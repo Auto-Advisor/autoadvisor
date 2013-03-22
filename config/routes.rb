@@ -5,6 +5,7 @@ Autoadvisor::Application.routes.draw do
   get '/profile', to: 'pages#profile'
   get '/transcript', to: 'pages#transcript'
   devise_for :users
+  resources :sections, :majors
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

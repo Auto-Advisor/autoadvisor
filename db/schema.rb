@@ -11,7 +11,52 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130228175155) do
+ActiveRecord::Schema.define(:version => 20130315190350) do
+
+  create_table "credits", :force => true do |t|
+    t.string  "name"
+    t.string  "year"
+    t.float   "gpa"
+    t.string  "dept"
+    t.string  "number"
+    t.integer "user_id"
+  end
+
+  create_table "majors", :force => true do |t|
+    t.string "name"
+    t.string "degree"
+    t.string "dept"
+  end
+
+  create_table "majors_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "major_id"
+  end
+
+  add_index "majors_users", ["major_id", "user_id"], :name => "index_majors_users_on_major_id_and_user_id"
+  add_index "majors_users", ["user_id", "major_id"], :name => "index_majors_users_on_user_id_and_major_id"
+
+  create_table "sections", :force => true do |t|
+    t.integer "spire_id"
+    t.string  "dept"
+    t.integer "class_number"
+    t.string  "class_string"
+    t.string  "section_number"
+    t.boolean "primary"
+    t.string  "instructor"
+    t.integer "size"
+    t.string  "name"
+    t.text    "description"
+    t.integer "time_slot_id"
+  end
+
+  create_table "time_slots", :force => true do |t|
+    t.string  "days"
+    t.integer "beg_min"
+    t.integer "beg_hour"
+    t.integer "end_min"
+    t.integer "end_hour"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

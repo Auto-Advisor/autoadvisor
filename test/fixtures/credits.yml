@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  year: MyString
+  gpa: 1.5
+  dept: MyString
+  number: MyString
+
+two:
+  name: MyString
+  year: MyString
+  gpa: 1.5
+  dept: MyString
+  number: MyString

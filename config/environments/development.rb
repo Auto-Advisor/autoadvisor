@@ -1,4 +1,5 @@
 Autoadvisor::Application.configure do
+  config.action_mailer.delivery_method = :file
   # Settings specified here will take precedence over those in config/application.rb
   config.action_mailer.default_url_options = {
     :host => '127.0.0.1',

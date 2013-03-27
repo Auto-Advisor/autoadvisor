@@ -11,12 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130315190350) do
+ActiveRecord::Schema.define(:version => 20130325225759) do
+
+  create_table "credit_constraints", :force => true do |t|
+    t.string   "field"
+    t.string   "op"
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "credits", :force => true do |t|
     t.string  "name"
     t.string  "year"
-    t.float   "gpa"
+    t.float   "grade"
     t.string  "dept"
     t.string  "number"
     t.integer "user_id"

@@ -1,0 +1,16 @@
+<h1>SCHEDULE</h1>
+
+<table id = 'schedule'>
+<tr valign = top>
+  <tr>
+    <th>Courses</th>
+  </tr>
+<P>
+<% @schdule.each do |sched| %>
+  	Timeslots: <%= sched.time_slot %><br/>
+	<%= link_profile 'Check Profile', '/profile' %>
+<% end %>
+</p>
+</table>
+
+

@@ -10,6 +10,14 @@
     <th></th>
     <th></th>
     <th></th>
+    <th>Class Recommendations</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th>Filter Class</th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
 	<tr>
 	<td><%= link_to 'Past Courses' , 'past_course' %></td>

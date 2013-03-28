@@ -6,19 +6,12 @@
     <th></th>
     <th></th>
     <th></th>  
-
-	<th>Browse Courses</th>
-	<td><%= link_to 'Check Past Courses', '/past_course %></td>
-	<td><%= link_to 'Check Profile', '/profile' %></td>
-	
-	<th>Filter Courses</th>
-	
-	<th>Class Options</th>
-	
-	<th>Recommendations</th>
-
-</tr>
+  </tr>
 	<tr>
+	<td><%= link_to 'Past Courses' , 'past_course' %></td>
+	</tr>
+	<tr>
+	<td><%= link_to 'Check Profile', '/profile' %></td>
 	</tr>
 
 </table>

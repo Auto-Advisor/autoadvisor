@@ -20,7 +20,7 @@ class PagesController < ApplicationController
 	@friend = usernow.friends
 	end
 
-  def schedule
+  def schedules
 	usernow = User.find(session[:'warden.user.user.key'][1][0])
 	@schedule = usernow.schedules
 	end

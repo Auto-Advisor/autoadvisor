@@ -9,7 +9,7 @@
 
 	<th>Browse Courses</th>
 	<td><%= link_to 'Check Past Courses', '/past_course %></td>
-
+	<td><%= link_to 'Check Profile', '/profile' %></td>
 	
 	<th>Filter Courses</th>
 	
@@ -19,7 +19,6 @@
 
 </tr>
 	<tr>
-	<td><%= link_to 'Check Profile', '/profile' %></td>
 	</tr>
 
 </table>

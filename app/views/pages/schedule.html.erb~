@@ -16,6 +16,8 @@
 	<th>Class Options</th>
 	
 	<th>Recommendations</th>
+
+</tr>
 	
 	<td><%= link_to 'Check Profile', '/profile' %></td>
 	</tr>

@@ -12,6 +12,7 @@
 	<tr>
   	<td>Timeslots: <%= schedule.time_slot %></td>
 	<td><%= link_to 'Check Profile', '/profile' %></td>
+	</tr>
 <% end %>
 </table>
 </br>

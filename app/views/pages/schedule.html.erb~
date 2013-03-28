@@ -2,10 +2,17 @@
 
 <table>
   <tr>
-    <th>Courses</th>
+    <th>Browse Courses</th>
     <th></th>
     <th></th>
-    <th></th>  
+    <th></th> 
+    <br>
+	<br>
+	<br> 
+    <th>Class Options</th>>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
 	<tr>
 	<td><%= link_to 'Past Courses' , 'past_course' %></td>

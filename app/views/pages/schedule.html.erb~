@@ -18,7 +18,7 @@
 	<th>Recommendations</th>
 
 </tr>
-	
+	<tr>
 	<td><%= link_to 'Check Profile', '/profile' %></td>
 	</tr>
 

@@ -1,16 +1,19 @@
 <h1>SCHEDULE</h1>
 
-<table id = 'schedule'>
-<tr valign = top>
+<table>
   <tr>
     <th>Courses</th>
+    <th></th>
+    <th></th>
+    <th></th>  
   </tr>
-<P>
-<% @schdule.each do |sched| %>
-  	Timeslots: <%= sched.time_slot %><br/>
-	<%= link_profile 'Check Profile', '/profile' %>
+
+<% @schedules.each do |schedule| %>
+	<tr>
+  	<td>Timeslots: <%= schedule.time_slot %></td>
+	<td><%= link_profile 'Check Profile', '/profile' %></td>
 <% end %>
-</p>
 </table>
+</br>
 
 

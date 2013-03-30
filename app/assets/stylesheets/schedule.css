@@ -1,0 +1,52 @@
+
+
+a:link {
+display:block;
+font-weight:bold;
+color:#66FFFF;
+background-color:none;
+width:120px;
+text-align:center;
+padding:4px;
+text-decoration:none;}
+
+
+a:visited {
+}
+
+a:hover {color: aqua; 
+text-decoration: underline;}
+
+table{border:none;
+width:50%;
+height:25px;
+text-align:left;
+padding:15px;
+color:none;
+}
+
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+ 
+li a {
+  text-decoration: none;
+  color: #000;
+  display: block;
+  width: 200px;
+ 
+  -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+  transition: font-size 0.3s ease, background-color 0.3s ease;
+}
+ 
+li a:hover {
+  font-size: 18px;
+  background: #f6f6f6;
+}
+
+
+

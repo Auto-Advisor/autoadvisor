@@ -9,7 +9,7 @@ Autoadvisor::Application.routes.draw do
   # /app/views/pages/profile.html.erb
   get '/profile', to: 'pages#profile'
   # /app/views/pages/schedule.html.erb [not yet created]
-  get '/schedule', to: 'pages#schedule'
+  get '/schedule', to: 'schedule#schedule'
   # /app/views/pages/transcript.html.erb [not yet created]
   get '/transcript', to: 'pages#transcript'
   # /app/views/pages/friends.html.erb [not yet created]

@@ -2,10 +2,8 @@ table#profile {
   margin: auto;
 }
 
-litem {
-  float: left;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
+.item {
+  text-align: left;
 }
 
 p.ritem {

@@ -1,69 +1,43 @@
 <table class="transcript">
   <tr class='head'>
-    <th colspan="4">TRANSCRIPT</th>
+    <th colspan="5">TRANSCRIPT</th>
   </tr>
-  <tr class='subhead'>
-    <td>Year</td><td>Course</td><td>Course Name</td><td>Grade</td>
+  <tr class='subhead' >
+    <td>Year</td><td>Course</td><td>Course Name</td><td>Grade</td><td align='right'>Delete?</td>
   </tr>
   <% @past_course.each do |c| %>
   <tr class='item'>
-    <td><%= c.year %></td><td><%= c.course_code %></td><td><%= c.course_name %></td><td><%= c.grade %></td>
+    <td><%= c.year %></td>
+    <td><%= c.course_code %></td>
+    <td><%= c.course_name %></td>
+    <td><%= c.grade %></td>
+    <td align='right'>
+
+      <%= link_to "Delete", delete_path(:action=>'delete', :courseCode => c.course_code, :year => c.year) %>
+
   </tr>
   <% end %>
   <tr class='subhead'>
-    <td colspan='3' align='right'>Credit Taken</td><td align='center'>33</td>
+    <td colspan='4' align='right'>Credit Taken</td><td align='center'>not yet!</td>
   </tr>
   <tr class='subhead'>
-    <td colspan='3' align='right'>GPA</td><td align='center'>4.3</td>
+    <td colspan='4' align='right'>GPA</td><td align='center'>not yet!</td>
   </tr>
+
 </table>
 
 <br />
 <br />
 
-<form method="get" action="transcript">
-  <table class='transcript'>
-    <tr>
-      <th class='head'>
-	UPLOAD TRANSCRIPT 
-      </th> 
-    </tr>
-    <tr align='center'>
-      <td>
-        <br>
-	<input type="file" name="fileField" size="30"><br>
-        <br>
-      </td>
-    </tr>
-    <tr>
-       <td class='manual_button' id='submit_transcript' align='center'>Submit</td>
-    </tr>
-  </table>
-</form>
-<br />
-
-<div>
-  <form method="get" action="transcript" >
-    <table class='transcript'>
-<tr> <th class='head' colspan='2'> ADD TRANSCRIPT ITEM </th> </tr>
-<tr><td colspan='2' align='center'>Disclamer</td></tr>
-      <tr align='center'>
-        <td valign="top">
-          Year:<br/>
-          <input type="text" name="Year" size="4"><br />
-          Course Code: (e.g. MATH131)<br />
-          <input type="text" name="Year" size="12"><br />
-        </td>
-        <td valign = "top">
-	  Course Name<br /><input type="text" name="courseName" size="30"><br>
-	  Grade: (e.g. A-)<br />
-          <input type="text" name="grade" size="2">
-        </td>
-      </tr>
-      <tr align='center'>
-      <td class='manual_button' id='submit_transcript' align='center'>Submit</td>
-      <td class='manual_button' id='submit_transcript' align='center'>Clear</td>
-    </table>
-<br />
-   </form>
+<div >
+   <%= render 'uploads/uploadTranscript' %>
 </div>
+
+<div >
+   <%= render 'uploads/uploadCourse' %>
+</div>
+
+<p>
+  * Please only upload Unofficial UMass transcirpts,<br>
+  found on your Spire account: Spire->Menu->Academics->Unofficial Transcript
+</p>

@@ -1,0 +1,1301 @@
+---
+CMPSCI105_01:
+  class_number: 105
+  class_string: CMPSCI105
+  dept: CMPSCI
+  desc: 
+  instructor: William Verts
+  name: Computer Literacy
+  room: Morrill Sci. Ctr. (II) rm 131
+  section_number: '01'
+  spire_id: '31735'
+  time_slot: 
+  type: LEC
+  units: '0'
+CMPSCI105_02:
+  class_number: 105
+  class_string: CMPSCI105
+  dept: CMPSCI
+  desc: 
+  instructor: William Verts
+  name: Computer Literacy
+  room: Morrill Sci. Ctr. (II) rm 131
+  section_number: '02'
+  spire_id: '31736'
+  time_slot: 
+  type: LEC
+  units: '0'
+CMPSCI120_01:
+  class_number: 120
+  class_string: CMPSCI120
+  dept: CMPSCI
+  desc: 
+  instructor: William Verts
+  name: Problem Solving w/Internet
+  room: Herter Hall room 227
+  section_number: '01'
+  spire_id: '31770'
+  time_slot: 
+  type: LEC
+  units: '0'
+CMPSCI121_01:
+  class_number: 121
+  class_string: CMPSCI121
+  dept: CMPSCI
+  desc: 
+  instructor: Robert Moll
+  name: Introduction to Problem Solving with Computers
+  room: Morrill Sci Ctr (1) Room N375
+  section_number: '01'
+  spire_id: '31737'
+  time_slot: TS1
+  type: LEC
+  units: '0'
+CMPSCI121_D01:
+  class_number: 121
+  class_string: CMPSCI121
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Introduction to Problem Solving with Computers
+  room: Marston Hall room 132
+  section_number: D01
+  spire_id: '31784'
+  time_slot: 
+  type: DIS
+  units: '0'
+CMPSCI121_D02:
+  class_number: 121
+  class_string: CMPSCI121
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Introduction to Problem Solving with Computers
+  room: Morrill 2 Room 222
+  section_number: D02
+  spire_id: '31785'
+  time_slot: TS4
+  type: DIS
+  units: '0'
+CMPSCI121_D03:
+  class_number: 121
+  class_string: CMPSCI121
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Introduction to Problem Solving with Computers
+  room: Engineering Laboratory rm 303
+  section_number: D03
+  spire_id: '31786'
+  time_slot: 
+  type: DIS
+  units: '0'
+CMPSCI121_D04:
+  class_number: 121
+  class_string: CMPSCI121
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Introduction to Problem Solving with Computers
+  room: Engineering Laboratory rm 323
+  section_number: D04
+  spire_id: '31787'
+  time_slot: TS5
+  type: DIS
+  units: '0'
+CMPSCI121_D05:
+  class_number: 121
+  class_string: CMPSCI121
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Introduction to Problem Solving with Computers
+  room: Ag. Engineering Bldg rm 119
+  section_number: D05
+  spire_id: '31788'
+  time_slot: 
+  type: DIS
+  units: '0'
+CMPSCI187_01:
+  class_number: 187
+  class_string: CMPSCI187
+  dept: CMPSCI
+  desc: 
+  instructor: James Allan
+  name: Programming w/Data Structures
+  room: Morrill Sci. Ctr. (II) rm 131
+  section_number: '01'
+  spire_id: '31738'
+  time_slot: 
+  type: LEC
+  units: '0'
+CMPSCI187_D01:
+  class_number: 187
+  class_string: CMPSCI187
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Programming w/Data Structures
+  room: Lederle Grad Res Tower 223
+  section_number: D01
+  spire_id: '31739'
+  time_slot: 
+  type: DIS
+  units: '0'
+CMPSCI187_D02:
+  class_number: 187
+  class_string: CMPSCI187
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Programming w/Data Structures
+  room: Lederle Grad Res Tower 223
+  section_number: D02
+  spire_id: '31781'
+  time_slot: TS8
+  type: DIS
+  units: '0'
+CMPSCI187_D03:
+  class_number: 187
+  class_string: CMPSCI187
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Programming w/Data Structures
+  room: Lederle Grad Res Tower 223
+  section_number: D03
+  spire_id: '31723'
+  time_slot: 
+  type: DIS
+  units: '0'
+CMPSCI187_D04:
+  class_number: 187
+  class_string: CMPSCI187
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Programming w/Data Structures
+  room: Lederle Grad Res Tower 223
+  section_number: D04
+  spire_id: '31727'
+  time_slot: TS9
+  type: DIS
+  units: '0'
+CMPSCI187_D05:
+  class_number: 187
+  class_string: CMPSCI187
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Programming w/Data Structures
+  room: Lederle Grad Res Tower 223
+  section_number: D05
+  spire_id: '39544'
+  time_slot: TS5
+  type: DIS
+  units: '0'
+CMPSCI187_D06:
+  class_number: 187
+  class_string: CMPSCI187
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Programming w/Data Structures
+  room: Lederle Grad Res Tower 223
+  section_number: D06
+  spire_id: '39545'
+  time_slot: TS5
+  type: DIS
+  units: '0'
+CMPSCI187_D07:
+  class_number: 187
+  class_string: CMPSCI187
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Programming w/Data Structures
+  room: Lederle Grad Res Tower 223
+  section_number: D07
+  spire_id: '39546'
+  time_slot: TS4
+  type: DIS
+  units: '0'
+CMPSCI187_D08:
+  class_number: 187
+  class_string: CMPSCI187
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Programming w/Data Structures
+  room: Lederle Grad Res Tower 223
+  section_number: D08
+  spire_id: '39547'
+  time_slot: TS4
+  type: DIS
+  units: '0'
+CMPSCI190DM_01:
+  class_number: 190
+  class_string: CMPSCI190DM
+  dept: CMPSCI
+  desc: 
+  instructor: David Barrington
+  name: A Mathematical Foundation for Informatics
+  room: Lederle Grad Res Tower Rm 143
+  section_number: '01'
+  spire_id: '39550'
+  time_slot: 
+  type: LEC
+  units: '0'
+CMPSCI191A_01:
+  class_number: 191
+  class_string: CMPSCI191A
+  dept: CMPSCI
+  desc: 
+  instructor: David Barrington, Robert Moll
+  name: S-CMPSCI Major RAP Seminar
+  room: Grayson Dorm Room 109
+  section_number: '01'
+  spire_id: '31740'
+  time_slot: 
+  type: SEM
+  units: '0'
+CMPSCI191P_01:
+  class_number: 191
+  class_string: CMPSCI191P
+  dept: CMPSCI
+  desc: 
+  instructor: William Verts
+  name: S-Intro to PGMG
+  room: Goessmann Lab. Addtn room 51
+  section_number: '01'
+  spire_id: '31771'
+  time_slot: 
+  type: LEC
+  units: '0'
+CMPSCI191P_L01:
+  class_number: 191
+  class_string: CMPSCI191P
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: S-Intro to PGMG
+  room: Morrill III Room 212
+  section_number: L01
+  spire_id: '38321'
+  time_slot: 
+  type: LAB
+  units: '0'
+CMPSCI191P_L02:
+  class_number: 191
+  class_string: CMPSCI191P
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: S-Intro to PGMG
+  room: Morrill III Room 212
+  section_number: L02
+  spire_id: '38322'
+  time_slot: 
+  type: LAB
+  units: '0'
+CMPSCI196H_01:
+  class_number: 196
+  class_string: CMPSCI196H
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Hnrs Indstu Cmpsci
+  room: 
+  section_number: '01'
+  spire_id: '31769'
+  time_slot: 
+  type: IND
+  units: '0'
+CMPSCI196_01:
+  class_number: 196
+  class_string: CMPSCI196
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Independent Study
+  room: 
+  section_number: '01'
+  spire_id: '31741'
+  time_slot: 
+  type: IND
+  units: '0'
+CMPSCI197C_01:
+  class_number: 197
+  class_string: CMPSCI197C
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: ST-Programming in C
+  room: Lederle Grad Res Tower 223
+  section_number: '01'
+  spire_id: '31797'
+  time_slot: 
+  type: LEC
+  units: '0'
+CMPSCI197C_02:
+  class_number: 197
+  class_string: CMPSCI197C
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: ST-Programming in C
+  room: Lederle Grad Res Tower 223
+  section_number: '02'
+  spire_id: '38323'
+  time_slot: 
+  type: LEC
+  units: '0'
+CMPSCI197U_01:
+  class_number: 197
+  class_string: CMPSCI197U
+  dept: CMPSCI
+  desc: 
+  instructor: Jarred Devaughn-Brown
+  name: ST-A Hands-On Intro to UNIX
+  room: Lederle Grad Res Tower rm 121
+  section_number: '01'
+  spire_id: '31776'
+  time_slot: 
+  type: LEC
+  units: '0'
+CMPSCI220_01:
+  class_number: 220
+  class_string: CMPSCI220
+  dept: CMPSCI
+  desc: 
+  instructor: Jack Wileden
+  name: Programming Methodology
+  room: Morrill 2 Room 222
+  section_number: '01'
+  spire_id: '31775'
+  time_slot: 
+  type: LEC
+  units: '0'
+CMPSCI220_D01:
+  class_number: 220
+  class_string: CMPSCI220
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Programming Methodology
+  room: Engineering Laboratory rm 323
+  section_number: D01
+  spire_id: '31789'
+  time_slot: 
+  type: DIS
+  units: '0'
+CMPSCI220_D02:
+  class_number: 220
+  class_string: CMPSCI220
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Programming Methodology
+  room: Goesmann lab Addition 152
+  section_number: D02
+  spire_id: '31790'
+  time_slot: 
+  type: DIS
+  units: '0'
+CMPSCI230_01:
+  class_number: 230
+  class_string: CMPSCI230
+  dept: CMPSCI
+  desc: 
+  instructor: Timothy Richards
+  name: Computer Systems Principles
+  room: Hasbrouck Laboratory room 134
+  section_number: '01'
+  spire_id: '31777'
+  time_slot: 
+  type: LEC
+  units: '0'
+CMPSCI230_D01:
+  class_number: 230
+  class_string: CMPSCI230
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Computer Systems Principles
+  room: Engineering Laboratory rm 306
+  section_number: D01
+  spire_id: '31799'
+  time_slot: 
+  type: DIS
+  units: '0'
+CMPSCI230_D02:
+  class_number: 230
+  class_string: CMPSCI230
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Computer Systems Principles
+  room: Engineering Laboratory rm 304
+  section_number: D02
+  spire_id: '31703'
+  time_slot: 
+  type: DIS
+  units: '0'
+CMPSCI240_01:
+  class_number: 240
+  class_string: CMPSCI240
+  dept: CMPSCI
+  desc: 
+  instructor: Benjamin Marlin
+  name: Reasoning Under Uncertainty
+  room: Hasbrouck Laboratory room 134
+  section_number: '01'
+  spire_id: '31772'
+  time_slot: TS12
+  type: LEC
+  units: '0'
+CMPSCI240_D01:
+  class_number: 240
+  class_string: CMPSCI240
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Reasoning Under Uncertainty
+  room: Lederle Grad Res. Ctr rm A201
+  section_number: D01
+  spire_id: '31791'
+  time_slot: 
+  type: DIS
+  units: '0'
+CMPSCI240_D02:
+  class_number: 240
+  class_string: CMPSCI240
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Reasoning Under Uncertainty
+  room: Lederle Grad Res. Ctr rm A201
+  section_number: D02
+  spire_id: '31704'
+  time_slot: TS22
+  type: DIS
+  units: '0'
+CMPSCI240_D03:
+  class_number: 240
+  class_string: CMPSCI240
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Reasoning Under Uncertainty
+  room: Lederle Grad Res Tower Rm 173
+  section_number: D03
+  spire_id: '38324'
+  time_slot: TS20
+  type: DIS
+  units: '0'
+CMPSCI250_01:
+  class_number: 250
+  class_string: CMPSCI250
+  dept: CMPSCI
+  desc: 
+  instructor: David Barrington
+  name: Introduction To Computation
+  room: Hasbrouck Lab Add room 126
+  section_number: '01'
+  spire_id: '31742'
+  time_slot: TS12
+  type: LEC
+  units: '0'
+CMPSCI250_D01:
+  class_number: 250
+  class_string: CMPSCI250
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Introduction To Computation
+  room: Engineering Laboratory rm 323
+  section_number: D01
+  spire_id: '31743'
+  time_slot: 
+  type: DIS
+  units: '0'
+CMPSCI250_D02:
+  class_number: 250
+  class_string: CMPSCI250
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Introduction To Computation
+  room: Engineering Laboratory rm 323
+  section_number: D02
+  spire_id: '31782'
+  time_slot: 
+  type: DIS
+  units: '0'
+CMPSCI290NW_01:
+  class_number: 290
+  class_string: CMPSCI290NW
+  dept: CMPSCI
+  desc: 
+  instructor: James Kurose
+  name: A Networked World
+  room: Lederle Grad Res Ctr rm A310
+  section_number: '01'
+  spire_id: '39913'
+  time_slot: TS7
+  type: LEC
+  units: '0'
+CMPSCI296H_01:
+  class_number: 296
+  class_string: CMPSCI296H
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Hnr Indstu In Cmpsci
+  room: 
+  section_number: '01'
+  spire_id: '31767'
+  time_slot: 
+  type: IND
+  units: '0'
+CMPSCI296_01:
+  class_number: 296
+  class_string: CMPSCI296
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Independent Study
+  room: 
+  section_number: '01'
+  spire_id: '31744'
+  time_slot: 
+  type: IND
+  units: '0'
+CMPSCI305_01:
+  class_number: 305
+  class_string: CMPSCI305
+  dept: CMPSCI
+  desc: 
+  instructor: Stephen Constantine
+  name: Social Issues in Computing
+  room: Engineering Laboratory rm 305
+  section_number: '01'
+  spire_id: '31745'
+  time_slot: TS10
+  type: LEC
+  units: '0'
+CMPSCI305_02:
+  class_number: 305
+  class_string: CMPSCI305
+  dept: CMPSCI
+  desc: 
+  instructor: Stephen Constantine
+  name: Social Issues in Computing
+  room: Engineering Laboratory rm 305
+  section_number: '02'
+  spire_id: '31705'
+  time_slot: 
+  type: LEC
+  units: '0'
+CMPSCI311_01:
+  class_number: 311
+  class_string: CMPSCI311
+  dept: CMPSCI
+  desc: 
+  instructor: Hava Siegelmann
+  name: Intro To Algorithms
+  room: Integrated Sciences Bldg 221
+  section_number: '01'
+  spire_id: '31746'
+  time_slot: TS1
+  type: LEC
+  units: '0'
+CMPSCI311_D01:
+  class_number: 311
+  class_string: CMPSCI311
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Intro To Algorithms
+  room: Morrill 2 Room 222
+  section_number: D01
+  spire_id: '31747'
+  time_slot: 
+  type: DIS
+  units: '0'
+CMPSCI320_01:
+  class_number: 320
+  class_string: CMPSCI320
+  dept: CMPSCI
+  desc: 
+  instructor: Leon Osterweil
+  name: Software Engineering
+  room: Computer Science Bldg rm 142
+  section_number: '01'
+  spire_id: '31748'
+  time_slot: 
+  type: LEC
+  units: '0'
+CMPSCI320_D01:
+  class_number: 320
+  class_string: CMPSCI320
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Software Engineering
+  room: Computer Science Bldg rm 142
+  section_number: D01
+  spire_id: '31766'
+  time_slot: TS26
+  type: DIS
+  units: '0'
+CMPSCI325_01:
+  class_number: 325
+  class_string: CMPSCI325
+  dept: CMPSCI
+  desc: 
+  instructor: Eva Hudlicka
+  name: Usability
+  room: Computer Science Bldg rm 142
+  section_number: '01'
+  spire_id: '31721'
+  time_slot: TS2
+  type: LEC
+  units: '0'
+CMPSCI326_01:
+  class_number: 326
+  class_string: CMPSCI326
+  dept: CMPSCI
+  desc: 
+  instructor: Timothy Richards
+  name: Web Programming
+  room: Lederle Grad Res Ctr rm A301
+  section_number: '01'
+  spire_id: '31719'
+  time_slot: TS12
+  type: LEC
+  units: '0'
+CMPSCI377_01:
+  class_number: 377
+  class_string: CMPSCI377
+  dept: CMPSCI
+  desc: 
+  instructor: Prashant Shenoy
+  name: Operating Systems
+  room: Computer Science Bldg rm 142
+  section_number: '01'
+  spire_id: '31707'
+  time_slot: 
+  type: LEC
+  units: '0'
+CMPSCI377_D01:
+  class_number: 377
+  class_string: CMPSCI377
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Operating Systems
+  room: Computer Science Bldg rm 142
+  section_number: D01
+  spire_id: '31708'
+  time_slot: TS24
+  type: DIS
+  units: '0'
+CMPSCI383_01:
+  class_number: 383
+  class_string: CMPSCI383
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Artificial Intelligence
+  room: Goesmann lab Addition 152
+  section_number: '01'
+  spire_id: '31793'
+  time_slot: TS29
+  type: LEC
+  units: '0'
+CMPSCI390DB_01:
+  class_number: 390
+  class_string: CMPSCI390DB
+  dept: CMPSCI
+  desc: 
+  instructor: Alexandra Meliou
+  name: Practice and Applications of Data Management
+  room: Computer Science Bldg rm 140
+  section_number: '01'
+  spire_id: '38325'
+  time_slot: 
+  type: LEC
+  units: '0'
+CMPSCI391IB_01:
+  class_number: 391
+  class_string: CMPSCI391IB
+  dept: CMPSCI
+  desc: 
+  instructor: Charles Weems
+  name: ! 'S-Inside the Box: How Computers Work'
+  room: Computer Science Bldg rm 140
+  section_number: '01'
+  spire_id: '31794'
+  time_slot: TS30
+  type: LEC
+  units: '0'
+CMPSCI396H_01:
+  class_number: 396
+  class_string: CMPSCI396H
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Hnrs Indstu Cmpsci
+  room: 
+  section_number: '01'
+  spire_id: '31768'
+  time_slot: 
+  type: IND
+  units: '0'
+CMPSCI396_01:
+  class_number: 396
+  class_string: CMPSCI396
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Independent Study
+  room: 
+  section_number: '01'
+  spire_id: '31749'
+  time_slot: 
+  type: IND
+  units: '0'
+CMPSCI410_01:
+  class_number: 410
+  class_string: CMPSCI410
+  dept: CMPSCI
+  desc: 
+  instructor: J Moss
+  name: Compiler Techniques
+  room: Computer Science Bldg rm 140
+  section_number: '01'
+  spire_id: '31778'
+  time_slot: 
+  type: LEC
+  units: '0'
+CMPSCI410_D01:
+  class_number: 410
+  class_string: CMPSCI410
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Compiler Techniques
+  room: Computer Science Bldg rm 140
+  section_number: D01
+  spire_id: '31709'
+  time_slot: 
+  type: DIS
+  units: '0'
+CMPSCI453_01:
+  class_number: 453
+  class_string: CMPSCI453
+  dept: CMPSCI
+  desc: 
+  instructor: James Kurose
+  name: Computer Networks
+  room: Computer Science Bldg rm 140
+  section_number: '01'
+  spire_id: '31798'
+  time_slot: TS1
+  type: LEC
+  units: '0'
+CMPSCI460_01:
+  class_number: 460
+  class_string: CMPSCI460
+  dept: CMPSCI
+  desc: 
+  instructor: Christopher Misra
+  name: Introduction to Computer and Network Security
+  room: Lederle Grad Res Ctr rm A310
+  section_number: '01'
+  spire_id: '31774'
+  time_slot: 
+  type: LEC
+  units: '0'
+CMPSCI474_01:
+  class_number: 474
+  class_string: CMPSCI474
+  dept: CMPSCI
+  desc: 
+  instructor: Rui Wang
+  name: Image Synthesis
+  room: Computer Science Bldg rm 140
+  section_number: '01'
+  spire_id: '38326'
+  time_slot: TS7
+  type: LEC
+  units: '0'
+CMPSCI496H_01:
+  class_number: 496
+  class_string: CMPSCI496H
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Hnr Indstu In Cmpsci
+  room: 
+  section_number: '01'
+  spire_id: '31765'
+  time_slot: 
+  type: IND
+  units: '0'
+CMPSCI496_01:
+  class_number: 496
+  class_string: CMPSCI496
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Independent Study
+  room: 
+  section_number: '01'
+  spire_id: '31751'
+  time_slot: 
+  type: IND
+  units: '0'
+CMPSCI498Y_01:
+  class_number: 498
+  class_string: CMPSCI498Y
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Practicum
+  room: 
+  section_number: '01'
+  spire_id: '31752'
+  time_slot: 
+  type: PRA
+  units: '0'
+CMPSCI499P_01:
+  class_number: 499
+  class_string: CMPSCI499P
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Honors Project
+  room: 
+  section_number: '01'
+  spire_id: '31753'
+  time_slot: 
+  type: IND
+  units: '0'
+CMPSCI499T_01:
+  class_number: 499
+  class_string: CMPSCI499T
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Honors Thesis
+  room: 
+  section_number: '01'
+  spire_id: '31754'
+  time_slot: 
+  type: IND
+  units: '0'
+CMPSCI499Y_01:
+  class_number: 499
+  class_string: CMPSCI499Y
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Honors Research
+  room: 
+  section_number: '01'
+  spire_id: '31755'
+  time_slot: 
+  type: IND
+  units: '0'
+CMPSCI503_01:
+  class_number: 503
+  class_string: CMPSCI503
+  dept: CMPSCI
+  desc: 
+  instructor: Roderic Grupen
+  name: Embedded Computing Systems
+  room: Lederle Grad Res Ctr rm A310
+  section_number: '01'
+  spire_id: '38327'
+  time_slot: TS29
+  type: LEC
+  units: '0'
+CMPSCI503_01LL:
+  class_number: 503
+  class_string: CMPSCI503
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Embedded Computing Systems
+  room: Lederle Grad Res Ctr rm A311
+  section_number: 01LL
+  spire_id: '39925'
+  time_slot: TS4
+  type: LAB
+  units: '0'
+CMPSCI503_01LM:
+  class_number: 503
+  class_string: CMPSCI503
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Embedded Computing Systems
+  room: Lederle Grad Res Ctr rm A311
+  section_number: 01LM
+  spire_id: '39926'
+  time_slot: TS28
+  type: LAB
+  units: '0'
+CMPSCI513_01:
+  class_number: 513
+  class_string: CMPSCI513
+  dept: CMPSCI
+  desc: 
+  instructor: Neil Immerman
+  name: Logic in Computer Science
+  room: Computer Science Bldg rm 140
+  section_number: '01'
+  spire_id: '38328'
+  time_slot: TS29
+  type: LEC
+  units: '0'
+CMPSCI521_01:
+  class_number: 521
+  class_string: CMPSCI521
+  dept: CMPSCI
+  desc: 
+  instructor: Yuriy Brun
+  name: ! 'Software Engineering: Analysis and Evaluation'
+  room: Computer Science Bldg rm 142
+  section_number: '01'
+  spire_id: '31724'
+  time_slot: TS31
+  type: LEC
+  units: '0'
+CMPSCI529_01:
+  class_number: 529
+  class_string: CMPSCI529
+  dept: CMPSCI
+  desc: 
+  instructor: Leon Osterweil
+  name: Software Engineering Project Management
+  room: Computer Science Bldg rm 142
+  section_number: '01'
+  spire_id: '31773'
+  time_slot: TS29
+  type: LEC
+  units: '0'
+CMPSCI529_D01:
+  class_number: 529
+  class_string: CMPSCI529
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Software Engineering Project Management
+  room: Computer Science Bldg rm 142
+  section_number: D01
+  spire_id: '31792'
+  time_slot: TS26
+  type: DIS
+  units: '0'
+CMPSCI529_S01:
+  class_number: 529
+  class_string: CMPSCI529
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Software Engineering Project Management
+  room: Computer Sci. Bldg Rm 343
+  section_number: S01
+  spire_id: '38329'
+  time_slot: 
+  type: SEM
+  units: '0'
+CMPSCI585_01:
+  class_number: 585
+  class_string: CMPSCI585
+  dept: CMPSCI
+  desc: 
+  instructor: Andrew McCallum
+  name: Introduction to Natural Language Processing
+  room: Computer Science Bldg rm 142
+  section_number: '01'
+  spire_id: '31722'
+  time_slot: TS7
+  type: LEC
+  units: '0'
+CMPSCI596_01:
+  class_number: 596
+  class_string: CMPSCI596
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Independent Study
+  room: 
+  section_number: '01'
+  spire_id: '31756'
+  time_slot: 
+  type: IND
+  units: '0'
+CMPSCI610_01:
+  class_number: 610
+  class_string: CMPSCI610
+  dept: CMPSCI
+  desc: 
+  instructor: J Moss
+  name: Compiler Techniques
+  room: Computer Science Bldg rm 140
+  section_number: '01'
+  spire_id: '31779'
+  time_slot: TS32
+  type: LEC
+  units: '0'
+CMPSCI610_D01:
+  class_number: 610
+  class_string: CMPSCI610
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Compiler Techniques
+  room: Computer Science Bldg rm 140
+  section_number: D01
+  spire_id: '31780'
+  time_slot: TS33
+  type: DIS
+  units: '0'
+CMPSCI611_01:
+  class_number: 611
+  class_string: CMPSCI611
+  dept: CMPSCI
+  desc: 
+  instructor: Ramesh Sitaraman
+  name: Advanced Algorithms
+  room: Computer Science Bldg rm 142
+  section_number: '01'
+  spire_id: '31757'
+  time_slot: TS34
+  type: LEC
+  units: '0'
+CMPSCI621_01:
+  class_number: 621
+  class_string: CMPSCI621
+  dept: CMPSCI
+  desc: 
+  instructor: Yuriy Brun
+  name: ! 'Advanced Software Engineering: Analysis and Evaluation'
+  room: Computer Science Bldg rm 142
+  section_number: '01'
+  spire_id: '31725'
+  time_slot: TS31
+  type: LEC
+  units: '0'
+CMPSCI630_01:
+  class_number: 630
+  class_string: CMPSCI630
+  dept: CMPSCI
+  desc: 
+  instructor: Emery Berger
+  name: Systems
+  room: Computer Science Bldg rm 140
+  section_number: '01'
+  spire_id: '31796'
+  time_slot: TS34
+  type: LEC
+  units: '0'
+CMPSCI653_01:
+  class_number: 653
+  class_string: CMPSCI653
+  dept: CMPSCI
+  desc: 
+  instructor: Donald Towsley
+  name: Computer Networking
+  room: Lederle Grad Res Ctr rm A310
+  section_number: '01'
+  spire_id: '38330'
+  time_slot: TS30
+  type: LEC
+  units: '0'
+CMPSCI670_01:
+  class_number: 670
+  class_string: CMPSCI670
+  dept: CMPSCI
+  desc: 
+  instructor: Erik Learned-Miller
+  name: Computer Vision
+  room: Lederle Grad Res Ctr rm A310
+  section_number: '01'
+  spire_id: '38332'
+  time_slot: TS31
+  type: SEM
+  units: '0'
+CMPSCI683_01:
+  class_number: 683
+  class_string: CMPSCI683
+  dept: CMPSCI
+  desc: 
+  instructor: Shlomo Zilberstein
+  name: Artificial Intelligence
+  room: Computer Science Bldg rm 142
+  section_number: '01'
+  spire_id: '31758'
+  time_slot: TS1
+  type: LEC
+  units: '0'
+CMPSCI689_01:
+  class_number: 689
+  class_string: CMPSCI689
+  dept: CMPSCI
+  desc: 
+  instructor: Sridhar Mahadevan
+  name: Machine Learning
+  room: Computer Science Bldg rm 142
+  section_number: '01'
+  spire_id: '31764'
+  time_slot: TS32
+  type: LEC
+  units: '0'
+CMPSCI690GC_01:
+  class_number: 690
+  class_string: CMPSCI690GC
+  dept: CMPSCI
+  desc: 
+  instructor: Evangelos Kalogerakis
+  name: 3D Modeling and Simulation
+  room: Lederle Grad Res Ctr rm A310
+  section_number: '01'
+  spire_id: '39667'
+  time_slot: TS32
+  type: LEC
+  units: '0'
+CMPSCI690LG_01:
+  class_number: 690
+  class_string: CMPSCI690LG
+  dept: CMPSCI
+  desc: 
+  instructor: Neil Immerman
+  name: Advanced Logic in Computer Science
+  room: Computer Science Bldg rm 140
+  section_number: '01'
+  spire_id: '38331'
+  time_slot: TS29
+  type: LEC
+  units: '0'
+CMPSCI691BL_01:
+  class_number: 691
+  class_string: CMPSCI691BL
+  dept: CMPSCI
+  desc: 
+  instructor: Brian Levine
+  name: S-The R Programming Language
+  room: Lederle Grad Res Ctr rm A310
+  section_number: '01'
+  spire_id: '39884'
+  time_slot: TS7
+  type: SEM
+  units: '0'
+CMPSCI691F_01:
+  class_number: 691
+  class_string: CMPSCI691F
+  dept: CMPSCI
+  desc: 
+  instructor: Arjun Guha
+  name: S-Pgmg Langs
+  room: Engineering Laboratory rm 327
+  section_number: '01'
+  spire_id: '38333'
+  time_slot: TS3
+  type: SEM
+  units: '0'
+CMPSCI691O_01:
+  class_number: 691
+  class_string: CMPSCI691O
+  dept: CMPSCI
+  desc: 
+  instructor: Beverly Woolf
+  name: S-Tools/Exlpanatory&TutorSystm
+  room: Lederle Grad Res Ctr rm A311
+  section_number: '01'
+  spire_id: '31759'
+  time_slot: TS13
+  type: SEM
+  units: '0'
+CMPSCI696_01:
+  class_number: 696
+  class_string: CMPSCI696
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Independent Study
+  room: 
+  section_number: '01'
+  spire_id: '31760'
+  time_slot: 
+  type: IND
+  units: '0'
+CMPSCI701_01:
+  class_number: 701
+  class_string: CMPSCI701
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Advanced Topics in Computer Science
+  room: 
+  section_number: '01'
+  spire_id: '31795'
+  time_slot: 
+  type: IND
+  units: '0'
+CMPSCI745_01:
+  class_number: 745
+  class_string: CMPSCI745
+  dept: CMPSCI
+  desc: 
+  instructor: Yanlei Diao
+  name: Advanced Topics in Database Systems
+  room: Lederle Grad Res Ctr rm A310
+  section_number: '01'
+  spire_id: '38334'
+  time_slot: TS1
+  type: LEC
+  units: '0'
+CMPSCI796_01:
+  class_number: 796
+  class_string: CMPSCI796
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Independent Study
+  room: 
+  section_number: '01'
+  spire_id: '31761'
+  time_slot: 
+  type: IND
+  units: '0'
+CMPSCI891M_01:
+  class_number: 891
+  class_string: CMPSCI891M
+  dept: CMPSCI
+  desc: 
+  instructor: Ramesh Sitaraman
+  name: S-Theory of Computation
+  room: Computer Science Bldg rm 140
+  section_number: '01'
+  spire_id: '31762'
+  time_slot: 
+  type: SEM
+  units: '0'
+CMPSCI899_01:
+  class_number: 899
+  class_string: CMPSCI899
+  dept: CMPSCI
+  desc: 
+  instructor: Staff
+  name: Ph D Dissertation
+  room: 
+  section_number: '01'
+  spire_id: '31763'
+  time_slot: 
+  type: DST
+  units: '0'

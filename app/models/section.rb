@@ -1,18 +1,21 @@
 class Section < ActiveRecord::Base
   attr_accessible :class_number, :class_string, :dept, :desc, :instructor, :name, :primary, :section_number, :size, :spire_id, :time_slot, :requirement
 
-  query_field :class_number, :int
-  query_field :dept, :string
-  query_field :desc, :string
-  query_field :instructor, :string
-  query_field :name, :string
-  query_field :primary, :bool
-  query_field :section_number, :string
-  query_field :size, :int
-  query_field :spire_id, :string
-
-  has_one :time_slot
+  belongs_to :time_slot
   has_one :requirement
+
+  def query_fields
+    {
+      :class_number => :int,
+      :dept => :string,
+      :desc => :string,
+      :name => :string,
+      :primary => :bool,
+      :section_number => :string,
+      :size => :int,
+      :spire_id => :string,
+    }
+  end
 
   def self.for_user(user)
     # query/fetch the sections based on the user's constraints.

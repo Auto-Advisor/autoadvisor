@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130325225759) do
+ActiveRecord::Schema.define(:version => 20130331021405) do
 
   create_table "credit_constraints", :force => true do |t|
     t.string   "field"
@@ -46,16 +46,18 @@ ActiveRecord::Schema.define(:version => 20130325225759) do
 
   create_table "sections", :force => true do |t|
     t.integer "spire_id"
-    t.string  "dept"
-    t.integer "class_number"
-    t.string  "class_string"
-    t.string  "section_number"
-    t.boolean "primary"
+    t.string  "dept",                            :null => false
+    t.integer "class_number",   :default => 0,   :null => false
+    t.string  "class_string",                    :null => false
+    t.string  "section_number",                  :null => false
     t.string  "instructor"
     t.integer "size"
     t.string  "name"
-    t.text    "description"
+    t.text    "desc"
     t.integer "time_slot_id"
+    t.string  "room"
+    t.string  "units",          :default => "0", :null => false
+    t.string  "type",           :default => "",  :null => false
   end
 
   create_table "time_slots", :force => true do |t|

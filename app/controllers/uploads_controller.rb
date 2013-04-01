@@ -2,10 +2,7 @@ class UploadsController < ApplicationController
 
 	#Upload a transcirpt. if there is a file to upload temporaraly save it
 	#in "public/uploadedTranscript", then delete it after parsing. if no 
-	#file stay on same page.
-	
-	#!!!!!!!!YOU NEED TO CREATE public/uploadTranscript FOR THIS TO WORK!!!!!!!
-	
+	#file to upload, stay on same page.
 	def upload_transcript
 		usernow = User.find(session[:'warden.user.user.key'][1][0])
 		if (!params[:file].blank?)

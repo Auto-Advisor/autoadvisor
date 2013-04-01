@@ -1,12 +1,10 @@
 class UsersController < ApplicationController
-  # GET /users
-  # GET /users.json
   def index
     redirect_to :controller => 'Pages', :action => 'main'
   end
 
-  # GET /users/1
-  # GET /users/1.json
+  # GET /user/1
+  # GET /user/1.json
   def show
     if params[:id].nil?
       @user = current_user

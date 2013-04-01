@@ -17,10 +17,11 @@ def load_sections file, logger
       num_string = class_num_info[1]
       num = num_string[0..2]
       class_string = dept + num_string
+      puts class_string
 
       section = Section.new
       section.spire_id = row[0]
-      section.dept = row[2]
+      section.dept = dept
       section.class_number = num
       section.class_string = class_string
       section.section_number = row[6]

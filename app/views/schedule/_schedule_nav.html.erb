@@ -24,13 +24,13 @@
 			<form> 
 			<aside id="left">Term
 <select>
-<option value="">Select a term</option>
-<option value="">Fall 2013</option>
-<option value="">Spring 2014</option>
-<option value="">Fall 2014</option>
-<option value="">Spring 2015</option>
-<option value="">Fall 2015</option>
-<option value="">Spring 2015</option>
+<option value="term">Select a term</option>
+<option value="fall13">Fall 2013</option>
+<option value="spr14">Spring 2014</option>
+<option value="fall14">Fall 2014</option>
+<option value="spr15">Spring 2015</option>
+<option value="fall15">Fall 2015</option>
+<option value="spr16">Spring 2016</option>
 </select>
 <br>
 <br>
@@ -46,11 +46,11 @@
 
 <aside id="left">Course Component
 <select>
-<option value=""></option>
-<option value="">Lecture</option>
-<option value="">Discussion</option>
-<option value="">Laboratory</option>
-<option value="">Seminar</option>
+<option value="select">select</option>
+<option value="lecture">Lecture</option>
+<option value="discussion">Discussion</option>
+<option value="lab">Laboratory</option>
+<option value="seminar">Seminar</option>
 </select>
 <br>
 <br>
@@ -58,13 +58,13 @@
 			<p>Day of Week (inlude these days)
 			<div align ="left"
 <form>
-<input type="checkbox" name="filterbox" value="Day">Monday
-<input type="checkbox" name="filterbox" value="Day">Tuesday
-<input type="checkbox" name="filterbox" value="Day">Wednesday
-<input type="checkbox" name="filterbox" value="Day">Thursday
-<input type="checkbox" name="filterbox" value="Day">Friday
-<input type="checkbox" name="filterbox" value="Day">Saturday
-<input type="checkbox" name="filterbox" value="Day">Sunday
+<input type="checkbox" name="monday" value="monday">Monday
+<input type="checkbox" name="tuesday" value="tuesday">Tuesday
+<input type="checkbox" name="wednesday" value="wednesday">Wednesday
+<input type="checkbox" name="thursday" value="thursday">Thursday
+<input type="checkbox" name="friday" value="friday">Friday
+<input type="checkbox" name="saturday" value="saturday">Saturday
+<input type="checkbox" name="sunday" value="sunday">Sunday
 </div>
 </P>
 <br>
@@ -82,32 +82,75 @@ and: <input type="text" id="and" style="width: 100px;" name="and">
 
 </td>
 
-
-
-
-
 </div>
 				
 			</tr>
 		</table>
 		<br />
 	</div>
+
 	<div id='recommendation' style='display:none'>
 		<table>
 			<tr>
 				<th>This block shows recommendations</th>
 			</tr>
-			<tr>
-				<td>Recommendation 1</td>
-				<td>Recommendation 2</td>
-			</tr>
+			
 		</table>
+
+		<div align="left"
+<p>Recommend Classes By:
+<br>
+<br>
+Credit: <input type="text" id="credit" style="width: 100px;" name="credit">(e.g. 15)<br>
+
+Career Years: <input type="text" id="year" style="width: 100px;" name="year">(e.g. current year)<br>
+
+			<aside id="left">Campus Location
+<select>
+<option value="select">select</option>
+<option value="north">North</option>
+<option value="northeast">Northeast</option>
+<option value="northwest">Northwest</option>
+<option value="east">East</option>
+<option value="west">West</option>
+<option value="south">South</option>
+<option value="southeast">Southeast</option>
+<option value="southwest">Southwest</option>
+<option value="central">Central</option>
+</select>
+
+
+		<aside id="left">Time of Day
+<select>
+<option vlue="">select</option>
+<option value="">Morning</option>
+<option value="">Afternoon</option>
+<option value="">Evening</option>
+</select>
+
+
+<br>
+<input type="checkbox" name="major" value="major">   Major<br>
+<input type="checkbox" name="minor" value="minor">   Minor<br>
+
+<br>
+<br>
+<input type="recommend" name="recommend" id="recommend" style="width: 85px;" class="button" value="Recommend"/>
+
+</P>
+
+
+
+
+</div
+
+
+
+
 		<br />
 	</div>
-	<div>
-		search by course code
-		search by professor
-	</div>
+
+
 	<div id='all_class'>
     	This block shows all class
     	</div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401163850) do
+ActiveRecord::Schema.define(:version => 20130401234616) do
 
   create_table "credit_constraints", :force => true do |t|
     t.string   "field"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(:version => 20130401163850) do
     t.integer "time_slot_id"
     t.string  "room"
     t.string  "units",          :default => "0", :null => false
-    t.string  "type",           :default => "",  :null => false
+    t.string  "ty",             :default => "",  :null => false
   end
 
   create_table "sections_users", :force => true do |t|

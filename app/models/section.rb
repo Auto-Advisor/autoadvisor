@@ -1,5 +1,5 @@
 class Section < ActiveRecord::Base
-  attr_accessible :class_number, :class_string, :dept, :desc, :instructor, :name, :section_number, :size, :spire_id, :time_slot, :requirement, :units, :room, :type
+  attr_accessible :class_number, :class_string, :dept, :desc, :instructor, :name, :section_number, :size, :spire_id, :time_slot, :requirement, :units, :room, :ty
 
   belongs_to :time_slot
   has_one :requirement
@@ -49,6 +49,10 @@ class Section < ActiveRecord::Base
       final << sections[idx] if satisfied[idx]
     end
     return final
+  end
+
+  def self.get_new_schedule num
+    find(:all).sample num
   end
 end
 

@@ -14,4 +14,15 @@ class PagesController < ApplicationController
     usernow = User.find(session[:'warden.user.user.key'][1][0])
     @past_course = usernow.past_courses
   end
+
+  def friends
+	usernow = User.find(session[:'warden.user.user.key'][1][0])
+	@friend = usernow.friends
+	end
+
+  def schedules
+	usernow = User.find(session[:'warden.user.user.key'][1][0])
+	@schedule = usernow.schedules
+	end
+
 end

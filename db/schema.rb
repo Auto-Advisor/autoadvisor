@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401155244) do
+ActiveRecord::Schema.define(:version => 20130401163850) do
 
   create_table "credit_constraints", :force => true do |t|
     t.string   "field"
@@ -67,6 +67,14 @@ ActiveRecord::Schema.define(:version => 20130401155244) do
     t.string  "units",          :default => "0", :null => false
     t.string  "type",           :default => "",  :null => false
   end
+
+  create_table "sections_users", :force => true do |t|
+    t.integer "user_id"
+    t.integer "section_id"
+  end
+
+  add_index "sections_users", ["section_id", "user_id"], :name => "index_sections_users_on_section_id_and_user_id"
+  add_index "sections_users", ["user_id", "section_id"], :name => "index_sections_users_on_user_id_and_section_id"
 
   create_table "time_slots", :force => true do |t|
     t.string  "days"

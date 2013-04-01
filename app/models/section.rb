@@ -3,6 +3,7 @@ class Section < ActiveRecord::Base
 
   belongs_to :time_slot
   has_one :requirement
+  has_and_belongs_to_many :users
 
   def query_fields
     {

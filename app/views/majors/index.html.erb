@@ -8,7 +8,7 @@
     <th>Edit</th>
   </tr>
 
-<% @majors.each do |major| %>
+<% @user.majors.each do |major| %>
   <tr>
     <td><%= major.degree %> </td>
     <td><%= major.dept %></td>
@@ -26,5 +26,3 @@
 </table>
 
 <br />
-
-<%= link_to 'New Major', new_major_path %>

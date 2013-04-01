@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
 
-<% if @admin %>
+<% if current_user.admin %>
 
 <p> Admin Login </p>
 

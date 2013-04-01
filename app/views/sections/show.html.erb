@@ -1,5 +1,29 @@
 <p id="notice"><%= notice %></p>
 
+<table border='2'>
+  <tr>
+  	<th colspan='2'><%= @section.class_string %></th>
+  	<td colspan='2'><%= @section.name %></td>
+  </tr>
+  <tr>
+  	<td>Section Number</td>
+  	<td><%= @section.section_number %></td>
+  	<td>Instructor</td>
+  	<td>It will be extracted from SPIRE</td>
+  </tr>
+  <tr>
+  	<td>Department</td>
+  	<td>It will be extracted from SPIRE</td>
+  	<td>Class Size </td>
+  	<td>It will be extracted from SPIRE</td>
+  </tr>
+  <tr>
+  	<th colspan='4'>Description</th>
+  </tr>
+  <tr>
+  	<td colspan='4'>It will be extracted from SPIRE</td>
+  </tr>
+</table>
 
 <%= link_to 'Edit', edit_section_path(@section) %> |
 <%= link_to 'Back', sections_path %>

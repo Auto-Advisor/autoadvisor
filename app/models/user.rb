@@ -9,10 +9,17 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation
 
-  has_many :credits
-  has_and_belongs_to_many :past_courses
-  has_and_belongs_to_many :sections
+  has_many :sections
+  has_and_belongs_to_many :credits
   has_and_belongs_to_many :majors
+
+  def schedule
+    self.sections
+  end
+
+  def transcript
+    self.credits
+  end
 
   def satisfies_requirements?(constraints_hash, requirement_slots)
     # pull the user's credits into memory then do the requirements queries manually.

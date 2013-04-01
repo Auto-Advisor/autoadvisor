@@ -1,7 +1,8 @@
 class Credit < ActiveRecord::Base
   attr_accessible :dept, :grade, :name, :number, :year, :user
 
-  belongs_to :user
+  has_and_belongs_to_many :user
+
   def self.query_fields
     {:dept => :string,
      :grade => :real,

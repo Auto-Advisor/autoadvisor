@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130331021405) do
+ActiveRecord::Schema.define(:version => 20130401155244) do
 
   create_table "credit_constraints", :force => true do |t|
     t.string   "field"
@@ -29,6 +29,14 @@ ActiveRecord::Schema.define(:version => 20130331021405) do
     t.string  "number"
     t.integer "user_id"
   end
+
+  create_table "credits_users", :force => true do |t|
+    t.integer "credit_id"
+    t.integer "user_id"
+  end
+
+  add_index "credits_users", ["credit_id", "user_id"], :name => "index_credits_users_on_credit_id_and_user_id"
+  add_index "credits_users", ["user_id", "credit_id"], :name => "index_credits_users_on_user_id_and_credit_id"
 
   create_table "majors", :force => true do |t|
     t.string "name"

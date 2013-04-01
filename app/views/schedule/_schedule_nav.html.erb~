@@ -1,32 +1,92 @@
 <link href="/assets/schedule.css" media="all" rel="stylesheet" type="text/css" />
 <div class='schedule_nav'>
-	<table>
+	<table id='sch_nav_table'>
 		<tr>
 			<td>
-				<a href='#' onclick='show_all_class()'>All Class</a>
+				<a id = 'sch_nav' href='#' onclick='show_all_class()'>All Class</a>
 			</td>
 			<td>
-				<a href="#' onclick='show_filter()'>Filter</a>
+				<a id = 'sch_nav1' href='#' onclick='show_filter()'>Filter</a>
 			</td>
 			<td>
-				<a href='#' onclick='show_recommendation()'>Recommendation</a>
+				<a id = 'sch_nav2' href='#' onclick='show_recommendation()'>Recommendation</a>
 			</td>
 			<td>
-				<a href='#' onclick='show_search()'>Search</a>
+				<a id = 'sch_nav3' href='#' onclick='show_search()'>Search</a>
 			</td>
 		</tr>
 	</table>
 	<div id='filter_class' style='display:none'>
 		<table>
 			<tr>
-				<th>This block shows class filter</th>
-			</tr>
-			<tr>
-				<td>Filter Option 1</td>
-				<td>Filter Option 2</td>
-			</tr>
-			<tr>
-				<td colspan='2'>[checkbox] Filter out requirement</td>
+				<div align ="left"
+				<td colspan='2'>[checkbox] Filter out requirement
+			<form> 
+			<aside id="left">Term
+<select>
+<option value="">Select a term</option>
+<option value="">Fall 2013</option>
+<option value="">Spring 2014</option>
+<option value="">Fall 2014</option>
+<option value="">Spring 2015</option>
+<option value="">Fall 2015</option>
+<option value="">Spring 2015</option>
+</select>
+<br>
+<br>
+
+			<input type="checkbox" name="filterbox" value="Major">   Major<br>
+
+<br>
+			<input type="checkbox" name="filterbox" value="Gened">   Gen. Ed<br>
+
+<br>
+			<input type="checkbox" name="filterbox" value="Elect">   Elective<br>
+			<br>
+
+<aside id="left">Course Component
+<select>
+<option value=""></option>
+<option value="">Lecture</option>
+<option value="">Discussion</option>
+<option value="">Laboratory</option>
+<option value="">Seminar</option>
+</select>
+<br>
+<br>
+<br>
+			<p>Day of Week (inlude these days)
+			<div align ="left"
+<form>
+<input type="checkbox" name="filterbox" value="Day">Monday
+<input type="checkbox" name="filterbox" value="Day">Tuesday
+<input type="checkbox" name="filterbox" value="Day">Wednesday
+<input type="checkbox" name="filterbox" value="Day">Thursday
+<input type="checkbox" name="filterbox" value="Day">Friday
+<input type="checkbox" name="filterbox" value="Day">Saturday
+<input type="checkbox" name="filterbox" value="Day">Sunday
+</div>
+</P>
+<br>
+<p>
+Meeting time<br>
+<div align="left"
+<form>
+between: <input type="text" id="between" style="width: 100px;" name="between">
+and: <input type="text" id="and" style="width: 100px;" name="and">
+</form>				
+</div>		
+	
+<input type="filter" name="filter" id="filter" style="width: 40px;" class="button" value="Filter"/></form>
+
+</td>
+
+
+
+
+
+</div>
+				
 			</tr>
 		</table>
 		<br />

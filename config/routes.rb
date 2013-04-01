@@ -5,9 +5,8 @@ Autoadvisor::Application.routes.draw do
   devise_for :users
   resources :sections, :only => [:show]
   resources :majors, :only => [:show]
-  match 'user/:id' => 'users#show', :via => :get
-  match 'user/transcript/:id' => 'users#transcript', :via => :get
-  match 'user/schedule/:id' => 'users#schedule', :via => :get
+  match 'user/transcript/' => 'users#transcript', :via => :get, :as => 'transcript'
+  match 'user/(:id)' => 'users#show', :via => :get
 
   # beta used only
   # /app/views/pages/profile.html.erb

@@ -4,7 +4,6 @@ class UploadsController < ApplicationController
 	#in "public/uploadedTranscript", then delete it after parsing. if no 
 	#file stay on same page.
 	def upload_transcript
-		usernow = User.find(session[:'warden.user.user.key'][1][0])
 		if (!params[:file].blank?)
 			transcriptFile =  params[:file].original_filename
     		directory = "public/uploadedTranscript"
@@ -12,10 +11,10 @@ class UploadsController < ApplicationController
     		File.open(path, "wb") { |f| f.write(params[:file].read)}
     		#system(path/to/parser #{"public/uploadedTranscript/"+transcriptFile})
     		#File.delete("public/uploadedTranscript/"+transcriptFile)
-    		redirect_to :action => 'transcript', :controller => 'pages'
+    		redirect_to :action => 'transcript', :controller => 'users'
     	else
     		#file field was blank
-    		redirect_to :action => 'transcript', :controller => 'pages'
+    		redirect_to :action => 'transcript', :controller => 'users'
     	end
 	end
 
@@ -23,29 +22,23 @@ class UploadsController < ApplicationController
 	#page. New course should be visible. Only uploads if all 4 fields 
 	#are filled in.
 	def upload_course
-		if (!params[:year].blank?)&&(!params[:courseName].blank?)&&(!params[:courseCode].blank?)&&(!params[:grade].blank?)
-			usernow = User.find(session[:'warden.user.user.key'][1][0])
-			usernow.past_courses << PastCourse.new(
-					:year => params[:year], 
-					:course_name => params[:courseName], 
-					:course_code => params[:courseCode], 
-					:grade => params[:grade])
-			redirect_to :action =>'transcript', :controller => 'pages'
+		if (!params[:year].blank?)&&(!params[:courseCode].blank?)&&(!params[:grade].blank?)
+      section = Section.where("class_string == (?)", params[:courseCode]).first
+			current_user.transcript << Credit.from_section(section, params[:year], params[:grade]) if !section.nil?
+			redirect_to :action =>'transcript', :controller => 'users'
 		else
 			#at least 1 field was left blank
-			redirect_to :action =>'transcript', :controller => 'pages'
+			redirect_to :controller => 'users', :action => 'transcript'
 		end
 	end
 
 	#Deletes the selected course information from the users records based
 	#on couse code and year.
 	def delete
-		usernow = User.find(session[:'warden.user.user.key'][1][0])
-		obj = usernow.past_courses.find(:all, :conditions => 
-				["past_courses.course_code IN (?) AND past_courses.year IN(?)",
-				params[:courseCode], params[:year]])
+		obj = current_user.transcript.find(:all, :conditions => 
+				["course_code == '?' AND year == '", params[:courseCode], params[:year]])
 		obj.each {|o| o.destroy}
-		redirect_to :action=> 'transcript',:controller=>'pages'
+		redirect_to :action=> 'transcript', :controller=>'users'
 	end
 
 end

@@ -10,4 +10,14 @@ class Credit < ActiveRecord::Base
      :number => :int,
      :year => :int}
   end
+
+  def self.from_section(section, year, grade)
+    credit = Credit.new
+    credit.dept = section.dept
+    credit.grade = grade
+    credit.name = section.name
+    credit.number = section.class_number
+    credit.year = year
+    credit
+  end
 end

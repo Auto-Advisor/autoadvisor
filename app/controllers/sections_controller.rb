@@ -2,7 +2,8 @@ class SectionsController < ApplicationController
   # GET /sections
   # GET /sections.json
   def index
-    @sections = Section.all
+    usernow = User.find(session[:'warden.user.user.key'][1][0])
+    @sections = usernow.sections.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,8 @@ class SectionsController < ApplicationController
   # GET /sections/1
   # GET /sections/1.json
   def show
-    @section = Section.find(params[:id])
+    usernow = User.find(session[:'warden.user.user.key'][1][0])
+    @section = usernow.sections.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -34,13 +36,16 @@ class SectionsController < ApplicationController
 
   # GET /sections/1/edit
   def edit
-    @section = Section.find(params[:id])
+    usernow = User.find(session[:'warden.user.user.key'][1][0])
+    @section = usernow.sections.find(params[:id])
   end
 
   # POST /sections
   # POST /sections.json
   def create
+    usernow = User.find(session[:'warden.user.user.key'][1][0])
     @section = Section.new(params[:section])
+    usernow.sections << @section
 
     respond_to do |format|
       if @section.save
@@ -56,7 +61,8 @@ class SectionsController < ApplicationController
   # PUT /sections/1
   # PUT /sections/1.json
   def update
-    @section = Section.find(params[:id])
+    usernow = User.find(session[:'warden.user.user.key'][1][0])
+    @section = usernow.sections.find(params[:id])
 
     respond_to do |format|
       if @section.update_attributes(params[:section])
@@ -72,7 +78,8 @@ class SectionsController < ApplicationController
   # DELETE /sections/1
   # DELETE /sections/1.json
   def destroy
-    @section = Section.find(params[:id])
+    usernow = User.find(session[:'warden.user.user.key'][1][0])
+    @section = usernow.sections.find(params[:id])
     @section.destroy
 
     respond_to do |format|

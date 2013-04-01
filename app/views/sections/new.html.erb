@@ -1,5 +1,11 @@
 <h1>New section</h1>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', sections_path %>
+<%= form_for @section, :url => { :action => "create" }, :html => {:class => "nifty_form"} do |f| %>
+  <%= label_tag(:class_string, "Course Code:") %>
+  <%= text_field(:section, :class_string) %>
+  <%= label_tag(:name, "Course Name:") %>
+  <%= text_field(:section, :name) %>
+  <%= label_tag(:section_number, "Sections Number:") %>
+  <%= text_field(:section, :section_number) %>
+  <%= submit_tag("Add") %>
+<% end %>

@@ -14,7 +14,19 @@ Autoadvisor::Application.routes.draw do
   get '/transcript', to: 'pages#transcript'
   # /app/views/pages/friends.html.erb [not yet created]
   get '/friends', to: 'pages#friends'
+
+  #upload coruse or transcript
+  get '/delete', to: 'uploads#delete'
+  get '/upload_course', to: 'uploads#upload_course'
+  post '/upload_transcript', to: 'uploads#upload_transcript'
   # ylno desu ateb
+  
+  #Adding following and followers actions to the Users controller. 
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

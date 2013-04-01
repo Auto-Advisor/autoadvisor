@@ -1,0 +1,70 @@
+<%= @u %>
+<table class="transcript">
+  <tr class='head'>
+    <th colspan="4">TRANSCRIPT</th>
+  </tr>
+  <tr class='subhead'>
+    <td>Year</td><td>Course</td><td>Course Name</td><td>Grade</td>
+  </tr>
+  <% @past_course.each do |c| %>
+  <tr class='item'>
+    <td><%= c.year %></td><td><%= c.course_code %></td><td><%= c.course_name %></td><td><%= c.grade %></td>
+  </tr>
+  <% end %>
+  <tr class='subhead'>
+    <td colspan='3' align='right'>Credit Taken</td><td align='center'>33</td>
+  </tr>
+  <tr class='subhead'>
+    <td colspan='3' align='right'>GPA</td><td align='center'>4.3</td>
+  </tr>
+</table>
+
+<br />
+<br />
+
+<form method="get" action="transcript">
+  <table class='transcript'>
+    <tr>
+      <th class='head'>
+	UPLOAD TRANSCRIPT 
+      </th> 
+    </tr>
+    <tr align='center'>
+      <td>
+        <br>
+	<input type="file" name="fileField" size="30"><br>
+        <br>
+      </td>
+    </tr>
+    <tr>
+       <td class='manual_button' id='submit_transcript' align='center'>Submit</td>
+    </tr>
+  </table>
+</form>
+<br />
+
+<div>
+  <form method="get" action="transcript" >
+    <table class='transcript'>
+<tr> <th class='head' colspan='2'> ADD TRANSCRIPT ITEM </th> </tr>
+<tr><td colspan='2' align='center'>Disclamer</td></tr>
+      <tr align='center'>
+        <td valign="top">
+          Year:<br/>
+          <input type="text" name="Year" size="4"><br />
+          Course Code: (e.g. MATH131)<br />
+          <input type="text" name="Year" size="12"><br />
+        </td>
+        <td valign = "top">
+	  Course Name<br /><input type="text" name="courseName" size="30"><br>
+	  Grade: (e.g. A-)<br />
+          <input type="text" name="grade" size="2">
+        </td>
+      </tr>
+      <tr align='center'>
+      <td class='manual_button' id='submit_transcript' align='center'>Submit</td>
+      <td class='manual_button' id='submit_transcript' align='center'>Clear</td>
+    </table>
+<br />
+   </form>
+</div>

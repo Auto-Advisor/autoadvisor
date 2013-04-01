@@ -1,5 +1,17 @@
 <p id="notice"><%= notice %></p>
 
+<h2><%= @major.name %></h2>
+<table>
+  <tr>
+  	<th><%= @major.degree %></th>
+  	<th><%= @major.dept %></th>
+  </tr>
+  <tr>
+  	<td colspan='2'><%= @major.name %></td>
+  </tr>
+</table>
+
+
 
 <%= link_to 'Edit', edit_major_path(@major) %> |
 <%= link_to 'Back', majors_path %>

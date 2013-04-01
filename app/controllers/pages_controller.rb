@@ -1,5 +1,10 @@
 class PagesController < ApplicationController
   def main
+    if user_signed_in?
+      usernow = User.find(session[:'warden.user.user.key'][1][0])
+      @admin = usernow.admin
+      @email = usernow.email
+    end
   end
 
   def profile
@@ -11,6 +16,7 @@ class PagesController < ApplicationController
   end
 
   def transcript
+    @u = session
     usernow = User.find(session[:'warden.user.user.key'][1][0])
     @past_course = usernow.past_courses
   end

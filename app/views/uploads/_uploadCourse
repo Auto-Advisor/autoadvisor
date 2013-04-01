@@ -1,0 +1,26 @@
+<div>
+  <%= form_tag({:action=> :upload_course, :controller=>:uploads},:method=>:get, :multipart=>'true') do %>
+    <table class='transcript'>
+<tr> <th class='head' colspan='2'> ADD TRANSCRIPT ITEM </th> </tr>
+<tr></td></tr>
+      <tr align='center'>
+        <td valign="top">
+          Year:<br/>
+          <%= text_field_tag 'year' %><br />
+          Course Code: (e.g. MATH131)<br />
+          <%= text_field_tag 'courseCode' %><br />
+        </td>
+        <td valign = "top">
+	       Course Name<br />
+          <%= text_field_tag 'courseName' %><br>
+	       Grade: (e.g. A-)<br />
+          <%= text_field_tag 'grade' %>
+        </td>
+      </tr>
+      <tr align='center'>
+      <td class='manual_button' colspan='2' id='submit_transcript' align='center'>
+          <%= submit_tag "submit" %></td>
+  <%end%>
+    </table>
+<br />
+</div>

@@ -2,18 +2,27 @@
 
 <table>
   <tr>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Degree</th>
+    <th>Department</th>
+    <th>Name</th>
+    <th>Edit</th>
   </tr>
 
 <% @majors.each do |major| %>
   <tr>
-    <td><%= link_to 'Show', major %></td>
-    <td><%= link_to 'Edit', edit_major_path(major) %></td>
-    <td><%= link_to 'Destroy', major, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= major.degree %> </td>
+    <td><%= major.dept %></td>
+    <td><%= major.name %></td>
+    <td><%= link_to 'Show', major %>
+      <%= link_to 'Edit', edit_major_path(major) %>
+      <%= link_to 'Destroy', major, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
+  <tr>
+    <td></td>
+    <td></td>
+    
+  </tr>
 </table>
 
 <br />

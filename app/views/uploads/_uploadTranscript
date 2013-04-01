@@ -1,0 +1,25 @@
+<div>
+<%= form_tag({:action=> :upload_transcript, :controller=>:uploads,:method=>:get}, {:multipart=>'true'} ) do %>
+  <table class='transcript'>
+    <tr>
+      <th class='head'>
+	UPLOAD TRANSCRIPT*
+      </th> 
+    </tr>
+    <tr align='center'>
+
+      <td>
+        <br>
+	<%= file_field_tag 'file' %><br>
+        <br>
+      </td>
+    </tr>
+    <tr>
+       <td class='manual_button' id='submit_transcript' align='center'>
+        <%= submit_tag 'upload' %>
+       </td>
+    </tr>
+  </table>
+<% end %>
+<br />
+</div>

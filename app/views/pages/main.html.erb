@@ -1,1 +1,34 @@
-<h2>a course selection aid.</h2>
+<% if user_signed_in? %>
+
+<% if @admin %>
+
+<p> Admin Login </p>
+
+<% end %>
+
+<% end %>
+
+<div class='main'>
+	<h2>What's new</h2>
+	<br />
+	<table>
+		<tr>
+			<td>
+				<p class='version'>v.beta</p>
+				<p class='date'>4/2/2013</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li>Registration/Sign Up</li>
+					<li>Account Log In</li>
+					<li>Upload/Parse Unofficial Transcript</li>
+					<li>Class Options/Recommendations</li>
+					<li>Browse/Filter Courses</li>
+					<li>Personal Profile</li>
+				</ul>
+			</td>
+		</tr>
+	</table>
+</div>

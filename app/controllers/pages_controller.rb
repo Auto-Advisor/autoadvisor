@@ -3,26 +3,15 @@ class PagesController < ApplicationController
   end
 
   def profile
-    usernow = User.find(session[:'warden.user.user.key'][1][0])
-    @email = usernow.email
-    @majors = usernow.majors
-    @courses = usernow.sections
-    @credit = usernow.credits
+    @user = User.find(session[:'warden.user.user.key'][1][0])
   end
 
   def transcript
-    usernow = User.find(session[:'warden.user.user.key'][1][0])
-    @past_course = usernow.past_courses
+    @user = User.find(session[:'warden.user.user.key'][1][0])
   end
 
-  def friends
-	usernow = User.find(session[:'warden.user.user.key'][1][0])
-	@friend = usernow.friends
-	end
-
   def schedules
-	usernow = User.find(session[:'warden.user.user.key'][1][0])
-	@schedule = usernow.schedules
-	end
+    @user = User.find(session[:'warden.user.user.key'][1][0])
+  end
 
 end

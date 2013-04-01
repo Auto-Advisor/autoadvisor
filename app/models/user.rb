@@ -14,11 +14,11 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :majors
 
   def schedule
-    self.sections
+    self.sections.all
   end
 
   def transcript
-    self.credits
+    self.credits.all
   end
 
   def satisfies_requirements?(constraints_hash, requirement_slots)

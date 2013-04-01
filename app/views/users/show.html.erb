@@ -3,14 +3,14 @@
     <td>
       <litem>Name</litem>
     </td><td>
-      <p class='ritem'><%= @email %></p>
+      <p class='ritem'><%= @user.email %></p>
     </td>
   </tr><tr valign=top>
     <td>
       <litem>Major</litem>
     </td><td>
       <p class='ritem'>
-        <% @majors.each do |major| %>
+        <% @user.majors.each do |major| %>
           <%= major.degree %> <%= major.name %><br/>
         <% end %>
       </p>
@@ -20,7 +20,7 @@
       <litem>Course</litem>
     </td><td>
       <p class='ritem'>
-        <% @courses.each do |course| %>
+        <% @user.schedule.each do |course| %>
           <%= course.class_string %> <br />
         <% end %>
       <%= link_to 'See my Schedule', '/schedule' %> 
@@ -32,7 +32,7 @@
 <litem>Credit</litem>
 </td><td>
 <p class='ritem'>
-  <% @credit.each do |c| %>
+  <% @user.transcript.each do |c| %>
     Name: <%= c.name %><br />
     Year: <%= c.year %><br />
     GPA: <%= c.gpa %><br />

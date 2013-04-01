@@ -1,0 +1,17 @@
+<% if user_signed_in? %>
+<h3>Welcome</h3>
+<ul class="nav nav-list">
+  <li class="nav-header">NAVIGATION</li>
+  <li><%= link_to "Profile", "/profile"  %></li>
+  <li><%= link_to "Schedule", "/schedule"  %></li>
+  <li><%= link_to "Transcript", "/transcript"  %></li>
+  <li><%= link_to "Friends", "/friends"  %></li>
+</ul>
+<% else %>
+<h3>Auto Advisor</h3>
+<ul class="nav nav-list">
+  <li class="nav-header">NAVIGATION</li>
+  <li><%= link_to "What's new", "/"  %></li>
+  <li><%= link_to "Sign in", "/"  %></li>
+</ul>
+<% end %>

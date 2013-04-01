@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation
 
   has_many :credits
+  has_and_belongs_to_many :past_courses
+  has_and_belongs_to_many :sections
   has_and_belongs_to_many :majors
 
   def satisfies_requirements?(constraints_hash, requirement_slots)

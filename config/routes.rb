@@ -5,6 +5,17 @@ Autoadvisor::Application.routes.draw do
   devise_for :users
   resources :sections, :majors
 
+  # beta used only
+  # /app/views/pages/profile.html.erb
+  get '/profile', to: 'pages#profile'
+  # /app/views/pages/schedule.html.erb [not yet created]
+  get '/schedule', to: 'pages#schedule'
+  # /app/views/pages/transcript.html.erb [not yet created]
+  get '/transcript', to: 'pages#transcript'
+  # /app/views/pages/friends.html.erb [not yet created]
+  get '/friends', to: 'pages#friends'
+  # ylno desu ateb
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

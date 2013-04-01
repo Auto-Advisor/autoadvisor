@@ -1,0 +1,17 @@
+<h1>Friend List</h1>
+
+<table>
+  <tr>
+    <th>Friend</th>
+    <th></th>
+  </tr>
+  
+
+<% @friends.each do |friend| %>
+  <tr>
+    <td> <%= friend.name %> </td>
+    <td> <%= link_to 'Schedule', friend %> </td>
+  </tr>
+<% end %>
+
+</table>

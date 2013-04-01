@@ -1,4 +1,5 @@
 class Section < ActiveRecord::Base
+<<<<<<< HEAD
   attr_accessible :class_number, :class_string, :dept, :desc, :instructor, :name, :primary, :section_number, :size, :spire_id, :time_slot, :requirement
 
   belongs_to :time_slot
@@ -50,3 +51,4 @@ class Section < ActiveRecord::Base
     return final
   end
 end
+

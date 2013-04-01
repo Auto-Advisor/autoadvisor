@@ -5,7 +5,7 @@
   <tr class='subhead'>
     <td>Year</td><td>Course</td><td>Course Name</td><td>Grade</td>
   </tr>
-  <% @past_course.each do |c| %>
+  <% @user.transcript.each do |c| %>
   <tr class='item'>
     <td><%= c.year %></td><td><%= c.course_code %></td><td><%= c.course_name %></td><td><%= c.grade %></td>
   </tr>

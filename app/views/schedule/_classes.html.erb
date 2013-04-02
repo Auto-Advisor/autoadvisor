@@ -1,0 +1,98 @@
+<table border="1" cellspacing = "0">
+<tr>
+  <td>
+    <div id = "class_titles"> CMPSCI320      Software Engineering</div>
+    <div id = "course_status"> Status: Open</div>
+    <div id = "class_section">01-Lec</div>
+    <div id = "class_number">Class Number: 31748</div>
+    <div id = "session"> Session: University</div>
+   <table border="1" cellspacing ="0" align ="center">
+   <tr id = "class_session_titles">
+     <td>Days & Times</td>
+     <td>Room</td>
+     <td>Instructor</td>
+     <td>Topic</td>
+     <td>Restrictions/Notes</td>
+   </tr>
+   <tr>
+     <td>TuTh11:15AM-12:30PM</td>
+     <td>MorrillSci Ctr</td>
+     <td>Yuri</td>
+     <td>TBA</td>
+     <td>Yes</td>
+   </tr>
+   </table>
+     <button id = 'course_description'>Description</button>
+        <div id = 'class_description' style ="display:none">
+          <form name ="class_discription_forum" action ="" method="post">
+           <fieldset>
+             <legend>Class Detail</legend>
+             <table id ="class_detail" align = "center">
+                <td>
+                  <ul>
+            	     <li>WaitList: <input type="checkbox" name="sports" value="waitList"  />Wait list if class is full</li>
+                     <li>Permission Number: <input type="text" style="width: 50px" name="permission_nbr"></li>
+                     <li>
+		       <label>Grading:</label> 
+                       <select id = "grading_list">
+                          <option value = "pass_fail">Elective Pass/Fail Grading</option>
+                          <option value = "graduate_student_only">For Graduate Student Only</option>
+                          <option value = "undergraduate_letter_grading">Undergraduate Letter Grading</option>
+                       </select>
+                     </li>
+		     <li>Unit: 4.0</li>
+                     <li>General Education: None</li>
+                     <li>RAP/TAP/HLC: None</li>
+                  </ul>
+                </td>
+              </table>
+           </fieldset>
+          </form>
+	 <fieldset>
+          <legend>Restriction & Notes</legend> 
+           <table id = 'restriction_notes'>
+            <td>
+              <div id = 'enrollment_requirements'>Enrollemnt Requirement</div>
+                <div id = 'enrollment_req_description'>
+		Open to Computer Science majors only.
+		Prerequisite: CMPSCI 187 or E&C-ENG 242 with a grade of 'C' or better.
+		CMPSCI MINORS, APPLICANTS-ON-CONTRACT, AND OTHERS NOT MEETING ELIGIBILITY, OR STUDENTS NEEDING SPECIAL PERMISSION MUST REQUEST OVERRIDES VIA THE ON-LINE FORM:  https://www.cs.umass.edu/ugrad-education/courses .   COURSE NUMBER CHANGED FROM 390WP TO 326.
+                </div> 
+            </td>
+          </table>
+         </fieldset>
+ 
+	<fieldset> 
+           <legend>Class Availability</legend>
+	<table id = "class_availability" cellspacing ="0" align ="center">
+           <tr>
+             <td id= "class_capacity">Class Capacity</td>
+             <td id = "class_capacity_value" align = "center">50</td>
+             <td id = "wait_list_capacity">Wait List Capacity</td>
+             <td id = "wait_list_capacity_value" align = "center">0</td>
+             <td id = "available_seats">Available Seats</td>
+             <td id = "available_seats_value" align = "center">46</td>
+           </tr>
+           <tr>
+             <td id = "enrollment_total">Enrollment Total</td>
+             <td id = "enrollment_total_value" align = "center">4</td>
+             <td id = "wait_list_total">Wait List Total</td>
+             <td id = "wait_list_total_value" align = "center">0</td>
+             <td></td>
+             <td></td>
+          </tr>
+          </table>
+	</fieldset>
+
+	 <fieldset>
+          <legend>Textbook/Other Materials</legend> 
+           <table id = 'textbook_materials'>
+            <tr id= "textbook_description" align= "center"> No Textbook Description! </tr>
+          </table>
+         </fieldset>
+	<fieldset>
+	<legend></legend>
+	<input type="course_submit" name="course_submit" style="width: 75px" id="course_submit" class="button" value="Submit"/>
+	</fieldset>
+        </div>
+</table>

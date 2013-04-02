@@ -1,3 +1,0 @@
-cmpsci = Major.create(:degree => "B.Sc", :dept => "CMPSCI", :name => "Computer Science")
-econ = Major.create(:degree => "B.A", :dept => "ECON", :name => "Economics")
-acct = Major.create(:degree => "B.A", :dept => "ACCT", :name => "Account")

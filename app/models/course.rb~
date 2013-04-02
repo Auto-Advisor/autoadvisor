@@ -1,5 +1,0 @@
-class Course < ActiveRecord::Base
-  attr_accessible :dept, :class_number, :class_string, :name, :description, :primary
-
-  has_many :sections
-end

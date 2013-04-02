@@ -1,5 +1,12 @@
 <h1>New major</h1>
 
-<%= render 'form' %>
+<%= form_for @major, :url => { :action => "create" }, :html => {:class => "nifty_form"} do |f| %>
+  <%= label_tag(:degree, "Degree:") %>
+  <%= text_field(:major, :degree) %>
+  <%= label_tag(:dept, "Department:") %>
+  <%= text_field(:major, :dept) %>
+  <%= label_tag(:name, "Major name:") %>
+  <%= text_field(:major, :name) %>
+  <%= submit_tag("Add") %>
+<% end %>
 
-<%= link_to 'Back', majors_path %>

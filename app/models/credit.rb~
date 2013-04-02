@@ -1,6 +1,0 @@
-class Credit < ActiveRecord::Base
-  attr_accessible :dept, :gpa, :name, :number, :year, :user
-
-  has_many :past_courses
-  belongs_to :user
-end

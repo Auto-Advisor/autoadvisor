@@ -11,25 +11,38 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130315190350) do
+ActiveRecord::Schema.define(:version => 20130401235356) do
 
   create_table "courses", :force => true do |t|
-    t.string  "dept"
-    t.integer "class_number"
-    t.string  "class_string"
+    t.integer "number"
     t.string  "name"
-    t.text    "description"
-    t.boolean "primary"
+    t.string  "dept"
+  end
+
+  create_table "credit_constraints", :force => true do |t|
+    t.string   "field"
+    t.string   "op"
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "credits", :force => true do |t|
     t.string  "name"
     t.string  "year"
-    t.float   "gpa"
+    t.float   "grade"
     t.string  "dept"
     t.string  "number"
     t.integer "user_id"
   end
+
+  create_table "credits_users", :force => true do |t|
+    t.integer "credit_id"
+    t.integer "user_id"
+  end
+
+  add_index "credits_users", ["credit_id", "user_id"], :name => "index_credits_users_on_credit_id_and_user_id"
+  add_index "credits_users", ["user_id", "credit_id"], :name => "index_credits_users_on_user_id_and_credit_id"
 
   create_table "majors", :force => true do |t|
     t.string "name"
@@ -46,22 +59,25 @@ ActiveRecord::Schema.define(:version => 20130315190350) do
   add_index "majors_users", ["user_id", "major_id"], :name => "index_majors_users_on_user_id_and_major_id"
 
   create_table "sections", :force => true do |t|
-    t.string  "dept"
-    t.integer "class_number"
-    t.string  "class_string"
-    t.string  "name"
-    t.text    "description"
-    t.boolean "primary"
     t.integer "spire_id"
-    t.string  "section_number"
+    t.string  "dept",                            :null => false
+    t.integer "class_number",   :default => 0,   :null => false
+    t.string  "class_string",                    :null => false
+    t.string  "section_number",                  :null => false
     t.string  "instructor"
     t.integer "size"
+    t.string  "name"
+    t.text    "desc"
     t.integer "time_slot_id"
+    t.string  "room"
+    t.string  "units",          :default => "0", :null => false
+    t.string  "ty",             :default => "",  :null => false
+    t.integer "course_id"
   end
 
-  create_table "sections_users", :id => false, :force => true do |t|
-    t.integer "section_id"
+  create_table "sections_users", :force => true do |t|
     t.integer "user_id"
+    t.integer "section_id"
   end
 
   add_index "sections_users", ["section_id", "user_id"], :name => "index_sections_users_on_section_id_and_user_id"
@@ -74,22 +90,6 @@ ActiveRecord::Schema.define(:version => 20130315190350) do
     t.integer "end_min"
     t.integer "end_hour"
   end
-
-  create_table "past_courses", :force => true do |t|
-    t.string "year"
-    t.string "course_code"
-    t.string "course_name"
-    t.string "grade"
-    t.string "past_course_id"
-  end
-
-  create_table "past_courses_users", :id => false, :force => true do |t|
-    t.integer "past_course_id"
-    t.integer "user_id"
-  end
-
-  add_index "past_courses_users", ["past_course_id", "user_id"], :name => "index_past_courses_users_on_past_course_id_and_user_id"
-  add_index "past_courses_users", ["user_id", "past_course_id"], :name => "index_past_courses_users_on_user_id_and_past_course_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

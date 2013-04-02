@@ -26,11 +26,10 @@ function show_search() {
   document.getElementById('search').style.display = 'block';
 }
 
+$(document).ready(function(){
+  $('button#course_description').click(function(){
+    $('div#class_description').toggle();
+	return false;
+  });
+});
 
-function show_description(){
-  var element = document.getElementById('class_description');
-  if(element.style.display === 'block')
-      element.style.display = 'none';
-  else
-      element.style.display = 'block';
-}

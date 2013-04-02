@@ -11,7 +11,7 @@ class CreateCourses < ActiveRecord::Migration
     end
 
     Section.find(:all).each do |section|
-      course = Course.where('number == (?) AND dept == (?)', section.class_number, section.dept).first
+      course = Course.where('number == ? AND dept == ?', section.class_number, section.dept).first
       if course.nil?
         course = Course.new
         course.number = section.class_number

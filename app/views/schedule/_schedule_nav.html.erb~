@@ -20,139 +20,111 @@
 <div id='filter_class' style='display:none'>
 	<table>
 		<tr>
-				<td colspan='2'>
+			<td colspan='2'>
+				<div align ="left">
 						[checkbox] Filter out requirement
-			<form> 
-			<aside id="left">Term
-<select>
-<option value="term">Select a term</option>
-<option value="fall13">Fall 2013</option>
-<option value="spr14">Spring 2014</option>
-<option value="fall14">Fall 2014</option>
-<option value="spr15">Spring 2015</option>
-<option value="fall15">Fall 2015</option>
-<option value="spr16">Spring 2016</option>
-</select>
-<br>
-<br>
+						<form> 
+							<aside id="left">Term</aside>
+							<select>
+								<option value="term">Select a term</option>
+								<option value="fall13">Fall 2013</option>
+								<option value="spr14">Spring 2014</option>
+								<option value="fall14">Fall 2014</option>
+								<option value="spr15">Spring 2015</option>
+								<option value="fall15">Fall 2015</option>
+								<option value="spr16">Spring 2016</option>
+							</select>
+							<br>
+							<br>
 
-			<input type="checkbox" name="filterbox" value="Major">   Major<br>
+							<input type="checkbox" name="filterbox" value="Major">   Major<br>
 
-<br>
-			<input type="checkbox" name="filterbox" value="Gened">   Gen. Ed<br>
+							<br>
+							<input type="checkbox" name="filterbox" value="Gened">   Gen. Ed<br>
 
-<br>
-			<input type="checkbox" name="filterbox" value="Elect">   Elective<br>
-			<br>
+							<br>
+							<input type="checkbox" name="filterbox" value="Elect">   Elective<br>
+							<br>
 
-<aside id="left">Course Component
-<select>
-<option value="select">select</option>
-<option value="lecture">Lecture</option>
-<option value="discussion">Discussion</option>
-<option value="lab">Laboratory</option>
-<option value="seminar">Seminar</option>
-</select>
-<br>
-<br>
-<br>
-			<p>Day of Week (inlude these days)
-			<div align ="left"
-<form>
-<input type="checkbox" name="monday" value="monday">Monday
-<input type="checkbox" name="tuesday" value="tuesday">Tuesday
-<input type="checkbox" name="wednesday" value="wednesday">Wednesday
-<input type="checkbox" name="thursday" value="thursday">Thursday
-<input type="checkbox" name="friday" value="friday">Friday
-<input type="checkbox" name="saturday" value="saturday">Saturday
-<input type="checkbox" name="sunday" value="sunday">Sunday
+							<aside id="left">Course Component</aside>
+							<select>
+							<option value="select">select</option>
+							<option value="lecture">Lecture</option>
+							<option value="discussion">Discussion</option>
+							<option value="lab">Laboratory</option>
+							<option value="seminar">Seminar</option>
+							</select>
+							<br>
+							<br>
+							<br>
+							<p>Day of Week (include these days)
+							<input type="checkbox" name="monday" value="monday">Monday
+							<input type="checkbox" name="tuesday" value="tuesday">Tuesday
+							<input type="checkbox" name="wednesday" value="wednesday">Wednesday
+							<input type="checkbox" name="thursday" value="thursday">Thursday
+							<input type="checkbox" name="friday" value="friday">Friday
+							<input type="checkbox" name="saturday" value="saturday">Saturday
+							<input type="checkbox" name="sunday" value="sunday">Sunday
+							</p>
+							<br>
+							<p>
+							Meeting time<br>
+							between: <input type="text" id="between" style="width: 100px;" name="between">
+							and: <input type="text" id="and" style="width: 100px;" name="and">
+							<br>
+							<br>	
+							<input type="filter" name="filter" id="filter" style="width: 40px;" class="button" value="Filter"/>
+						</form>
+				</div>
+			</td>
+		</tr>
+	</table>
 </div>
-</P>
-<br>
-<p>
-Meeting time<br>
-<div align="left"
-<form>
-between: <input type="text" id="between" style="width: 100px;" name="between">
-and: <input type="text" id="and" style="width: 100px;" name="and">
-</form>				
-</div>		
-<br>
-<br>	
-<input type="filter" name="filter" id="filter" style="width: 40px;" class="button" value="Filter"/></form>
-
-</td>
-
-</div>
-				
-			</tr>
-		</table>
-		<br />
-	</div>
-
-	<div id='recommendation' style='display:none'>
-		<table>
-			<tr>
-				<th>This block shows recommendations</th>
-			</tr>
+<br />
+<div id='recommendation' style='display:none'>
+	<table>
+		<tr>
+			<th>This block shows recommendations</th>
+		</tr>
 			
-		</table>
+	</table>
+	<p>Recommend Classes By:
+		<br>
+		<br>
+		Credit: <input type="text" id="credit" style="width: 100px;" name="credit">(e.g. 15)<br>
+		Career Years: <input type="text" id="year" style="width: 100px;" name="year">(e.g. current year)<br>
 
-		<div align="left"
-<p>Recommend Classes By:
-<br>
-<br>
-Credit: <input type="text" id="credit" style="width: 100px;" name="credit">(e.g. 15)<br>
+		Campus Location
+		<select>
+		<option value="select">select</option>
+		<option value="north">North</option>
+		<option value="northeast">Northeast</option>
+		<option value="northwest">Northwest</option>
+		<option value="east">East</option>
+		<option value="west">West</option>
+		<option value="south">South</option>
+		<option value="southeast">Southeast</option>
+		<option value="southwest">Southwest</option>
+		<option value="central">Central</option>
+		</select>
 
-Career Years: <input type="text" id="year" style="width: 100px;" name="year">(e.g. current year)<br>
-
-			<aside id="left">Campus Location
-<select>
-<option value="select">select</option>
-<option value="north">North</option>
-<option value="northeast">Northeast</option>
-<option value="northwest">Northwest</option>
-<option value="east">East</option>
-<option value="west">West</option>
-<option value="south">South</option>
-<option value="southeast">Southeast</option>
-<option value="southwest">Southwest</option>
-<option value="central">Central</option>
-</select>
-
-
-		<aside id="left">Time of Day
-<select>
-<option vlue="">select</option>
-<option value="">Morning</option>
-<option value="">Afternoon</option>
-<option value="">Evening</option>
-</select>
-
-
-<br>
-<input type="checkbox" name="major" value="major">   Major<br>
-<input type="checkbox" name="minor" value="minor">   Minor<br>
-
-<br>
-<br>
-<input type="recommend" name="recommend" id="recommend" style="width: 85px;" class="button" value="Recommend"/>
-
-</P>
-
-
-
-
+		Time of Day
+		<select>
+		<option vlue="">select</option>
+		<option value="">Morning</option>
+		<option value="">Afternoon</option>
+		<option value="">Evening</option>
+		</select>
+		<br>
+		<input type="checkbox" name="major" value="major">   Major<br>
+		<input type="checkbox" name="minor" value="minor">   Minor<br>
+		<br>
+		<br>
+		<input type="recommend" name="recommend" id="recommend" style="width: 85px;" class="button" value="Recommend"/>
+	</p>
 </div>
+<br />
 
-
-
-
-		<br />
-	</div>
-
-
-	<div id='all_class'>
-    	This block shows all class
-    	</div>
+<div id='all_class'>
+    <%= render 'schedule/classes' %>
 </div>

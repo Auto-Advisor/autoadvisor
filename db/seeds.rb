@@ -8,4 +8,5 @@
 
 require 'section_loader'
 
+puts "Seeding database..."
 load_sections 'courses.csv', Rails.logger

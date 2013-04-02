@@ -17,7 +17,16 @@ def load_sections file, logger
       num_string = class_num_info[1]
       num = num_string[0..2]
       class_string = dept + num_string
-      puts class_string
+      name = row[9]
+
+      course = Course.where('number = (?) AND dept = (?)', num, dept).first
+      if course.nil?
+        course = Course.create
+        course.number = num
+        course.dept = dept
+        course.name = name
+        course.save
+      end
 
       section = Section.new
       section.spire_id = row[0]
@@ -26,12 +35,13 @@ def load_sections file, logger
       section.class_string = class_string
       section.section_number = row[6]
       if row[7] # primary
-        section.type = 'LEC' # could also be sem
+        section.ty = 'LEC' # could also be sem
       else
-        section.type = 'unknown'
+        section.ty = 'unknown'
       end
       section.instructor = row[8]
-      section.name = row[9]
+      section.name = name
+      section.course = course
       section.save
     rescue Exception => e
       logger.debug "Encountered error while processing csv row #{line}:\n#{e.inspect}\n#{e.backtrace.join '\n'}"

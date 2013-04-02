@@ -2,6 +2,7 @@ class Section < ActiveRecord::Base
   attr_accessible :class_number, :class_string, :dept, :desc, :instructor, :name, :section_number, :size, :spire_id, :time_slot, :requirement, :units, :room, :ty
 
   belongs_to :time_slot
+  belongs_to :course
   has_one :requirement
   has_and_belongs_to_many :users
 

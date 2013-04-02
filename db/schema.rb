@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401234616) do
+ActiveRecord::Schema.define(:version => 20130401235356) do
+
+  create_table "courses", :force => true do |t|
+    t.integer "number"
+    t.string  "name"
+    t.string  "dept"
+  end
 
   create_table "credit_constraints", :force => true do |t|
     t.string   "field"
@@ -66,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20130401234616) do
     t.string  "room"
     t.string  "units",          :default => "0", :null => false
     t.string  "ty",             :default => "",  :null => false
+    t.integer "course_id"
   end
 
   create_table "sections_users", :force => true do |t|

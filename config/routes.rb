@@ -3,18 +3,24 @@ Autoadvisor::Application.routes.draw do
 
   root :to => 'pages#main'
   devise_for :users
-  resources :sections, :majors
+  resources :sections, :only => [:show]
+  resources :majors, :only => [:show]
+  match 'user/transcript/' => 'users#transcript', :via => :get, :as => 'transcript'
+  match 'user/(:id)' => 'users#show', :via => :get
 
   # beta used only
   # /app/views/pages/profile.html.erb
-  get '/profile', to: 'pages#profile'
+  #get '/profile', to: 'pages#profile'
   # /app/views/pages/schedule.html.erb [not yet created]
-  get '/schedule', to: 'pages#schedule'
+  get '/schedule', to: 'schedule#schedule'
   # /app/views/pages/transcript.html.erb [not yet created]
-  get '/transcript', to: 'pages#transcript'
+  #get '/transcript', to: 'pages#transcript'
   # /app/views/pages/friends.html.erb [not yet created]
-  get '/friends', to: 'pages#friends'
-  # ylno desu ateb
+
+  #upload coruse or transcript
+  get '/delete', to: 'uploads#delete'
+  get '/upload_course', to: 'uploads#upload_course'
+  post '/upload_transcript', to: 'uploads#upload_transcript'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,17 +1,20 @@
 <% if user_signed_in? %>
 <h3>Welcome</h3>
 <ul class="nav nav-list">
-  <li class="nav-header">NAVIGATION</li>
-  <li><%= link_to "Profile", "/profile"  %></li>
+  <li class="nav-header"><%= current_user.email %></li>
+
+  <li><%= link_to "Profile", "/user/#{current_user.id}"  %></li>
   <li><%= link_to "Schedule", "/schedule"  %></li>
-  <li><%= link_to "Transcript", "/transcript"  %></li>
-  <li><%= link_to "Friends", "/friends"  %></li>
+  <li><%= link_to "Transcript", "/user/transcript/"  %></li>
+  <hr>
+  <li><%= link_to 'My Majors' , "/majors" %></li>
+  <li><%= link_to 'My Courses' , "/sections" %></li>
 </ul>
 <% else %>
 <h3>Auto Advisor</h3>
 <ul class="nav nav-list">
   <li class="nav-header">NAVIGATION</li>
   <li><%= link_to "What's new", "/"  %></li>
-  <li><%= link_to "Sign in", "/"  %></li>
+  <li><%= link_to "Sign in", new_user_session_path %></li>
 </ul>
 <% end %>

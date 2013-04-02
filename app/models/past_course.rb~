@@ -1,5 +1,0 @@
-class Past_Course < ActiveRecourd::Base
-  atti_accessible :class, :year, :grade
-
-  belongs_to :user
-end

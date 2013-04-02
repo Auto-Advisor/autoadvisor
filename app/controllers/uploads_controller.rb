@@ -23,7 +23,7 @@ class UploadsController < ApplicationController
 	#are filled in.
 	def upload_course
 		if (!params[:year].blank?)&&(!params[:courseCode].blank?)&&(!params[:grade].blank?)
-      section = Section.where("class_string == (?)", params[:courseCode]).first
+      section = Section.where("class_string == ?", params[:courseCode]).first
 			current_user.transcript << Credit.from_section(section, params[:year], params[:grade])# if !section.nil?
 			redirect_to :controller => 'users', :action => 'transcript'
 		else

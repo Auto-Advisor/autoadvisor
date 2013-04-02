@@ -120,19 +120,7 @@
 		<input type="checkbox" name="minor" value="minor">   Minor<br>
 		<br>
 		<br>
-		<input type="recommend" name="recommend" id="recommend" style="width: 85px;" class="button" value="Recommend"   	 onclick='recommend()'/>
-	    <div id='recommendation_table' style='display:none'>
-    <table border='1'>
-      <tr>
-        <th>Course Code</th><th>Name</th><th>Instructor</th>
-      </tr>
-        <% @rec.each do |r| %>
-        <tr>
-          <td><%= r.class_string %><td><%= r.name %></td><td><%= r.spire_id %></td>
-        </tr>
-        <% end %>
-    </table>
-    </div> 	
+		<input type="recommend" name="recommend" id="recommend" style="width: 85px;" class="button" value="Recommend"/>
 	</p>
 </div>
 <br />

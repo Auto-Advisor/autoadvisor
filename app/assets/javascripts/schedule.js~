@@ -26,12 +26,6 @@ function show_search() {
   document.getElementById('search').style.display = 'block';
 }
 
-function recommend() {
-  var rec = document.getElementById('recommendation_table');
-  rec.style.display = 'block';
-}
-
-
 $(document).ready(function(){
   $('button#course_description').click(function(){
     $('div#class_description').toggle();

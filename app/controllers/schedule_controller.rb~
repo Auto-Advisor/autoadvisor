@@ -1,6 +1,5 @@
 class ScheduleController < ApplicationController
   def schedule
-	@rec = Section.get_new_schedule(10)
   end
 
   def all_classes

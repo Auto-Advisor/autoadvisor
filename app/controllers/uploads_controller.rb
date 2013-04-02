@@ -2,7 +2,7 @@ class UploadsController < ApplicationController
 
 	#Upload a transcirpt. if there is a file to upload temporaraly save it
 	#in "public/uploadedTranscript", then delete it after parsing. if no 
-	#file stay on same page.
+	#file to upload, stay on same page.
 	def upload_transcript
 		if (!params[:file].blank?)
 			transcriptFile =  params[:file].original_filename

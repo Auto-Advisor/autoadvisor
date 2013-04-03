@@ -8,12 +8,11 @@
   <% @user.transcript.each do |c| %>
   <tr class='item'>
     <td><%= c.year %></td>
-    <td><%= c.course_code %></td>
-    <td><%= c.course_name %></td>
+    <td><%= c.dept + c.number %></td>
+    <td><%= c.name %></td>
     <td><%= c.grade %></td>
     <td align='right'>
 
-      <%= link_to "Delete", delete_path(:action=>'delete', :courseCode => c.course_code, :year => c.year) %>
 
   </tr>
   <% end %>

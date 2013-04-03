@@ -19,5 +19,6 @@ class Credit < ActiveRecord::Base
     credit.number = section.class_number
     credit.year = year
     credit.save
+    credit
   end
 end

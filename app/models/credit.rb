@@ -4,6 +4,8 @@ class Credit < ActiveRecord::Base
   belongs_to :course
   belongs_to :user
 
+  after_update :trigger_gpa
+
   def string
     course.string
   end
@@ -14,6 +16,10 @@ class Credit < ActiveRecord::Base
 
   def name
     course.name
+  end
+
+  def trigger_gpa
+    user.calculate_gpa
   end
 
   def self.query_fields

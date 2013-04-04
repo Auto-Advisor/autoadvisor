@@ -1,7 +1,20 @@
 class Credit < ActiveRecord::Base
-  attr_accessible :dept, :grade, :name, :number, :year, :user
+  attr_accessible :course, :grade, :year, :user
 
-  has_and_belongs_to_many :user
+  belongs_to :course
+  belongs_to :user
+
+  def string
+    course.string
+  end
+
+  def number
+    course.number
+  end
+
+  def name
+    course.name
+  end
 
   def self.query_fields
     {:dept => :string,
@@ -11,12 +24,10 @@ class Credit < ActiveRecord::Base
      :year => :int}
   end
 
-  def self.from_section(section, year, grade)
+  def self.from_course(course, year, grade)
     credit = Credit.new
-    credit.dept = section.dept
+    credit.course = course
     credit.grade = grade
-    credit.name = section.name
-    credit.number = section.class_number
     credit.year = year
     credit.save
     credit

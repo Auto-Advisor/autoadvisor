@@ -5,22 +5,15 @@ Autoadvisor::Application.routes.draw do
   devise_for :users
   resources :sections, :only => [:show]
   resources :majors, :only => [:show]
-  match 'user/transcript/' => 'users#transcript', :via => :get, :as => 'transcript'
-  match 'user/(:id)' => 'users#show', :via => :get
-
-  # beta used only
-  # /app/views/pages/profile.html.erb
-  #get '/profile', to: 'pages#profile'
-  # /app/views/pages/schedule.html.erb [not yet created]
-  get '/schedule', to: 'schedule#schedule'
+  match '/user/transcript/add/(:id)' => 'uploads#add_credit', :via => :get, :as => 'add_credit'
+  match '/user/transcript/delete/(:id)' => 'uploads#delete_credit', :via => :get, :as => 'delete_credit'
+  match '/user/transcript/upload/(:id)' => 'uploads#upload_credits', :via => :get, :as => 'upload_credits'
+  match '/user/transcript/' => 'users#transcript', :via => :get, :as => 'transcript'
+  match '/user/(:id)' => 'users#show', :via => :get
+  match '/schedule/' => 'schedules#schedule', :via => :get, :as => 'schedule'
   # /app/views/pages/transcript.html.erb [not yet created]
   #get '/transcript', to: 'pages#transcript'
   # /app/views/pages/friends.html.erb [not yet created]
-
-  #upload coruse or transcript
-  get '/delete', to: 'uploads#delete'
-  get '/upload_course', to: 'uploads#upload_course'
-  post '/upload_transcript', to: 'uploads#upload_transcript'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

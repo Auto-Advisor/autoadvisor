@@ -11,12 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401235356) do
+ActiveRecord::Schema.define(:version => 20130402012645) do
 
   create_table "courses", :force => true do |t|
-    t.integer "number"
-    t.string  "name"
-    t.string  "dept"
+    t.string  "dept",   :default => "Unknown", :null => false
+    t.text    "desc"
+    t.string  "name",   :default => "Unknown", :null => false
+    t.integer "number", :default => 0,         :null => false
+    t.string  "string", :default => "UNKNOWN", :null => false
   end
 
   create_table "credit_constraints", :force => true do |t|
@@ -28,12 +30,10 @@ ActiveRecord::Schema.define(:version => 20130401235356) do
   end
 
   create_table "credits", :force => true do |t|
-    t.string  "name"
     t.string  "year"
     t.float   "grade"
-    t.string  "dept"
-    t.string  "number"
     t.integer "user_id"
+    t.integer "course_id", :default => 0, :null => false
   end
 
   create_table "credits_users", :force => true do |t|
@@ -60,19 +60,14 @@ ActiveRecord::Schema.define(:version => 20130401235356) do
 
   create_table "sections", :force => true do |t|
     t.integer "spire_id"
-    t.string  "dept",                            :null => false
-    t.integer "class_number",   :default => 0,   :null => false
-    t.string  "class_string",                    :null => false
     t.string  "section_number",                  :null => false
     t.string  "instructor"
     t.integer "size"
-    t.string  "name"
-    t.text    "desc"
     t.integer "time_slot_id"
     t.string  "room"
     t.string  "units",          :default => "0", :null => false
     t.string  "ty",             :default => "",  :null => false
-    t.integer "course_id"
+    t.integer "course_id",      :default => 0,   :null => false
   end
 
   create_table "sections_users", :force => true do |t|

@@ -1,10 +1,30 @@
 class Section < ActiveRecord::Base
-  attr_accessible :class_number, :class_string, :dept, :desc, :instructor, :name, :section_number, :size, :spire_id, :time_slot, :requirement, :units, :room, :ty
+  attr_accessible :instructor, :section_number, :size, :spire_id, :time_slot, :requirement, :units, :room, :ty
 
   belongs_to :time_slot
   belongs_to :course
   has_one :requirement
   has_and_belongs_to_many :users
+
+  def dept
+    course.dept
+  end
+
+  def name
+    course.name
+  end
+
+  def number
+    course.number
+  end
+
+  def class_string
+    course.string
+  end
+
+  def desc
+    course.desc
+  end
 
   def query_fields
     {
@@ -20,6 +40,7 @@ class Section < ActiveRecord::Base
   end
 
   def self.for_user(user)
+    raise "Outdated code, tell duane to fix this."
     # query/fetch the sections based on the user's constraints.
     sections = self.compile # invokes super's compile, could be nothing.
 
@@ -52,7 +73,7 @@ class Section < ActiveRecord::Base
     return final
   end
 
-  def self.get_new_schedule num
+  def self.get_new_schedule num=4
     find(:all).sample num
   end
 end

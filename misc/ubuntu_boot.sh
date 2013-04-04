@@ -1,4 +1,4 @@
-sudo apt-get install git build-essential openssh-client ruby1.9.1-dev libsqlite3-dev sqlite3 libmysqlclient-dev mysql-client mysql-server libv8-dev nodejs && \
+sudo apt-get install git build-essential openssh-client ruby1.9.1-dev libmysqlclient-dev mysql-client mysql-server libv8-dev nodejs && \
   git clone git@github.com:Auto-Advisor/autoadvisor.git autoadvisor && \
   cd autoadvisor && \
   sudo gem install rails && \

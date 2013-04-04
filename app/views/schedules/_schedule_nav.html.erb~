@@ -11,7 +11,9 @@
 			<td>
 				<a id = 'sch_nav2' href='#' onclick='show_recommendation()'>Recommendation</a>
 			</td>
-			
+			<td>
+				<a id = 'sch_nav3' href='#' onclick='show_search()'>Search</a>
+			</td>
 		</tr>
 	</table>
 </div>

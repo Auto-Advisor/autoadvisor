@@ -5,7 +5,7 @@
   <div id ="top_search">
     <form name="input" action="" method="get">
       <input type="text" id="keywords" name="keywords" size="100" class="searchBox" value="Enter Class Number, Class Name, or Professor Name!">
-      <input type="submit" name="submit" id="submit" class="button" value="Search"/>
+      <input type="submit" name="submit" id="submit" class="button" value="Submit"/>
     </form>
   </div>
 </div>

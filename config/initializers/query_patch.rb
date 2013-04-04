@@ -37,7 +37,7 @@ class ActiveRecord::Base
 		raise "cannot type value (#{val})"
 	end
 
-	def constraint_str(field, op, val)
+	def constraint(field, op, val)
 		raise "invalid field to query" unless query_fields.include? field
 		type = self.query_fields[field]
 		ops = @@QUERY_TYPE_OPS[type]

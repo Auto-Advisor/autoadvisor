@@ -3,24 +3,23 @@
     <th colspan="5">TRANSCRIPT</th>
   </tr>
   <tr class='subhead' >
-    <td>Year</td><td>Course</td><td>Course Name</td><td>Grade</td><td align='right'>Delete?</td>
+    <td>Year</td><td>Course</td><td>Course Name</td><td>Grade</td><td align='center'>Delete?</td>
   </tr>
   <% @user.transcript.each do |c| %>
   <tr class='item'>
     <td><%= c.year %></td>
-    <td><%= c.dept + c.number %></td>
+    <td><%= c.string %></td>
     <td><%= c.name %></td>
     <td><%= c.grade %></td>
-    <td align='right'>
-
+    <td align='center'><%= link_to "Remove", :controller => 'uploads', :action => 'delete_credit', :id => c.id %></td>
 
   </tr>
   <% end %>
-  <tr class='subhead'>
+  <!--<tr class='subhead'>
     <td colspan='4' align='right'>Credit Taken</td><td align='center'>not yet!</td>
-  </tr>
+  </tr>-->
   <tr class='subhead'>
-    <td colspan='4' align='right'>GPA</td><td align='center'>not yet!</td>
+    <td colspan='4' align='right'>GPA</td><td align='center'><%= "%.3f" % @user.gpa %></td>
   </tr>
 
 </table>

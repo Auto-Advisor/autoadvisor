@@ -9,4 +9,12 @@
 require 'section_loader'
 
 puts "Seeding database..."
+
+user = User.new
+user.email = 'test@example.com'
+user.password = 'password'
+user.password_confirmation = 'password'
+user.skip_confirmation!
+user.save
+
 load_sections 'courses.csv', Rails.logger

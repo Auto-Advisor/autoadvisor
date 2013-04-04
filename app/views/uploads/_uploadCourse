@@ -13,7 +13,7 @@
         <td valign = "top">
 	       Course Name<br />
           <%= text_field_tag 'courseName' %><br>
-	       Grade: (e.g. A-)<br />
+	       Grade: (e.g. 3.65)<br />
           <%= text_field_tag 'grade' %>
         </td>
       </tr>

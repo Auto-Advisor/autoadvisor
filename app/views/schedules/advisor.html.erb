@@ -1,0 +1,30 @@
+<link href="/assets/advisor.css" media="all" rel="stylesheet" type="text/css" />
+<% provide(:title, 'Advisor') %>
+
+<div align="center">
+<div class='advisor_nav'>
+	<table id='adv_nav_table'>
+		<tr>
+			<td>
+				<a id = 'adv_nav2' href='#' onclick='show_recommendation()'>Recommendation</a>
+			</td>
+			<td>
+				<a id = 'adv_nav1' href='#' onclick='show_filter()'>Search</a>
+			</td>
+
+			
+		</tr>
+	</table>
+</div>
+<div id='filter_class' style='display:none'>
+	<%=render 'filter' %>
+</div>
+ <div id='recommendation'>
+	<%= render 'rec' %>
+</div>
+  
+</div>
+
+
+<br>
+

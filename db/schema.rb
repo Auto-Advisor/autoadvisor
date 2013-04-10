@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130410094251) do
+ActiveRecord::Schema.define(:version => 20130410123912) do
 
   create_table "courses", :force => true do |t|
     t.string  "dept",   :default => "Unknown", :null => false
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20130410094251) do
     t.string  "name",   :default => "Unknown", :null => false
     t.integer "number", :default => 0,         :null => false
     t.string  "string", :default => "UNKNOWN", :null => false
+    t.boolean "hidden", :default => false,     :null => false
   end
 
   create_table "credit_constraints", :force => true do |t|

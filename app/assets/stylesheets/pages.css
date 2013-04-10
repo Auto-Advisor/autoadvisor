@@ -62,3 +62,27 @@ td.manual_button:active {
 .schedule {
   margin: 0px auto;
 }
+
+.adv_nav {
+  margin-left: 10px;
+  margin-right: 10px;
+  border-top: 10px;
+  border-bottom: 10px;
+}
+
+.button {
+  color: black;
+  background-color: white;
+  border-style: solid;
+  border: 2px;
+  border-color: black;
+}
+
+.button:hover {
+  background-color: #EEEEEE;
+}
+
+.button:active {
+  background-color: #444444;
+  color: white;
+}

@@ -28,9 +28,9 @@ text-decoration:none;
 table tr a:hover #sch_nav {color: aqua; 
 text-decoration: underline;}
 
-table{border:none;
+table{
 text-align:center;
-table-width:100%
+table-width: 800px
 color:none;
 border-collapse: collapse;
 border-spacing: 0;

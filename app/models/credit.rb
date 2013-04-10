@@ -4,7 +4,8 @@ class Credit < ActiveRecord::Base
   belongs_to :course
   belongs_to :user
 
-  after_update :trigger_gpa
+  after_update { user.recalculate_credits}
+  after_destroy {|credit| credit.user.recalculate_credits}
 
   def string
     course.string
@@ -18,7 +19,8 @@ class Credit < ActiveRecord::Base
     course.name
   end
 
-  def trigger_gpa
+  def trigger_gpa credit=nil
+    user = credit.nil? ? self.user : credit.user
     user.recalculate_credits
   end
 
@@ -54,7 +56,7 @@ class Credit < ActiveRecord::Base
     credit.course = course
     credit.grade = grade
     credit.units = BigDecimal.new(units) or raise "Not a valid units"
-    credit.points = Credit.points_for_letter(grade) * credit.units
+    credit.points = Credit.points_for_letter(grade) * credit.units if !grade.nil?
     credit.year = year
     credit.save
     credit

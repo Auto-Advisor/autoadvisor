@@ -5,12 +5,8 @@ class UploadsController < ApplicationController
   #file to upload, stay on same page.
   def upload_credits
     if (!params[:file].blank?)
-      transcriptFile =  params[:file].original_filename
-        directory = "public/uploadedTranscript"
-        path = File.join(directory, transcriptFile)
-        File.open(path, "wb") { |f| f.write(params[:file].read)}
-        #system(path/to/parser #{"public/uploadedTranscript/"+transcriptFile})
-        #File.delete("public/uploadedTranscript/"+transcriptFile)
+        transcript = params[:file].read
+        current_user.apply_transcript(transcript) if !current_user.nil?
         redirect_to :controller => 'users', :action => 'transcript'
       else
         #file field was blank

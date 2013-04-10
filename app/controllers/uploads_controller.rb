@@ -22,12 +22,12 @@ class UploadsController < ApplicationController
   #page. New course should be visible. Only uploads if all 4 fields 
   #are filled in.
   def add_credit
-    if (!params[:year].blank?)&&(!params[:course_string].blank?)&&(!params[:grade].blank?)
+    if (!params[:year].blank?)&&(!params[:course_string].blank?)&&(!params[:grade].blank?)&&(!params[:units].blank?)
       course = Course.where("string = ?", params[:course_string]).first
       if course.nil?
         # HANDLE ERROR
       else
-        current_user.transcript << Credit.from_course(course, params[:year], params[:grade])
+        current_user.transcript << Credit.from_course(course, params[:year], params[:units], params[:grade])
       end
       redirect_to :controller => 'users', :action => 'transcript'
     else

@@ -7,14 +7,24 @@ class User < ActiveRecord::Base
          :lockable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :gpa
+  attr_accessible :email, :password, :password_confirmation, :gpa, :credit_hours, :grade_points
 
   has_many :credits
   has_and_belongs_to_many :sections
   has_and_belongs_to_many :majors
 
-  def calculate_gpa
-    self.gpa = self.credits.average(:grade)
+  def credit_hours
+    self.credits.sum(:units)
+  end
+
+  def grade_points
+    self.credits.sum(:points)
+  end
+
+  def recalculate_credits
+    self.credit_hours = self.credits.sum(:units)
+    self.grade_points = self.credits.sum(:points)
+    self.gpa =  self.grade_points / self.credit_hours
     save
   end
 

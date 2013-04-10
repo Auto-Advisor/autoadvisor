@@ -11,9 +11,9 @@
           <%= text_field_tag 'course_string' %><br />
         </td>
         <td valign = "top">
-	       Course Name<br />
-          <%= text_field_tag 'courseName' %><br>
-	       Grade: (e.g. 3.65)<br />
+	       Units (0-6)<br />
+          <%= text_field_tag 'units' %><br>
+	       Grade: (e.g. B+)<br />
           <%= text_field_tag 'grade' %>
         </td>
       </tr>

@@ -7,14 +7,25 @@ class User < ActiveRecord::Base
          :lockable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :gpa
+  attr_accessible :email, :password, :password_confirmation, :gpa, :credit_hours, :grade_points
 
   has_many :credits
   has_and_belongs_to_many :sections
   has_and_belongs_to_many :majors
 
-  def calculate_gpa
-    self.gpa = self.credits.average(:grade)
+  def credit_hours
+    self.credits.sum(:units)
+  end
+
+  def grade_points
+    self.credits.sum(:points)
+  end
+
+  def recalculate_credits
+    credits = self.credits.where("units IS NOT NULL AND grade IS NOT NULL AND units > 0")
+    credit_hours = self.credit_hours = credits.sum(:units)
+    grade_points = self.grade_points = credits.sum(:points)
+    self.gpa = grade_points == 0 ? 0 :  grade_points / credit_hours
     save
   end
 
@@ -43,4 +54,71 @@ class User < ActiveRecord::Base
       satisfied
     end
   end
+
+  def apply_transcript(transcript)
+    lines = transcript.split /\n/
+    mode = :unknown
+    year = nil
+    primed = false
+
+    lines.each do |line|
+      if line =~ /-\s+Test\s+Credits/i
+        mode = :test
+        next
+      elsif line =~ /-\s+Transfer\s+Credits/i
+        mode = :transfer
+        next
+      elsif line =~ /Beginning\s+of\s+Undergraduate\s+Record/i
+        mode = :ugrad
+        next
+      end
+      year_line = /Transferred\s+to\s+Term\s+\w+\s+(\d+)/i.match(line)
+      if !year_line.nil?
+        year = year_line[1]
+        primed = true
+        next
+      end
+      if mode == :transfer || mode == :test
+        if year != nil && !line.empty? && primed
+          primed = false
+          line_parts = line.split
+          dept = line_parts[0]
+          number = line_parts[1]
+          name = line_parts[2..-4].join(" ")
+          class_string = dept + number
+          units = line_parts[-3]
+          course = Course.find_or_create_dummy(dept, number, name) or next
+          self.credits << Credit.from_course(course, year, units, nil)
+        end
+      elsif mode == :ugrad
+        year_line = /(Fall|Winter|Spring|Summer)\s+(\d+)/i.match(line)
+        if !year_line.nil?
+          year = year_line[2]
+          next
+        end
+        if line =~ /PLAN\s+:/i
+          primed = true
+          next
+        end
+        if line =~ /TERM\s+GPA/i
+          primed = false
+          next
+        end
+        if primed
+          line_parts = line.split
+          if !(line_parts[-1] =~ /\d+\.\d+/) # we've reached our current semester.
+            return
+          end
+          dept = line_parts[0]
+          number = line_parts[1]
+          name = line_parts[2..-5]
+          units = line_parts[-4]
+          grade = line_parts[-2]
+          course = Course.find_or_create_dummy(dept, number, name) or next
+          self.credits << Credit.from_course(course, year, units, grade)
+        end
+      else
+    end
+  end
+end
 end

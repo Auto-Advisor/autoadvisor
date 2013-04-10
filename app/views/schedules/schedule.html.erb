@@ -1,26 +1,78 @@
-<link href="/assets/schedule.css" media="all" rel="stylesheet" type="text/css" />
-<% provide(:title, 'Schedule') %>
-<div align="center">
-  <h1>SCHEDULE</h1>
-  <div id ="top_search">
-    <form name="input" action="" method="get">
-      <input type="text" id="keywords" name="keywords" size="100" class="searchBox" value="Enter Class Number, Class Name, or Professor Name!">
-      <input type="submit" name="submit" id="submit" class="button" value="Search"/>
-    </form>
-  </div>
-</div>
+<select onChange='showSchedule(this.value)'>
+  <optgroup>
+    <option value='0'>My Schedule</option>
+    <option value='1'>Helen's Schedule</option>
+    <option value='2'>Ken's Schedule</option>
+  </optgroup>
+</select>
+<br/>
 
-<div align="center">
-  <%= render 'schedule_nav' %>
-  <br>
-  
-</div>
-
-
-<br>
-<table>
-	<tr>
-		<td colspan='1'>Course Code | Course Title</td>
-	</tr>
+<div class='schedule-table'>
+<table border='2' class='schedule'>
+  <tr>
+    <th colspan='5' class='head'>Schedule Name: My Schedule</th>
+    <th><a href='#'>Delete</a></th>
+  <tr>
+    <th width='50px'>Time</th>
+    <th width='100px'>Mo</th>
+    <th width='100px'>Tu</th>
+    <th width='100px'>We</th>
+    <th width='100px'>Th</th>
+    <th width='100px'>Fr</th>
+  </tr>
+  <tr>
+    <th>0800</th><td rowspan='2' align='center'>ECON103<br/>0800-0850</td><td rowspan='6'></td>
+  </tr>
+  <tr>
+    <th>0830</th>
+  </tr>
+  <tr>
+    <th>0900</th><td rowspan='4'></td>
+  </tr>
+  <tr>
+    <th>0930</th>
+  </tr>
+  <tr>
+    <th>1000</th>
+  </tr>
+  <tr>
+    <th>1030</th>
+  </tr>
+  <tr>
+    <th>1100</th><td rowspan='2' align='center'>CMPSCI326<br/>1115-1205</td><td rowspan='3' align='center'>CMPSCI383<br/>1115-1225</td>
+  </tr>
+  <tr>
+    <th>1130</th>
+  </tr>
+  <tr>
+    <th>1200</th><td rowspan='2'></td>
+  </tr>
+  <tr>
+    <th>1230</th><td></td>
+  </tr>
+  <tr>
+    <td colspan='6' align='center'>Will be increased just in case</td>
+  </tr>
 </table>
+</div>
 
+<div class='schedule-table' style='display: none'>
+<h3> This is Helen's Page </h3>
+</div>
+
+<div class='schedule-table' style='display: none'>
+<h3> This is Ken's Page </h3>
+</div>
+
+<script>
+  function showSchedule(n) {
+    var tables = $('.schedule-table');
+    for (var i = 0; i < tables.length; i++) {
+      if (i != n) {
+        tables[i].style.display = 'none';
+      } else {
+        tables[i].style.display = 'block';
+      }
+    }
+  }
+</script>

@@ -1,5 +1,5 @@
 <div>
-<%= form_tag({:action=> :upload_credits, :controller=>:uploads,:method=>:get}, {:multipart=>'true'} ) do %>
+<%= form_tag({:action=> :upload_credits, :controller=>:uploads,:method=>:post}, {:multipart=>'true'} ) do %>
   <table class='transcript'>
     <tr>
       <th class='head'>

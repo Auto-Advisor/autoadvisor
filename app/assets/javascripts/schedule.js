@@ -29,6 +29,8 @@ function printDayOff(days) {
   return day;
 }
 
+$('#constraint').prop('selectedIndex', -1)
+
 $('#search').bind('click', function (event) {
   var result = '<b>Your Search Criterial</b><br />Course Name/Number: '
              + $('input#cnum').val() + '<br />'

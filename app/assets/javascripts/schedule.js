@@ -1,15 +1,15 @@
 function show_filter() {
   document.getElementById('filter_class').style.display = 'block';
-  $('#filter_class').attr('class', 'active');
+  $('#showSearch').attr('class', 'active');
   document.getElementById('recommendation').style.display = 'none';
-  $('#recommendation').attr('class', '');
+  $('#showRec').attr('class', '');
 }
 
 function show_recommendation() {
   document.getElementById('filter_class').style.display = 'none';
-  $('#filter_class').attr('class', '');
+  $('#showSearch').attr('class', '');
   document.getElementById('recommendation').style.display = 'block';
-  $('#recommendation').attr('class', 'active');
+  $('#showRec').attr('class', 'active');
 }
 
 function showClass() {

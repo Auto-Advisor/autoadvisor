@@ -4,9 +4,10 @@ var constraints = [];
 function constraint(count) {
   var id = count;
   var obj = {};
+  var active = undefined;
 
   obj.major = {
-    "relation" : "<select><option value='equal'>Equal To</option></select>",
+    "relation" : "<select id='relation_" + id + "'><option value='equal'>Equal To</option></select>",
     "input" : "<select id='major_" + id + "'><option value='ACCOUNTG'>Accounting</option>"
       + "<option value='AEROSPAC'>Aerospace Studies</option>"
       + "<option value='AFROAM'>Afro-American Studies</option>"
@@ -113,48 +114,62 @@ function constraint(count) {
   };
 
   obj.c_time = {
-  	"relation" : "<select><option value='equal'>Equal To</option>"
-  	           + "<option value='less_than'>Less Than Or Equal To</option>"
-  	           + "<option value='greater_than'>Greater Than Or Equal To</option></select>",
+  	"relation" : "<select id='relation_" + id + "'><option value='equal'>Equal To</option>"
+  	           + "<option value='less than'>Less Than Or Equal To</option>"
+  	           + "<option value='greater than'>Greater Than Or Equal To</option></select>",
   	   "input" : "<input id='time_"
             + id
             + "' class='input-medium' name='time' type='time' value='10:00:00'>"
   };
 
   obj.credit = {
-  	"relation" : "<select><option value='equal'>Equal To</option>"
+  	"relation" : "<select id='relation_" + id + "'><option value='equal'>Equal To</option>"
                + "<option value='less than'>Less Than Or Equal To</option>"
                + "<option value='greater than'>Greater Than Or Equal To</option></select>",
   	"input" : "<input id='credit_"
             + id
-            + "' class='input-medium' name='time' type='time' value='10:00:00'>"
+            + "' class='input-medium' name='credit' type='number' min=1 step=1 value='12'>"
   };
 
   obj.num_course = {
-  	"relation" : "<select><option value='equal'>Equal To</option>"
-  	           + "<option value='less than'>Less Than Or Equal To</option>"
-  	           + "<option value='greater than'>Greater Than Or Equal To</option></select>",
+  	"relation" : "<select id='relation_" + id + "'><option value='equal'>Equal To</option>"
+               + "<option value='less than'>Less Than Or Equal To</option>"
+               + "<option value='greater than'>Greater Than Or Equal To</option></select>",
   	   "input" : "<input id='num_course_"
                + id
-               + "' class='input-medium' name='time' type='time' value='10:00:00'>"
+               + "' class='input-medium' name='num_course' type='number' min=1 step=1 value='3'>"
   };
 
   obj.spe_course = {
-  	"relation" : "<select><option value='equal'>Equal To</option></select>",
+  	"relation" : "<select id='relation_" + id + "'><option value='equal'>Equal To</option></select>",
     "input" : "<input id='spe_course_" + id + "' type='text' name='spc_course'>"
   };
 
   obj.day_off = {
-    "relation" : "<select><option value='equal'>Equal To</option></select>",
-    "input" : "<input type='checkbox' name='dayoff' value='Mo'> Mo"
-            + "<input type='checkbox' name='dayoff' value='Tu'> Tu"
-            + "<input type='checkbox' name='dayoff' value='We'> We"
-            + "<input type='checkbox' name='dayoff' value='Th'> Th"
+    "relation" : "<select id='relation_" + id + "'><option value='equal'>Equal To</option></select>",
+    "input" : "<input type='checkbox' id='dayoff_1' value='Mo'> Mo"
+            + "<input type='checkbox' id='dayoff_2' value='Tu'> Tu"
+            + "<input type='checkbox' id='dayoff_3' value='We'> We"
+            + "<input type='checkbox' id='dayoff_4' value='Th'> Th"
             + "<br>"
-            + "<input type='checkbox' name='dayoff' value='Fr'> Fr"
-            + "<input type='checkbox' name='dayoff' value='Sa'> Sa"
-            + "<input type='checkbox' name='dayoff' value='Su'> Su"
+            + "<input type='checkbox' id='dayoff_5' value='Fr'> Fr"
+            + "<input type='checkbox' id='dayoff_6' value='Sa'> Sa"
+            + "<input type='checkbox' id='dayoff_7' value='Su'> Su"
   };
+
+  obj.course_range = {
+    "relation" : "<select id='relation_" + id + "'><option value='equal'>Equal To</option>"
+               + "<option value='less than'>Less Than Or Equal To</option>"
+               + "<option value='greater than'>Greater Than Or Equal To</option></select>",
+    "input" : "<input id='course_range_"
+            + id
+            + "' class='input-medium' name='course_range' type='number' min=1 max=600 step=1 value='000'>"
+  }
+
+  obj.dis_lab = {
+    "relation" : "<input type='checkbox' id='dis' value='dis'> Have Discussion",
+    "input" : "<input type='checkbox' id='lab' value='lab'> Have Laboratory"
+  }
 
   return obj;
 }
@@ -165,26 +180,42 @@ function relation(val, c) {
   if (val === 'major'){
     relation += constraints[c].major.relation;
     input += constraints[c].major.input;
+    constraints[c].active = 'major';
   }
   else if (val === 'c_time') {
     relation += constraints[c].c_time.relation;
     input += constraints[c].c_time.input;
+    constraints[c].active = 'c_time';
   }
   else if (val === 'credit') {
     relation += constraints[c].credit.relation;
     input += constraints[c].credit.input;
+    constraints[c].active = 'credit';
   }
   else if (val === 'num-course') {
     relation += constraints[c].num_course.relation;
     input += constraints[c].num_course.input;
+    constraints[c].active = 'num-course';
   }
   else if (val === 'spe-course') {
     relation += constraints[c].spe_course.relation;
     input += constraints[c].spe_course.input;
+    constraints[c].active = 'spe-course';
   }
   else if (val === 'dayoff') {
     relation += constraints[c].day_off.relation;
     input += constraints[c].day_off.input;
+    constraints[c].active = 'dayoff';
+  }
+  else if (val === 'course_range') {
+    relation += constraints[c].course_range.relation;
+    input += constraints[c].course_range.input;
+    constraints[c].active = 'course_range';
+  }
+  else if (val === 'dis_lab') {
+    relation += constraints[c].dis_lab.relation;
+    input += constraints[c].dis_lab.input;
+    constraints[c].active = 'dis_lab';
   }
 
   $('#r_' + c).html(relation);
@@ -196,27 +227,143 @@ $('#additem').bind('click', function () {
   constraints.push(c);
   var id = num_constraint;
   $('div#msg').html('clicked');
-  var html = '<tr><th>' 
+  var html = '<tr id="constraint_row_';
      html += id;
+     html += '"><th>';
+     html += id+1;
      html += '.</th>';
      html += '<td><select name="constraint" onChange="relation(this.value, ';
      html += id;
      html += ')" id="constraint_';
      html += id;
      html += '"><option value="major">Major</option>';
+     html += '<option value="course_range">Course Number Range</option>';
      html += '<option value="c_time">Time</option>';
-	   html += '<option value="credit">Credit</option>';
 	   html += '<option value="num-course">Number of Courses</option>';
+     html += '<option value="credit">Credit</option>';
 	   html += '<option value="spe-course">Specific Courses</option>';
-	   html += '<option value="dayoff">Day-off</option></select></td>';
+	   html += '<option value="dayoff">Day-off</option>';
+     html += '<option value="dis_lab">Discussion Or Laboratory</option>';
+     html += '</select></td>'
      html += '<td><div id="r_';
      html += id;
      html += '"><select><option></option></select></div></td>';
      html += '<td><div id="i_';
      html += id;
-     html += '"><select><option></option></select></div></td></tr>';
+     html += '"><select><option></option></select></div></td>';
+     html += '<td><a href="#" onclick="remove(';
+     html += id;
+     html += ')"><img class="remove" id="';
+     html += id;
+     html += '"src="http://www.clker.com/cliparts/1/1/9/2/12065738771352376078Arnoud999_Right_or_wrong_5.svg.hi.png" width="30px" height="30px"/></a></td>'
+     html += '</tr>';
      
   $('table#constraints').append(html);
   $('#constraint_' + id).prop('selectedIndex', -1);
   num_constraint++;
+});
+
+function remove(i) {
+  constraints[i].active = undefined;
+  $('#constraint_row_' + i).hide();
+}
+
+function getRelation (ind) {
+  var relation = $('#relation_' + ind).val();
+  console.log(relation);
+  var string = '';
+  if (relation === 'equal') {
+    string += "\=";
+  }
+  else if (relation === 'less than') {
+    string += "\<\=";
+  }
+  else if (relation === 'greater than') {
+    string += "\>\=";
+  }
+  return string;
+}
+
+function getDays() {
+  string = '';
+  for (var i = 1; i < 8; i++) {
+    if ($('#dayoff_' + i).prop('checked')) {
+      string += $('#dayoff_' + i).val();
+    }
+  }
+  return string;
+}
+
+function getString(cons_ind) {
+  var string = '';
+  if (constraints[cons_ind].active === 'major') {
+    string += '"major"=' + $('#major_' + cons_ind).val();
+  }
+  else if (constraints[cons_ind].active === 'c_time') {
+    string += '"time"';
+    string += getRelation(cons_ind);
+    string += $('#time_' + cons_ind).val();
+  }
+  else if (constraints[cons_ind].active === 'credit') {
+    string += '"credit"';
+    string += getRelation(cons_ind);
+    string += $('#credit_' + cons_ind).val();
+  }
+  else if (constraints[cons_ind].active === 'num-course') {
+    string += '"num_course"';
+    string += getRelation(cons_ind);
+    string += $('#num_course_' + cons_ind).val();
+  }
+  else if (constraints[cons_ind].active === 'spe-course') {
+    string += '"spe_course"';
+    string += getRelation(cons_ind);
+    string += $('#spe_course_' + cons_ind).val();
+  }
+  else if (constraints[cons_ind].active === 'dayoff') {
+    string += '"dayoff"';
+    string += getRelation(cons_ind);
+    string += getDays();
+  }
+  else if (constraints[cons_ind].active === 'course_range') {
+    string += '"course_range"';
+    string += getRelation(cons_ind);
+    string += $('#course_range_' + cons_ind).val();
+  }
+  else if (constraints[cons_ind].active === 'dis_lab') {
+    string += '"lab"=';
+    if ($('#dis').prop('checked')) {
+      string += 'true';
+    } else {
+      string += 'false';
+    }
+    string += '&"lab"=';
+    if ($('#lab').prop('checked')) {
+      string += 'true';
+    } else {
+      string += 'false';
+    }
+  }
+  return string;
+}
+
+function firstThing() {
+  var i = 0;
+  for (i; i < constraints.length; i++) {
+    if (constraints[i].active != undefined)
+      return i;
+  }
+}
+
+$('#getrecommend').bind('click', function () {
+  $('#msg').html('Recommendation Clicked');
+
+  var c_string = '';
+  var i = firstThing();
+    c_string += getString(i);
+    for (i = i+1; i < constraints.length; i++) {
+      if (constraints[i].active != undefined)
+        c_string += '&' + getString(i);
+    }
+
+  $('#string').html(c_string);
 });

@@ -1,69 +1,14 @@
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped" id='constraints'>
   <tr>
-    <th colspan='3'>Constrints</th>
+    <th colspan='4'>Constrints</th>
   </tr>
-  <tr>
-    <td>
-      1.
-    </td>
-    <td>
-      <select name='constraint' onChange='relation(this.value)' id='constraint'>
-        <option value='major'>Major</option>
-        <option value='time'>Time</option>
-        <option value='credit'>Credit</option>
-        <option value='num-course'>Number of Courses</option>
-        <option value='spe-course'>Specific Courses</option>
-        <option value='dayoff'>Day-off</option>
-      </select>
-      <script>
-        function relation(val) {
-          var rel = '<select>';
-          if (val === 'major' || val === 'spe-course' || val === 'dayoff') {
-            rel += '<option value="equal">Equal</option>'
-          } else {
-            rel += '<option value="equal">Equal</option>'
-                  + '<option value="less">Less Than Or Equal To</option>'
-                  + '<option value="greater">Greater Than Or Equal To</option';
-          }
-          rel += '</select>';
-          $('#relation').html(rel);
 
-          var the_val = '';
-          if (val === 'major') {
-            the_val += getMajors();
-          }
-          else if (val === 'time') {
-            the_val += timeChoose();
-          }
-          else if (val === 'credit') {
-            the_val += numChoose('credit');
-          }
-          else if (val === 'num-course') {
-            the_val += numChoose('num-course');
-          }
-          else if (val === 'spe-course') {
-            the_val += textBox();
-          }
-          else if (val === 'dayoff') {
-            the_val += checkBox();
-          }
-          $('#the-val').html(the_val);
-        }
-      </script>
-    </td>
-    <td>
-      <div id='relation'>
-        <select>
-          <option></option>
-        </select>
-      </div>
-    </td>
-    <td>
-      <div id='the-val'>
-      </div>
-    </td>
-  </tr>
 </table>
+<div id='msg'>
+  </div>
+  <div id='debug'>
+  </div>
+<a id='additem'>Add Item</a>
 
 <form name="input" action="" method="get">
 <table class="table table-bordered table-striped">

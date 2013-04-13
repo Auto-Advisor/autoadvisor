@@ -1,11 +1,15 @@
 function show_filter() {
   document.getElementById('filter_class').style.display = 'block';
+  $('#filter_class').attr('class', 'active');
   document.getElementById('recommendation').style.display = 'none';
+  $('#recommendation').attr('class', '');
 }
 
 function show_recommendation() {
   document.getElementById('filter_class').style.display = 'none';
+  $('#filter_class').attr('class', '');
   document.getElementById('recommendation').style.display = 'block';
+  $('#recommendation').attr('class', 'active');
 }
 
 function showClass() {

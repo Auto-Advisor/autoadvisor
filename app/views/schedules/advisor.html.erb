@@ -1,16 +1,10 @@
 <% provide(:title, 'Advisor') %>
 
 <div align="center">
-<table border='2'>
-<tr>
-<td>
-<a class = 'adv_nav' href='#' onclick='show_recommendation()'>Recommendation</a>
-</td>
-<td>
-<a class = 'adv_nav' href='#' onclick='show_filter()'>Search</a>
-</td>
-</tr>
-</table>
+<ul class="nav nav-tabs">
+<li class="active"><a class = 'adv_nav' href='#' onclick='show_recommendation()'>Recommendation</a>
+<li class=""><a href='#' onclick='show_filter()'>Search</a>
+</ul>
 
 <div id='filter_class' style='display:none'>
 <%=render 'filter' %>

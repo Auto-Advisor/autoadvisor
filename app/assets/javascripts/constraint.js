@@ -116,10 +116,17 @@ function constraint(count) {
   obj.c_time = {
   	"relation" : "<select id='relation_" + id + "'><option value='equal'>Equal To</option>"
   	           + "<option value='less than'>Less Than Or Equal To</option>"
-  	           + "<option value='greater than'>Greater Than Or Equal To</option></select>",
-  	   "input" : "<input id='time_"
-            + id
-            + "' class='input-medium' name='time' type='time' value='10:00:00'>"
+  	           + "<option value='greater than'>Greater Than Or Equal To</option></select><br><input id='time_"
+  	           + id
+               + "' class='input-medium' name='time' type='time' value='10:00:00'>",
+       "input" : "<input type='checkbox' id='time_day_1' value='Mo' checked='true'> Mo"
+                + "<input type='checkbox' id='time_day_2' value='Tu' checked='true'> Tu"
+                + "<input type='checkbox' id='time_day_3' value='We' checked='true'> We"
+                + "<input type='checkbox' id='time_day_4' value='Th' checked='true'> Th"
+                + "<br>"
+                + "<input type='checkbox' id='time_day_5' value='Fr' checked='true'> Fr"
+                + "<input type='checkbox' id='time_day_6' value='Sa'> Sa"
+                + "<input type='checkbox' id='time_day_7' value='Su'> Su"
   };
 
   obj.credit = {
@@ -171,6 +178,11 @@ function constraint(count) {
     "input" : "<input type='checkbox' id='lab' value='lab'> Have Laboratory"
   }
 
+  obj.gen = {
+    "relation" : "<select id='relation_" + id + "'><option value='equal'>Equal To</option></select>",
+       "input" : "<input type='checkbox' id='gen' value='gen'> GenEd"
+  }
+
   return obj;
 }
 
@@ -217,6 +229,11 @@ function relation(val, c) {
     input += constraints[c].dis_lab.input;
     constraints[c].active = 'dis_lab';
   }
+  else if (val === 'gen') {
+    relation += constraints[c].gen.relation;
+    input += constraints[c].gen.input;
+    constraints[c].active = 'gen';
+  }
 
   $('#r_' + c).html(relation);
   $('#i_' + c).html(input);
@@ -244,6 +261,7 @@ $('#additem').bind('click', function () {
 	   html += '<option value="spe-course">Specific Courses</option>';
 	   html += '<option value="dayoff">Day-off</option>';
      html += '<option value="dis_lab">Discussion Or Laboratory</option>';
+     html += '<option value="gen">GenEd</option>'
      html += '</select></td>'
      html += '<td><div id="r_';
      html += id;
@@ -284,11 +302,11 @@ function getRelation (ind) {
   return string;
 }
 
-function getDays() {
+function getDays(type) {
   string = '';
   for (var i = 1; i < 8; i++) {
-    if ($('#dayoff_' + i).prop('checked')) {
-      string += $('#dayoff_' + i).val();
+    if ($('#' + type + '_' + i).prop('checked')) {
+      string += $('#' + type + '_' + i).val();
     }
   }
   return string;
@@ -297,47 +315,54 @@ function getDays() {
 function getString(cons_ind) {
   var string = '';
   if (constraints[cons_ind].active === 'major') {
-    string += '"major"=' + $('#major_' + cons_ind).val();
+    string += '"major": "' + $('#major_' + cons_ind).val() + '"';
   }
   else if (constraints[cons_ind].active === 'c_time') {
-    string += '"time"';
-    string += getRelation(cons_ind);
-    string += $('#time_' + cons_ind).val();
+    string += '"time": {{"operator": "';
+    string += getRelation(cons_ind) + '", "value": "';
+    string += $('#time_' + cons_ind).val() + '"}, "on": "'
+    string += getDays('time_day') + '"';
   }
   else if (constraints[cons_ind].active === 'credit') {
-    string += '"credit"';
-    string += getRelation(cons_ind);
-    string += $('#credit_' + cons_ind).val();
+    string += '"credit": {"operator": "';
+    string += getRelation(cons_ind) + '", "value": "';
+    string += $('#credit_' + cons_ind).val() + '"}';
   }
   else if (constraints[cons_ind].active === 'num-course') {
-    string += '"num_course"';
-    string += getRelation(cons_ind);
-    string += $('#num_course_' + cons_ind).val();
+    string += '"num_course": {"operator": "';
+    string += getRelation(cons_ind) + '", "value": "';
+    string += $('#num_course_' + cons_ind).val() + '"}';
   }
   else if (constraints[cons_ind].active === 'spe-course') {
-    string += '"spe_course"';
-    string += getRelation(cons_ind);
-    string += $('#spe_course_' + cons_ind).val();
+    string += '"spe_course": "';
+    string += $('#spe_course_' + cons_ind).val() + '"';
   }
   else if (constraints[cons_ind].active === 'dayoff') {
-    string += '"dayoff"';
-    string += getRelation(cons_ind);
-    string += getDays();
+    string += '"dayoff": "';
+    string += getDays('dayoff') + '"';
   }
   else if (constraints[cons_ind].active === 'course_range') {
-    string += '"course_range"';
-    string += getRelation(cons_ind);
-    string += $('#course_range_' + cons_ind).val();
+    string += '"course_range" : {"operator": "';
+    string += getRelation(cons_ind) + '", "value": "';
+    string += $('#course_range_' + cons_ind).val() + '"}';
   }
   else if (constraints[cons_ind].active === 'dis_lab') {
-    string += '"lab"=';
+    string += '"dis": ';
     if ($('#dis').prop('checked')) {
       string += 'true';
     } else {
       string += 'false';
     }
-    string += '&"lab"=';
+    string += ', "lab": ';
     if ($('#lab').prop('checked')) {
+      string += 'true';
+    } else {
+      string += 'false';
+    }
+  }
+  else if (constraints[cons_ind].active === 'gen') {
+    string += '"gen": ';
+    if ($('#gen').prop('checked')) {
       string += 'true';
     } else {
       string += 'false';
@@ -357,13 +382,15 @@ function firstThing() {
 $('#getrecommend').bind('click', function () {
   $('#msg').html('Recommendation Clicked');
 
-  var c_string = '';
+  var c_string = '{';
   var i = firstThing();
-    c_string += getString(i);
-    for (i = i+1; i < constraints.length; i++) {
-      if (constraints[i].active != undefined)
-        c_string += '&' + getString(i);
-    }
+  c_string += getString(i);
+  for (i = i+1; i < constraints.length; i++) {
+    if (constraints[i].active != undefined)
+      c_string += ', ' + getString(i);
+  }
+  c_string += '}';
+
 
   $('#string').html(c_string);
 });

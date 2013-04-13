@@ -124,8 +124,8 @@
           </select>
         </td>
       <td colspan='5'>
-    <input type="text" name="coursesmall" id='csmall'>
-    To <input type="text" name="courselarge" id='clarge'>
+    <input id='csmall' class='input-medium' name='course_range' type='number' min=1 max=600 step=1 value='000'>
+    To <input id='clarge' class='input-medium' name='course_range' type='number' min=1 max=600 step=1 value='600'>
       </td>
     </tr>
     <tr>
@@ -133,28 +133,29 @@
         Time From
       </th>
       <td colspan='5'>
-      <input id='time_from"' class='input-medium' name='time' type='time' value='10:00:00'>
+      <input id='time_from' class='input-medium' name='time' type='time' value='8:00:00'>
     To:
-      <input id='time_to"' class='input-medium' name='time' type='time' value='10:00:00'>
+      <input id='time_to' class='input-medium' name='time' type='time' value='18:00:00'>
       </td>
     </tr>
     <tr>
       <th class='subhead'>
-        Day-off
+        Day
       </th>
       <td colspan='5'>
-        <input type='checkbox' id='day_1' value='Mo'> Mo
-        <input type='checkbox' id='day_2' value='Tu'> Tu
-        <input type='checkbox' id='day_3' value='We'> We
-        <input type='checkbox' id='day_4' value='Th'> Th
-        <br>
-        <input type='checkbox' id='day_5' value='Fr'> Fr
+        <input type='checkbox' id='day_1' value='Mo' checked='true'> Mo
+        <input type='checkbox' id='day_2' value='Tu' checked='true'> Tu
+        <input type='checkbox' id='day_3' value='We' checked='true'> We
+        <input type='checkbox' id='day_4' value='Th' checked='true'> Th
+        <input type='checkbox' id='day_5' value='Fr' checked='true'> Fr
         <input type='checkbox' id='day_6' value='Sa'> Sa
         <input type='checkbox' id='day_7' value='Su'> Su
       </td>
     </tr>
   </table>
 </form>
+
+<div id='deg'></div>
 
 <div class='btn-group'>
   <button class='btn' id='search'>Search For Classes</button>

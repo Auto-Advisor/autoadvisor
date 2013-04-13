@@ -1,3 +1,4 @@
+<link href="/assets/times.css" media="all" rel="stylesheet" />
 <select onChange='showSchedule(this.value)'>
   <optgroup>
     <option value='0'>My Schedule</option>
@@ -12,48 +13,136 @@
   <tr>
     <th colspan='5' class='head'>Schedule Name: My Schedule</th>
     <th><a href='#'>Delete</a></th>
-  <tr>
-    <th width='50px'>Time</th>
-    <th width='100px'>Mo</th>
-    <th width='100px'>Tu</th>
-    <th width='100px'>We</th>
-    <th width='100px'>Th</th>
-    <th width='100px'>Fr</th>
-  </tr>
-  <tr>
-    <th>0800</th><td rowspan='2' align='center'>ECON103<br/>0800-0850</td><td rowspan='6'></td>
-  </tr>
-  <tr>
-    <th>0830</th>
-  </tr>
-  <tr>
-    <th>0900</th><td rowspan='4'></td>
-  </tr>
-  <tr>
-    <th>0930</th>
-  </tr>
-  <tr>
-    <th>1000</th>
-  </tr>
-  <tr>
-    <th>1030</th>
-  </tr>
-  <tr>
-    <th>1100</th><td rowspan='2' align='center'>CMPSCI326<br/>1115-1205</td><td rowspan='3' align='center'>CMPSCI383<br/>1115-1225</td>
-  </tr>
-  <tr>
-    <th>1130</th>
-  </tr>
-  <tr>
-    <th>1200</th><td rowspan='2'></td>
-  </tr>
-  <tr>
-    <th>1230</th><td></td>
-  </tr>
-  <tr>
-    <td colspan='6' align='center'>Will be increased just in case</td>
-  </tr>
-</table>
+    </table>
+  <div id="daytime" class="time_column">
+    <div class="time header">Time</div>
+    <div class="time hour">8:00</div>
+    <div class="time hour">9:00</div>
+    <div class="time hour">10:00</div>
+    <div class="time hour">11:00</div>
+    <div class="time hour">12:00</div>
+    <div class="time hour">1:00</div>
+    <div class="time hour">2:00</div>
+    <div class="time hour">3:00</div>
+    <div class="time hour">4:00</div>
+    <div class="time hour">5:00</div>
+    <div class="time hour">6:00</div>
+
+</div>
+
+
+
+  <div id="monday" class="day_column">
+    <div class="time header">Monday</div>
+    <div class="time fifty">8:00</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">9:05</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">10:10</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">11:15</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">12:20</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">1:25</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">2:30</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">3:35</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">4:40</div>
+    <div class="time fifteen"></div>
+    <div class="time seventyfive">5:45</div>
+
+    
+   
+</div>
+
+<div id="tuesday" class="day_column">
+    <div class="time header">Tuesday</div>
+    <div class="time seventyfive">8:00</div>
+    <div class="time fifteen"></div>
+    <div class="time seventyfive">9:30</div>
+    <div class="time half"></div>
+    <div class="time seventyfive">11:15</div>
+    <div class="time half"></div>
+    <div class="time seventyfive">1:00</div>
+    <div class="time fifteen"></div>
+    <div class="time seventyfive">2:30</div>
+    <div class="time fifteen"></div>
+    <div class="time seventyfive">4:00</div>
+    <div class="time half"></div>
+    <div class="time seventyfive">5:45</div>
+</div>
+
+<div id="wednesday" class="day_column">
+    <div class="time header">Wednesday</div>
+     <div class="time fifty">8:00</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">9:05</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">10:10</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">11:15</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">12:20</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">1:25</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">2:30</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">3:35</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">4:40</div>
+    <div class="time fifteen"></div>
+    <div class="time seventyfive">5:45</div>
+
+</div>
+
+<div id="thursday" class="day_column">
+    <div class="time header">Thursday</div>
+    <div class="time seventyfive">8:00</div>
+    <div class="time fifteen"></div>
+    <div class="time seventyfive">9:30</div>
+    <div class="time half"></div>
+    <div class="time seventyfive">11:15</div>
+    <div class="time half"></div>
+    <div class="time seventyfive">1:00</div>
+    <div class="time fifteen"></div>
+    <div class="time seventyfive">2:30</div>
+    <div class="time fifteen"></div>
+    <div class="time seventyfive">4:00</div>
+    <div class="time half"></div>
+    <div class="time seventyfive">5:45</div>
+</div>
+
+<div id="friday" class="day_column">
+    <div class="time header">Friday</div>
+    <div class="time fifty">8:00</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">9:05</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">10:10</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">11:15</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">12:20</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">1:25</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">2:30</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">3:35</div>
+    <div class="time fifteen"></div>
+    <div class="time fifty">4:40</div>
+    <div class="time fifteen"></div>
+    <div class="time seventyfive">5:45</div>
+  
+</div>
+
+
+
+
 </div>
 
 <div class='schedule-table' style='display: none'>

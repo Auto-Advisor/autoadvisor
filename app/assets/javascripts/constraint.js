@@ -394,3 +394,5 @@ $('#getrecommend').bind('click', function () {
 
   $('#string').html(c_string);
 });
+
+$('#constraint').prop('selectedIndex', -1)

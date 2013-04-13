@@ -19,40 +19,18 @@ function showClass() {
 $(document).ready(function(){
   $('button#course_description').click(function(){
     $('div#class_description').toggle();
-	return false;
+	  return false;
   });
 });
 
-function printDayOff(days) {
-  var day = '';
-  for (var i = 0; i < days.length; i++) {
-    if (days[i].checked) {
-      day += days[i].value;
-    }
-  }
-  return day;
-}
-
-$('#constraint').prop('selectedIndex', -1)
+$('#major').prop('selectedIndex', -1);
 
 $('#search').bind('click', function (event) {
-  var result = '<b>Your Search Criterial</b><br />Course Name/Number: '
-             + $('input#cnum').val() + '<br />'
-             + 'Course From: ' 
-             + $('select#major').val() + $('input#csmall').val()
-             + ' to '
-             + $('select#major').val() + $('input#clarge').val() + '<br />'
-             + 'Time from: '
-             + $('select#tfrom').val()
-             + ' to '
-             + $('select#tto').val() + '<br />'
-             + 'Day-off: '
-             + printDayOff($('.day'))
-          // + a list of tables
-               ;
-  $('div#list_class').html(result);
+
 });
 
-$('#recommend').bind('click', function (event) {
-  $('div#recommendations').html('This is your recommendation');
+$('#clear').bind('click', function (event) {
+  for (var i = 1; i < 8; i++){
+    $('#day_' + i).checked = false;
+  }
 });

@@ -1,24 +1,23 @@
   <form>
     <table border='1'>
       <tr>
-        <th colspan='2' class='head'>Search</th>
+        <th colspan='6' class='head'>Search</th>
       <tr>
         <th class='subhead'>Course Name/Number: </th>
-        <td><input type="text" name="coursenamenumber" id='cnum'>
+        <td colspan='5'><input type="text" name="coursenamenumber" id='cnum'>
         </td>
       </tr>
       <tr>
         <th class='subhead'>
           Major
         </td>
-        <th class='subhead'>
+        <th class='subhead' colspan='5'>
           Course# Range
         </th>
       </tr>
       <tr>
         <td>
           <select id='major'>
-            <option value=""></option>
             <option value="ACCOUNTG" >Accounting</option>
             <option value="AEROSPAC" >Aerospace Studies</option>
             <option value="AFROAM"   >Afro-American Studies</option>
@@ -124,7 +123,7 @@
             <option value="YIDDISH">Yiddish</option>
           </select>
         </td>
-      <td>
+      <td colspan='5'>
     <input type="text" name="coursesmall" id='csmall'>
     To <input type="text" name="courselarge" id='clarge'>
       </td>
@@ -133,66 +132,34 @@
       <th class='subhead'>
         Time From
       </th>
-      <td>
-    <select id='tfrom'>
-      <option value="8am">8:00AM</option>
-      <option value="9am">9:00AM</option>
-      <option value="10am">10:00AM</option>
-      <option value="11am">11:00AM</option>
-      <option value="12pm">12:00PM</option>
-      <option value="1pm">1:00PM</option>
-      <option value="2pm">2:00PM</option>
-      <option value="3pm">3:00PM</option>
-      <option value="4pm">4:00PM</option>
-      <option value="5pm">5:00PM</option>
-      <option value="6pm">6:00PM</option>
-      <option value="7pm">7:00PM</option>
-      <option value="8pm">8:00PM</option>
-      <option value="9pm">9:00PM</option>
-      <option value="10pm">10:00PM</option>
-    </select>
+      <td colspan='5'>
+      <input id='time_from"' class='input-medium' name='time' type='time' value='10:00:00'>
     To:
-    <select id='tto'>
-      <option value="8am">8:00AM</option>
-      <option value="9am">9:00AM</option>
-      <option value="10am">10:00AM</option>
-      <option value="11am">11:00AM</option>
-      <option value="12pm">12:00PM</option>
-      <option value="1pm">1:00PM</option>
-      <option value="2pm">2:00PM</option>
-      <option value="3pm">3:00PM</option>
-      <option value="4pm">4:00PM</option>
-      <option value="5pm">5:00PM</option>
-      <option value="6pm">6:00PM</option>
-      <option value="7pm">7:00PM</option>
-      <option value="8pm">8:00PM</option>
-      <option value="9pm">9:00PM</option>
-      <option value="10pm">10:00PM</option>
-    </select>
+      <input id='time_to"' class='input-medium' name='time' type='time' value='10:00:00'>
       </td>
     </tr>
     <tr>
       <th class='subhead'>
         Day-off
       </th>
-      <td colspan>
-    <input type="checkbox" name="Day" class='day' value="Mo">Monday
-    <input type="checkbox" name="Day" class='day' value="Tu">Tuesday
-    <input type="checkbox" name="Day" class='day' value="We">Wednesday
-    <input type="checkbox" name="Day" class='day' value="Th">Thursday
-    <br />
-    <input type="checkbox" name="Day" class='day' value="Fr">Frclassay
-    <input type="checkbox" name="Day" class='day' value="Sa">Saturday
-    <input type="checkbox" name="Day" class='day' value="Su">Sunday
-      </td>
-    </tr>
-    <tr>
-      <td class='manual_button' colspan='2' align='center' id='search'>
-        <b>Search</b>
+      <td colspan='5'>
+        <input type='checkbox' id='day_1' value='Mo'> Mo
+        <input type='checkbox' id='day_2' value='Tu'> Tu
+        <input type='checkbox' id='day_3' value='We'> We
+        <input type='checkbox' id='day_4' value='Th'> Th
+        <br>
+        <input type='checkbox' id='day_5' value='Fr'> Fr
+        <input type='checkbox' id='day_6' value='Sa'> Sa
+        <input type='checkbox' id='day_7' value='Su'> Su
       </td>
     </tr>
   </table>
 </form>
+
+<div class='btn-group'>
+  <button class='btn' id='search'>Search For Classes</button>
+  <button class='btn' id='clear'>Clear The Form</button>
+</div>
 
 <div id='list_class' align="center">
   <%= render 'list_search'  %>

@@ -37,6 +37,16 @@
   </head>
   <body>
 
+
+<header class="hash subhead">
+  <div class="container">
+    <h1>Home</h1>
+    <p>Keep Us Updated! Share to your friends! Let them know about AutoAdvisor.</p>
+  </div>
+</header>
+
+
+
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -50,7 +60,8 @@
           </div><!--/.nav-collapse -->
         </div>
       </div>
-    </div>
+    </div>		 
+
 
     <div class="container">
         <div class="row">
@@ -59,15 +70,11 @@
             <%= yield %>
           </div>
           <div class="span3">
-            <div class="well sidebar-nav">
               <%= render 'layouts/sidebar' %>
-            </div><!--/.well -->
           </div><!--/span-->
         </div><!--/row-->
 
-      <footer>
-        <p>&copy; AutoAdvisor 2013</p>
-      </footer>
+	<%= render 'layouts/footer' %>
 
     </div> <!-- /container -->
 

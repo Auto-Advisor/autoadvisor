@@ -1,3 +1,10 @@
+footer, header, nav,section,article,aside{
+  display:block;
+}
+
+body{
+  position:relative; 
+}
 .main {
   margin: auto;
   width: 700px;
@@ -81,3 +88,79 @@ td.manual_button:active {
   background-color: #444444;
   color: white;
 }
+
+html,body
+{
+height:100%;
+}
+
+#wrap
+{
+min-height: 100%;
+}
+
+#main
+{
+overflow:auto;
+padding-bottom:150px; /* this needs to be bigger than footer height*/
+}
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #999;
+}
+
+footer a {
+  color: #555;
+}  
+
+footer a:hover { 
+  color: #222;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 10px;
+}
+
+/*inner header*/
+
+.hash {
+    margin-top: -20px;
+}
+.subhead {
+    text-align: left;
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+.hash {
+    position: relative;
+    padding: 40px 0px;
+    margin-bottom: 20px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4), 0px 0px 30px rgba(0, 0, 0, 0.075);
+  background: 	#3f234a ;
+  background: -moz-linear-gradient(45deg,  #3f234a 0%, #9a1d1d 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,	#3f234a), color-stop(100%,#9a1d1d)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(45deg,  #3f234a 0%,#9a1d1d 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(45deg,  #3f234a 0%,#9a1d1d 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(45deg, #3f234a 0%,#9a1d1d 100%); /* IE10+ */
+  background: linear-gradient(45deg,  	#3f234a 0%,#9a1d1d 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f234a', endColorstr='#9a1d1d',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  -webkit-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
+     -moz-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
+          box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
+}} 

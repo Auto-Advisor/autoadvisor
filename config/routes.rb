@@ -12,6 +12,8 @@ Autoadvisor::Application.routes.draw do
   match '/user/(:id)' => 'users#show', :via => :get
   match '/schedule' => 'schedules#schedule', :via => :get, :as => 'schedule'
   match '/advisor' => 'schedules#advisor'
+  match '/about' => 'pages#about'
+  match '/documentation' => 'pages#documentation'
   # /app/views/pages/transcript.html.erb [not yet created]
   #get '/transcript', to: 'pages#transcript'
   # /app/views/pages/friends.html.erb [not yet created]

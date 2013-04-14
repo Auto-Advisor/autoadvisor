@@ -64,13 +64,15 @@
 
 
     <div class="container">
-        <div class="row">
+        <div class="row-fluid row">
           <div class="span9">
             <%= bootstrap_flash %>
             <%= yield %>
           </div>
           <div class="span2"align="center">
+	     <div class="sidebar-nav-fixed">
               <%= render 'layouts/sidebar' %>
+             </div>
           </div><!--/span-->
         </div><!--/row-->
 

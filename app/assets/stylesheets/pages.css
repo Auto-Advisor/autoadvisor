@@ -4,10 +4,11 @@ footer, header, nav,section,article,aside{
 
 body{
   position:relative; 
+  width:100%;
 }
 .main {
   margin: auto;
-  width: 700px;
+  width: 800px;
 }
 
 .main .version {

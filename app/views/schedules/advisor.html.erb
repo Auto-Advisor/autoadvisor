@@ -1,16 +1,21 @@
 <% provide(:title, 'Advisor') %>
 
-<div align="center">
+<div class= "tabbable" align="center">
 <ul class="nav nav-tabs">
-<li class="active" id='showRec'><a onClick='show_recommendation()'>Recommendation</a></li>
-<li class="" id='showSearch'><a onClick='show_filter()'>Search</a></li>
+<li class="active"><a herf="#recommendation" onclick="show_recommendation()" data-toggle="tab">Recommendation</a></li>
+<li><a herf="#filter_class" onclick="show_filter()" data-toggle="tab">Search</a></li>
+<li><a herf="#adv_search" onclick="adv_filter()" data-toggle="tab">Advance Search</a></li>
 </ul>
 
-<div id='filter_class' style='display:none'>
-<%=render 'filter' %>
+<div class="tab-content">
+  <div class="tab-pane active" id= "recommendation">
+	<%= render 'rec' %>
+  </div>
+  <div class="tab-pane" id="filter_class">
+	<%=render 'filter' %>
+  </div>
+  <div class="tab-pane" id="adv_search">
+	<%= render 'adv_search' %>
+  </div>  
 </div>
- <div id='recommendation'>
-<%= render 'rec' %>
-</div>
-  
 </div>

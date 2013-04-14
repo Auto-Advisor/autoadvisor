@@ -1,17 +1,20 @@
 function show_filter() {
   document.getElementById('filter_class').style.display = 'block';
-  $('#showSearch').attr('class', 'active');
   document.getElementById('recommendation').style.display = 'none';
-  $('#showRec').attr('class', '');
+  document.getElementByID('adv_search').style.display = 'none';
 }
 
 function show_recommendation() {
   document.getElementById('filter_class').style.display = 'none';
-  $('#showSearch').attr('class', '');
   document.getElementById('recommendation').style.display = 'block';
-  $('#showRec').attr('class', 'active');
+  document.getElementByID('adv_search').style.display = 'none';
 }
 
+function adv_filter(){
+  document.getElementById('filter_class').style.display = 'none';
+  document.getElementById('recommendation').style.display = 'none';
+  document.getElementByID('adv_search').style.display = 'block';
+}
 function showClass() {
   document.getElementById('list_class').style.display = 'block';
 }

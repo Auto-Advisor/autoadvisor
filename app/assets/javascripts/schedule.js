@@ -55,11 +55,18 @@ $('#search').bind('click', function (event) {
   }
   string += '"time_from": "' + $('#time_from').val() + '", ';
   string += '"time_to": "' + $('#time_to').val() + '", ';
-  string += '"day": "' + getDays('day') + '"';
+  string += '"day": "' + getDays('day', '') + '"';
   string += '}';
   $('#deg').html(string);
 });
 
 $('#clear').bind('click', function (event) {
   $('#deg').html('hi');
+});
+
+$('#details').popover({
+  "html": true,
+  "title": "Software Engineering",
+  "content": "<h4>Description</h4><div class='description'>In this course, students learn and gain practical experience with software engineering principles and techniques. The practical experience centers on a semester-long team project in which a software development project is carried through all the stages of the software life cycle. Topics in this course include requirements analysis, specification, design, abstraction, programming style, testing, maintenance, communication, teamwork, and software project management. Particular emphasis is placed on communication and negotiation skills and on designing and developing maintainable software.  This course satisfies the Integrative Experience requirement for BS-CMPSCI and BA-CMPSCI majors.  Use of computer required. Several written assignments, in-class presentations, exams, and a term project.</div>"
+
 });

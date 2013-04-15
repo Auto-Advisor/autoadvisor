@@ -133,7 +133,7 @@
         Time From
       </th>
       <td colspan='5'>
-      <input id='time_from' class='input-medium' name='time' type='time' value='8:00:00'>
+      <input id='time_from' class='input-medium' name='time' type='time' value='08:00:00'>
     To:
       <input id='time_to' class='input-medium' name='time' type='time' value='18:00:00'>
       </td>
@@ -143,13 +143,17 @@
         Day
       </th>
       <td colspan='5'>
-        <input type='checkbox' id='day_1' value='Mo' checked='true'> Mo
-        <input type='checkbox' id='day_2' value='Tu' checked='true'> Tu
-        <input type='checkbox' id='day_3' value='We' checked='true'> We
-        <input type='checkbox' id='day_4' value='Th' checked='true'> Th
-        <input type='checkbox' id='day_5' value='Fr' checked='true'> Fr
-        <input type='checkbox' id='day_6' value='Sa'> Sa
-        <input type='checkbox' id='day_7' value='Su'> Su
+        <div id='day_'>
+          <div class='btn-group' data-toggle='buttons-checkbox'>
+            <button type='button' class='btn' value='Su'>Su</button>
+            <button type='button' class='btn' value='Mo'>Mo</button>
+            <button type='button' class='btn' value='Tu'>Tu</button>
+            <button type='button' class='btn' value='We'>We</button>
+            <button type='button' class='btn' value='Th'>Th</button>
+            <button type='button' class='btn' value='Fr'>Fr</button>
+            <button type='button' class='btn' value='Sa'>Sa</button>
+          </div>
+        </div>
       </td>
     </tr>
   </table>

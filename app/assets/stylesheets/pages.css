@@ -50,10 +50,6 @@ tr.item:hover {
   background: #EFEFEF;
 }
 
-td.manual_button {
-  border-style: solid;
-}
-
 td.manual_button:hover {
   background: #EEEEEE;
 }

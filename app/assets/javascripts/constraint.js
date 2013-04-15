@@ -114,19 +114,21 @@ function constraint(count) {
   };
 
   obj.c_time = {
-  	"relation" : "<select id='relation_" + id + "'><option value='equal'>Equal To</option>"
+  	"relation" : "<select id='relation_" + id + "'>"
   	           + "<option value='less than'>Less Than Or Equal To</option>"
   	           + "<option value='greater than'>Greater Than Or Equal To</option></select><br><input id='time_"
   	           + id
                + "' class='input-medium' name='time' type='time' value='10:00:00'>",
-       "input" : "<input type='checkbox' id='time_day_1' value='Mo' checked='true'> Mo"
-                + "<input type='checkbox' id='time_day_2' value='Tu' checked='true'> Tu"
-                + "<input type='checkbox' id='time_day_3' value='We' checked='true'> We"
-                + "<input type='checkbox' id='time_day_4' value='Th' checked='true'> Th"
-                + "<br>"
-                + "<input type='checkbox' id='time_day_5' value='Fr' checked='true'> Fr"
-                + "<input type='checkbox' id='time_day_6' value='Sa'> Sa"
-                + "<input type='checkbox' id='time_day_7' value='Su'> Su"
+    "input" : "On<br /><div id='timeday_" + id + "'>"
+            + "<div class='btn-group' data-toggle='buttons-checkbox'>"
+            + "<button type='button' class='btn' value='Su'>Su</button>"
+            + "<button type='button' class='btn active' value='Mo'>Mo</button>"
+            + "<button type='button' class='btn active' value='Tu'>Tu</button>"
+            + "<button type='button' class='btn active' value='We'>We</button>"
+            + "<button type='button' class='btn active' value='Th'>Th</button>"
+            + "<button type='button' class='btn active' value='Fr'>Fr</button>"
+            + "<button type='button' class='btn' value='Sa'>Sa</button>"
+            + "</div></div>"
   };
 
   obj.credit = {
@@ -154,14 +156,16 @@ function constraint(count) {
 
   obj.day_off = {
     "relation" : "<select id='relation_" + id + "'><option value='equal'>Equal To</option></select>",
-    "input" : "<input type='checkbox' id='dayoff_1' value='Mo'> Mo"
-            + "<input type='checkbox' id='dayoff_2' value='Tu'> Tu"
-            + "<input type='checkbox' id='dayoff_3' value='We'> We"
-            + "<input type='checkbox' id='dayoff_4' value='Th'> Th"
-            + "<br>"
-            + "<input type='checkbox' id='dayoff_5' value='Fr'> Fr"
-            + "<input type='checkbox' id='dayoff_6' value='Sa'> Sa"
-            + "<input type='checkbox' id='dayoff_7' value='Su'> Su"
+    "input" : "<div id='dayoff_" + id + "'>"
+            + "<div class='btn-group' data-toggle='buttons-checkbox'>"
+            + "<button type='button' class='btn' value='Su'>Su</button>"
+            + "<button type='button' class='btn' value='Mo'>Mo</button>"
+            + "<button type='button' class='btn' value='Tu'>Tu</button>"
+            + "<button type='button' class='btn' value='We'>We</button>"
+            + "<button type='button' class='btn' value='Th'>Th</button>"
+            + "<button type='button' class='btn' value='Fr'>Fr</button>"
+            + "<button type='button' class='btn' value='Sa'>Sa</button>"
+            + "</div></div>"
   };
 
   obj.course_range = {
@@ -259,7 +263,7 @@ $('#additem').bind('click', function () {
 	   html += '<option value="num-course">Number of Courses</option>';
      html += '<option value="credit">Credit</option>';
 	   html += '<option value="spe-course">Specific Courses</option>';
-	   html += '<option value="dayoff">Day-off</option>';
+	   html += '<option value="dayoff">No Class Days</option>';
      html += '<option value="dis_lab">Discussion Or Laboratory</option>';
      html += '<option value="gen">GenEd</option>'
      html += '</select></td>'
@@ -302,13 +306,11 @@ function getRelation (ind) {
   return string;
 }
 
-function getDays(type) {
+function getDays(type, i) {
   string = '';
-  for (var i = 1; i < 8; i++) {
-    if ($('#' + type + '_' + i).prop('checked')) {
-      string += $('#' + type + '_' + i).val();
-    }
-  }
+  $('#' + type + '_' + i + ' .btn.active').each(function () {
+    string += this.value;
+  })
   return string;
 }
 
@@ -321,7 +323,7 @@ function getString(cons_ind) {
     string += '"time": {{"operator": "';
     string += getRelation(cons_ind) + '", "value": "';
     string += $('#time_' + cons_ind).val() + '"}, "on": "'
-    string += getDays('time_day') + '"';
+    string += getDays('timeday', cons_ind) + '"}';
   }
   else if (constraints[cons_ind].active === 'credit') {
     string += '"credit": {"operator": "';
@@ -339,7 +341,7 @@ function getString(cons_ind) {
   }
   else if (constraints[cons_ind].active === 'dayoff') {
     string += '"dayoff": "';
-    string += getDays('dayoff') + '"';
+    string += getDays('dayoff', cons_ind) + '"';
   }
   else if (constraints[cons_ind].active === 'course_range') {
     string += '"course_range" : {"operator": "';

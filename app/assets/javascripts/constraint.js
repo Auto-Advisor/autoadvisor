@@ -393,8 +393,29 @@ $('#getrecommend').bind('click', function () {
   }
   c_string += '}';
 
-
   $('#string').html(c_string);
+
+  function onSuccess (data) {
+    var string = '<table><tr>';
+    for (var i = 0; i < data.length; i++) {
+      string += '<td align="center">';
+      string += data[i].name + '<br>';
+      string += data[i].day;
+      string += '</td>';
+    }
+    string += '</tr></table>';
+    $('div#recommendations').html(string);
+  }
+  
+  $.ajax({
+    type: 'POST',
+    contentType: "application/json",
+    url: '/schedule/get_recommendations', data: c_string,
+    success: onSuccess,
+    dataType: "json"
+  });
 });
+
+
 
 $('#constraint').prop('selectedIndex', -1)

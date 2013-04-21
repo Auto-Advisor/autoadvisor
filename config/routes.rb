@@ -10,6 +10,7 @@ Autoadvisor::Application.routes.draw do
   match '/user/transcript/upload/(:id)' => 'uploads#upload_credits', :via => :get, :as => 'upload_credits'
   match '/user/transcript/' => 'users#transcript', :via => :get, :as => 'transcript'
   match '/user/(:id)' => 'users#show', :via => :get
+  match '/schedule/get_recommendations' => 'schedules#recommend', :via => :post
   match '/schedule' => 'schedules#schedule', :via => :get, :as => 'schedule'
   match '/advisor' => 'schedules#advisor'
   match '/about' => 'pages#about'

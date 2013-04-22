@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130410123912) do
+=======
+ActiveRecord::Schema.define(:version => 20130415054459) do
+>>>>>>> d1622978723d12f821101572a3d3b552f3ffc3cf
 
   create_table "courses", :force => true do |t|
     t.string  "dept",   :default => "Unknown", :null => false
@@ -100,10 +104,13 @@ ActiveRecord::Schema.define(:version => 20130410123912) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+<<<<<<< HEAD
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+=======
+>>>>>>> d1622978723d12f821101572a3d3b552f3ffc3cf
     t.integer  "failed_attempts",                                      :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
@@ -115,7 +122,6 @@ ActiveRecord::Schema.define(:version => 20130410123912) do
     t.decimal  "credit_hours",           :precision => 8, :scale => 4, :default => 0.0, :null => false
   end
 
-  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true

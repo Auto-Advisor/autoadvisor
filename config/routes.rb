@@ -3,6 +3,7 @@ Autoadvisor::Application.routes.draw do
 
   root :to => 'pages#main'
   devise_for :users
+  resources :users
   resources :sections, :only => [:show]
   resources :majors, :only => [:show]
   match '/user/transcript/add/(:id)' => 'uploads#add_credit', :via => :get, :as => 'add_credit'

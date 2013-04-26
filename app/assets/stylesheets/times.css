@@ -1,3 +1,4 @@
+
 .day_column {
     border: 1px solid black;
     width: 163px;
@@ -28,16 +29,20 @@
 .hour{
     height:60px;
     width:40px;
+    font-size:75%
 }
 
 .fifty{
 	height:50px;
-	width:163px;	
+	width:163px;
+	font-size: 75%;
+		
 }
 
 .seventyfive{
 	height:75px;
 	width:163px;	
+	font-size: 75%;
 }
 
 .fifteen{

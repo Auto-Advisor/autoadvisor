@@ -4,6 +4,7 @@
 
 var num_constraint = 0;
 var constraints = [];
+var dontwant = [];
 
 function relation(val, c) {
   var relation = '';
@@ -185,6 +186,13 @@ function getString(cons_ind) {
       string += 'false';
     }
   }
+  else if (dontwant.length != 0) {
+    string += '"exclude": "';
+    for (var i = 0; i < dontwant.length; i++) {
+      string += dontwant + ', ';
+    }
+    string += '"';
+  }
   return string;
 }
 
@@ -235,7 +243,7 @@ function printSchedule(data) {
   return string;
 }
 
-$('#getrecommend').bind('click', function () {
+function getRecommendation() {
   $('#msg').html('Recommendation Clicked');
 
   var c_string = '{';
@@ -245,6 +253,9 @@ $('#getrecommend').bind('click', function () {
     if (constraints[i].active != undefined)
       c_string += ', ' + getString(i);
   }
+  $.each(dontwant, function(index, value) {
+    c_string += ', "exclude": "' + value + '"';
+  });
   c_string += '}';
 
   $('#string').html(c_string);
@@ -253,7 +264,7 @@ $('#getrecommend').bind('click', function () {
     var string = '';
     for (var i = 0; i < data.length; i++){
       string += '<table class="table table-bordered table-striped"><tr>';
-      string += '<td rowspan="3" width="20%">';
+      string += '<td rowspan="4" width="20%">';
       string += '<a href="#save_' + i + '" role="button" class="btn" data-toggle="modal">Save This Schedule</a>';
       string += '<div id="save_' + i + '" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'
       string += '<div class="modal-body">';
@@ -273,13 +284,29 @@ $('#getrecommend').bind('click', function () {
 
       string += printSchedule(data[i]);
       
+      string += '</tr><tr><td>&nbsp;</td>'
+
+      for (var j = 0; j < data[i].length; j++) {
+        string += '<td><a role="button" class="btn btn-danger No_' + data[i][j].name + '">I don\'t want this class</a></td>';
+        
+      }
+
       string += '</tr></table>';
 
-      $('#save_schedule_0').bind('click', function(event) {
-        $('#save_0').html('You are going to save this schedule');
-      })
-      $('div#recommendations').html(string);
+      
     }
+
+    $('div#recommendations').html(string);
+
+    $.each(data, function(index, value) {
+      $.each(value, function(i, v) {
+        $('a.No_' + v.name).bind('click', function(event) {
+          console.log("No Class " + v.name);
+          dontwant.push(v.name);
+          getRecommendation();
+        });
+      })
+    })
   }
 
   function onSend() {
@@ -294,7 +321,9 @@ $('#getrecommend').bind('click', function () {
     beforeSend: onSend,
     dataType: "json"
   });
-});
+}
+
+$('#getrecommend').bind('click', getRecommendation);
 
 
 

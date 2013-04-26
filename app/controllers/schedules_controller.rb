@@ -61,7 +61,7 @@ class SchedulesController < ApplicationController
         }
         ], [
           {
-            name: "CMPSCI 453",
+            name: "CMPSCI453",
             day: "HiHi",
             beg_time: "1115",
             end_time: "1205"
@@ -93,7 +93,39 @@ class SchedulesController < ApplicationController
   end
 
   def getSearchResult(keys)
-    return keys
+    sections = [{
+      course: "CMPSCI320",
+      name: "Software Engineering",
+      details: "Details",
+      sections: [{
+        number: "01-Lec",
+        id: "31748",
+        day: "TuTh",
+        time: "11:15AM-12:30PM",
+        room: "MorrillSci Ctr",
+        instructor: "Yuriy"
+      }, {
+        number: "02-Lec",
+        id: "31758",
+        day: "MoWeFr",
+        time: "TBA",
+        room: "TBA",
+        instructor: "YBA"
+      }]
+    }, {
+      course: "ECON103",
+      name: "Microeconomics",
+      details: "Details 2",
+      sections: [{
+        number: "Lec",
+        id: "10203",
+        day: "Mo",
+        time: "8:00AM-8:50AM",
+        room: "Mahar",
+        instructor: "TBA"
+      }]
+    }]
+    return sections
   end
 
   def search

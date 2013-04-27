@@ -81,12 +81,12 @@ class User < ActiveRecord::Base
         if year != nil && !line.empty? && primed
           primed = false
           line_parts = line.split
-          major = line_parts[0]
+          major_code = line_parts[0]
           number = line_parts[1]
           name = line_parts[2..-4].join(" ")
-          class_string = major + number
+          class_string = major_code + number
           units = line_parts[-3]
-          course = Course.find_or_create_dummy(major, number, name) or next
+          course = Course.find_or_create_dummy(major_code, number, name) or next
           self.credits << Credit.from_course(course, year, units, nil)
         end
       elsif mode == :ugrad
@@ -108,12 +108,12 @@ class User < ActiveRecord::Base
           if !(line_parts[-1] =~ /\d+\.\d+/) # we've reached our current semester.
             return
           end
-          major = line_parts[0]
+          major_code = line_parts[0]
           number = line_parts[1]
           name = line_parts[2..-5]
           units = line_parts[-4]
           grade = line_parts[-2]
-          course = Course.find_or_create_dummy(major, number, name) or next
+          course = Course.find_or_create_dummy(major_code, number, name) or next
           self.credits << Credit.from_course(course, year, units, grade)
         end
       else

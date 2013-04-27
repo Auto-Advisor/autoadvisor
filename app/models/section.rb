@@ -6,7 +6,6 @@ MINUTES = 60
 class Section < ActiveRecord::Base
   attr_accessible :days, :gened, :instructor, :min_end, :min_start, :room, :section_number, :size, :spire_id, :ty
 
-  belongs_to :time_slot
   belongs_to :course
   has_and_belongs_to_many :users
 
@@ -56,8 +55,12 @@ class Section < ActiveRecord::Base
     "#{start_s} - #{end_s}"
   end
 
-  def time_place_s
-    "#{start_s} - #{end_s} #{days}"
+  def days_s
+    days.sub(/M/, "Mo").sub(/T/, "Tu").sub(/W/, "We").sub(/R/, "Th").sub(/F/, "Fr")
+  end
+
+  def time_days_s
+    "#{start_s} - #{end_s} #{days_s}"
   end
 
   def self.max_time
@@ -66,6 +69,7 @@ class Section < ActiveRecord::Base
 
   # fields:
   # dept (string)
+  # gened (string)
   # major (string)
   # instructor (string)
   # section_number (string)
@@ -73,6 +77,7 @@ class Section < ActiveRecord::Base
   # description
   # name
   # number
+  # room
   # class_string
   # units
 
@@ -81,17 +86,22 @@ class Section < ActiveRecord::Base
       "class_string" => class_string,
       "dept" => dept,
       "desc" => desc || "",
+      "gened" => gened,
       "instructor" => instructor || "",
       "major" => major,
       "name" => name,
       "number" => number,
+      "room" => room || "",
       "section_number" => section_number,
       "spire_id" => spire_id,
-      "units" => units
+      "min_beg" => min_beg,
+      "min_end" => min_end
     }
   end
 
   # format:
+  # each constraint has the optional boolean 'invert' association that inverts the logic of the operation.
+  # array of the following constraints:
   #   type: major
   #   major: string (e.g. 'CMPSCI')
   # 
@@ -131,6 +141,7 @@ class Section < ActiveRecord::Base
     num_upper_courses = nil
     num_lower_credits = nil
     num_upper_credits = nil
+    target_type = nil
     specified_courses = Set.new
     specified_sections = Set.new
     query = Section.joins(:course)
@@ -161,9 +172,11 @@ class Section < ActiveRecord::Base
         if type == "credits"
           num_lower_credits = lower
           num_upper_credits = upper
+          target_type = :credits
         elsif type == "number"
           num_lower_courses = lower
           num_upper_courses = upper
+          target_type = :number
         end
       when "specified"
         constraints["courses"].each do |course_string|
@@ -179,7 +192,7 @@ class Section < ActiveRecord::Base
           query = query.where("sections.days #{not_op} LIKE '%#{c}%'")
         end
       when "course_range"
-        query = query.where("courses.number IN (?)", constraint["lower"]..constraint["upper"])
+        query = query.where("courses.number IN (?)", constraint["lower"].to_i..constraint["upper"].to_i)
       when "dis_lab"
         if constraint["discussion"]
           query = query.where("sections.ty #{eq_op} 'DIS'")

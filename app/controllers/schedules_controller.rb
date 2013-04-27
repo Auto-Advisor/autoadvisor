@@ -138,13 +138,16 @@ class SchedulesController < ApplicationController
   end
 
   def recommend_schedule
-    json_string = request.raw_post || ""
-    json = ActiveSupport::JSON.decode(json_string)
     if request.get?
       render "recommend_schedule"
     elsif request.post?
+      json_string = request.raw_post || ""
+      json = ActiveSupport::JSON.decode(json_string) || []
       sections = Section.sections_for_constraints(json)
-      render :partial => "sections/section_table", :locals => { :sections => sections.all.sample(4) }
+      respond_to do |format|
+        format.html { render :partial => "sections/section_table", :locals => { :sections => sections.all.sample(4) } }
+        format.json { render :json => sections.all }
+      end
     else
       redirect_to :controller => 'schedules', :action => 'recommend_schedule'
     end

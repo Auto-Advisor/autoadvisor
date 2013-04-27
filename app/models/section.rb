@@ -7,6 +7,7 @@ class Section < ActiveRecord::Base
   attr_accessible :days, :gened, :instructor, :min_end, :min_start, :room, :section_number, :size, :spire_id, :ty
 
   belongs_to :course
+  has_one :major, :through => :course
   has_and_belongs_to_many :users
 
    def self.time_str time
@@ -94,7 +95,7 @@ class Section < ActiveRecord::Base
       "room" => room || "",
       "section_number" => section_number,
       "spire_id" => spire_id,
-      "min_beg" => min_beg,
+      "min_beg" => min_start,
       "min_end" => min_end
     }
   end
@@ -109,17 +110,17 @@ class Section < ActiveRecord::Base
   #   lower: string: HH:MM(AM|PM)
   #   upper: string: HH:MM(AM|PM)
   #
-  #   type: units
+  #   type: units "only sections worth 3 credits"
   #   lower: integer >= 0
   #   upper: integer >= 0
   #   
-  #   type: target
+  #   type: target "total of 18 credits this semester, please" (or 4 classes)
   #   target_type: ("credits" | "number")
   #   lower: integer >= 0
   #   upper: integer >= 0
   #
   #   type: specified
-  #   courses: [course_code]
+  #   courses: [major_code]
   #   sections: [spire_id]
   #
   #   type: days_off
@@ -144,7 +145,7 @@ class Section < ActiveRecord::Base
     target_type = nil
     specified_courses = Set.new
     specified_sections = Set.new
-    query = Section.joins(:course)
+    query = Section.joins(:course, :major)
     constraints.each do |constraint|
       invert = constraint.include? "invert" && constraint["invert"] == true
       eq_op = invert ? "!=" : "="
@@ -156,7 +157,7 @@ class Section < ActiveRecord::Base
       or_op = invert ? " AND " : " OR "
       case constraint["type"]
       when "major"
-        query = query.where("courses.dept #{eq_op} ?", constraint["major"])
+        query = query.where("majors.code #{eq_op} ?", constraint["major"])
       when "time"
         lower = constraint["lower"]
         upper = constraint["upper"]

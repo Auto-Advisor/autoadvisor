@@ -1,0 +1,13 @@
+#two majors to test off of, computerScience and biology.
+
+computerScience:
+ name: compsci
+ degree: bs
+ dept: cmpsci
+ code: 1
+
+biology:
+ name: biology
+ degree: bs
+ dept: bio
+ code: 2

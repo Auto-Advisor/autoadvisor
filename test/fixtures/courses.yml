@@ -1,11 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+#two courses to test off of, data and ai.
+data:
+ desc: data
+ name: data
+ number: 187
+ string: ""
+ hidden: false
+ dept: cmpsci
+ major_id: 1
 
-one:
-  number: 
-  name: MyString
-  dept: MyString
-
-two:
-  number: 
-  name: MyString
-  dept: MyString
+ai:
+ desc: ai
+ name: ai
+ number: 383
+ string: ""
+ hidden: false
+ dept: cmpsci
+ major_id: 1

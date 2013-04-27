@@ -1,47 +1,18 @@
+#two courses to test off of: data and ai.
 data:
-  dept: CSCI
-  grade: 3.33
-  name: Data Structures
-  number: 241
-  year: 2009
-  user: monkey
+ year: 2009
+ grade: 3.0
+ user_id: 
+ course_id: cmpsci187
+ units: 4
+ points: 4
 
-org:
-  dept: CSCI
-  grade: 1.0
-  name: Computer Organization
-  number: 213
-  year: 2010
-  user: monkey
+ai:
+ year: 2009
+ grade: 4.0
+ user_id:
+ course_id: cmpsci383
+ units: 4
+ points: 4
 
-foundation:
-  dept: MATH
-  grade: 2.0
-  name: Foundations of Mathematics
-  number: 254
-  year: 2010
-  user: monkey
 
-physics:
-  dept: PHYS
-  grade: 3.0
-  name: Classical Physics
-  number: 101
-  year: 2010
-  user: monkey
-
-rus_lit:
-  dept: RUSS
-  grade: 4.0
-  name: "Love & Prostitution in Russian Literature"
-  number: 241
-  year: 2010
-  user: monkey
-
-studio_art:
-  dept: FART
-  grade: 0.0
-  name: Introduction to Studio Art
-  number: 420
-  year: 2010
-  user: monkey

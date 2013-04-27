@@ -1,0 +1,29 @@
+<table class="table table-striped">
+  <tr>
+    <td>Course Code</td>
+    <td>Spire ID</td>
+    <td>Name</td>
+    <td>Days</td>
+    <td>Time</td>
+    <td>Location</td>
+    <td>Instructor</td>
+    <td>Units</td>
+  </tr>
+  <% @sections.each do |section| %>
+    <tr>
+      <td><%= section.class_string %></td>
+      <td><%= section.spire_id %></td>
+      <td><%= section.name %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><%= section.units %></td>
+    </tr>
+    <% if !section.desc.blank? %>
+      <tr>
+        <td colspan="0"><%= section.desc %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

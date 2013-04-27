@@ -105,7 +105,7 @@ $('#additem').bind('click', function () {
 
 function getRelation (ind) {
   var relation = $('#relation_' + ind).val();
-  console.log(relation);
+
   var string = '';
   if (relation === 'equal') {
     string += "\=";
@@ -137,7 +137,7 @@ function getString(cons_ind) {
     string += getRelation(cons_ind) + '", "value": "';
     string += $('#time_' + cons_ind).val() + '", "on": "'
     string += getDays('timeday', cons_ind) + '"}';
-  }
+    }
   else if (constraints[cons_ind].active === 'credit') {
     string += '"credit": {"operator": "';
     string += getRelation(cons_ind) + '", "value": "';
@@ -257,88 +257,20 @@ function getRecommendation() {
 
   $('#string').html(c_string);
 
-  function onSuccess (data) {
-    var string = '';
-    for (var i = 0; i < data.length; i++){
-      string += '<table class="table table-bordered table-striped"><tr>';
-      string += '<td rowspan="4" width="20%">';
-      string += '<a href="#save_' + i + '" role="button" class="btn" data-toggle="modal">Save This Schedule</a>';
-      string += '<div id="save_' + i + '" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'
-      string += '<div class="modal-body">';
-      string += 'You are going to save the following schedule:<br />';
-
-      string += '<table class="table table-bordered table-striped"><tr>'
-      string += printSchedule(data[i]);
-      string += '</tr></table>';
-
-      string += 'Name of This Schedule: <input type="text" name="name_of_save_0"></div>';
-      string += '<div class="modal-footer">';
-      string += '<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>';
-      string += '<button class="btn btn-primary">Save</button>'
-      string += '</div>'
-      string += '</div>';
-      string += '</td>';
-
-      string += printSchedule(data[i]);
-      
-      string += '</tr><tr><td>&nbsp;</td>'
-
-      for (var j = 0; j < data[i].length; j++) {
-        string += '<td><a role="button" class="btn btn-warning No_' + data[i][j].name + '">I don\'t want this class</a></td>';
-        
-      }
-
-      string += '</tr></table>';
-    }
-
-    $('div#recommendations').html(string);
-
-    var exclusion_list = '';
-    if (dontwant.length != 0) {
-      exclusion_list += '<table class="table table-hover table-bordered">';
-      exclusion_list +=   '<thead>';
-      exclusion_list +=     '<tr><td colspan="2">Exclusion List</td></tr>';
-      exclusion_list +=   '</thead>';
-      exclusion_list += '<tbody>';
-      for (var i = 0; i < dontwant.length; i++) {
-        exclusion_list += '<tr><td>' + dontwant[i] + '</td><td><a role="button" class="btn btn-danger" id="delete_exclusion_' + i + '">Delete</a></td></tr>'
-      }
-      exclusion_list += '</tbody></table>';
-    }
-
-    $('#exclusion_list').html(exclusion_list);
-
-    $.each(dontwant, function(index, value) {
-      $('#delete_exclusion_' + index).bind('click', function(event) {
-        dontwant = jQuery.grep(dontwant, function(v) {
-          return value != v;
-        });
-        getRecommendation();
-      });
-    });
-
-    $.each(data, function(index, value) {
-      $.each(value, function(i, v) {
-        $('a.No_' + v.name).bind('click', function(event) {
-          console.log("No Class " + v.name);
-          dontwant.push(v.name);
-          getRecommendation();
-        });
-      })
-    })
-  }
-
-  function onSend() {
-    $('#recommendations').html("Please wait... I am looking for schedules which suitable for you :)");
-  }
-  
   $.ajax({
-    type: 'POST',
+    type: "POST",
     contentType: "application/json",
-    url: '/schedule/get_recommendations', data: c_string,
-    success: onSuccess,
-    beforeSend: onSend,
-    dataType: "json"
+    url: "/schedule/recommend", data: c_string,
+    success: function(data, text_status, jqXHR) {
+      $('#recommendations').html(data);
+      console.log("success!");
+    },
+    beforeSend: function() {
+      $('#recommendations').html("Please wait... I am looking for schedules which suitable for you :)");
+    },
+    fail: function(jqXHR, textStatus, errorThrown) {
+      console.log("failed.");
+    }
   });
 }
 

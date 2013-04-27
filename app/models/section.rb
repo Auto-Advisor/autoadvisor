@@ -26,6 +26,31 @@ class Section < ActiveRecord::Base
     course.desc
   end
 
+  # fields:
+  # dept (string)
+  # instructor (string)
+  # section_number (string)
+  # spire_id (number)
+  # description
+  # name
+  # number
+  # class_string
+  # units
+
+  def as_json(options)
+    {
+      "class_string" => class_string,
+      "dept" => dept,
+      "desc" => desc || "",
+      "instructor" => instructor || "",
+      "name" => name,
+      "number" => number,
+      "section_number" => section_number,
+      "spire_id" => spire_id,
+      "units" => units
+    }
+  end
+
   def query_fields
     {
       :class_number => :int,

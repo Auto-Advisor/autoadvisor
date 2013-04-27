@@ -134,7 +134,17 @@ class SchedulesController < ApplicationController
     @result = getSearchResult(keys)
     respond_to do |format|
       format.json {render :json => @result }
-      format.html
+    end
+  end
+
+  def recommend_schedule
+    @sections = Section.all.sample(4)
+    if request.get?
+      render "recommend_schedule"
+    elsif request.post?
+      render :partial => "sections/section_table", :locals => { :sections => @sections }
+    else
+      redirect_to :controller => 'schedules', :action => 'recommend_schedule'
     end
   end
 end

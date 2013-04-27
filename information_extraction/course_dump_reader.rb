@@ -139,7 +139,7 @@ while i < catalog_lines.length
     if  /^GenEd/.match(catalog_lines[i])
         #gened discovery needs to occur right after course name discovery, since gened indication for a course can occur after the first spire id is written
         #puts catalog_lines[i].partition("  ")[2]
-        course.gened = catalog_lines[i].partition("  ")[2]
+        course.gened = catalog_lines[i].partition("  ")[2].strip
         #puts course.gened
         line_processed = true
     end

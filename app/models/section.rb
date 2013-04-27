@@ -1,9 +1,8 @@
 class Section < ActiveRecord::Base
-  attr_accessible :instructor, :section_number, :size, :spire_id, :time_slot, :requirement, :units, :room, :ty
+  attr_accessible :days, :gened, :instructor, :min_end, :min_start, :room, :section_number, :size, :spire_id, :ty, :units
 
   belongs_to :time_slot
   belongs_to :course
-  has_one :requirement
   has_and_belongs_to_many :users
 
   def dept

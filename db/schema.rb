@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130415054459) do
+ActiveRecord::Schema.define(:version => 20130427143043) do
 
   create_table "courses", :force => true do |t|
     t.string  "dept",   :default => "Unknown", :null => false
@@ -20,14 +20,6 @@ ActiveRecord::Schema.define(:version => 20130415054459) do
     t.integer "number", :default => 0,         :null => false
     t.string  "string", :default => "UNKNOWN", :null => false
     t.boolean "hidden", :default => false,     :null => false
-  end
-
-  create_table "credit_constraints", :force => true do |t|
-    t.string   "field"
-    t.string   "op"
-    t.string   "value"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "credits", :force => true do |t|
@@ -66,11 +58,14 @@ ActiveRecord::Schema.define(:version => 20130415054459) do
     t.string  "section_number",                  :null => false
     t.string  "instructor"
     t.integer "size"
-    t.integer "time_slot_id"
     t.string  "room"
     t.string  "units",          :default => "0", :null => false
     t.string  "ty",             :default => "",  :null => false
     t.integer "course_id",      :default => 0,   :null => false
+    t.string  "days",           :default => "",  :null => false
+    t.string  "gened",          :default => "",  :null => false
+    t.integer "min_start",      :default => 0,   :null => false
+    t.integer "min_end",        :default => 0,   :null => false
   end
 
   create_table "sections_users", :force => true do |t|
@@ -80,14 +75,6 @@ ActiveRecord::Schema.define(:version => 20130415054459) do
 
   add_index "sections_users", ["section_id", "user_id"], :name => "index_sections_users_on_section_id_and_user_id"
   add_index "sections_users", ["user_id", "section_id"], :name => "index_sections_users_on_user_id_and_section_id"
-
-  create_table "time_slots", :force => true do |t|
-    t.string  "days"
-    t.integer "beg_min"
-    t.integer "beg_hour"
-    t.integer "end_min"
-    t.integer "end_hour"
-  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                                                :default => "",  :null => false

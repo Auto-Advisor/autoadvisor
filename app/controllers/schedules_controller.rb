@@ -93,6 +93,7 @@ class SchedulesController < ApplicationController
   end
 
   def getSearchResult(keys)
+    temp = Section.get_new_schedule(1)
     sections = [{
       course: "CMPSCI320",
       name: "Software Engineering",
@@ -125,7 +126,7 @@ class SchedulesController < ApplicationController
         instructor: "TBA"
       }]
     }]
-    return sections
+    return temp
   end
 
   def search

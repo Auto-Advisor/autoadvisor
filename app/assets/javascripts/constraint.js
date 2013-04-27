@@ -89,22 +89,19 @@ $('#additem').bind('click', function () {
      html += '<td><div id="i_';
      html += id;
      html += '"><select><option></option></select></div></td>';
-     html += '<td><a href="#" onclick="remove(';
-     html += id;
-     html += ')"><img class="remove" id="';
-     html += id;
-     html += '"src="http://www.clker.com/cliparts/1/1/9/2/12065738771352376078Arnoud999_Right_or_wrong_5.svg.hi.png" width="30px" height="30px"/></a></td>'
+     html += '<td><a class="btn btn-danger" id="remove_constraint_' + id +'">Delete</a>';
+     html += '</td>'
      html += '</tr>';
      
   $('table#constraints').append(html);
   $('#constraint_' + id).prop('selectedIndex', -1);
+
+  $('#remove_constraint_' + id).bind('click', function() {
+    constraints[id].active = undefined;
+    $('#constraint_row_' + id).hide();
+  })
   num_constraint++;
 });
-
-function remove(i) {
-  constraints[i].active = undefined;
-  $('#constraint_row_' + i).hide();
-}
 
 function getRelation (ind) {
   var relation = $('#relation_' + ind).val();
@@ -136,9 +133,9 @@ function getString(cons_ind) {
     string += '"major": "' + $('#major_' + cons_ind).val() + '"';
   }
   else if (constraints[cons_ind].active === 'c_time') {
-    string += '"time": {{"operator": "';
+    string += '"time": {"operator": "';
     string += getRelation(cons_ind) + '", "value": "';
-    string += $('#time_' + cons_ind).val() + '"}, "on": "'
+    string += $('#time_' + cons_ind).val() + '", "on": "'
     string += getDays('timeday', cons_ind) + '"}';
   }
   else if (constraints[cons_ind].active === 'credit') {
@@ -287,16 +284,38 @@ function getRecommendation() {
       string += '</tr><tr><td>&nbsp;</td>'
 
       for (var j = 0; j < data[i].length; j++) {
-        string += '<td><a role="button" class="btn btn-danger No_' + data[i][j].name + '">I don\'t want this class</a></td>';
+        string += '<td><a role="button" class="btn btn-warning No_' + data[i][j].name + '">I don\'t want this class</a></td>';
         
       }
 
       string += '</tr></table>';
-
-      
     }
 
     $('div#recommendations').html(string);
+
+    var exclusion_list = '';
+    if (dontwant.length != 0) {
+      exclusion_list += '<table class="table table-hover table-bordered">';
+      exclusion_list +=   '<thead>';
+      exclusion_list +=     '<tr><td colspan="2">Exclusion List</td></tr>';
+      exclusion_list +=   '</thead>';
+      exclusion_list += '<tbody>';
+      for (var i = 0; i < dontwant.length; i++) {
+        exclusion_list += '<tr><td>' + dontwant[i] + '</td><td><a role="button" class="btn btn-danger" id="delete_exclusion_' + i + '">Delete</a></td></tr>'
+      }
+      exclusion_list += '</tbody></table>';
+    }
+
+    $('#exclusion_list').html(exclusion_list);
+
+    $.each(dontwant, function(index, value) {
+      $('#delete_exclusion_' + index).bind('click', function(event) {
+        dontwant = jQuery.grep(dontwant, function(v) {
+          return value != v;
+        });
+        getRecommendation();
+      });
+    });
 
     $.each(data, function(index, value) {
       $.each(value, function(i, v) {

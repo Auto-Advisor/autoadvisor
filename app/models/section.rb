@@ -1,3 +1,5 @@
+require 'set'
+
 HOURS = 24
 MINUTES = 60
 
@@ -20,6 +22,10 @@ class Section < ActiveRecord::Base
 
   def dept
     course.dept
+  end
+
+  def major
+    course.major
   end
 
   def name
@@ -60,6 +66,7 @@ class Section < ActiveRecord::Base
 
   # fields:
   # dept (string)
+  # major (string)
   # instructor (string)
   # section_number (string)
   # spire_id (number)
@@ -75,6 +82,7 @@ class Section < ActiveRecord::Base
       "dept" => dept,
       "desc" => desc || "",
       "instructor" => instructor || "",
+      "major" => major,
       "name" => name,
       "number" => number,
       "section_number" => section_number,
@@ -83,20 +91,48 @@ class Section < ActiveRecord::Base
     }
   end
 
-  def query_fields
-    {
-      :class_number => :int,
-      :dept => :string,
-      :desc => :string,
-      :name => :string,
-      :primary => :bool,
-      :section_number => :string,
-      :size => :int,
-      :spire_id => :string,
-    }
-  end
+  # format:
+  #   type: major
+  #   major: string (e.g. 'CMPSCI')
+  # 
+  #   type: time
+  #   lower: string: HH:MM(AM|PM)
+  #   upper: string: HH:MM(AM|PM)
+  #
+  #   type: units
+  #   lower: integer >= 0
+  #   upper: integer >= 0
+  #   
+  #   type: target
+  #   target_type: ("credits" | "number")
+  #   lower: integer >= 0
+  #   upper: integer >= 0
+  #
+  #   type: specified
+  #   courses: [course_code]
+  #   sections: [spire_id]
+  #
+  #   type: days_off
+  #   days_off: string e.g. "MTWRF"
+  #
+  #   type: course_range
+  #   lower: integer >= 0
+  #   upper: integer >= 0
+  #
+  #   type: dis_lab
+  #   discussion: boolean
+  #   lab: boolean
+  #
+  #   type: gened
+  #   string: gened code
 
   def self.sections_for_constraints(constraints)
+    num_lower_courses = nil
+    num_upper_courses = nil
+    num_lower_credits = nil
+    num_upper_credits = nil
+    specified_courses = Set.new
+    specified_sections = Set.new
     query = Section.joins(:course)
     constraints.each do |constraint|
       invert = constraint.include? "invert" && constraint["invert"] == true
@@ -109,38 +145,41 @@ class Section < ActiveRecord::Base
       or_op = invert ? " AND " : " OR "
       case constraint["type"]
       when "major"
-      query = query.where("courses.dept #{eq_op} ?", constraint["major"])
-      when "c_time"
+        query = query.where("courses.dept #{eq_op} ?", constraint["major"])
+      when "time"
         lower = constraint["lower"]
         upper = constraint["upper"]
-        query = query.where("sections.min_beg #{gt_op} ? #{and_op} sections.min_end #{lt_op} upper", lower, upper)
-      when "credit"
+        query = query.where("sections.min_beg #{gt_op} ? #{and_op} sections.min_end #{lt_op} ?", lower, upper)
+      when "units"
         lower = constraint["lower"]
-        upper = [constraint["upper"], 6].min
-        possible = [lower..upper].to_a
-        credits = possible.map {|potential| "units #{yes_op} LIKE CONCAT('_',?,'_')"}
-        complete = "(%s)" % credits.join(" #{or_op} ")
-        query = query.where(complete, possible.map {|i|i.to_s})
-      when "num_courses"
-        lower = constraint["lower"] || 0
-        upper = constraint["upper"] || Section.max_time
-      when "spe_course"
-        # needs: to be explained?
-      when "daysoff"
-        daysoff = constraint["daysoff"]
+        upper = constraint["upper"]
+        query = query.where("sections.credit_min #{gt_op} ? #{and_op} sections.credit_max #{lt_op}", lower, upper)
+      when "target"
+        lower = constraint["lower"]
+        upper = constraint["upper"]
+        type = constraint["target_type"]
+        if type == "credits"
+          num_lower_credits = lower
+          num_upper_credits = upper
+        elsif type == "number"
+          num_lower_courses = lower
+          num_upper_courses = upper
+        end
+      when "specified"
+        constraints["courses"].each do |course_string|
+          specified_courses << Course.where("string = ?", course_string)
+        end
+        constraints["sections"].each do |spire_id|
+          specifed_sections << Section.where("spire_id = ?", spire_id)
+        end
+      when "days_off"
+        daysoff = constraint["days_off"]
 
         daysoff.each_char do |c|
           query = query.where("sections.days #{not_op} LIKE '%#{c}%'")
         end
       when "course_range"
-        case constraint["operation"]
-        when "<="
-          query = query.where("courses.number #{lt_op} ?", constraint["input"].to_i)
-        when ">="
-          query = query.where("courses.number #{gt_op} ?", constraint["input"].to_i)
-        when "="
-          query = query.where("courses.number #{eq_op} ?", constraint["input"].to_i)
-        end
+        query = query.where("courses.number IN (?)", constraint["lower"]..constraint["upper"])
       when "dis_lab"
         if constraint["discussion"]
           query = query.where("sections.ty #{eq_op} 'DIS'")
@@ -148,9 +187,8 @@ class Section < ActiveRecord::Base
         if constraint["lab"]
           query = query.where("sections.ty #{eq_op} 'LAB'")
         end
-      when "gen"
-        # gened is assumed to be a bang-separated list of codes.
-        query = query.where("sections.gened #{yes_op} LIKE CONCAT('!',?,'!')", constraints["gen"])
+      when "gened"
+        query = query.where("sections.gened #{yes_op} LIKE ?", constraints["gened"])
       end
     end
     query

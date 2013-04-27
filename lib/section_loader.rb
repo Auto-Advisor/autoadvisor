@@ -27,17 +27,27 @@ def load_sections file, logger
       next if row[0].blank?
       raise CSVFormatError, "Bad number of entries in CSV row #{line}." if row.length != 14
       class_num_info = row[2].split
-      dept = class_num_info[0]
+      major_code = class_num_info[0]
       num_string = class_num_info[1] or puts row[2].to_s
       num = num_string[0..2]
-      class_string = dept + num_string
+      class_string = major_code + num_string
       name = row[10]
 
+      major = Major.where('code = ?', major_code).first
+      if major.nil?
+        major = Major.new
+        major.degree = nil
+        major.dept = row[1].strip
+        major.name = ""
+        major.code = major_code
+        major.save
+      end
+
       # :dept, :desc, :name, :number, :sections, :string
-      course = Course.where('number = ? AND dept = ?', num, dept).first
+      course = Course.joins(:major).where('courses.number = ? AND majors.code = ?', num, major_code).first
       if course.nil?
         course = Course.new
-        course.dept = dept
+        course.major = major
         course.desc = nil
         course.name = name
         course.number = num
@@ -63,8 +73,8 @@ def load_sections file, logger
       section.min_start = row[4].blank? ? 0 : parse_time(row[4])
       section.min_end = row[5].blank? ? 0 : parse_time(row[5])
       section.save
-#    rescue CSVFormatError => e
-#      logger.debug "Encountered error while processing csv row #{line}:\n#{e.inspect}\n#{e.backtrace.join('\n')}\n"
+    rescue CSVFormatError => e
+      logger.debug "Encountered error while processing csv row #{line}:\n#{e.inspect}\n#{e.backtrace.join('\n')}\n"
     end
   end
 end

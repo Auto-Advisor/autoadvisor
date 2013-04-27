@@ -5,6 +5,9 @@ class SectionCleanup < ActiveRecord::Migration
     remove_column :sections, :time_slot_id
     remove_column :sections, :units
 
+    rename_column :courses, :dept, :major
+    add_column :courses, :dept, :string, :null => false, :default => ""
+
     add_column :sections, :days, :string, :null => false, :default => ""
     add_column :sections, :gened, :string, :null => false, :default => ""
     add_column :sections, :min_start, :integer, :null => false, :default => 0
@@ -30,8 +33,10 @@ class SectionCleanup < ActiveRecord::Migration
       t.integer "end_hour"
     end
     add_column :sections, :time_slot_id, :integer
-    add_column :sections, :units, :default => "0", :null => false
+    add_column :sections, :units, :string, :default => "0", :null => false
 
+    remove_column :courses, :dept
+    rename_column :courses, :major, :dept
 
     remove_column :sections, :credit_min
     remove_column :sections, :credit_max

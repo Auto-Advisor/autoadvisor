@@ -11,15 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130427143043) do
+ActiveRecord::Schema.define(:version => 20130427193738) do
 
   create_table "courses", :force => true do |t|
-    t.string  "dept",   :default => "Unknown", :null => false
     t.text    "desc"
-    t.string  "name",   :default => "Unknown", :null => false
-    t.integer "number", :default => 0,         :null => false
-    t.string  "string", :default => "UNKNOWN", :null => false
-    t.boolean "hidden", :default => false,     :null => false
+    t.string  "name",     :default => "Unknown", :null => false
+    t.integer "number",   :default => 0,         :null => false
+    t.string  "string",   :default => "UNKNOWN", :null => false
+    t.boolean "hidden",   :default => false,     :null => false
+    t.string  "dept",     :default => "",        :null => false
+    t.integer "major_id"
   end
 
   create_table "credits", :force => true do |t|
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20130427143043) do
     t.string "name"
     t.string "degree"
     t.string "dept"
+    t.string "code",   :default => "", :null => false
   end
 
   create_table "majors_users", :id => false, :force => true do |t|

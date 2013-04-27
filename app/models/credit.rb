@@ -43,14 +43,6 @@ class Credit < ActiveRecord::Base
     BigDecimal.new(grades[letter_grade.upcase])
   end
 
-  def self.query_fields
-    {:dept => :string,
-     :grade => :real,
-     :name => :string,
-     :number => :int,
-     :year => :int}
-  end
-
   def self.from_course(course, year, units, grade)
     credit = Credit.new
     credit.course = course

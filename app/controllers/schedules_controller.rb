@@ -138,11 +138,13 @@ class SchedulesController < ApplicationController
   end
 
   def recommend_schedule
-    @sections = Section.all.sample(4)
+    json_string = request.raw_post || ""
+    json = ActiveSupport::JSON.decode(json_string)
     if request.get?
       render "recommend_schedule"
     elsif request.post?
-      render :partial => "sections/section_table", :locals => { :sections => @sections }
+      render :text => json
+      #render :partial => "sections/section_table", :locals => { :sections => Section.all.sample(4) }
     else
       redirect_to :controller => 'schedules', :action => 'recommend_schedule'
     end

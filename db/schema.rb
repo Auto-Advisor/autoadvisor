@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20130410123912) do
-=======
 ActiveRecord::Schema.define(:version => 20130415054459) do
->>>>>>> d1622978723d12f821101572a3d3b552f3ffc3cf
 
   create_table "courses", :force => true do |t|
     t.string  "dept",   :default => "Unknown", :null => false
@@ -104,13 +100,6 @@ ActiveRecord::Schema.define(:version => 20130415054459) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-<<<<<<< HEAD
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
-=======
->>>>>>> d1622978723d12f821101572a3d3b552f3ffc3cf
     t.integer  "failed_attempts",                                      :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"

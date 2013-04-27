@@ -2,7 +2,7 @@ HOURS = 24
 MINUTES = 60
 
 class Section < ActiveRecord::Base
-  attr_accessible :days, :gened, :instructor, :min_end, :min_start, :room, :section_number, :size, :spire_id, :ty, :units
+  attr_accessible :days, :gened, :instructor, :min_end, :min_start, :room, :section_number, :size, :spire_id, :ty
 
   belongs_to :time_slot
   belongs_to :course

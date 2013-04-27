@@ -55,17 +55,18 @@ ActiveRecord::Schema.define(:version => 20130427143043) do
 
   create_table "sections", :force => true do |t|
     t.integer "spire_id"
-    t.string  "section_number",                  :null => false
+    t.string  "section_number",                 :null => false
     t.string  "instructor"
     t.integer "size"
     t.string  "room"
-    t.string  "units",          :default => "0", :null => false
-    t.string  "ty",             :default => "",  :null => false
-    t.integer "course_id",      :default => 0,   :null => false
-    t.string  "days",           :default => "",  :null => false
-    t.string  "gened",          :default => "",  :null => false
-    t.integer "min_start",      :default => 0,   :null => false
-    t.integer "min_end",        :default => 0,   :null => false
+    t.string  "ty",             :default => "", :null => false
+    t.integer "course_id",      :default => 0,  :null => false
+    t.string  "days",           :default => "", :null => false
+    t.string  "gened",          :default => "", :null => false
+    t.integer "min_start",      :default => 0,  :null => false
+    t.integer "min_end",        :default => 0,  :null => false
+    t.integer "credit_min",     :default => 0,  :null => false
+    t.integer "credit_max",     :default => 0,  :null => false
   end
 
   create_table "sections_users", :force => true do |t|

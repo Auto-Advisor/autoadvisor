@@ -3,10 +3,14 @@ class SectionCleanup < ActiveRecord::Migration
     drop_table "credit_constraints"
     drop_table "time_slots"
     remove_column :sections, :time_slot_id
+    remove_column :sections, :units
+
     add_column :sections, :days, :string, :null => false, :default => ""
     add_column :sections, :gened, :string, :null => false, :default => ""
     add_column :sections, :min_start, :integer, :null => false, :default => 0
     add_column :sections, :min_end, :integer, :null => false, :default => 0
+    add_column :sections, :credit_min, :integer, :null => false, :default => 0
+    add_column :sections, :credit_max, :integer, :null => false, :default => 0
   end
 
   def down
@@ -26,7 +30,11 @@ class SectionCleanup < ActiveRecord::Migration
       t.integer "end_hour"
     end
     add_column :sections, :time_slot_id, :integer
+    add_column :sections, :units, :default => "0", :null => false
 
+
+    remove_column :sections, :credit_min
+    remove_column :sections, :credit_max
     remove_column :sections, :days
     remove_column :sections, :gened
     remove_column :sections, :min_end

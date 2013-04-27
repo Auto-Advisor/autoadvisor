@@ -1,3 +1,5 @@
+require 'json'
+
 class SchedulesController < ApplicationController
   def schedule
     @rec = Section.get_new_schedule(10)
@@ -143,10 +145,10 @@ class SchedulesController < ApplicationController
     elsif request.post?
       json_string = request.raw_post || ""
       json = ActiveSupport::JSON.decode(json_string) || []
-      sections = Section.sections_for_constraints(json)
+      sections = Section.sections_for_constraints(json).all.sample(4)
       respond_to do |format|
-        format.html { render :partial => "sections/section_table", :locals => { :sections => sections.all.sample(4) } }
-        format.json { render :json => sections.all }
+        format.html { render :text => "<pre>#{ActiveSupport::JSON.encode(sections.as_json)}</pre>" }
+        format.json { render :json => sections }
       end
     else
       redirect_to :controller => 'schedules', :action => 'recommend_schedule'

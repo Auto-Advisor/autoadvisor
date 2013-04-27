@@ -82,7 +82,7 @@ class Section < ActiveRecord::Base
   # class_string
   # units
 
-  def as_json(options)
+  def as_json(options={})
     {
       "class_string" => class_string,
       "dept" => dept,

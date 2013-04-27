@@ -1,16 +1,23 @@
 
+.day_row{
+    height: 20px;
+    width: 815px
+    position: relative;
+     float: left; 
+     
+
+}
 .day_column {
-    border: 1px solid black;
+    border: 1px solid lightblue;
     width: 163px;
     position: relative;
      float: left;   
 }
 .time_column{
-     border: 1px solid black;
+     border: 1px solid lightblue;
     width: 40px;
     position: relative;
-     float: left; 
-
+     float: left;
 }
 
 .time {
@@ -22,27 +29,30 @@
      font: 15px Arial;
     font-weight: bold;
     text-align: center;
-   border-bottom: 2px solid black; 
+   border-bottom: 2px solid lightblue; 
 }
 
 
 .hour{
     height:60px;
     width:40px;
-    font-size:75%
+    font-size:85%;
+    font-weight:bold;
 }
 
 .fifty{
 	height:50px;
 	width:163px;
-	font-size: 75%;
+	font-size: 85%;
+	font-weight:bold;
 		
 }
 
 .seventyfive{
 	height:75px;
 	width:163px;	
-	font-size: 75%;
+	font-size: 85%;
+	font-weight:bold;
 }
 
 .fifteen{

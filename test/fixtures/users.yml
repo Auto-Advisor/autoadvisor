@@ -1,7 +1,4 @@
-monkey:
-  email: monkey@example.com
+#one test user to test off of, test. 
+test:
+  email: test@example.com
   admin: false
-
-god:
-  email: god@gmail.heaven
-  admin: true

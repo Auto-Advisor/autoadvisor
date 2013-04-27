@@ -220,7 +220,6 @@ $('#additem').bind('click', function () {
 
 function getRelation(relation) {
   var string = "";
-  console.log(relation);
   if (relation === 'equal') {
     string += "\=";
   }
@@ -394,7 +393,7 @@ function getRecommendation() {
     contentType: "application/json",
     url: "/schedule/recommend", data: JSON.stringify(constraints),
     success: function(data, text_status, jqXHR) {
-      $('#recommendations').html(data + JSON.stringify(get_constraints_array));
+      $('#recommendations').html(data);
      },
     beforeSend: function() {
       $('#recommendations').html("Please wait... I am looking for schedules which suitable for you :)");

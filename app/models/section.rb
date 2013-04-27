@@ -64,38 +64,42 @@ class Section < ActiveRecord::Base
     }
   end
 
-  def self.for_user(user)
-    raise "Outdated code, tell duane to fix this."
-    # query/fetch the sections based on the user's constraints.
-    sections = self.compile # invokes super's compile, could be nothing.
-
-    # parse requirements, identify leaves that need to be retrieved.
-    # the leaves should be text versions of indices into constraints.
-    requirements = sections.select {|s| s.requirement}
-    evaluator = BooleanExprTree(requirements)
-    constraint_ids = evaluator.slots
-
-    # now fetch all the constraints.
-    constraints = Constraints.find(constraint_ids)
-    # and throw them in a hash for unordered access by id
-    constraints_hash = {}
-    constraints.each {|constraint| constraints_hash[constraint_id] = constraint}
-
-    # map them to each requirement, which requires all the constraints to be applied to the same section (e.g. 'dept = "CMPSCI" && num = 350 && credits > 0.0')
-    requirement_slots = evaluator.expr_slots
-
-    # Evaluate them collectively.
-    constraint_result = user.satisfies_requirements?(constraints_hash, requirement_slots)
-
-    # Now pass them into the requirement evaluator.
-    satisfied = requirements.evaluate(constraint_result)
-
-    # At this point, we can build our final list of sections.
-    final = []
-    sections.each_index do |idx|
-      final << sections[idx] if satisfied[idx]
+  def self.sections_for_constraints(constraints)
+    query = Section.joins(:course)
+    constraints.each do |constraint|
+      case constraint["type"]
+      when "major"
+        query = query.where("courses.dept = ?", constraint["major"])
+      when "c_time"
+        # needs: section.beg, section.end
+      when "credit"
+        # need: sec.min_credit, sec.max_credit, or digits of possible credits.
+      when "num_courses"
+      when "spe_course"
+        # needs: to be explained?
+      when "dayoff"
+        # needs: section.days
+      when "course_range"
+        case constraint["operation"]
+        when "<="
+          query = query.where("courses.number <= ?", constraint["input"].to_i)
+        when ">="
+          query = query.where("courses.number >= ?", constraint["input"].to_i)
+        when "="
+          query = query.where("courses.number = ?", constraint["input"].to_i)
+        end
+      when "dis_lab"
+        if constraint["discussion"]
+          query = query.where("sections.ty = 'DIS'")
+        end
+        if constraint["lab"]
+          query = query.where("sections.ty = 'LAB'")
+        end
+      when "gen"
+        # needs: section.gen
+      end
     end
-    return final
+    query
   end
 
   def self.get_new_schedule num=4

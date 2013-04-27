@@ -143,8 +143,8 @@ class SchedulesController < ApplicationController
     if request.get?
       render "recommend_schedule"
     elsif request.post?
-      render :text => json
-      #render :partial => "sections/section_table", :locals => { :sections => Section.all.sample(4) }
+      sections = Section.sections_for_constraints(json)
+      render :partial => "sections/section_table", :locals => { :sections => sections.all.sample(4) }
     else
       redirect_to :controller => 'schedules', :action => 'recommend_schedule'
     end

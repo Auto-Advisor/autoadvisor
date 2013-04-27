@@ -9,11 +9,6 @@ function show_recommendation() {
   document.getElementById('recommendation').style.display = 'block';
   document.getElementById('adv_search').style.display = 'none';
 }
-function drawszlider(ossz, meik){
-    var szazalek=Math.round((meik*100)/ossz);
-    document.getElementById("szliderbar").style.width=szazalek+'%';
-    document.getElementById("szazalek").innerHTML=szazalek+'%';
-}
 
 function adv_filter(){
   document.getElementById('filter_class').style.display = 'none';

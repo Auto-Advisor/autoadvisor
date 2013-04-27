@@ -174,6 +174,13 @@ while i < catalog_lines.length
         course.section = catalog_lines[i].strip
         line_processed = true
     end
+    #checks if current line contains an instructor name
+    if  /^Instructor:/.match(catalog_lines[i])
+        #puts catalog_lines[i].partition("  ")[2]
+        course.instructor = catalog_lines[i].partition(" ")[2].strip
+        #puts course.gened
+        line_processed = true
+    end
     #checks if line is day
     if /^[MWF]{1,3}$/.match(catalog_lines[i].strip) or /^(M|TU|W|TH|F|SA|SU){1,5}$/.match(catalog_lines[i].strip)
         #if the section hasn't been seen yet, assume this is the section

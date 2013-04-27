@@ -14,11 +14,11 @@
       <td><%= section.class_string %></td>
       <td><%= section.spire_id %></td>
       <td><%= section.name %></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td><%= section.units %></td>
+      <td><%= section.days %></td>
+      <td><%= section.range_s %></td>
+      <td><%= section.room %></td>
+      <td><%= section.instructor %></td>
+      <td><%= "%0.2f - %0.2f" % [section.credit_min, section.credit_max] %></td>
     </tr>
     <% if !section.desc.blank? %>
       <tr>

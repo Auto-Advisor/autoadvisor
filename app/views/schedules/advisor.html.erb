@@ -1,30 +1,24 @@
-<link href="/assets/advisor.css" media="all" rel="stylesheet" type="text/css" />
 <% provide(:title, 'Advisor') %>
+<% content_for :h1 do %>
+  <h1>Schedule Advisor</h1>
+<% end %>
 
-<div align="center">
-<div class='advisor_nav'>
-	<table id='adv_nav_table'>
-		<tr>
-			<td>
-				<a id = 'adv_nav2' href='#' onclick='show_recommendation()'>Recommendation</a>
-			</td>
-			<td>
-				<a id = 'adv_nav1' href='#' onclick='show_filter()'>Search</a>
-			</td>
+<div class= "tabbable" align="center">
+<ul class="nav nav-tabs">
+<li class="active"><a herf="#recommendation" onclick="show_recommendation()" data-toggle="tab">Recommendation</a></li>
+<li><a herf="#filter_class" onclick="show_filter()" data-toggle="tab">Search</a></li>
+<li><a herf="#adv_search" onclick="adv_filter()" data-toggle="tab">Advance Search</a></li>
+</ul>
 
-			
-		</tr>
-	</table>
-</div>
-<div id='filter_class' style='display:none'>
-	<%=render 'filter' %>
-</div>
- <div id='recommendation'>
+<div class="tab-content">
+  <div class="tab-pane active" id= "recommendation">
 	<%= render 'rec' %>
+  </div>
+  <div class="tab-pane" id="filter_class">
+	<%=render 'filter' %>
+  </div>
+  <div class="tab-pane" id="adv_search">
+	<%= render 'adv_search' %>
+  </div>  
 </div>
-  
 </div>
-
-
-<br>
-

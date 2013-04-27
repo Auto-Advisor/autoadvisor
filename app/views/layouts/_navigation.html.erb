@@ -20,3 +20,9 @@
     </li>
   <% end %>
 </ul>
+
+<ul class="nav pull-right">
+  <%if user_signed_in? %>
+	 <li class="nav-header" style="margin-top:6px"><%= current_user.email %></li>
+  <%end%>
+</ul>

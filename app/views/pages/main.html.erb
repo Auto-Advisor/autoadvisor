@@ -8,27 +8,54 @@
 
 <% end %>
 
-<div class='main'>
-	<h2>What's new</h2>
-	<br />
-	<table>
-		<tr>
-			<td>
-				<p class='version'>v.beta</p>
-				<p class='date'>4/2/2013</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li>Registration/Sign Up</li>
-					<li>Account Log In</li>
-					<li>Upload/Parse Unofficial Transcript</li>
-					<li>Class Options/Recommendations</li>
-					<li>Browse/Filter Courses</li>
-					<li>Personal Profile</li>
-				</ul>
-			</td>
-		</tr>
-	</table>
+<% content_for :h1 do %>
+  <h1>Home</h1>
+<% end %>
+
+
+    <div class="hero-unit">
+    <h1>Welcome to Auto-Advisor</h1>
+    <p>AutoAdvisor is a course selection aid.  It solves the problem of selecting courses that best meet the academic and lifestyle requirements of today’s on-the-go student. </p>
+    </div>
+<div class='main'>   
+    <ul class="nav nav-tabs">
+    	<li class="active">
+    	<a href="#">Version</a></li>
+    </ul>
+<div class="accordion" id="accordion2">
+<div class="accordion-group">
+<div class="accordion-heading">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+Final Release 
+<div class="date">5/1/2013</div>
+</a>
+</div>
+<div id="collapseOne" class="accordion-body collapse in">
+<div class="accordion-inner">
+List of Thing to be include in the final release
+</div>
+</div>
+</div>
+<div class="accordion-group">
+<div class="accordion-heading">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+Beta Release 
+<div class="date">4/2/2013</div>
+</a>
+</div>
+<div id="collapseTwo" class="accordion-body collapse">
+<div class="accordion-inner">
+
+     <div>Registration/Sign Up</div>
+     <div>Account Log In</div>
+     <div>Upload/Parse Unofficial Transcript</div>
+     <div>Class Options/Recommendations</div>
+     <div>Browse/Filter Courses</div>
+     <div>Personal Profile</div>
+
+
+</div>
+</div>
+</div>
+</div>
 </div>

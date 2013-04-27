@@ -3,6 +3,7 @@ Autoadvisor::Application.routes.draw do
 
   root :to => 'pages#main'
   devise_for :users
+  resources :users
   resources :sections, :only => [:show]
   resources :majors, :only => [:show]
   match '/user/transcript/add/(:id)' => 'uploads#add_credit', :via => :get, :as => 'add_credit'
@@ -10,8 +11,12 @@ Autoadvisor::Application.routes.draw do
   match '/user/transcript/upload/(:id)' => 'uploads#upload_credits', :via => :post, :as => 'upload_credits'
   match '/user/transcript/' => 'users#transcript', :via => :get, :as => 'transcript'
   match '/user/(:id)' => 'users#show', :via => :get
+  match '/schedule/get_recommendations' => 'schedules#recommend', :via => :post
+  match '/schedule/search' => 'schedules#search', :via => :post
   match '/schedule' => 'schedules#schedule', :via => :get, :as => 'schedule'
   match '/advisor' => 'schedules#advisor'
+  match '/about' => 'pages#about'
+  match '/documentation' => 'pages#documentation'
   # /app/views/pages/transcript.html.erb [not yet created]
   #get '/transcript', to: 'pages#transcript'
   # /app/views/pages/friends.html.erb [not yet created]

@@ -22,12 +22,13 @@ def write_clean_catalog(to_write)
 end
 
 class CourseInformation
-    attr_accessor :id, :department, :number, :days, :start_time, :end_time, :associated, :section, :primary, :instructor, :name, :gened, :mincredit, :maxcredit
+    attr_accessor :id, :department, :number, :letter, :days, :start_time, :end_time, :associated, :section, :primary, :instructor, :name, :gened, :mincredit, :maxcredit
 
     def initialize
         @id = ""
         @department = ""
         @number  = ""
+        @letter = ""
         @days =""
         @start_time = ""
         @end_time=""
@@ -84,9 +85,6 @@ class StringList
 
 end
 
-#call pdf2text to convert the pdf course report
-#system("pdf2txt.py -M .5 -o output.txt sched_1137.pdf")
-
 catalog_lines = StringList.new
 
 aFile = File.new("course_catalog.txt", "r")
@@ -132,8 +130,17 @@ while i < catalog_lines.length
             end
             course.name = ""
             course.number = catalog_lines[i].strip
+            course.gened = ""
         end
         course_num_seen = 0
+        line_processed = true
+    end
+    #checks if gened line
+    if  /^GenEd/.match(catalog_lines[i])
+        #gened discovery needs to occur right after course name discovery, since gened indication for a course can occur after the first spire id is written
+        #puts catalog_lines[i].partition("  ")[2]
+        course.gened = catalog_lines[i].partition("  ")[2].strip
+        #puts course.gened
         line_processed = true
     end
     #Case that current line is SPIRE ID
@@ -165,6 +172,13 @@ while i < catalog_lines.length
             end
         end
         course.section = catalog_lines[i].strip
+        line_processed = true
+    end
+    #checks if current line contains an instructor name
+    if  /^Instructor:/.match(catalog_lines[i])
+        #puts catalog_lines[i].partition("  ")[2]
+        course.instructor = catalog_lines[i].partition(" ")[2].strip
+        #puts course.gened
         line_processed = true
     end
     #checks if line is day
@@ -218,12 +232,3 @@ while i < catalog_lines.length
     course_id_seen = course_id_seen + 1
 end
 course.write
-
-def stuff(catalog_lines, course)
-
-#checks if gened line
-if  /^GenEd/.match(catalog_lines[i])
-    #gened discovery needs to occur right after course name discovery, since gened indication for a course can occur after the first spire id is written
-    puts "gened"
-end
-end

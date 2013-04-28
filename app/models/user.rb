@@ -107,7 +107,7 @@ class User < ActiveRecord::Base
         if primed
           line_parts = line.split
             #check if we've reached our current semester
-            if !(line_parts[-1] =~ /^(\d+\.\d+)|P|F|W$/)
+            if !(line_parts[-1] =~ /^((\d+\.\d+)|P|F|W)$/)
                 return
             end
             #handle pass/fail courses

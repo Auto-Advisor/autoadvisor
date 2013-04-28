@@ -89,6 +89,7 @@ class User < ActiveRecord::Base
           course = Course.find_or_create_dummy(major_code, number, name) or next
           self.credits << Credit.from_course(course, year, units, nil)
         end
+      #case where we are looking at part of a student's undergraduate history
       elsif mode == :ugrad
         year_line = /(Fall|Winter|Spring|Summer)\s+(\d+)/i.match(line)
         if !year_line.nil?
@@ -105,16 +106,28 @@ class User < ActiveRecord::Base
         end
         if primed
           line_parts = line.split
-          if !(line_parts[-1] =~ /\d+\.\d+/) # we've reached our current semester.
+          #check if we've reached our current semester
+          if !(line_parts[-1] =~ /(\d+\.\d+)|P|F/)
             return
           end
-          major_code = line_parts[0]
-          number = line_parts[1]
-          name = line_parts[2..-5]
-          units = line_parts[-4]
-          grade = line_parts[-2]
-          course = Course.find_or_create_dummy(major_code, number, name) or next
-          self.credits << Credit.from_course(course, year, units, grade)
+          #handle pass/fail courses
+          if /^[PF]/.match(line_parts[-1])
+            #major_code = line_parts[0]
+            #number = line_parts[1]
+            #name = line_parts[2..-5]
+            #units = line_parts[-4]          
+            #grade = line_parts[-2]
+            #course = Course.find_or_create_dummy(major_code, number, name) or next
+            #self.credits << Credit.from_course(course, year, units, grade)
+          else
+            major_code = line_parts[0]
+            number = line_parts[1]
+            name = line_parts[2..-5]
+            units = line_parts[-4]          
+            grade = line_parts[-2]
+            course = Course.find_or_create_dummy(major_code, number, name) or next
+            self.credits << Credit.from_course(course, year, units, grade)
+          end
         end
       else
     end

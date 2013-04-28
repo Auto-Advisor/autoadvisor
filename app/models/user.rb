@@ -22,7 +22,6 @@ class User < ActiveRecord::Base
 
   def recalculate_credits
     credits = self.credits.where("units IS NOT NULL AND grade IS NOT NULL AND units > 0")
-    credits.delete_if { |c| c.points == nil }
     credit_hours = self.credit_hours = credits.sum(:units)
     grade_points = self.grade_points = credits.sum(:points)
     self.gpa = grade_points == 0 ? 0 :  grade_points / credit_hours
@@ -116,10 +115,9 @@ class User < ActiveRecord::Base
             major_code = line_parts[0]
             number = line_parts[1]
             name = line_parts[2..-4]
-            units = line_parts[-3]          
-            #grade = line_parts[-2]
+            units = line_parts[-3]
             course = Course.find_or_create_dummy(major_code, number, name) or next
-            self.credits << Credit.from_course(course, year, units, grade)
+            self.credits << Credit.from_course(course, year, units, nil)
           else
             major_code = line_parts[0]
             number = line_parts[1]

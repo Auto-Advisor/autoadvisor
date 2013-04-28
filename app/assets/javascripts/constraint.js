@@ -396,7 +396,7 @@ function getRecommendation() {
       $('#recommendations').html("<pre align='left'>"+JSON.stringify(data, null, "  ")+"</pre>");
      },
     beforeSend: function() {
-      $('#recommendations').html("Please wait... I am looking for schedules which suitable for you :)");
+      $('#recommendations').html("Please wait... I am looking for schedules which are suitable for you :)");
     },
     fail: function(jqXHR, textStatus, errorThrown) {
       alert("panic");

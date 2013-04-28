@@ -114,7 +114,7 @@ function relation(row_element) {
       + "<option value='WOMENSST'>Women, Gender, Sexuality</option>"
       + "<option value='YIDDISH'>Yiddish</option></select>"
     },
-    
+
     'c_time': {
       "relation" : "<select>"
                  + "<option value='less than'>Less Than Or Equal To</option>"
@@ -170,14 +170,14 @@ function relation(row_element) {
     },
 
     "dis": {
-      "relation" : " <select style='width: 100px' id='relation_" + id + "'><option value='equal'>Equal To</option></select>",
-      "input" : "<input type='checkbox' id='dis' value='dis'> GenEd"        
-    };
+      "relation" : " <select><option value='equal'>Equal To</option></select>",
+      "input" : "<input type='checkbox' id='dis' value='dis'> Discussion"        
+    },
 
-    "lab" = {
-      "relation" : " <select style='width: 100px' id='relation_" + id + "'><option value='equal'>Equal To</option></select>",
-      "input" : "<input type='checkbox' id='lab' value='lab'> GenEd"        
-    };
+    "lab": {
+      "relation" : " <select><option value='equal'>Equal To</option></select>",
+      "input" : "<input type='checkbox' id='lab' value='lab'> Laboratory"        
+    },
 
     "gen": {
       "relation" : "<select><option value='equal'>Equal To</option></select>",
@@ -185,14 +185,12 @@ function relation(row_element) {
     },
 
     "num_major_course": {
-      "relation" : "<button type='button' class='btn' id='not_" + id + "' data-toggle='button'>Not</button>"
-                 + " <select style='width: 100px' id='num_major_course_" + id + "'><option value='equal'>Equal To</option>"
+      "relation" : " <select><option value='equal'>Equal To</option>"
                  + "<option value='less than'>Less Than Or Equal To</option>"
                  + "<option value='greater than'>Greater Than Or Equal To</option></select>",
-      "input" : "<input id='num_of_major_course_"
-              + id
+      "input" : "<input id='num_of_major_course"
               + "' class='input-medium' name='num_major_course' type='number' min=1 max=5 step=1 value='3'>"
-    };
+    }
 
 
   }
@@ -216,13 +214,16 @@ $('#additem').bind('click', function () {
      html += '<td><select name="constraint" onChange="relation(this)" class="constraint"><option value="major">Major</option>';
      html += '<option value="course_range">Course Number Range</option>';
      html += '<option value="c_time">Time</option>';
-	   html += '<option value="num-course">Number of Courses</option>';
+     html += '<option value="num_course">Number of Courses</option>';
+     html += '<option value="unit_per_course">Unit Per Course</option>';
      html += '<option value="credit">Credit</option>';
-	   html += '<option value="spe-course">Specific Courses</option>';
-	   html += '<option value="dayoff">No Class Days</option>';
-     html += '<option value="dis_lab">Discussion Or Laboratory</option>';
-     html += '<option value="gen">GenEd</option>'
-     html += '</select></td>'
+     html += '<option value="spe_course">Specific Courses</option>';
+     html += '<option value="dayoff">No Class Days</option>';
+     html += '<option value="dis">Discussion</option>';
+     html += '<option value="lab">Laboratory</option>';
+     html += '<option value="gen">GenEd</option>';
+     html += '<option value="num_major_course">Number of Major Courses</option>';
+     html += '</select></td>';
      html += '<td><div class="relation"';
      html += '"><select><option></option></select></div></td>';
      html += '<td><div class="input';
@@ -265,69 +266,6 @@ function getDays(type, i) {
   return string;
 }
 
-function getString(cons_ind) {
-  var string = '';
-  if (constraints[cons_ind].active === 'c_time') {
-    string += '"time": {"operator": "';
-    string += getRelation(cons_ind) + '", "value": "';
-    string += $('#time_' + cons_ind).val() + '", "on": "'
-    string += getDays('timeday', cons_ind) + '"}';
-    }
-  else if (constraints[cons_ind].active === 'credit') {
-    string += '"credit": {"operator": "';
-    string += getRelation(cons_ind) + '", "value": "';
-    string += $('#credit_' + cons_ind).val() + '"}';
-  }
-  else if (constraints[cons_ind].active === 'num-course') {
-    string += '"num_course": {"operator": "';
-    string += getRelation(cons_ind) + '", "value": "';
-    string += $('#num_course_' + cons_ind).val() + '"}';
-  }
-  else if (constraints[cons_ind].active === 'spe-course') {
-    string += '"spe_course": "';
-    string += $('#spe_course_' + cons_ind).val() + '"';
-  }
-  else if (constraints[cons_ind].active === 'dayoff') {
-    string += '"dayoff": "';
-    string += getDays('dayoff', cons_ind) + '"';
-  }
-  else if (constraints[cons_ind].active === 'course_range') {
-    string += '"course_range" : {"operator": "';
-    string += getRelation(cons_ind) + '", "value": "';
-    string += $('#course_range_' + cons_ind).val() + '"}';
-  }
-  else if (constraints[cons_ind].active === 'dis_lab') {
-    string += '"dis": ';
-    if ($('#dis').prop('checked')) {
-      string += 'true';
-    } else {
-      string += 'false';
-    }
-    string += ', "lab": ';
-    if ($('#lab').prop('checked')) {
-      string += 'true';
-    } else {
-      string += 'false';
-    }
-  }
-  else if (constraints[cons_ind].active === 'gen') {
-    string += '"gen": ';
-    if ($('#gen').prop('checked')) {
-      string += 'true';
-    } else {
-      string += 'false';
-    }
-  }
-  else if (dontwant.length != 0) {
-    string += '"exclude": "';
-    for (var i = 0; i < dontwant.length; i++) {
-      string += dontwant + ', ';
-    }
-    string += '"';
-  }
-  return string;
-}
-
 function firstThing() {
   var i = 0;
   for (i; i < constraints.length; i++) {
@@ -352,12 +290,18 @@ function get_constraint(row) {
   } else if (c_type == "spe_course") {
     hash['spe_course'] = val;
   } else if (c_type == "dayoff") {
-    hash['daysoff'] = val;
-  } else if (c_type == "dis_lab") {
-    hash['discussion'] = rel;
-    hash['lab'] = val;
+    hash['daysoff'] = getDays(val);
+  } else if (c_type == "dis") {
+    hash['discussion'] = val;
+  } else if (c_type == "lab") {
+    hash['laboratory'] = val;
   } else if (c_type == "gen") {
     hash['gen'] = val;
+  }
+
+  else if (c_type == "num_major_course") {
+    hash['operation'] = getRelation(rel);
+    hash['num_major_course'] = val;
   }
   return hash;
 }
@@ -369,56 +313,19 @@ function get_constraints_array() {
   return constraints;
 }
 
-function printSchedule(data) {
-  var string = '';
-  string += '<th width="10%">Lectures</th>';
-  for (var i = 0; i < data.length; i++) {
-    string += '<td align="center">';
-    string += data[i].name + '<br>';
-    string += data[i].day + '<br>';
-    string += data[i].beg_time + ' - ' + data[i].end_time;
-    string += '</td>';
-  }
-
-  string += '</tr><tr><th>Discussions</th>';
-  for (var i = 0; i < data.length; i++) {
-    string += '<td>'
-    if (data[i].discussion == undefined) {
-      string += '&nbsp;';
-    } else {
-      string += data[i].discussion.name + '<br>';
-      string += data[i].discussion.day + '<br>';
-      string += data[i].discussion.beg_time + ' - ' + data[i].discussion.end_time;
-    }
-    string += '</td>';
-  }
-
-  string += '</tr><tr><th>Laboratory</th>';
-  for (var i = 0; i < data.length; i++) {
-    string += '<td>'
-    if (data[i].laboratory == undefined) {
-      string += '&nbsp;';
-    } else {
-      string += data[i].laboratory.name + '<br>';
-      string += data[i].laboratory.day + '<br>';
-      string += data[i].laboratory.beg_time + ' - ' + data[i].laboratory.end_time;
-    }
-    string += '</td>';
-  }
-  return string;
-}
-
 function getRecommendation() {
   $('#msg').html('Recommendation Clicked');
 
   var constraints = get_constraints_array();
+
+  $('#string').html(JSON.stringify(constraints));
 
   $.ajax({
     type: "POST",
     contentType: "application/json",
     url: "/schedule/generate.json", data: JSON.stringify(constraints),
     success: function(data, text_status, jqXHR) {
-      $('#recommendations').html(print_recommendation(data));
+      print_recommendation(data);
 
      },
     beforeSend: function() {

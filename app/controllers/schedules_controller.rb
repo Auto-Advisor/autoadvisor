@@ -142,16 +142,26 @@ class SchedulesController < ApplicationController
   def recommend_schedule
     if request.get?
       render "recommend_schedule"
-    elsif request.post?
-      json_string = request.raw_post || ""
-      json = ActiveSupport::JSON.decode(json_string) || []
-      sections = Section.sections_for_constraints(json).all.sample(4)
-      respond_to do |format|
-        format.html { render :text => "<pre>#{ActiveSupport::JSON.encode(sections.as_json)}</pre>" }
-        format.json { render :json => sections }
-      end
     else
       redirect_to :controller => 'schedules', :action => 'recommend_schedule'
     end
+  end
+
+  def generate_json_schedule
+    redirect_to :controller => 'schedules', :action => 'recommend_schedule' unless request.post?
+    json_string = request.raw_post || ""
+    json = ActiveSupport::JSON.decode(json_string) || []
+    sections = generate_schedule(Section.sections_for_constraints(json))
+    render :json => sections
+  end
+
+  def generate_schedule(opts)
+    query = opts[:query]
+    courses = opts[:specified_courses]
+    credits = opts[:specified_credits]
+    target_type = opts[:target_type]
+    lower = opts[:lower]
+    upper = opts[:upper]
+    query.all.sample(4)
   end
 end

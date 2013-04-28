@@ -187,9 +187,9 @@ class Section < ActiveRecord::Base
           specifed_sections << Section.where("spire_id = ?", spire_id)
         end
       when "days_off"
-        daysoff = constraint["days_off"]
+        days_off = constraint["days_off"]
 
-        daysoff.each_char do |c|
+        days_off.each_char do |c|
           query = query.where("sections.days #{not_op} LIKE '%#{c}%'")
         end
       when "course_range"
@@ -205,7 +205,20 @@ class Section < ActiveRecord::Base
         query = query.where("sections.gened #{yes_op} LIKE ?", constraints["gened"])
       end
     end
-    query
+    result = {
+      :query => query,
+      :specified_courses => specified_courses,
+      :specifed_sections => specified_sections,
+      :target_type => target_type
+    }
+    if target_type == :credits
+      result[:lower] = num_lower_credits
+      result[:upper] = num_upper_credits
+    elsif target_type == :courses
+      result[:lower] = num_lower_courses
+      result[:upper] = num_upper_courses
+    end
+    result
   end
 
   def self.get_new_schedule num=4

@@ -391,14 +391,15 @@ function getRecommendation() {
   $.ajax({
     type: "POST",
     contentType: "application/json",
-    url: "/schedule/recommend", data: JSON.stringify(constraints),
+    url: "/schedule/generate.json", data: JSON.stringify(constraints),
     success: function(data, text_status, jqXHR) {
-      $('#recommendations').html(data);
+      $('#recommendations').html("<pre align='left'>"+JSON.stringify(data, null, "  ")+"</pre>");
      },
     beforeSend: function() {
       $('#recommendations').html("Please wait... I am looking for schedules which suitable for you :)");
     },
     fail: function(jqXHR, textStatus, errorThrown) {
+      alert("panic");
     }
   });
 }

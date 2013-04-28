@@ -1,11 +1,10 @@
 <table id='profile'>
   <tr valign=top>
     <td>
-      <litem>Name</litem>
+      <litem>User Email:</litem>
     </td><td>
       <p class='ritem'><%= @user.email %></p>
     </td>
-
 
   <tr valign=top>
     <td>
@@ -19,21 +18,10 @@
     </div>
 </div>
     </td>
-
-
+    
   </tr><tr valign=top>
     <td>
-      <litem>Major</litem>
-    </td><td>
-      <p class='ritem'>
-        <% @user.majors.each do |major| %>
-          <%= major.degree %> <%= major.name %><br/>
-        <% end %>
-      </p>
-    </td>
-  </tr><tr valign=top>
-    <td>
-      <litem>Course</litem>
+      <litem>Schedule</litem>
     </td><td>
       <p class='ritem'>
         <% @user.schedule.each do |section| %>
@@ -45,14 +33,11 @@
 </tr>
 <tr valign=top>
 <td>
-<litem>Credit</litem>
+<litem>Transcript History</litem>
 </td><td>
 <p class='ritem'>
   <% @user.transcript.each do |c| %>
-    Number: <%= c.string %>
-    Name: <%= c.name %><br />
-    Grade: <%= c.grade %><br />
-    Year: <%= c.year %><br />
+    Year: <%= c.year %> Name: <%= c.name %> Number: <%= c.string %> Grade: <%= c.grade %><br />
   <% end %>
 </p>
 </td></tr>

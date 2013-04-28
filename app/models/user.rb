@@ -107,7 +107,7 @@ class User < ActiveRecord::Base
         if primed
           line_parts = line.split
             #check if we've reached our current semester
-            if !(line_parts[-1] =~ /^[(\d+\.\d+)PFW]/)
+            if !(line_parts[-1] =~ /^[(\d+\.\d+)PFW]$/)
                 return
             end
             #handle pass/fail courses
@@ -118,7 +118,7 @@ class User < ActiveRecord::Base
                 units = line_parts[-3]
                 course = Course.find_or_create_dummy(major_code, number, name) or next
                 self.credits << Credit.from_course(course, year, units, nil)
-            elsif /^[W]/.match(line_parts[-1])
+            elsif /^W$/.match(line_parts[-1])
                 puts "W detected"
             else
                 major_code = line_parts[0]

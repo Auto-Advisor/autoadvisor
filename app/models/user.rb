@@ -119,11 +119,7 @@ class User < ActiveRecord::Base
                 course = Course.find_or_create_dummy(major_code, number, name) or next
                 self.credits << Credit.from_course(course, year, units, nil)
             elsif /^[W]/.match(line_parts[-1])
-                major_code = line_parts[0]
-                number = line_parts[1]
-                name = line_parts[2..-4]
-                course = Course.find_or_create_dummy(major_code, number, name) or next
-                self.credits << Credit.from_course(course, year, 0, nil)
+                puts "W detected"
             else
                 major_code = line_parts[0]
                 number = line_parts[1]

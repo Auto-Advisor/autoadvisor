@@ -94,6 +94,7 @@ class User < ActiveRecord::Base
         year_line = /(Fall|Winter|Spring|Summer)\s+(\d+)/i.match(line)
         if !year_line.nil?
           year = year_line[2]
+          primed = false
           next
         end
         if line =~ /PLAN\s+:/i

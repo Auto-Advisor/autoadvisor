@@ -107,8 +107,7 @@ class User < ActiveRecord::Base
         if primed
           line_parts = line.split
           #ignore withdraws
-          if (line_parts[-1] =~ /W/)
-          else
+          if !(line_parts[-1] =~ /W/)
           #check if we've reached our current semester
           if !(line_parts[-1] =~ /(\d+\.\d+)|P|F/)
             return

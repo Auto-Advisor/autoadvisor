@@ -112,13 +112,13 @@ class User < ActiveRecord::Base
           end
           #handle pass/fail courses
           if /^[PF]/.match(line_parts[-1])
-            #major_code = line_parts[0]
-            #number = line_parts[1]
-            #name = line_parts[2..-5]
-            #units = line_parts[-4]          
+            major_code = line_parts[0]
+            number = line_parts[1]
+            name = line_parts[2..-4]
+            units = line_parts[-3]          
             #grade = line_parts[-2]
-            #course = Course.find_or_create_dummy(major_code, number, name) or next
-            #self.credits << Credit.from_course(course, year, units, grade)
+            course = Course.find_or_create_dummy(major_code, number, name) or next
+            self.credits << Credit.from_course(course, year, units, grade)
           else
             major_code = line_parts[0]
             number = line_parts[1]

@@ -104,6 +104,10 @@ class User < ActiveRecord::Base
           primed = false
           next
         end
+        if line =~ /^B$/
+          primed = false
+          next
+        end
         if primed
           line_parts = line.split
             #check if we've reached our current semester
@@ -119,7 +123,6 @@ class User < ActiveRecord::Base
                 course = Course.find_or_create_dummy(major_code, number, name) or next
                 self.credits << Credit.from_course(course, year, units, nil)
             elsif /^W$/.match(line_parts[-1])
-                puts "W detected"
             else
                 major_code = line_parts[0]
                 number = line_parts[1]

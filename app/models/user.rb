@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
 
   def recalculate_credits
     credits = self.credits.where("units IS NOT NULL AND grade IS NOT NULL AND units > 0")
+    credits.delete_if { |c| c.points == nil }
     credit_hours = self.credit_hours = credits.sum(:units)
     grade_points = self.grade_points = credits.sum(:points)
     self.gpa = grade_points == 0 ? 0 :  grade_points / credit_hours

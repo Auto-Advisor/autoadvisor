@@ -114,6 +114,7 @@ function relation(row_element) {
       + "<option value='WOMENSST'>Women, Gender, Sexuality</option>"
       + "<option value='YIDDISH'>Yiddish</option></select>"
     },
+    
     'c_time': {
       "relation" : "<select>"
                  + "<option value='less than'>Less Than Or Equal To</option>"
@@ -129,22 +130,26 @@ function relation(row_element) {
               + "<button type='button' class='btn' value='Sa'>Sa</button>"
               + "</div></div>"
     },
+
     "credit": {
       "relation" : "<select><option value='equal'>Equal To</option>"
                  + "<option value='less than'>Less Than Or Equal To</option>"
                  + "<option value='greater than'>Greater Than Or Equal To</option></select>",
       "input" : "<input id='credit' class='input-medium' name='credit' type='number' min=1 step=1 value='12'>"
     },
+
     "num_course": {
       "relation" : "<select><option value='equal'>Equal To</option>"
                + "<option value='less than'>Less Than Or Equal To</option>"
                + "<option value='greater than'>Greater Than Or Equal To</option></select>",
        "input" : "<input id='num_course' class='input-medium' name='num_course' type='number' min=1 step=1 value='3'>"
     }, 
+
     "spe_course": {
       "relation" : "<select><option value='equal'>Equal To</option></select>",
       "input" : "<input id='spe_course' type='text' name='spc_course'>"
     },
+
     "dayoff": {
       "relation" : "<select><option value='equal'>Equal To</option></select>",
       "input" : "<div id='dayoff'>"
@@ -156,20 +161,40 @@ function relation(row_element) {
               + "<button type='button' class='btn' value='Fr'>Fr</button>"
               + "</div></div>"
     },
+
     "course_range": {
       "relation" : "<select><option value='equal'>Equal To</option>"
                + "<option value='less than'>Less Than Or Equal To</option>"
                + "<option value='greater than'>Greater Than Or Equal To</option></select>",
       "input" : "<input id='course_range' class='input-medium' name='course_range' type='number' min=1 max=600 step=1 value='000'>"
     },
-    "dis_lab": {
-      "relation" : "<input type='checkbox' id='dis' value='dis'> Have Discussion",
-      "input" : "<input type='checkbox' id='lab' value='lab'> Have Laboratory"
-    },
+
+    "dis": {
+      "relation" : " <select style='width: 100px' id='relation_" + id + "'><option value='equal'>Equal To</option></select>",
+      "input" : "<input type='checkbox' id='dis' value='dis'> GenEd"        
+    };
+
+    "lab" = {
+      "relation" : " <select style='width: 100px' id='relation_" + id + "'><option value='equal'>Equal To</option></select>",
+      "input" : "<input type='checkbox' id='lab' value='lab'> GenEd"        
+    };
+
     "gen": {
       "relation" : "<select><option value='equal'>Equal To</option></select>",
       "input" : "<input type='checkbox' id='gen' value='gen'> GenEd"
-    }
+    },
+
+    "num_major_course": {
+      "relation" : "<button type='button' class='btn' id='not_" + id + "' data-toggle='button'>Not</button>"
+                 + " <select style='width: 100px' id='num_major_course_" + id + "'><option value='equal'>Equal To</option>"
+                 + "<option value='less than'>Less Than Or Equal To</option>"
+                 + "<option value='greater than'>Greater Than Or Equal To</option></select>",
+      "input" : "<input id='num_of_major_course_"
+              + id
+              + "' class='input-medium' name='num_major_course' type='number' min=1 max=5 step=1 value='3'>"
+    };
+
+
   }
   var r = $(row_element).parent().parent();
   var type = r.find('.constraint').first().val();
@@ -393,7 +418,8 @@ function getRecommendation() {
     contentType: "application/json",
     url: "/schedule/generate.json", data: JSON.stringify(constraints),
     success: function(data, text_status, jqXHR) {
-      $('#recommendations').html("<pre align='left'>"+JSON.stringify(data, null, "  ")+"</pre>");
+      $('#recommendations').html(print_recommendation(data));
+
      },
     beforeSend: function() {
       $('#recommendations').html("Please wait... I am looking for schedules which are suitable for you :)");

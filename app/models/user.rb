@@ -107,29 +107,30 @@ class User < ActiveRecord::Base
         if primed
           line_parts = line.split
           #ignore withdraws
-          if !(line_parts[-1] =~ /W/)
-          #check if we've reached our current semester
-          if !(line_parts[-1] =~ /(\d+\.\d+)|P|F/)
-            return
+          if !(line_parts[-1].trim =~ /^W/)
+            #check if we've reached our current semester
+            if !(line_parts[-1].trim =~ /^[(\d+\.\d+)PF]/)
+                return
+            end
+            #handle pass/fail courses
+            if /^[PF]/.match(line_parts[-1])
+                major_code = line_parts[0]
+                number = line_parts[1]
+                name = line_parts[2..-4]
+                units = line_parts[-3]
+                course = Course.find_or_create_dummy(major_code, number, name) or next
+                self.credits << Credit.from_course(course, year, units, nil)
+            else
+                major_code = line_parts[0]
+                number = line_parts[1]
+                name = line_parts[2..-5]
+                units = line_parts[-4]          
+                grade = line_parts[-2]
+                course = Course.find_or_create_dummy(major_code, number, name) or next
+                self.credits << Credit.from_course(course, year, units, grade)
+            end
           end
-          #handle pass/fail courses
-          if /^[PF]/.match(line_parts[-1])
-            major_code = line_parts[0]
-            number = line_parts[1]
-            name = line_parts[2..-4]
-            units = line_parts[-3]
-            course = Course.find_or_create_dummy(major_code, number, name) or next
-            self.credits << Credit.from_course(course, year, units, nil)
-          else
-            major_code = line_parts[0]
-            number = line_parts[1]
-            name = line_parts[2..-5]
-            units = line_parts[-4]          
-            grade = line_parts[-2]
-            course = Course.find_or_create_dummy(major_code, number, name) or next
-            self.credits << Credit.from_course(course, year, units, grade)
-          end
-          end
+          puts "WITHDRAW DETECTED"
         end
       else
     end

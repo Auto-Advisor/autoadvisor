@@ -106,6 +106,9 @@ class User < ActiveRecord::Base
         end
         if primed
           line_parts = line.split
+          #ignore withdraws
+          if !(line_parts[-1] =~ /^W/)
+          else
           #check if we've reached our current semester
           if !(line_parts[-1] =~ /(\d+\.\d+)|P|F/)
             return
@@ -126,6 +129,7 @@ class User < ActiveRecord::Base
             grade = line_parts[-2]
             course = Course.find_or_create_dummy(major_code, number, name) or next
             self.credits << Credit.from_course(course, year, units, grade)
+          end
           end
         end
       else

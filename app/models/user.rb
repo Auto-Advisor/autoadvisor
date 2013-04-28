@@ -106,8 +106,6 @@ class User < ActiveRecord::Base
         end
         if primed
           line_parts = line.split
-          #ignore withdraws
-          if !(line_parts[-1] =~ /^W/)
             #check if we've reached our current semester
             if !(line_parts[-1] =~ /^[(\d+\.\d+)PF]/)
                 return
@@ -129,8 +127,6 @@ class User < ActiveRecord::Base
                 course = Course.find_or_create_dummy(major_code, number, name) or next
                 self.credits << Credit.from_course(course, year, units, grade)
             end
-          end
-          puts "WITHDRAW DETECTED"
         end
       else
     end

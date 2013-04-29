@@ -1,14 +1,14 @@
+<% provide(:title, 'Transcript') %>
 <% content_for :h1 do %>
   <h1>Upload Transcript</h1>
 <% end %>
 
-
-<table class="transcript">
-  <tr class='head'>
-    <th colspan="5">TRANSCRIPT</th>
+<table class="table table-hover table-bordered">
+  <tr class='subhead'>
+    <th colspan="5">Your transcript</th>
   </tr>
-  <tr class='subhead' >
-    <td>Year</td><td>Course</td><td>Course Name</td><td>Grade</td><td align='center'>Delete?</td>
+  <tr class='transcript' >
+    <td>Year</td><td>Course</td><td>Course name</td><td>Grade</td><td align='center'>Remove?</td>
   </tr>
   <% @user.transcript.each do |c| %>
   <tr class='item'>
@@ -20,9 +20,6 @@
 
   </tr>
   <% end %>
-  <!--<tr class='subhead'>
-    <td colspan='4' align='right'>Credit Taken</td><td align='center'>not yet!</td>
-  </tr>-->
   <tr class='subhead'>
     <td colspan='4' align='right'>GPA</td><td align='center'><%= "%.3f" % @user.gpa %></td>
   </tr>
@@ -31,6 +28,9 @@
 
 <br />
 <br />
+  <div class="hero-unit">
+    Please only upload text (.txt) versions of unofficial UMass transcripts. Do this by copying the PDF and pasting it into a text file. Thank you:) 
+  </div>
 
 <div >
    <%= render 'uploads/uploadTranscript' %>
@@ -39,8 +39,3 @@
 <div >
    <%= render 'uploads/uploadCourse' %>
 </div>
-
-<p>
-  * Please only upload Unofficial UMass transcripts,<br>
-  found on your SPIRE account: SPIRE->Menu->Academics->Unofficial Transcript
-</p>

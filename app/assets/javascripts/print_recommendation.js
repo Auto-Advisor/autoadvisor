@@ -49,7 +49,7 @@ function printSchedule(data) {
     string += '</td>';
   }
   return string;
-}
+} 
 
 function print_recommendation (data) {
 	var string = '<table class="table table-bordered table-striped"><tr>';
@@ -73,12 +73,20 @@ function print_recommendation (data) {
      string += '</tr><tr><td>&nbsp;</td>';
 
   $.each(data, function (index, value) {
-  	string += '<td><a role="button" class="btn btn-warning No_' + value.name + '">I don\'t want this class</a></td>';
+  	string += '<td><a role="button" class="btn btn-warning No_' + value.class_string + '">I don\'t want this class</a></td>';
   });
 
   string += '</tr></table>';
 
   $('#recommendations').html(string);
+
+  $.each(data, function(i, v) {
+    $('a.No_' + v.class_string).bind('click', function (event) {
+      console.log("No Class " + v.class_string);
+      dontwant.push(v.class_string);
+      getRecommendation();
+    });
+  });
 
   $('#save_btn').bind('click', function (event) {
   	$('#string').html('your schedule saved with name ' + $('#name_of_save').val());

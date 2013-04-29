@@ -163,14 +163,37 @@ class SchedulesController < ApplicationController
     lower = opts[:lower]
     upper = opts[:upper]
     targets_so_far = 0
-    sched = [nil,nil,nil,nil,nil]
     lower = 4
-    upper = 8
+    sched = []
+   
     while(targets_so_far < lower)
-      sect = query.all.sample(1)
-      next unless sect[0].ty = 'LEC' and (2 + 1 < 4) # (targets_so_far + sect[0].units < upper)
-      sched[targets_so_far] = sect[0]
-      targets_so_far +=1
+      sect = query.all.sample
+      next unless sect.ty == 'LEC' 
+      poss = query.where("majors.code = ? AND courses.number = ?", sect.major.code, sect.course.number)
+      disc = []
+      labs = []
+      # sched.append(poss.sample)
+      for cur in poss
+        next unless cur.ty != 'LEC'
+        if cur.section_number.include?('d')
+          disc.append(cur)
+        end
+        if :section_number.include?('l')
+          labs.append(cur)
+        end
+      end
+      
+      
+      incr = (target_type == :credits ? sect.credits : 1)
+      sched.append(sect)
+ 
+      if (disc.length > 0) 
+        sched.append(disc.sample) 
+      end
+       if (labs.length > 0) 
+        sched.append(labs.sample) 
+      end
+      targets_so_far += incr
     end  
       #
       # targets_so_far+=1

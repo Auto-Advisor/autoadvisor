@@ -3,16 +3,16 @@
 <% end %>
 
 <link href="/assets/times.css" media="all" rel="stylesheet" />
-<select onChange='showSchedule(this.value)'>
+<select>
   <optgroup>
-    <option value='0'>Schedule 1</option>
-    <option value='1'>Schedule 2</option>
-    <option value='2'>Schedule 3</option>
+    <% @user.schedules.each do |schedule| %>
+      <option value="<%= schedule.id %>"><%= schedule.name %></option>
+    <% end %>
   </optgroup>
 </select>
 <br/>
 
-<div class='schedule-table' align="center">
+<div id='schedule-table' align="center">
 <table class='schedule' align="right">
   <tr>
     <th><a id='delete' class ='btn btn-danger'>Delete Schedule</a></th>
@@ -557,14 +557,56 @@
 </div>
 
 <script>
-  function showSchedule(n) {
-    var tables = $('.schedule-table');
-    for (var i = 0; i < tables.length; i++) {
-      if (i != n) {
-        tables[i].style.display = 'none';
-      } else {
-        tables[i].style.display = 'block';
-      }
+  function handle_status(status) {
+    var message = null;
+    if ('message' in status) {
+      message = status["message"];
+    } else {
+      message = "Unknown problem.";
     }
+    var alert = '<div class="alert fade in alert-' + (success ? 'success' : 'error') + '"><button class="close" data-dismiss="alert">×</button>' + message + '</div>';
+    $("#alerts").append(alert);
+  }
+
+  function get_schedules() {
+    
+  }
+
+  function load(schedule) {
+    // 
+  }
+
+  function get(id) {
+    var request = { 'id': id }
+    $('#string').append('<pre>' + JSON.stringify(request) + '</pre><br />');
+    $.ajax({
+      type: 'POST',
+      contentType: "application/json",
+      url: "/schedule/get", data: JSON.stringify(request),
+      success: function(response) {
+        handle_status(response);
+        if (response["success"] == true) {
+          load(response["schedule"]);
+        }
+      },
+      dataType: "json"
+    });
+  }
+
+  function destroy(id) {
+    var request = { 'id': id }
+    $('#string').append('<pre>' + JSON.stringify(request) + '</pre><br />');
+    $.ajax({
+      type: 'POST',
+      contentType: "application/json",
+      url: "/schedule/destroy", data: JSON.stringify(request),
+      success: function(response) {
+        handle_status(response);
+        if (response["success"] == true) {
+        }
+        window.location = "<%= schedule_path %>"
+      },
+      dataType: "json"
+    });
   }
 </script>

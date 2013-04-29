@@ -394,15 +394,6 @@ function getRecommendation() {
             window.location = "/schedule";
             alert('halelujah.');
           }
-
-          var message = null;
-          if ('message' in response) {
-            message = response["message"];
-          } else {
-            message = "Unknown problem.";
-          }
-          var alert = '<div class="alert fade in alert-' + (success ? 'success' : 'error') + '"><button class="close" data-dismiss="alert">×</button>' + message + '</div>';
-          $("#alerts").append(alert);
         },
         dataType: "json"
       });

@@ -13,9 +13,9 @@ Autoadvisor::Application.routes.draw do
   match '/user/(:id)' => 'users#show', :via => :get
 
   match '/schedule/create/' => 'schedules#create', :via => :post, :as => 'create_schedule'
-  match '/schedule/update/(:id)' => 'schedules#get', :via => :post, :as => 'update_schedule'
+  match '/schedule/update/(:id)' => 'schedules#update', :via => :post, :as => 'update_schedule'
   match '/schedule/get/(:id)' => 'schedules#get', :via => :post, :as => 'get_schedule'
-  match '/schedule/destroy/(:id)' => 'schedules#get', :via => :post, :as => 'destroy_schedule'
+  match '/schedule/destroy/(:id)' => 'schedules#destroy', :via => :post, :as => 'destroy_schedule'
 
   match '/schedule/get_recommendations' => 'schedules#recommend', :via => :post
   match '/schedule/search' => 'schedules#search', :via => :post

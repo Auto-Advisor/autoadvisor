@@ -2,7 +2,7 @@ require 'json'
 
 class SchedulesController < ApplicationController
   def schedule
-    @rec = Section.get_new_schedule(10)
+    @user = current_user
   end
 
   def all_classes
@@ -207,8 +207,8 @@ class SchedulesController < ApplicationController
     render :json => {'success' => false, 'message' => msg}
   end
 
-  def render_success(msg, schedule=nil)
-    render :json => {'success' => true, 'message' => msg, 'schedule' => schedule.as_json}
+  def render_success(msg, schedule=nil, schedules=nil)
+    render :json => {'success' => true, 'message' => msg, 'schedule' => schedule.as_json, 'schedules' => schedules.as_json}
   end
 
   # POST
@@ -305,6 +305,19 @@ class SchedulesController < ApplicationController
     else
       render_success "", schedule
     end
+  end
+
+  # POST, GET
+  # takes: authentication.
+  # returns: application/json { 'success': boolean, 'message': string, 'schedules': {schedule_id: schedule}}
+  def list
+    render_error "No currently logged in user, can't list users' schedules." and return if !signed_in?
+
+    schedules = {}
+    user.schedules.each do |schedule|
+      schedules[schedule.id] = schedule
+    end
+    render_success "Successfully fetched list.", nil, schedules
   end
 
   # parses json from body if post.

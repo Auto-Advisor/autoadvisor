@@ -2,6 +2,7 @@
 .day_row{
     height: 20px;
     width: 815px
+    position: relative;
      float: left; 
      
 
@@ -9,11 +10,13 @@
 .day_column {
     border: 1px solid lightblue;
     width: 163px;
+    position: relative;
      float: left;   
 }
 .time_column{
      border: 1px solid lightblue;
     width: 40px;
+    position: relative;
      float: left;
 }
 

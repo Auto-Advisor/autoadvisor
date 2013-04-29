@@ -24,6 +24,10 @@ class Credit < ActiveRecord::Base
     user.recalculate_credits
   end
 
+  def to_str
+    course.to_str
+  end
+
   def self.points_for_letter letter_grade
     grades = {
       'A+' => '4.0',
@@ -40,14 +44,15 @@ class Credit < ActiveRecord::Base
       'D-' => '0.7',
       'F' => '0.0'
     }
-    BigDecimal.new(grades[letter_grade.upcase])
+    return nil if !grades.include? letter_grade
+    BigDecimal.new(grades[letter_grade])
   end
 
   def self.from_course(course, year, units, grade)
     credit = Credit.new
     credit.course = course
     credit.grade = grade
-    credit.units = BigDecimal.new(units) or raise "Not a valid units"
+    credit.units = BigDecimal.new(units)
     credit.points = Credit.points_for_letter(grade) * credit.units if !grade.nil?
     credit.year = year
     credit.save

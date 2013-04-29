@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130429172656) do
+ActiveRecord::Schema.define(:version => 20130429023544) do
 
   create_table "courses", :force => true do |t|
     t.text    "desc"
@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(:version => 20130429172656) do
     t.decimal  "gpa",                    :precision => 8, :scale => 4, :default => 0.0, :null => false
     t.decimal  "grade_points",           :precision => 8, :scale => 4, :default => 0.0, :null => false
     t.decimal  "credit_hours",           :precision => 8, :scale => 4, :default => 0.0, :null => false
+    t.integer  "schedule_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

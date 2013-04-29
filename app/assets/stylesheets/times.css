@@ -1,19 +1,18 @@
 
 .day_row{
     height: 20px;
-    width: 815px
-     float: left; 
+    width: 822px; 
      
 
 }
 .day_column {
     border: 1px solid lightblue;
-    width: 163px;
+    width: 150px;
      float: left;   
 }
 .time_column{
      border: 1px solid lightblue;
-    width: 40px;
+    width: 60px;
      float: left;
 }
 

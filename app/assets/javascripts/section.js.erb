@@ -409,6 +409,7 @@ function getRecommendation() {
   function onSuccess (data) {
     console.log("Print");
     print_recommendation(data);
+    $('#string').html(JSON.stringify(data));
 
     var exclusion_list = '';
     if (dontwant.length != 0) {

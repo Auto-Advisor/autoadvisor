@@ -26,9 +26,13 @@
     <!-- 7 - 11, every half hour. -->
     <% (7..22).each do |num|
       height = 30 # minutes.
+      meridian = num >= 12 ? "PM" : "AM"
+      num -= 12 if num > 12
+      num = 12 if num == 0
       %>
-      <div class="time_reference" style="height:<%= height %>px;max-height:<%= height %>px;"><%= "#{num}:00" %></div>
-      <div class="time_reference" style="height:<%= height %>px;max-height:<%= height %>px;"><%= "#{num}:30" %></div>
+
+      <div class="time_reference" style="height:<%= height %>px;max-height:<%= height %>px;"><%= "#{num}:00#{meridian}" %></div>
+      <div class="time_reference" style="height:<%= height %>px;max-height:<%= height %>px;"><%= "#{num}:30#{meridian}" %></div>
     <% end %>
 
 </div>
@@ -160,7 +164,7 @@ days.each do |day| %>
       contentType: "application/json",
       url: "/schedule/destroy", data: JSON.stringify(request),
       success: function(response) {
-        callback();
+        window.location = "<$= schedule_path %>";
       },
       dataType: "json"
     });

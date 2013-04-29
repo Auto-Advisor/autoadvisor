@@ -68,6 +68,11 @@ class Section < ActiveRecord::Base
     HOURS * MINUTES
   end
 
+  def self.major_count(constraints)
+    query = sections_for_constraints(constraints)[:query] or return {}
+    query.joins(:course, :major).select('sections.spire_id, majors.code').group('majors.code').count
+  end
+
   # fields:
   # class_string (string)
   # days {MTWRF}

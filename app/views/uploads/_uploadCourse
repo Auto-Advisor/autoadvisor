@@ -7,7 +7,7 @@
         <td valign="top">
           Year:<br/>
           <%= text_field_tag 'year' %><br />
-          Course Code: (e.g. MATH131)<br />
+          Course code: (e.g. MATH131)<br />
           <%= text_field_tag 'course_string' %><br />
         </td>
         <td valign = "top">

@@ -127,7 +127,7 @@ class User < ActiveRecord::Base
               name = line_parts[2..-5]
               units = line_parts[-4]          
               grade = line_parts[-2]
-              course = Course.find_or_create_dummy(major_code + number, number, name) or next
+              course = Course.find_or_create_dummy(major_code + number, name) or next
               self.credits << Credit.from_course(course, year, units, grade)
           end
         end

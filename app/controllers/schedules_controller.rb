@@ -163,7 +163,7 @@ class SchedulesController < ApplicationController
     upper = opts[:upper]
     targets_so_far = 0
     lower = 4
-    return query.all.sample(4)
+    return query.all.sample(4) # was broken.
     sched = []
    
     while(targets_so_far < lower)

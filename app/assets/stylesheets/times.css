@@ -18,8 +18,8 @@
 }
 
 .time {
-    border-bottom: 1px solid lightblue;
-    margin-bottom: -1px;
+    border: 1px solid lightblue;
+    margin: -1px;
 }
 
 .header {
@@ -28,36 +28,3 @@
     text-align: center;
    border-bottom: 2px solid lightblue; 
 }
-
-
-.hour{
-    height:120px;
-    width:40px;
-    font-size:85%;
-    font-weight:bold;
-}
-
-.fifty{
-	height:100px;
-	width:163px;
-	font-size: 85%;
-	font-weight:bold;
-		
-}
-
-.seventyfive{
-	height:150px;
-	width:163px;	
-	font-size: 85%;
-	font-weight:bold;
-}
-
-.fifteen{
-	height: 30px;
-	width: 163px;
-}
-
-.half{
-     height: 60px;
-     width: 163px;
-     }

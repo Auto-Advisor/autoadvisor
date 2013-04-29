@@ -5,21 +5,7 @@ function printSchedule(data) {
     string += '<td align="center">';
     string += data[i].class_string + '<br>';
     string += data[i].name + '<br>';
-    string += Math.floor(data[i].min_beg / 60) + ':';
-    if (data[i].min_beg % 60 === 0)
-    	string += '00';
-    else if (data[i].min_beg % 60 === 5)
-    	string += '0' + data[i].min_beg % 60;
-    else
-    	string += data[i].min_beg % 60;
-    string += ' - ';
-    string += Math.floor(data[i].min_end / 60) + ':';
-    if (data[i].min_end % 60 === 0)
-    	string += '00';
-    else if (data[i].min_end % 60 === 5)
-    	string += '0' + data[i].min_end % 60;
-    else
-    	string += data[i].min_end % 60;
+    string += data[i]["time_start"] + ' - ' + data[i]["time_end"];
     string += '</td>';
   }
 

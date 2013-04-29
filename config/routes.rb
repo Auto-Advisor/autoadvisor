@@ -16,6 +16,7 @@ Autoadvisor::Application.routes.draw do
   match '/schedule/update/(:id)' => 'schedules#update', :via => :post, :as => 'update_schedule'
   match '/schedule/get/(:id)' => 'schedules#get', :via => :post, :as => 'get_schedule'
   match '/schedule/destroy/(:id)' => 'schedules#destroy', :via => :post, :as => 'destroy_schedule'
+  match '/schedule/list/(:id)' => 'schedules#list', :via => :post, :as => 'list_schedule'
 
   match '/schedule/get_recommendations' => 'schedules#recommend', :via => :post
   match '/schedule/search' => 'schedules#search', :via => :post

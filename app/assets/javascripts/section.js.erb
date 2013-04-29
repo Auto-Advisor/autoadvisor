@@ -6,8 +6,8 @@
 var fingerprint_lookup = {};
 
 function searchSlot(t, day) {
-  for (var i = 0; i < sections.sections.length; ++i) {
-    var section = sections["sections"][i];
+  for (var i = 0; i < cur_schedule.sections.length; ++i) {
+    var section = cur_schedule["sections"][i];
     console.log("found");
     if (section["days"].indexOf(day) >= 0) {
       if (section["time_start"] === t) {
@@ -18,23 +18,23 @@ function searchSlot(t, day) {
   return;
 }
 
-function searchSlotMon(t){
+function searchSlotMon(t) {
   return searchSlot(t, 'M');
 }
 
-function searchSlotTues(t){
+function searchSlotTues(t) {
   return searchSlot(t, 'T');
 }
 
-function searchSlotWed(t){
+function searchSlotWed(t) {
   return searchSlot(t, 'W');
 }
 
-function searchSlotThur(t){
+function searchSlotThur(t) {
   return searchSlot(t, 'R');
 }
 
-function searchSlotFri(t){
+function searchSlotFri(t) {
   return searchSlot(t, 'F');
 }
 
@@ -67,7 +67,6 @@ function reload(schedule_hash) {
   }
 }
 
-$(function(){reload(schedule);});
 
 var num_constraint = 0;
 var constraints = [];

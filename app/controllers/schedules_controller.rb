@@ -285,7 +285,7 @@ class SchedulesController < ApplicationController
     payload = get_json
     render_error "Empty request." and return if payload.nil?
     render_error "No 'id' association is given in request" and return if !payload.include? 'id'
-    if Schedule.destroy(id)
+    if Schedule.destroy(payload['id'])
       render_success "Schedule successfully destroyed."
     else
       render_error "Could not delete requested schedule."
@@ -309,15 +309,10 @@ class SchedulesController < ApplicationController
 
   # POST, GET
   # takes: authentication.
-  # returns: application/json { 'success': boolean, 'message': string, 'schedules': {schedule_id: schedule}}
+  # returns: application/json { 'success': boolean, 'message': string, 'schedules': [schedule]}
   def list
     render_error "No currently logged in user, can't list users' schedules." and return if !signed_in?
-
-    schedules = {}
-    user.schedules.each do |schedule|
-      schedules[schedule.id] = schedule
-    end
-    render_success "Successfully fetched list.", nil, schedules
+    render_success "Successfully fetched list.", nil, (current_user.schedules.order("name DESC").all || [])
   end
 
   # parses json from body if post.

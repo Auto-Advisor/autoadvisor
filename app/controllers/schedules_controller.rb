@@ -233,6 +233,7 @@ class SchedulesController < ApplicationController
     schedule.name = name
     schedule.sections = sections
     schedule.save
+    current_user.schedules << schedule
 
     render_success "Created schedule \"#{name}\"."
   end

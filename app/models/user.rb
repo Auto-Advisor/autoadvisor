@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   attr_accessible :current_schedule, :credit_hours, :email, :gpa, :grade_points, :password_confirmation, :password, :schedules
 
   has_many :credits
+  has_many :schedules
   belongs_to :current_schedule, :class_name => "Schedule", :foreign_key => "schedule_id"
   has_and_belongs_to_many :majors
 

@@ -3,6 +3,72 @@
  * newConstraint function is in ./constraint_helper/new_constraint.js
  */
 
+var fingerprint_lookup = {};
+
+function searchSlot(t, day) {
+  for (var i = 0; i < sections.sections.length; ++i) {
+    var section = sections["sections"][i];
+    console.log("found");
+    if (section["days"].indexOf(day) >= 0) {
+      if (section["time_start"] === t) {
+        return section['name'] + '<br />' + section['time_start'] + ' - ' + section['time_end'];
+      }
+    }
+  }
+  return;
+}
+
+function searchSlotMon(t){
+  return searchSlot(t, 'M');
+}
+
+function searchSlotTues(t){
+  return searchSlot(t, 'T');
+}
+
+function searchSlotWed(t){
+  return searchSlot(t, 'W');
+}
+
+function searchSlotThur(t){
+  return searchSlot(t, 'R');
+}
+
+function searchSlotFri(t){
+  return searchSlot(t, 'F');
+}
+
+function ids_for_section(section) {
+  var fingerprint = section["time_start"] + section["time_end"];
+  var days = section["days"].split('');
+  return $.grep($.map(days, function(day, idx) {
+    var day_finger = day + fingerprint;
+    if (day_finger in fingerprint_lookup) {
+      return fingerprint_lookup[day_finger];
+    }
+    return null;
+  }), function(val, idx) {
+    return !(val === null);
+  });
+}
+
+function reload(schedule_hash) {
+  for (var i = 0; i < cur_ids.length; ++i) {
+    $(cur_ids[i]).html('');
+  }
+  var sections = schedule_hash["sections"];
+  for (var i = 0; i < sections.length; ++i) {
+    var section = sections[i];
+    var ids = ids_for_section(section);
+    for (var j = 0; j < ids.length; ++j) {
+      var id = ids[j];
+      $(id).html(html_for_section(section));
+    }
+  }
+}
+
+$(function(){reload(schedule);});
+
 var num_constraint = 0;
 var constraints = [];
 var dontwant = [];
@@ -271,10 +337,9 @@ function getRecommendation() {
 
   var constraints_array = getConstraints();
 
-  $('#string').html(JSON.stringify(constraints_array));
+  $('#string').append('<pre>'+JSON.stringify(constraints_array)+'</pre><br />');
 
   function onSuccess (data) {
-    
     console.log("Print");
     print_recommendation(data);
 
@@ -312,10 +377,35 @@ function getRecommendation() {
       });
     });
 
-    $.each(data, function(index, value) {
-      $('#save_btn_' + index).bind('click', function (event) {
-        console.log('schedule ' + index + ' saved');
-      })
+
+    $('#save_btn').bind('click', function (event) {
+      var name = $("#name_of_save").val();
+      if (name === null) {name = "";}
+      var sections = $.map(data, function(val){return val["spire_id"];});
+      var request = {'name': name, 'sections': sections};
+      $('#string').append('<pre>' + JSON.stringify(request) + '</pre><br />');
+      $.ajax({
+        type: 'POST',
+        contentType: "application/json",
+        url: "/schedule/create", data: JSON.stringify(request),
+        success: function(response) {
+          var success = response["success"];
+          if (success === true) {
+            window.location = "/schedule";
+            alert('halelujah.');
+          }
+
+          var message = null;
+          if ('message' in response) {
+            message = response["message"];
+          } else {
+            message = "Unknown problem.";
+          }
+          var alert = '<div class="alert fade in alert-' + (success ? 'success' : 'error') + '"><button class="close" data-dismiss="alert">×</button>' + message + '</div>';
+          $("#alerts").append(alert);
+        },
+        dataType: "json"
+      });
     });
   }
 

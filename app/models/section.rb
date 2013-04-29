@@ -17,7 +17,7 @@ class Section < ActiveRecord::Base
     meridian = hours < 12 ? "AM" : "PM"
     hours = 12 if hours == 0
     hours -= 12 if hours > 12
-    return "%02d:%02d%s" % [hours, minutes, meridian]
+    return "%-d:%02d" % [hours, minutes]
   end
 
   def dept
@@ -73,6 +73,7 @@ class Section < ActiveRecord::Base
   # days {MTWRF}
   # dept (string)
   # gened (string)
+  # id (integer)
   # major (string)
   # instructor (string)
   # section_number (string)
@@ -90,10 +91,13 @@ class Section < ActiveRecord::Base
       "days" => days,
       "dept" => dept,
       "gened" => gened,
+      "id" => id,
       "instructor" => instructor || "",
       "major" => major,
-      "min_beg" => min_start,
+      "min_start" => min_start,
       "min_end" => min_end,
+      "time_start" => start_s,
+      "time_end" => end_s,
       "name" => name,
       "number" => number,
       "room" => room || "",

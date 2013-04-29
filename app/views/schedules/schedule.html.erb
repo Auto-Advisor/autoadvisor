@@ -43,6 +43,7 @@
     <div class="time hour">8:00</div>
     <div class="time hour">9:00</div>
 </div>
+
 <div id="monday" class="day_column">
     <div class="time header">Monday</div>
     <div class="time fifty" id="Mon1" >8:00
@@ -66,6 +67,7 @@
     <div class="time fifty" id="Mon3">10:10
     <script>
      $(function(){ 
+        console.log("10:10");
      var variable = searchSlotMon("10:10");
      $('#Mon3').html(variable);
      });
@@ -553,8 +555,6 @@
 </div>
 
 </div>
-
-
 
 <script>
   function showSchedule(n) {

@@ -130,6 +130,7 @@ DEPENDENCIES
   debugger
   devise
   jquery-rails
+  json
   less-rails
   mysql2
   rails (= 3.2.12)

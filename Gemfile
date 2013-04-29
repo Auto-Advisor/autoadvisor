@@ -7,6 +7,7 @@ gem 'rails', '3.2.12'
 
 gem 'mysql2'
 gem 'activerecord-import' # bulk insert.
+gem 'json'
 
 
 gem 'devise'

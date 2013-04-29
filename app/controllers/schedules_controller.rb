@@ -140,6 +140,7 @@ class SchedulesController < ApplicationController
   end
 
   def recommend_schedule
+    @user = current_user
     if request.get?
       render "recommend_schedule"
     else
@@ -162,6 +163,7 @@ class SchedulesController < ApplicationController
     upper = opts[:upper]
     targets_so_far = 0
     lower = 4
+    return query.all.sample(4)
     sched = []
    
     while(targets_so_far < lower)
@@ -205,13 +207,13 @@ class SchedulesController < ApplicationController
     render :json => {'success' => false, 'message' => msg}
   end
 
-  def render_success(msg)
-    render :json => {'success' => true, 'message' => msg}
+  def render_success(msg, schedule=nil)
+    render :json => {'success' => true, 'message' => msg, 'schedule' => schedule.as_json}
   end
 
   # POST
   # takes: {'name': string, 'sections': [spire_id]}
-  # returns: application/json { 'success': boolean, 'message': string }
+  # returns: application/json { 'success': boolean, 'message': string, 'schedule': schedul_hash }
   def create
     render_error "No currently logged in user, can't create schedule." and return if !signed_in?
 
@@ -235,30 +237,74 @@ class SchedulesController < ApplicationController
     schedule.save
     current_user.schedules << schedule
 
-    render_success "Created schedule \"#{name}\"."
+    render_success "Created schedule \"#{name}\".", schedule
   end
 
   # See models/section.rb for a description of the section format.
   # See models/schedule.rb for a description of the schedule format.
 
   # POST
-  # takes: {'id': id, 'update': <format for create>}
+  # takes: {'id': id, 'name': string, 'sections': [spire_id]}
   # returns: application/json { 'success': boolean, 'message': string, 'schedule': schedule_hash }
   def update
     render_error "No currently logged in user, can't create schedule." and return if !signed_in?
+
+    payload = get_json
+    render_error "Empty request." and return if payload.nil?
+    render_error "No 'name' association is given in request." and return if !payload.include? 'name'
+    render_error "No 'sections' association is given in request" and return if !payload.include? 'sections'
+    render_error "No 'id' association is given in request" and return if !payload.include? 'id'
+
+    name = payload['name']
+    spire_ids = payload['sections']
+    id = payload['id']
+
+    schedule = Schedule.find(id)
+    render_error "No schedule found for schedule \##{id}" and return if schedule.nil?
+
+    sections = spire_ids.map do |spire_id|
+      section = Section.where('spire_id = ?', spire_id).first
+      render_error "Could not find section with spire id '#{spire_id}'." and return if section.nil?
+      section
+    end
+
+    schedule.name = name
+    schedule.sections = sections
+    schedule.save
+    current_user.schedules << schedule
+
+    render_success "Updated schedule \"#{name}\".", schedule
   end
 
   # POST
   # takes: {'id': id }
-  # returns: application/json { 'success': boolean, 'message': string}
+  # returns: application/json { 'success': boolean, 'message': string }
   def destroy
     render_error "No currently logged in user, can't create schedule." and return if !signed_in?
+
+    payload = get_json
+    render_error "Empty request." and return if payload.nil?
+    render_error "No 'id' association is given in request" and return if !payload.include? 'id'
+    if Schedule.destroy(id)
+      render_success "Schedule successfully destroyed."
+    else
+      render_error "Could not delete requested schedule."
+    end
   end
 
   # POST
   # takes: {'id': id}
   # returns: application/json { 'success': boolean, 'message': string, 'schedule': {'name': string, sections: [sections], primary: bool}}
   def get
+    payload = get_json
+    render_error "Empty request." and return if payload.nil?
+    render_error "No 'id' association is given in request" and return if !payload.include? 'id'
+    schedule = Schedule.find(payload["id"])
+    if schedule.nil?
+      render_error "Unable to get schedule with id #{payload['id']}"
+    else
+      render_success "", schedule
+    end
   end
 
   # parses json from body if post.

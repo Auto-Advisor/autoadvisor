@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130427193738) do
+ActiveRecord::Schema.define(:version => 20130429023544) do
 
   create_table "courses", :force => true do |t|
     t.text    "desc"
@@ -55,6 +55,21 @@ ActiveRecord::Schema.define(:version => 20130427193738) do
   add_index "majors_users", ["major_id", "user_id"], :name => "index_majors_users_on_major_id_and_user_id"
   add_index "majors_users", ["user_id", "major_id"], :name => "index_majors_users_on_user_id_and_major_id"
 
+  create_table "schedules", :force => true do |t|
+    t.text     "name"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "schedules_sections", :id => false, :force => true do |t|
+    t.integer "schedule_id"
+    t.integer "section_id"
+  end
+
+  add_index "schedules_sections", ["schedule_id", "section_id"], :name => "index_schedules_sections_on_schedule_id_and_section_id"
+  add_index "schedules_sections", ["section_id", "schedule_id"], :name => "index_schedules_sections_on_section_id_and_schedule_id"
+
   create_table "sections", :force => true do |t|
     t.integer "spire_id"
     t.string  "section_number",                 :null => false
@@ -70,14 +85,6 @@ ActiveRecord::Schema.define(:version => 20130427193738) do
     t.integer "credit_min",     :default => 0,  :null => false
     t.integer "credit_max",     :default => 0,  :null => false
   end
-
-  create_table "sections_users", :force => true do |t|
-    t.integer "user_id"
-    t.integer "section_id"
-  end
-
-  add_index "sections_users", ["section_id", "user_id"], :name => "index_sections_users_on_section_id_and_user_id"
-  add_index "sections_users", ["user_id", "section_id"], :name => "index_sections_users_on_user_id_and_section_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                                :default => "",  :null => false
@@ -99,6 +106,7 @@ ActiveRecord::Schema.define(:version => 20130427193738) do
     t.decimal  "gpa",                    :precision => 8, :scale => 4, :default => 0.0, :null => false
     t.decimal  "grade_points",           :precision => 8, :scale => 4, :default => 0.0, :null => false
     t.decimal  "credit_hours",           :precision => 8, :scale => 4, :default => 0.0, :null => false
+    t.integer  "schedule_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

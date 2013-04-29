@@ -8,7 +8,7 @@ class Section < ActiveRecord::Base
 
   belongs_to :course
   has_one :major, :through => :course
-  has_and_belongs_to_many :users
+  has_and_belongs_to_many :schedules
 
    def self.time_str time
     hours = time / MINUTES

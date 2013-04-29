@@ -6,10 +6,10 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :lockable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :gpa, :credit_hours, :grade_points
+  attr_accessible :email, :password, :password_confirmation, :gpa, :credit_hours, :grade_points, :schedules
 
   has_many :credits
-  has_and_belongs_to_many :sections
+  belongs_to :current_schedule, :class_name => "Schedule", :foreign_key => "schedule_id"
   has_and_belongs_to_many :majors
 
   def credit_hours
@@ -26,10 +26,6 @@ class User < ActiveRecord::Base
     grade_points = self.grade_points = credits.sum(:points)
     self.gpa = grade_points == 0 ? 0 :  grade_points / credit_hours
     save
-  end
-
-  def schedule
-    self.sections
   end
 
   def transcript

@@ -13,4 +13,11 @@ namespace :db do
     "db:schema:dump",
     "db:seed"
   ]
+
+  task :gen_schema => [
+    "db:drop",
+    "db:create",
+    "db:migrate",
+    "db:schema:dump"
+  ]
 end

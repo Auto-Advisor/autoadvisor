@@ -72,83 +72,97 @@ $(function(){reload(schedule);});
 var num_constraint = 0;
 var constraints = [];
 var dontwant = [];
+var inclusion = {'type': 'specified', 'courses': [], 'sections': []};
 
+/**
+ * Change Details within one constraints
+ *
+ * relation is the middle dropdown box
+ * input is the right input items
+ *
+ * Once constraint type is set, the activation of
+ * that row is that constraint
+ */
 function relation(val, c) {
   var relation = '';
   var input = '';
   if (val === 'major'){
     relation += constraints[c].major.relation;
     input += constraints[c].major.input;
-    constraints[c].active = 'major';
   }
   else if (val === 'c_time') {
     relation += constraints[c].c_time.relation;
     input += constraints[c].c_time.input;
-    constraints[c].active = 'c_time';
   }
   else if (val === 'credit') {
     relation += constraints[c].credit.relation;
     input += constraints[c].credit.input;
-    constraints[c].active = 'credit';
   }
   else if (val === 'num_course') {
     relation += constraints[c].num_course.relation;
     input += constraints[c].num_course.input;
-    constraints[c].active = 'num_course';
   }
   else if (val === 'spe_course') {
     relation += constraints[c].spe_course.relation;
     input += constraints[c].spe_course.input;
-    constraints[c].active = 'spe_course';
   }
-  else if (val === 'dayoff') {
-    relation += constraints[c].day_off.relation;
-    input += constraints[c].day_off.input;
-    constraints[c].active = 'days_off';
+  else if (val === 'spe_section') {
+    relation += constraints[c].spe_section.relation;
+    input += constraints[c].spe_section.input;
   }
-  else if (val === 'course_range') {
-    relation += constraints[c].course_range.relation;
-    input += constraints[c].course_range.input;
-    constraints[c].active = 'course_range';
+  else if (val === 'day') {
+    relation += constraints[c].day.relation;
+    input += constraints[c].day.input;
+  }
+  else if (val === 'course_number') {
+    relation += constraints[c].course_number.relation;
+    input += constraints[c].course_number.input;
   }
   else if (val === 'dis') {
     relation += constraints[c].dis.relation;
     input += constraints[c].dis.input;
-    constraints[c].active = 'dis';
   }
   else if (val === 'lab') {
     relation += constraints[c].lab.relation;
     input += constraints[c].lab.input;
-    constraints[c].active = 'lab';
   }
-  else if (val === 'gen') {
-    relation += constraints[c].gen.relation;
-    input += constraints[c].gen.input;
-    constraints[c].active = 'gen';
+  else if (val === 'gened') {
+    relation += constraints[c].gened.relation;
+    input += constraints[c].gened.input;
   }
-  else if (val === 'num_major_course') {
-    relation += constraints[c].num_major_course.relation;
-    input += constraints[c].num_major_course.input;
-    constraints[c].active = 'num_major_course';
+  else if (val === 'major_course') {
+    relation += constraints[c].major_course.relation;
+    input += constraints[c].major_course.input;
   }
   else if (val === 'unit_per_course') {
     relation += constraints[c].unit_per_course.relation;
     input += constraints[c].unit_per_course.input;
-    constraints[c].active = 'unit_per_course';
   }
 
+  constraints[c].active = val;
   $('#r_' + c).html(relation);
   $('#i_' + c).html(input);
 }
 
+/**
+ * Bind "Add new constraint" to add one more row
+ *
+ * See new_constraint.js
+ */
 $('#additem').bind('click', function (event) {
   newConstraint();
 });
 
+/**
+ * ==Not Necessary==
+ * May remove next time
+ * 
+ * Convert Relation into simbolic form
+ */
 function getRelation (ind) {
   var relation = $('#relation_' + ind).val();
   var string = '';
-  if (relation === 'equal') {
+  if (relation === 'within') {
     string += "\=";
   }
   else if (relation === 'less than') {
@@ -160,6 +174,11 @@ function getRelation (ind) {
   return string;
 }
 
+/**
+ * Get Days from a set of Day Buttons
+ *
+ * return a string (eg. MTW)
+ */
 function getDays(type, i) {
   string = '';
   $('#' + type + '_' + i + ' .btn.active').each(function () {
@@ -168,74 +187,62 @@ function getDays(type, i) {
   return string;
 }
 
-function printSchedule(data) {
-  var string = '';
-  string += '<th width="10%">Lectures</th>';
-  for (var i = 0; i < data.length; i++) {
-    string += '<td align="center">';
-    string += data[i].name + '<br>';
-    string += data[i].day + '<br>';
-    string += data[i].beg_time + ' - ' + data[i].end_time;
-    string += '</td>';
-  }
-
-  string += '</tr><tr><th>Discussions</th>';
-  for (var i = 0; i < data.length; i++) {
-    string += '<td>'
-    if (data[i].discussion == undefined) {
-      string += '&nbsp;';
-    } else {
-      string += data[i].discussion.name + '<br>';
-      string += data[i].discussion.day + '<br>';
-      string += data[i].discussion.beg_time + ' - ' + data[i].discussion.end_time;
-    }
-    string += '</td>';
-  }
-
-  string += '</tr><tr><th>Laboratory</th>';
-  for (var i = 0; i < data.length; i++) {
-    string += '<td>'
-    if (data[i].laboratory == undefined) {
-      string += '&nbsp;';
-    } else {
-      string += data[i].laboratory.name + '<br>';
-      string += data[i].laboratory.day + '<br>';
-      string += data[i].laboratory.beg_time + ' - ' + data[i].laboratory.end_time;
-    }
-    string += '</td>';
-  }
-  return string;
-}
-
+/**
+ * Get an array of constraints
+ * Constructing each constraint to a json object
+ *
+ * The format of EACH JSON Object is:
+ *
+ */
 function getConstraints() {
+  var valid = true;
   var array = $.map(constraints, function (value, index) {
     if (value.active === undefined) {
       return;
     }
+
     var hash = {"type": value.active};
     if (value.active === 'major') {
       hash['major'] = $('#major_' + index).val();
     }
 
-    else if (value.active === 'course_range') {
+    else if (value.active === 'course_number') {
       if (getRelation(index) === '\>\=') {
-        hash['lower'] = $('#course_range_' + index).val();
+        hash['lower'] = $('#course_number_' + index).val();
       }
       else if (getRelation(index) === '\<\=') {
-        hash['upper'] = $('#course_range_' + index).val();
+        hash['upper'] = $('#course_number_' + index).val();
       }
       else {
-        hash['lower'] = $('#course_range_' + index).val();
-        hash['upper'] = $('#course_range_' + index).val();
+        var lower = $('#course_number_' + index).val();
+        var higher = $('#course_number_2_' + index).val();
+        if (lower > higher) {
+          valid = false;
+        }
+        else {
+          hash['lower'] = lower;
+          hash['upper'] = higher;
+        }
       }
     }
 
     else if (value.active === 'c_time') {
-
+      hash['type'] = 'time';
+      if (getRelation(index) === '\>\=') {
+        hash['lower'] = $('#time_' + index).val();
+      }
+      else if (getRelation(index) === '\<\=') {
+        hash['upper'] = $('#time_' + index).val();
+      }
+      else {
+        hash['lower'] = $('#time_' + index).val();
+        hash['upper'] = $('#time_2_' + index).val();
+      }
     }
 
     else if (value.active === 'num_course') {
       hash['type'] = 'target';
+      hash['target_type'] = "number";
       if (getRelation(index) === '\>\=') {
         hash['lower'] = $('#num_course_' + index).val();
       }
@@ -243,13 +250,21 @@ function getConstraints() {
         hash['upper'] = $('#num_course_' + index).val();
       }
       else {
-        hash['lower'] = $('#num_course_' + index).val();
-        hash['upper'] = $('#num_course_' + index).val();
+        var lower = $('#num_course_' + index).val();
+        var higher = $('#num_course_2_' + index).val();
+        if (lower > higher) {
+          valid = false;
+        }
+        else {
+          hash['lower'] = lower;
+          hash['upper'] = higher;
+        }
       }
     }
 
     else if (value.active === 'credit') {
       hash['type'] = 'target';
+      hash['target_type'] = "credits";
       if (getRelation(index) === '\>\=') {
         hash['lower'] = $('#credit_' + index).val();
       }
@@ -257,22 +272,39 @@ function getConstraints() {
         hash['upper'] = $('#credit_' + index).val();
       }
       else {
-        hash['lower'] = $('#credit_' + index).val();
-        hash['upper'] = $('#credit_' + index).val();
+        var lower = $('#credit_' + index).val();
+        var higher = $('#credit_2_' + index).val();
+        if (lower > higher) {
+          valid = false;
+        }
+        else {
+          hash['lower'] = lower;
+          hash['upper'] = higher;
+        }
       }
     }
 
     else if (value.active === 'spe_course') {
-
+      var courses = $('#spe_course_' + index).val().split(', ');
+      $.each(courses, function (index, value) {
+        inclusion.courses.push(value);
+      });
     }
 
-    else if (value.active === 'days_off') {
-      hash['days_off'] = getDays('dayoff', index);
+    else if (value.active === 'spe_section') {
+      var sections = $('#spe_section_' + index).val().split(', ');
+      $.each(sections, function (index, value) {
+        inclusion.sections.push(value);
+      });
+    }
+
+    else if (value.active === 'days') {
+      hash['days'] = getDays('day', index);
 
     }
 
     else if (value.active === 'dis') {
-      if ($('#dis').prop('checked')) {
+      if ($('#dis_' + index).prop('checked')) {
         hash['discussion'] = 'true';
       } else {
         hash['discussion'] = 'false';
@@ -280,23 +312,39 @@ function getConstraints() {
     }
 
     else if (value.active === 'lab') {
-      if ($('#lab').prop('checked')) {
+      if ($('#lab_' + index).prop('checked')) {
         hash['lab'] = 'true';
       } else {
         hash['lab'] = 'false';
       }
     }
 
-    else if (value.active === 'gen') {
-      if ($('#gen').prop('checked')) {
-        hash['gen'] = 'true';
-      } else {
-        hash['gen'] = 'false';
-      }
+    else if (value.active === 'gened') {
+      hash['string'] = $('#gened_' + index).val();
     }
 
-    else if (value.active === 'num_major_course') {
-
+    /**
+     * TODO
+     */
+    else if (value.active === 'major_course') {
+      hash['type'] = 'major_course';
+      if (getRelation(index) === '\>\=') {
+        hash['lower'] = $('#major_course_' + index).val();
+      }
+      else if (getRelation(index) === '\<\=') {
+        hash['upper'] = $('#major_course_' + index).val();
+      }
+      else {
+        var lower = $('#major_course_' + index).val();
+        var higher = $('#major_course_2_' + index).val();
+        if (lower > higher) {
+          valid = false;
+        }
+        else {
+          hash['lower'] = lower;
+          hash['upper'] = higher;
+        }
+      }
     }
 
     else if (value.active === 'unit_per_course') {
@@ -308,8 +356,15 @@ function getConstraints() {
         hash['upper'] = $('#unit_per_course_' + index).val();
       }
       else {
-        hash['lower'] = $('#unit_per_course_' + index).val();
-        hash['upper'] = $('#unit_per_course_' + index).val();
+        var lower = $('#unit_per_course_' + index).val();
+        var higher = $('#unit_per_course_2_' + index).val();
+        if (lower > higher) {
+          valid = false;
+        }
+        else {
+          hash['lower'] = lower;
+          hash['upper'] = higher;
+        }
       }
     }
 
@@ -329,9 +384,22 @@ function getConstraints() {
   });
   exclusion['invert'] = true;
   array.push(exclusion);
+  array.push(inclusion);
   return array;
 }
 
+/**
+ * Binded to "Show Me My Option"
+ * 
+ * 1. Send the array of JSON object created by
+ *    getConstraints() function
+ *
+ * 2. Get data on Success and print the schedule
+ *    ** See print_recommendation.js
+ *
+ * The format of JSON received is:
+ *
+ */
 function getRecommendation() {
   $('#msg').html('Recommendation Clicked');
 
@@ -413,9 +481,5 @@ function getRecommendation() {
     dataType: "json"
   });
 }
-
 $('#getrecommend').bind('click', getRecommendation);
-
-
-
 $('#constraint').prop('selectedIndex', -1)

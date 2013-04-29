@@ -1,35 +1,46 @@
+function changeInput(type, id) {
+  var relation = $('#relation_' + id);
+  var input = $('#second_' + type + '_input_' + id);
+  if (relation.val() != 'within') {
+    input.hide();
+  }
+  else if (relation.val() === 'within') {
+    input.show();
+  }
+}
+
 var newConstraint = function (type, operator, value) {
-	console.log(type + ' ' + operator + ' ' + value);
   var c = Object.create(constraint(num_constraint));
   constraints.push(c);
   var id = num_constraint;
   $('div#msg').html('clicked');
   var html = '<tr id="constraint_row_';
      html += id;
-     html += '"><th>';
+     html += '"><th width="2%">';
      html += id+1;
      html += '.</th>';
-     html += '<td><select name="constraint" onChange="relation(this.value, ';
+     html += '<td width="20%"><select style="width: 200px" name="constraint" onChange="relation(this.value, ';
      html += id;
      html += ')" id="constraint_';
      html += id;
      html += '"><option value="major">Major</option>';
-     html += '<option value="course_range">Course Number Range</option>';
-     html += '<option value="c_time">Time</option>';
+     html += '<option value="major_course">Number of Major Courses</option>';
+     html += '<option value="course_number">Course Number Range</option>';
      html += '<option value="num_course">Number of Courses</option>';
+     html += '<option value="c_time">Time</option>';
      html += '<option value="unit_per_course">Unit Per Course</option>';
      html += '<option value="credit">Credit</option>';
-     html += '<option value="spe_course">Specific Courses</option>';
-     html += '<option value="dayoff">No Class Days</option>';
+     html += '<option value="spe_course">Specified Courses</option>';
+     html += '<option value="spe_section">Specified Sections</option>';
+     html += '<option value="day">Class Days</option>';
      html += '<option value="dis">Discussion</option>';
      html += '<option value="lab">Laboratory</option>';
-     html += '<option value="gen">GenEd</option>';
-     html += '<option value="num_major_course">Number of Major Courses</option>';
+     html += '<option value="gened">GenEd</option>';
      html += '</select></td>';
-     html += '<td><div id="r_';
+     html += '<td width="36%"><div id="r_';
      html += id;
      html += '">&nbsp;</div></td>';
-     html += '<td><div id="i_';
+     html += '<td width="34%"><div id="i_';
      html += id;
      html += '">&nbsp;</div></td>';
      html += '<td><a class="btn btn-danger" id="remove_constraint_' + id +'">Delete</a>';

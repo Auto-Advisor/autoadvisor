@@ -143,12 +143,12 @@ class SchedulesController < ApplicationController
     if request.get?
       render "recommend_schedule"
     else
-      redirect_to :controller => 'schedules', :action => 'recommend_schedule'
+      redirect_to schedule_recommend_path
     end
   end
 
   def generate_json_schedule
-    redirect_to :controller => 'schedules', :action => 'recommend_schedule' unless request.post?
+    redirect_to schedule_recommend_path unless request.post?
     json_string = request.raw_post || ""
     json = ActiveSupport::JSON.decode(json_string) || []
     sections = generate_schedule(Section.sections_for_constraints(json))

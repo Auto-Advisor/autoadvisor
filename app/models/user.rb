@@ -94,6 +94,7 @@ class User < ActiveRecord::Base
         year_line = /(Fall|Winter|Spring|Summer)\s+(\d+)/i.match(line)
         if !year_line.nil?
           year = year_line[2]
+          primed = false
           next
         end
         if line =~ /PLAN\s+:/i
@@ -104,11 +105,15 @@ class User < ActiveRecord::Base
           primed = false
           next
         end
+        if line =~ /^B$/
+          primed = false
+          next
+        end
         if primed
           line_parts = line.split
           #check if we've reached our current semester
-          if !(line_parts[-1] =~ /(\d+\.\d+)|P|F/)
-            return
+          if !(line_parts[-1] =~ /^((\d+\.\d+)|P|F|W)$/)
+              return
           end
           #handle pass/fail courses
           if /^[PF]/.match(line_parts[-1])
@@ -118,14 +123,15 @@ class User < ActiveRecord::Base
             units = line_parts[-3]
             course = Course.find_or_create_dummy(major_code + number, name) or next
             self.credits << Credit.from_course(course, year, units, nil)
+          elsif /^W$/.match(line_parts[-1])
           else
-            major_code = line_parts[0]
-            number = line_parts[1]
-            name = line_parts[2..-5]
-            units = line_parts[-4]          
-            grade = line_parts[-2]
-            course = Course.find_or_create_dummy(major_code + number, name) or next
-            self.credits << Credit.from_course(course, year, units, grade)
+              major_code = line_parts[0]
+              number = line_parts[1]
+              name = line_parts[2..-5]
+              units = line_parts[-4]          
+              grade = line_parts[-2]
+              course = Course.find_or_create_dummy(major_code + number, number, name) or next
+              self.credits << Credit.from_course(course, year, units, grade)
           end
         end
       else

@@ -160,17 +160,17 @@ class Section < ActiveRecord::Base
       when "major"
         query = query.where("majors.code #{eq_op} ?", constraint["major"])
       when "time"
-        lower = constraint["lower"]
-        upper = constraint["upper"]
+        lower = constraint["lower"] || 0
+        upper = constraint["upper"] || 2599
         query = query.where("sections.min_beg #{gt_op} ? #{and_op} sections.min_end #{lt_op} ?", lower, upper)
       when "units"
-        lower = constraint["lower"]
-        upper = constraint["upper"]
+        lower = constraint["lower"] || 0
+        upper = constraint["upper"] || 18
         query = query.where("sections.credit_min #{gt_op} ? #{and_op} sections.credit_max #{lt_op}", lower, upper)
       when "target"
-        lower = constraint["lower"]
-        upper = constraint["upper"]
-        type = constraint["target_type"]
+        lower = constraint["lower"] || 4
+        upper = constraint["upper"] || 4
+        type = constraint["target_type"] || :number
         if type == "credits"
           num_lower_credits = lower
           num_upper_credits = upper
@@ -181,11 +181,15 @@ class Section < ActiveRecord::Base
           target_type = :number
         end
       when "specified"
-        constraints["courses"].each do |course_string|
-          specified_courses << Course.where("string = ?", course_string)
+        if constraint.include? "courses"
+          constraint["courses"].each do |course_string|
+            specified_courses << Course.where("string #{eq_op} ?", course_string)
+          end
         end
-        constraints["sections"].each do |spire_id|
-          specifed_sections << Section.where("spire_id = ?", spire_id)
+        if constraint.include? "sections"
+          constraint["sections"].each do |spire_id|
+            specifed_sections << Section.where("spire_id #{eq_op} ?", spire_id)
+          end
         end
       when "days_off"
         days_off = constraint["days_off"]

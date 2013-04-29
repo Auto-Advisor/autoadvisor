@@ -13,7 +13,7 @@ Autoadvisor::Application.routes.draw do
   match '/user/(:id)' => 'users#show', :via => :get
   match '/schedule/get_recommendations' => 'schedules#recommend', :via => :post
   match '/schedule/search' => 'schedules#search', :via => :post
-  match '/schedule/recommend' => 'schedules#recommend_schedule', :via => :get
+  match '/schedule/recommend' => 'schedules#advisor', :via => :get
   match '/schedule/generate' => 'schedules#generate_json_schedule', :via => :post
   match '/schedule' => 'schedules#schedule', :via => :get, :as => 'schedule'
   match '/advisor' => 'schedules#advisor'

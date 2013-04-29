@@ -22,18 +22,22 @@
 </div>
     </td>
     
-  </tr><tr valign=top>
+  </tr>
+
+  <% if !@user.current_schedule.nil? %>
+  <tr valign=top>
     <td>
       <litem>Schedule</litem>
     </td><td>
       <p class='ritem'>
-        <% @user.schedule.each do |section| %>
+        <% @user.current_schedule.sections.each do |section| %>
           <%= section.class_string %> <br />
         <% end %>
-      <%= link_to 'See my Schedule', '/schedule' %> 
-</p>
-</td>
-</tr>
+        <%= link_to 'See my Schedule', '/schedule' %> 
+      </p>
+    </td>
+  </tr>
+  <% end %>
 <tr valign=top>
 <td>
 <litem>Transcript History</litem>

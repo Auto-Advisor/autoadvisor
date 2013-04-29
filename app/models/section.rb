@@ -148,6 +148,11 @@ class Section < ActiveRecord::Base
   #
   #
 
+  def for_user(user, query=nil)
+    query = Section if query.nil?
+    query.joins(:course).where("course.string NOT IN (?)", user.credits.joins(:course).all.map { |credit| credit.course.string })
+  end
+
   def self.sections_for_constraints(constraints)
     num_lower_courses = nil
     num_upper_courses = nil

@@ -17,7 +17,6 @@ end
 def load_sections file, logger
   rows = CSV.read(file)
   rows.shift # pop off the header
-  #SpireID, Dept, Number, Days, StartTime, EndTime, Associated, SectionNum, PrimaryClass, Instructor, CourseName, GenEd
   #SpireID, Dept, Number, Days, StartTime, EndTime, Associated, SectionNum, PrimaryClass, Instructor, CourseName, GenEd, MinCredit, MaxCredit
 
   rows.each_index do |idx|
@@ -55,23 +54,28 @@ def load_sections file, logger
         course.save
       end
 
+      section_number = row[7].strip
+
       section = Section.new
       section.course = course
-      section.instructor = row[9].strip
-      section.section_number = row[6].strip
-      section.spire_id = row[0]
-      section.days = row[3].strip.sub(/TU/, "T").sub(/TH/, "R")
-
-      section.credit_min = row[12].to_f.to_i || 0
       section.credit_max = row[13].to_f.to_i || 0
-
-      if row[8] # primary
-        section.ty = 'LEC' # could also be sem
-      else
-        section.ty = 'unknown'
-      end
+      section.credit_min = row[12].to_f.to_i || 0
+      section.days = row[3].strip.sub(/TU/, "T").sub(/TH/, "R")
+      section.instructor = row[9].strip
       section.min_start = row[4].blank? ? 0 : parse_time(row[4])
       section.min_end = row[5].blank? ? 0 : parse_time(row[5])
+      section.section_number = section_number
+      section.spire_id = row[0]
+      section.ty = case section_number
+        when /D\d/
+          "DIS"
+        when /L\d/
+          "LAB"
+        when /S\d/
+          "SEM"
+        else
+          "LEC"
+      end
       section.save
     rescue CSVFormatError => e
       logger.debug "Encountered error while processing csv row #{line}:\n#{e.inspect}\n#{e.backtrace.join('\n')}\n"

@@ -69,35 +69,36 @@ class Section < ActiveRecord::Base
   end
 
   # fields:
+  # class_string (string)
+  # days {MTWRF}
   # dept (string)
   # gened (string)
   # major (string)
   # instructor (string)
   # section_number (string)
   # spire_id (number)
-  # description
   # name
   # number
   # room
-  # class_string
   # units
 
   def as_json(options={})
     {
       "class_string" => class_string,
+      "credit_max" => credit_max,
+      "credit_min" => credit_min,
       "days" => days,
       "dept" => dept,
-      "desc" => desc || "",
       "gened" => gened,
       "instructor" => instructor || "",
       "major" => major,
+      "min_beg" => min_start,
+      "min_end" => min_end,
       "name" => name,
       "number" => number,
       "room" => room || "",
       "section_number" => section_number,
       "spire_id" => spire_id,
-      "min_beg" => min_start,
-      "min_end" => min_end,
     }
   end
 

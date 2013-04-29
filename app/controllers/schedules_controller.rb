@@ -82,7 +82,7 @@ class SchedulesController < ApplicationController
         ]
       ]
     end
-    return schedules;
+    return schedules
   end
 
   def recommend
@@ -238,9 +238,12 @@ class SchedulesController < ApplicationController
     render_success "Created schedule \"#{name}\"."
   end
 
+  # See models/section.rb for a description of the section format.
+  # See models/schedule.rb for a description of the schedule format.
+
   # POST
   # takes: {'id': id, 'update': <format for create>}
-  # returns: application/json { 'success': boolean, 'message': string}
+  # returns: application/json { 'success': boolean, 'message': string, 'schedule': schedule_hash }
   def update
     render_error "No currently logged in user, can't create schedule." and return if !signed_in?
   end

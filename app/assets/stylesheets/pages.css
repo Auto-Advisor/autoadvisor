@@ -35,15 +35,15 @@ p.ritem {
 table.transcript {
   width: 600px;
   margin: auto;
-  border-style: solid;
-}
+  border: 1px solid lightblue;
+}  
 
 .head {
   background: #CDCDCD;
 }
 
 .subhead {
-  background: #DEDEDE;
+  background: lightblue;
 }
 
 tr.item:hover {

@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :lockable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :gpa, :credit_hours, :grade_points, :schedules
+  attr_accessible :current_schedule, :credit_hours, :email, :gpa, :grade_points, :password_confirmation, :password, :schedules
 
   has_many :credits
   belongs_to :current_schedule, :class_name => "Schedule", :foreign_key => "schedule_id"

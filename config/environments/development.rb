@@ -38,4 +38,7 @@ Autoadvisor::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # don't do stupid cookie auth stuff.
+  config.action_controller.allow_forgery_protection = false
 end

@@ -11,6 +11,12 @@ Autoadvisor::Application.routes.draw do
   match '/user/transcript/upload/(:id)' => 'uploads#upload_credits', :via => :post, :as => 'upload_credits'
   match '/user/transcript/' => 'users#transcript', :via => :get, :as => 'transcript'
   match '/user/(:id)' => 'users#show', :via => :get
+
+  match '/schedule/create/' => 'schedules#create', :via => :post, :as => 'create_schedule'
+  match '/schedule/update/(:id)' => 'schedules#get', :via => :post, :as => 'update_schedule'
+  match '/schedule/get/(:id)' => 'schedules#get', :via => :post, :as => 'get_schedule'
+  match '/schedule/destroy/(:id)' => 'schedules#get', :via => :post, :as => 'destroy_schedule'
+
   match '/schedule/get_recommendations' => 'schedules#recommend', :via => :post
   match '/schedule/search' => 'schedules#search', :via => :post
   match '/schedule/recommend' => 'schedules#advisor', :via => :get
@@ -19,6 +25,8 @@ Autoadvisor::Application.routes.draw do
   match '/advisor' => 'schedules#advisor'
   match '/about' => 'pages#about'
   match '/documentation' => 'pages#documentation'
+  match '/logged_in' => 'pages#logged_in', :via => [:get, :post] if Rails.env.development?
+
   # /app/views/pages/transcript.html.erb [not yet created]
   #get '/transcript', to: 'pages#transcript'
   # /app/views/pages/friends.html.erb [not yet created]

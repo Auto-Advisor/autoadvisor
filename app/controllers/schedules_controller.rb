@@ -148,9 +148,7 @@ class SchedulesController < ApplicationController
   end
 
   def generate_json_schedule
-    redirect_to schedule_recommend_path unless request.post?
-    json_string = request.raw_post || ""
-    json = ActiveSupport::JSON.decode(json_string) || []
+    json = get_json || []
     sections = generate_schedule(Section.sections_for_constraints(json))
     render :json => sections
   end
@@ -163,5 +161,67 @@ class SchedulesController < ApplicationController
     lower = opts[:lower]
     upper = opts[:upper]
     query.all.sample(4)
+  end
+
+  def render_error(msg)
+    render :json => {'success' => false, 'message' => msg}
+  end
+
+  def render_success(msg)
+    render :json => {'success' => true, 'message' => msg}
+  end
+
+  # POST
+  # takes: {'name': string, 'sections': [spire_id]}
+  # returns: application/json { 'success': boolean, 'message': string }
+  def create
+    render_error "No currently logged in user, can't create schedule." and return if !signed_in?
+
+    payload = get_json
+    render_error "Empty or nil payload." and return if payload.nil?
+    render_error "No 'name' association is given in request." and return if !payload.include? 'name'
+    render_error "No 'sections' association is given in request" and return if !payload.include? 'sections'
+
+    name = payload['name']
+    spire_ids = payload['sections']
+
+    sections = spire_ids.map do |spire_id|
+      section = Section.where('spire_id = ?', spire_id).first
+      render_error "Could not find section with spire id '#{spire_id}'." and return if section.nil?
+      section
+    end
+
+    schedule = Schedule.new
+    schedule.name = name
+    schedule.sections = sections
+    schedule.save
+
+    render_success "Created schedule \"#{name}\"."
+  end
+
+  # POST
+  # takes: {'id': id, 'update': <format for create>}
+  # returns: application/json { 'success': boolean, 'message': string}
+  def update
+    render_error "No currently logged in user, can't create schedule." and return if !signed_in?
+  end
+
+  # POST
+  # takes: {'id': id }
+  # returns: application/json { 'success': boolean, 'message': string}
+  def destroy
+    render_error "No currently logged in user, can't create schedule." and return if !signed_in?
+  end
+
+  # POST
+  # takes: {'id': id}
+  # returns: application/json { 'success': boolean, 'message': string, 'schedule': {'name': string, sections: [sections], primary: bool}}
+  def get
+  end
+
+  # parses json from body if post.
+  def get_json
+    return nil unless request.post?
+    ActiveSupport::JSON.decode(request.raw_post)
   end
 end

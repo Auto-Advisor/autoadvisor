@@ -121,22 +121,27 @@ class Section < ActiveRecord::Base
   #   upper: integer >= 0
   #
   #   type: specified
-  #   courses: [major_code]
+  #   courses: [course_code]
   #   sections: [spire_id]
+  #   
+  #   type: days
+  #   days: string e.g. "MTWRF" => sections on any day, "" => NOTHING
+  #                     similarly, "MF" with invert=true => no classes on monday and friday.
   #
-  #   type: days_off
-  #   days_off: string e.g. "MTWRF"
-  #
-  #   type: course_range
+  #   type: course_number
   #   lower: integer >= 0
   #   upper: integer >= 0
   #
-  #   type: dis_lab
+  #   type: dis
   #   discussion: boolean
+  # 
+  #   type: lab
   #   lab: boolean
   #
   #   type: gened
-  #   string: gened code
+  #   string: e.g. "SBU"
+  #
+  #
 
   def self.sections_for_constraints(constraints)
     num_lower_courses = nil

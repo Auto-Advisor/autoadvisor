@@ -3,12 +3,7 @@
       <tr>
         <th colspan='6' class='head'>Search</th>
       <tr>
-        <th class='subhead'>Course Name/Number: </th>
-        <td colspan='5'><input type="text" name="coursenamenumber" id='cnum'>
-        </td>
-      </tr>
-      <tr>
-        <th class='subhead'>
+        <th class='subhead' width='20%'>
           Major
         </td>
         <th class='subhead' colspan='5'>
@@ -125,9 +120,14 @@
         </td>
       <td colspan='5'>
     <input id='csmall' class='input-medium' name='course_range' type='number' min=1 max=600 step=1 value='000'>
-    To <input id='clarge' class='input-medium' name='course_range' type='number' min=1 max=600 step=1 value='600'>
+    To: <input id='clarge' class='input-medium' name='course_range' type='number' min=1 max=600 step=1 value='600'>
       </td>
     </tr>
+    <tr>
+      <th class='subhead'>Course Unit</th>
+      <td>From <input id='course_unit_low' class='input-medium' name='course_unit_low' type='number' min=1 step=1 style='width: 70px'>
+          To <input id='course_unit_high' class='input-medium' name='course_unit_high' type='number' min=1 step=1 style='width: 70px'>
+      </td>
     <tr>
       <th class='subhead'>
         Time From
@@ -145,17 +145,52 @@
       <td colspan='5'>
         <div id='day_'>
           <div class='btn-group' data-toggle='buttons-checkbox'>
-            <button type='button' class='btn' value='Su'>Su</button>
-            <button type='button' class='btn' value='Mo'>Mo</button>
-            <button type='button' class='btn' value='Tu'>Tu</button>
-            <button type='button' class='btn' value='We'>We</button>
-            <button type='button' class='btn' value='Th'>Th</button>
-            <button type='button' class='btn' value='Fr'>Fr</button>
-            <button type='button' class='btn' value='Sa'>Sa</button>
+            <button type='button' class='btn active' value='M'>Mo</button>
+            <button type='button' class='btn active' value='T'>Tu</button>
+            <button type='button' class='btn active' value='W'>We</button>
+            <button type='button' class='btn active' value='R'>Th</button>
+            <button type='button' class='btn active' value='F'>Fr</button>
           </div>
         </div>
       </td>
     </tr>
+    <tr>
+      <th class='subhead'>Options</th>
+      <td><input type='checkbox' id='lab'>Have Laboratory
+          <input type='checkbox' id='dis'>Have Discussion
+      </td>
+    </tr>
+    <tr>
+      <th class='subhead'>GenEd</th>
+      <td><select id='gened'>
+            <option value='' selected='selected'></option>
+            <option value='AL'>AL Literature</option>
+            <option value='ALG'>ALG Literature/Diversity: Global</option> 
+            <option value='ALU'>ALU Literature/Diversity: U.S.</option> 
+            <option value='AT'>AT Arts</option> 
+            <option value='ATG'>ATG Arts/Diversity: Global</option> 
+            <option value='ATU'>ATU Arts/Diversity: U.S.</option> 
+            <option value='BS'>BS Biological Science</option> 
+            <option value='CW'>CW Freshman Writing</option> 
+            <option value='G'>G Diversity: Global</option> 
+            <option value='HS'>HS Historical Studies</option> 
+            <option value='HSG'>HSG Hist. Studies/Diversity:Global</option> 
+            <option value='HSU'>HSU Hist. Studies/Diversity: U.S.</option> 
+            <option value='I'>I Interdisciplinary</option> 
+            <option value='IG'>IG Interdisc/Diversity: Global</option> 
+            <option value='IU'>IU Interdisc/Diversity: U.S.</option> 
+            <option value='PS'>PS Physical Science</option> 
+            <option value='R1'>R1 Basic Math Skills</option> 
+            <option value='R2'>R2 Analytical Reasoning</option> 
+            <option value='SB'>SB Social and Behavioral Sciences</option> 
+            <option value='SBG'>SBG Soc/Behav Sci/Diversty: Global</option> 
+            <option value='SBU'>SBU Soc/Behav Sci/Diversty: U.S.</option> 
+            <option value='SI'>SI Science Interdisciplinary</option> 
+            <option value='SIG'>SIG Science Intrdisc/Dvrsty:Global</option> 
+            <option value='SIU'>SIU Science Intrdisc/Dvrsty: U.S.</option> 
+            <option value='U'>U Diversity: United States</option>
+          </select> 
+        </td>
   </table>
 </form>
 

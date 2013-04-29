@@ -51,6 +51,18 @@ function printSchedule(data) {
   return string;
 } 
 
+function getSections(data) {
+	var sections = [];
+	$.each(data, function (index, value) {
+		sections.push(value.spire_id);
+		if (value.discussion != undefined)
+			sections.push(value.discussion.spire_id);
+		if (value.laboratory != undefined)
+			sections.push(value.laboratory.spire_id);
+	});
+	return sections;
+}
+
 function print_recommendation (data) {
 	var string = '<table class="table table-bordered table-striped"><tr>';
 	   string += '<td rowspan="4" width = "20%">';
@@ -80,10 +92,9 @@ function print_recommendation (data) {
 
   $('#recommendations').html(string);
 
-  $.each(data, function(i, v) {
-    $('a.No_' + v.class_string).bind('click', function (event) {
-      console.log("No Class " + v.class_string);
-      dontwant.push(v.class_string);
+  $.each(data, function(index, value) {
+    $('a.No_' + value.class_string).bind('click', function (event) {
+      dontwant.push(value.class_string);
       getRecommendation();
     });
   });
@@ -97,28 +108,37 @@ function print_recommendation (data) {
 		 *   "schedule_name": The name of schedule we want to save.
 		 *                    The name will be appeared in schedule
 		 * 										page.
-		 *   "schedule": The entire schedule shown
+		 *   "sections": The SPIRE ID of the schedule shown
   	 * }
   	 */
   	var send_data = {'schedule_name': $('#name_of_save').val()};
-  	send_data['schedule'] = data;
+  	send_data['sections'] = getSections(data);
 
   	$('#string').html(JSON.stringify(send_data));
 
+  	/**
+  	 * TODO: 
+  	 *
+  	 * 1. get the save query URL
+  	 *
+  	 * 2. page effect on success
+  	 * 3. page effect on send
+  	 * 4. page effect on fail
+  	 */
   	// $.ajax({
-	  //   // type: "POST",
-	  //   // contentType: "application/json",
-	  //   // url: /** save schedule URL **/, data: JSON.stringify(data),
-	  //   // success: function(data, text_status, jqXHR) {
-	  //   //   print_recommendation(data);
+	  //   type: "POST",
+	  //   contentType: "application/json",
+	  //   url: /** save schedule URL **/, data: JSON.stringify(send_data),
+	  //   success: function(data, text_status, jqXHR) {
+	  //     print_recommendation(data);
 
-	  //   //  },
-	  //   // beforeSend: function() {
-	  //   //   $('#recommendations').html("Please wait... I am looking for schedules which are suitable for you :)");
-	  //   // },
-	  //   // fail: function(jqXHR, textStatus, errorThrown) {
-	  //   //   alert("panic");
-	  //   // }
+	  //    },
+	  //   beforeSend: function() {
+	  //     $('#recommendations').html("Please wait... I am looking for schedules which are suitable for you :)");
+	  //   },
+	  //   fail: function(jqXHR, textStatus, errorThrown) {
+	  //     alert("panic");
+	  //   }
 	  // });
   });
 }

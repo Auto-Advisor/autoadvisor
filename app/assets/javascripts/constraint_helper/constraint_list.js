@@ -113,50 +113,56 @@ var constraint = function (count) {
 
   obj.c_time = {
     "relation" : "<button type='button' class='btn' id='not_" + id + "' data-toggle='button'>Not</button>"
-               + " <select style='width: 100px' id='relation_" + id + "'>"
+               + " <select style='width: 200px' id='relation_" + id + "' onChange='changeInput(\"time\", " + id + ")'>"
+               + "<option value='within'>Within</option>"
                + "<option value='less than'>Less Than Or Equal To</option>"
-               + "<option value='greater than'>Greater Than Or Equal To</option></select><div align='right'>On<div>",
-    "input" : "<input id='time_" + id + "' class='input-medium' name='time' type='time' value='10:00:00'>"
-            + "<div id='timeday_" + id + "'>"
-            + "<div class='btn-group' data-toggle='buttons-checkbox'>"
-            + "<button type='button' class='btn' value='Su'>Su</button>"
-            + "<button type='button' class='btn active' value='Mo'>Mo</button>"
-            + "<button type='button' class='btn active' value='Tu'>Tu</button>"
-            + "<button type='button' class='btn active' value='We'>We</button>"
-            + "<button type='button' class='btn active' value='Th'>Th</button>"
-            + "<button type='button' class='btn active' value='Fr'>Fr</button>"
-            + "<button type='button' class='btn' value='Sa'>Sa</button>"
-            + "</div></div>"
+               + "<option value='greater than'>Greater Than Or Equal To</option></select>",
+    "input" : "<input id='time_" + id + "' class='input-medium' name='time' type='time' value='10:00:00' style='width: 70px'>"
+               + " <div id='second_time_input_" + id + "' style='float: right'> and "
+               + "<input id='time_2_" + id + "' class='input-medium' name='time' type='time' value='18:00:00' style='width: 70px'></div>"
+            // + "<div id='timeday_" + id + "'>"
+            // + "<div class='btn-group' data-toggle='buttons-checkbox'>"
+            // + "<button type='button' class='btn' value='Su'>Su</button>"
+            // + "<button type='button' class='btn active' value='Mo'>Mo</button>"
+            // + "<button type='button' class='btn active' value='Tu'>Tu</button>"
+            // + "<button type='button' class='btn active' value='We'>We</button>"
+            // + "<button type='button' class='btn active' value='Th'>Th</button>"
+            // + "<button type='button' class='btn active' value='Fr'>Fr</button>"
+            // + "<button type='button' class='btn' value='Sa'>Sa</button>"
+            // + "</div></div>"
   };
 
   obj.unit_per_course = {
     "relation" : "<button type='button' class='btn' id='not_" + id + "' data-toggle='button'>Not</button>"
-               + " <select style='width: 100px' id='relation_" + id + "'><option value='equal'>Equal To</option>"
+               + " <select style='width: 200px' id='relation_" + id + "' onChange='changeInput(\"unit\", " + id + ")'>"
+               + "<option value='within'>Within</option>"
                + "<option value='less than'>Less Than Or Equal To</option>"
                + "<option value='greater than'>Greater Than Or Equal To</option></select>",
-    "input" : "<input id='unit_per_course_"
-            + id
-            + "' class='input-medium' name='unit_per_course' type='number' min=1 step=1 value='3'>"
+    "input" : "<input id='unit_per_course_" + id + "' class='input-medium' name='unit_per_course' type='number' min=1 step=1 value='3' style='width: 70px'>"
+               + " <div id='second_unit_input_" + id + "' style='float: right'> and "
+               + "<input id='unit_per_course_2_" + id + "' class='input-medium' name='unit_per_course' type='number' min=1 step=1 value='3' style='width: 70px'>"
   };
 
   obj.credit = {
     "relation" : "<button type='button' class='btn' id='not_" + id + "' data-toggle='button'>Not</button>"
-               + " <select style='width: 100px' id='relation_" + id + "'><option value='equal'>Equal To</option>"
+               + " <select style='width: 200px' id='relation_" + id + "' onChange='changeInput(\"credit\", " + id + ")'>"
+               + "<option value='within'>Within</option>"
                + "<option value='less than'>Less Than Or Equal To</option>"
                + "<option value='greater than'>Greater Than Or Equal To</option></select>",
-    "input" : "<input id='credit_"
-            + id
-            + "' class='input-medium' name='credit' type='number' min=1 step=1 value='12'>"
+    "input" : "<input id='credit_" + id + "' class='input-medium' name='credit' type='number' min=1 max=18 step=1 value='12' style='width:70px'>"
+               + " <div id='second_credit_input_" + id + "' style='float: right'> and "
+               + "<input id='credit_2_" + id + "' class='input-medium' name='unit_per_course' type='number' min=1 max=18 step=1 value='15' style='width: 70px'>"
   };
 
   obj.num_course = {
     "relation" : "<button type='button' class='btn' id='not_" + id + "' data-toggle='button'>Not</button>"
-               + " <select style='width: 100px' id='relation_" + id + "'><option value='equal'>Equal To</option>"
+               + " <select style='width: 200px' id='relation_" + id + "' onChange='changeInput(\"num_course\", " + id + ")'>" 
+               + "<option value='within'>Within</option>"
                + "<option value='less than'>Less Than Or Equal To</option>"
                + "<option value='greater than'>Greater Than Or Equal To</option></select>",
-       "input" : "<input id='num_course_"
-               + id
-               + "' class='input-medium' name='num_course' type='number' min=1 step=1 value='3'>"
+       "input" : "<input id='num_course_" + id + "' class='input-medium' name='num_course' type='number' min=1 step=1 value='3' style='width: 70px'>"
+               + " <div id='second_num_course_input_" + id + "' style='float: right'> and "
+               + "<input id='num_course_2_" + id + "' class='input-medium' name='unit_per_course' type='number' min=1 step=1 value='3' style='width: 70px'>"
   };
 
   obj.spe_course = {
@@ -165,57 +171,87 @@ var constraint = function (count) {
     "input" : "<input id='spe_course_" + id + "' type='text' name='spc_course'>"
   };
 
-  obj.day_off = {
-    "relation" : "<button type='button' class='btn disabled' id='not_" + id + "' data-toggle='button'>Not</button>"
+  obj.spe_section = {
+    "relation" : "<button type='button' class='btn' id='not_" + id + "' data-toggle='button'>Not</button>"
+               + " <select style='width: 100px' id='relation_" + id + "'><option value='equal'>Equal To</option></select>",
+    "input" : "<input id='spe_section_" + id + "' type='text' name='spc_setions'>"
+  }
+
+  obj.day = {
+    "relation" : "<button type='button' class='btn' id='not_" + id + "' data-toggle='button'>Not</button>"
                + " <select style='width: 100px' id='relation_" + id + "'><option value='equal'>Equal To</option></select>",
     "input" : "<div id='dayoff_" + id + "'>"
             + "<div class='btn-group' data-toggle='buttons-checkbox'>"
-            + "<button type='button' class='btn' value='Su'>Su</button>"
-            + "<button type='button' class='btn' value='M'>Mo</button>"
-            + "<button type='button' class='btn' value='T'>Tu</button>"
-            + "<button type='button' class='btn' value='W'>We</button>"
-            + "<button type='button' class='btn' value='R'>Th</button>"
-            + "<button type='button' class='btn' value='F'>Fr</button>"
-            + "<button type='button' class='btn' value='Sa'>Sa</button>"
+            + "<button type='button' class='btn active' value='M'>Mo</button>"
+            + "<button type='button' class='btn active' value='T'>Tu</button>"
+            + "<button type='button' class='btn active' value='W'>We</button>"
+            + "<button type='button' class='btn active' value='R'>Th</button>"
+            + "<button type='button' class='btn active' value='F'>Fr</button>"
             + "</div></div>"
   };
 
-  obj.course_range = {
+  obj.course_number = {
     "relation" : "<button type='button' class='btn' id='not_" + id + "' data-toggle='button'>Not</button>"
-               + " <select style='width: 100px' id='relation_" + id + "'><option value='equal'>Equal To</option>"
+               + " <select style='width: 200px' id='relation_" + id + "' onChange='changeInput(\"course_number\", " + id + ")'>"
+               + "<option value='within'>Within</option>"
                + "<option value='less than'>Less Than Or Equal To</option>"
                + "<option value='greater than'>Greater Than Or Equal To</option></select>",
-    "input" : "<input id='course_range_"
-            + id
-            + "' class='input-medium' name='course_range' type='number' min=1 max=600 step=1 value='000'>"
+    "input" : "<input id='course_number_" + id + "' class='input-medium' name='course_range' type='number' min=1 step=1 value='000' style='width: 70px'>"
+               + " <div id='second_course_number_input_" + id + "' style='float: right'> and "
+               + "<input id='course_number_2_" + id + "' class='input-medium' name='unit_per_course' type='number' min=1 step=1 value='000' style='width: 70px'>"
   };
 
   obj.dis = {
     "relation" : "<button type='button' class='btn disabled' id='not_" + id + "' data-toggle='button'>Not</button>"
                + " <select style='width: 100px' id='relation_" + id + "'><option value='equal'>Equal To</option></select>",
-       "input" : "<input type='checkbox' id='dis' value='dis'> Discussion"        
+       "input" : "<input type='checkbox' id='dis_" + id + "' value='dis'> Discussion"        
   };
 
   obj.lab = {
     "relation" : "<button type='button' class='btn disabled' id='not_" + id + "' data-toggle='button'>Not</button>"
                + " <select style='width: 100px' id='relation_" + id + "'><option value='equal'>Equal To</option></select>",
-       "input" : "<input type='checkbox' id='lab' value='lab'> Laboratory"        
+       "input" : "<input type='checkbox' id='lab_" + id + "' value='lab'> Laboratory"        
   };
 
-  obj.gen = {
+  obj.gened = {
     "relation" : "<button type='button' class='btn disabled' id='not_" + id + "' data-toggle='button'>Not</button>"
                + " <select style='width: 100px' id='relation_" + id + "'><option value='equal'>Equal To</option></select>",
-       "input" : "<input type='checkbox' id='gen' value='gen'> GenEd"
+       "input" : "<select id='gened_" + id + "'><option value='AL'>AL Literature</option>"
+               + "<option value='ALG'>ALG Literature/Diversity: Global</option>"
+               + "<option value='ALU'>ALU Literature/Diversity: U.S.</option>"
+               + "<option value='AT'>AT Arts</option>"
+               + "<option value='ATG'>ATG Arts/Diversity: Global</option>"
+               + "<option value='ATU'>ATU Arts/Diversity: U.S.</option>"
+               + "<option value='BS'>BS Biological Science</option>"
+               + "<option value='CW'>CW Freshman Writing</option>"
+               + "<option value='G'>G Diversity: Global</option>"
+               + "<option value='HS'>HS Historical Studies</option>"
+               + "<option value='HSG'>HSG Hist. Studies/Diversity:Global</option>"
+               + "<option value='HSU'>HSU Hist. Studies/Diversity: U.S.</option>"
+               + "<option value='I'>I Interdisciplinary</option>"
+               + "<option value='IG'>IG Interdisc/Diversity: Global</option>"
+               + "<option value='IU'>IU Interdisc/Diversity: U.S.</option>"
+               + "<option value='PS'>PS Physical Science</option>"
+               + "<option value='R1'>R1 Basic Math Skills</option>"
+               + "<option value='R2'>R2 Analytical Reasoning</option>"
+               + "<option value='SB'>SB Social and Behavioral Sciences</option>"
+               + "<option value='SBG'>SBG Soc/Behav Sci/Diversty: Global</option>"
+               + "<option value='SBU'>SBU Soc/Behav Sci/Diversty: U.S.</option>"
+               + "<option value='SI'>SI Science Interdisciplinary</option>"
+               + "<option value='SIG'>SIG Science Intrdisc/Dvrsty:Global</option>"
+               + "<option value='SIU'>SIU Science Intrdisc/Dvrsty: U.S.</option>"
+               + "<option value='U'>U Diversity: United States</option></select>"
   };
 
-  obj.num_major_course = {
+  obj.major_course = {
     "relation" : "<button type='button' class='btn' id='not_" + id + "' data-toggle='button'>Not</button>"
-               + " <select style='width: 100px' id='num_major_course_" + id + "'><option value='equal'>Equal To</option>"
+               + " <select style='width: 200px' id='relation_" + id + "' onChange='changeInput(\"major_course\", " + id + ")'>"
+               + "<option value='within'>Within</option>"
                + "<option value='less than'>Less Than Or Equal To</option>"
                + "<option value='greater than'>Greater Than Or Equal To</option></select>",
-    "input" : "<input id='num_of_major_course_"
-            + id
-            + "' class='input-medium' name='num_major_course' type='number' min=1 max=5 step=1 value='3'>"
+    "input" : "<input id='major_course_" + id + "' class='input-medium' name='major_course' type='number' min=1 step=1 value='3' style='width: 70px'>"
+               + " <div id='second_major_course_input_" + id + "' style='float: right'> and "
+               + "<input id='major_course_2_" + id + "' class='input-medium' name='unit_per_course' type='number' min=1 step=1 value='3' style='width: 70px'>"
   };
 
   return obj;

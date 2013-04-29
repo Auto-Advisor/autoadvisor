@@ -19,6 +19,12 @@
     </table>
     <br>
     <br>
+    </div>
+    
+   
+  <div id="dayrow" class="day_row" style="background:lightblue;" class="styleguide-color">
+  
+  </div>
   <div id="dayrow" class="day_row" style="background:lightblue;" class="styleguide-color">
   <div id="daytime" class="time_column">
     <div class="time header">Time</div>
@@ -38,11 +44,7 @@
     <div class="time hour">9:00</div>
 </div>
 
-
-
-
-
-  <div id="monday" class="day_column">
+<div id="monday" class="day_column">
     <div class="time header">Monday</div>
     <div class="time fifty" id="Mon1" >8:00
     <script>
@@ -154,12 +156,7 @@
     <div class="time hour">9:00</div> 
 </div>
 
-
-
-
-
-
-<div id="tuesday" class="day_column">
+ <div id="tuesday" class="day_column">
     <div class="time header">Tuesday</div>
     <div class="time seventyfive" id="Tues1">8:00
     <script>
@@ -552,9 +549,6 @@
     <div class="time fifteen"></div>
     <div class="time hour">9:00</div>  
 </div>
-
-
-
 
 </div>
 

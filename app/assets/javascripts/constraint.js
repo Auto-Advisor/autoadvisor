@@ -256,7 +256,7 @@ function getConstraints() {
    * Exclusion List
    */
   var exclusion = {};
-  exclusion['type'] = 'specifiedd';
+  exclusion['type'] = 'specified';
   exclusion['courses'] = [];
   $.each(dontwant, function (index, value) {
     exclusion['courses'].push(value);

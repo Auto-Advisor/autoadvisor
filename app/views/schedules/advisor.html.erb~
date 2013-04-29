@@ -1,6 +1,6 @@
 <% provide(:title, 'Advisor') %>
 <% content_for :h1 do %>
-  <h1>Advisor</h1>
+  <h1>Profile</h1>
 <% end %>
 
 <div class= "tabbable" align="center">

@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
           name = line_parts[2..-4].join(" ")
           class_string = major_code + number
           units = line_parts[-3]
-          course = Course.find_or_create_dummy(major_code, number, name) or next
+          course = Course.find_or_create_dummy(major_code + number, name) or next
           self.credits << Credit.from_course(course, year, units, nil)
         end
       #case where we are looking at part of a student's undergraduate history
@@ -116,7 +116,7 @@ class User < ActiveRecord::Base
             number = line_parts[1]
             name = line_parts[2..-4]
             units = line_parts[-3]
-            course = Course.find_or_create_dummy(major_code, number, name) or next
+            course = Course.find_or_create_dummy(major_code + number, name) or next
             self.credits << Credit.from_course(course, year, units, nil)
           else
             major_code = line_parts[0]
@@ -124,7 +124,7 @@ class User < ActiveRecord::Base
             name = line_parts[2..-5]
             units = line_parts[-4]          
             grade = line_parts[-2]
-            course = Course.find_or_create_dummy(major_code, number, name) or next
+            course = Course.find_or_create_dummy(major_code + number, name) or next
             self.credits << Credit.from_course(course, year, units, grade)
           end
         end

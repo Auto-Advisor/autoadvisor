@@ -85,6 +85,7 @@ class Section < ActiveRecord::Base
   def as_json(options={})
     {
       "class_string" => class_string,
+      "days" => days,
       "dept" => dept,
       "desc" => desc || "",
       "gened" => gened,
@@ -96,7 +97,7 @@ class Section < ActiveRecord::Base
       "section_number" => section_number,
       "spire_id" => spire_id,
       "min_beg" => min_start,
-      "min_end" => min_end
+      "min_end" => min_end,
     }
   end
 

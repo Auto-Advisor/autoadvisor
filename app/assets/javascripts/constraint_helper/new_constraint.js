@@ -13,7 +13,6 @@ var newConstraint = function (type, operator, value) {
   var c = Object.create(constraint(num_constraint));
   constraints.push(c);
   var id = num_constraint;
-  $('div#msg').html('clicked');
   var html = '<tr id="constraint_row_';
      html += id;
      html += '"><th width="2%">';

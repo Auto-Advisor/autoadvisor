@@ -164,7 +164,7 @@ days.each do |day| %>
       contentType: "application/json",
       url: "/schedule/destroy", data: JSON.stringify(request),
       success: function(response) {
-        window.location = "<$= schedule_path %>";
+        window.location = "<%= schedule_path %>";
       },
       dataType: "json"
     });

@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
 
   has_many :credits
   has_many :schedules
-  belongs_to :current_schedule, :class_name => "Schedule", :foreign_key => "schedule_id"
   has_and_belongs_to_many :majors
 
   def credit_hours

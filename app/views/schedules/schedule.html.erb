@@ -23,530 +23,29 @@
   
   <div id="daytime" class="time_column">
     <div class="time header">Time</div>
-    <div class="time hour">8:00</div>
-    <div class="time hour">9:00</div>
-    <div class="time hour">10:00</div>
-    <div class="time hour">11:00</div>
-    <div class="time hour">12:00</div>
-    <div class="time hour">1:00</div>
-    <div class="time hour">2:00</div>
-    <div class="time hour">3:00</div>
-    <div class="time hour">4:00</div>
-    <div class="time hour">5:00</div>
-    <div class="time hour">6:00</div>
-    <div class="time hour">7:00</div>
-    <div class="time hour">8:00</div>
-    <div class="time hour">9:00</div>
-</div>
+    <!-- 7 - 11, every half hour. -->
+    <% (7..22).each do |num|
+      height = 30 # minutes.
+      meridian = num >= 12 ? "PM" : "AM"
+      num -= 12 if num > 12
+      num = 12 if num == 0
+      %>
 
-<div id="monday" class="day_column">
-    <div class="time header">Monday</div>
-    <div class="time fifty" id="Mon1" >8:00
-    <script>
-     $(function(){ 
-     var variable = null; //Mon("8:00");
-     // $('#Mon1').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Mon2">9:05
-    <script>
-     $(function(){ 
-     var variable = null; //Mon("9:05");
-     // $('#Mon2').html(variable);
-     });
-      </script> 
-      </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Mon3">10:10
-    <script>
-     $(function(){ 
-     var variable = null; //Mon("10:10");
-     // $('#Mon3').html(variable);
-     });
-      </script> </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Mon4">11:15
-    <script>
-     $(function(){ 
-     var variable = null; //Mon("11:15");
-     // $('#Mon4').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Mon5">12:20
-    <script>
-     $(function(){ 
-     var variable = null; //Mon("12:20");
-     // $('#Mon5').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Mon6">1:25
-    <script>
-     $(function(){ 
-     var variable = null; //Mon("1:25");
-     // $('#Mon6').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Mon7">2:30
-    <script>
-     $(function(){ 
-     var variable = null; //Mon("2:30");
-     // $('#Mon7').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Mon8">3:35
-    <script>
-     $(function(){ 
-     var variable = null; //Mon("3:35");
-     // $('#Mon8').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Mon9">4:40
-    <script>
-     $(function(){ 
-     var variable = null; //Mon("4:40");
-     // $('#Mon9').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Mon10">5:45
-    <script>
-     $(function(){ 
-     var variable = null; //Mon("5:45");
-     // $('#Mon10').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Mon11">6:50
-    <script>
-     $(function(){ 
-     var variable = null; //Mon("6:50");
-     // $('#Mon11').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Mon12">7:55
-    <script>
-     $(function(){ 
-     var variable = null; //Mon("7:55");
-     // $('#Mon12').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time hour">9:00</div> 
-</div>
-
- <div id="tuesday" class="day_column">
-    <div class="time header">Tuesday</div>
-    <div class="time seventyfive" id="Tues1">8:00
-    <script>
-     $(function(){ 
-     var variable = null; //Tues("8:00");
-     // $('#Tues1').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time seventyfive" id="Tues2">9:30
-    <script>
-     $(function(){ 
-     var variable = null; //Tues("9:30");
-     // $('#Tues2').html(variable);
-     });
-      </script> 
-      </div>
-    <div class="time half"></div>
-    <div class="time seventyfive" id="Tues3">11:15
-    <script>
-     $(function(){ 
-     var variable = null; //Tues("11:15");
-     // $('#Tues3').html(variable);
-     });
-      </script> 
-      </div>
-    <div class="time half"></div>
-    <div class="time seventyfive" id="Tues4">1:00
-    <script>
-     $(function(){ 
-     var variable = null; //Tues("1:00");
-     // $('#Tues4').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time seventyfive" id="Tues5">2:30
-    <script>
-     $(function(){ 
-     var variable = null; //Tues("2:30");
-     // $('#Tues5').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    
-    <div class="time seventyfive" id="Tues6" >4:00
-    <script>
-     $(function(){ 
-     var variable = null; //Tues("4:00");
-     // $('#Tues6').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time half"></div>
-    <div class="time seventyfive" id="Tues7">5:45
-    <script>
-     $(function(){ 
-     var variable = null; //Tues("5:45");
-     // $('#Tues7').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time half"></div>
-    <div class="time seventyfive" id="Tues8">7:30
-    <script>
-     $(function(){ 
-     var variable = null; //Tues("7:30");
-     // $('#Tues8').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time hour">9:00</div>   
-</div>
-
-
-
-
-
-<div id="wednesday" class="day_column">
-    <div class="time header">Wednesday</div>
-    <div class="time fifty" id="Wed1">8:00
-    <script>
-     $(function(){ 
-     var variable = null; //Wed("8:00");
-     // $('#Wed1').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Wed2">9:05
-    <script>
-     $(function(){ 
-     var variable = null; //Wed("9:05");
-     // $('#Wed2').html(variable);
-     });
-      </script> 
-      </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Wed3">10:10
-    <script>
-     $(function(){ 
-     var variable = null; //Wed("10:10");
-     // $('#Wed3').html(variable);
-     });
-      </script> </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Wed4">11:15
-    <script>
-     $(function(){ 
-     var variable = null; //Wed("11:15");
-     // $('#Wed4').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Wed5">12:20
-    <script>
-     $(function(){ 
-     var variable = null; //Wed("12:20");
-     // $('#Wed5').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Wed6">1:25
-    <script>
-     $(function(){ 
-     var variable = null; //Wed("1:25");
-     // $('#Wed6').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Wed7">2:30
-    <script>
-     $(function(){ 
-     var variable = null; //Wed("2:30");
-     // $('#Wed7').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Wed8">3:35
-    <script>
-     $(function(){ 
-     var variable = null; //Wed("3:35");
-     // $('#Wed8').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Wed9">4:40
-    <script>
-     $(function(){ 
-     var variable = null; //Wed("4:40");
-     // $('#Wed9').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Wed10">5:45
-    <script>
-     $(function(){ 
-     var variable = null; //Wed("5:45");
-     // $('#Wed10').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Wed11">6:50
-    <script>
-     $(function(){ 
-     var variable = null; //Wed("6:50");
-     // $('#Wed11').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Wed12">7:55
-    <script>
-     $(function(){ 
-     var variable = null; //Wed("7:55");
-     // $('#Wed12').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time hour">9:00</div>
-</div>
-
-
-
-
-
-<div id="thursday" class="day_column">
-    <div class="time header">Thursday</div>
-    <div class="time seventyfive" id="Thur1">8:00
-    <script>
-     $(function(){ 
-     var variable = null; //Thur("8:00");
-     // $('#Thur1').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time seventyfive" id="Thur2">9:30
-    <script>
-     $(function(){ 
-     var variable = null; //Thur("9:30");
-     // $('#Thur2').html(variable);
-     });
-      </script> 
-      </div>
-    <div class="time half"></div>
-    <div class="time seventyfive" id="Thur3">11:15
-    <script>
-     $(function(){ 
-     var variable = null; //Thur("11:15");
-     // $('#Thur3').html(variable);
-     });
-      </script> 
-      </div>
-    <div class="time half"></div>
-    <div class="time seventyfive" id="Thur4">1:00
-    <script>
-     $(function(){ 
-     var variable = null; //Thur("1:00");
-     // $('#Thur4').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time seventyfive" id="Thur5">2:30
-    <script>
-     $(function(){ 
-     var variable = null; //Thur("2:30");
-     // $('#Thur5').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    
-    <div class="time seventyfive" id="Thur6" >4:00
-    <script>
-     $(function(){ 
-     var variable = null; //Thur("4:00");
-     // $('#Thur6').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time half"></div>
-    <div class="time seventyfive" id="Thur7">5:45
-    <script>
-     $(function(){ 
-     var variable = null; //Thur("5:45");
-     // $('#Tues7').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time half"></div>
-    <div class="time seventyfive" id="Thur8">7:30
-    <script>
-     $(function(){ 
-     var variable = null; //Thur("7:30");
-     // $('#Thur8').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time hour">9:00</div>
-</div>
-
-
-
-
-
-
-
-<div id="friday" class="day_column">
-    <div class="time header">Friday</div>
-    <div class="time fifty" id="Fri1">8:00
-    <script>
-     $(function(){ 
-     var variable = null; //Fri("8:00");
-     // $('#Fri1').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Fri2">9:05
-    <script>
-     $(function(){ 
-     var variable = null; //Fri("9:05");
-     // $('#Fri2').html(variable);
-     });
-      </script> 
-      </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Fri3">10:10
-    <script>
-     $(function(){ 
-     var variable = null; //Fri("10:10");
-     // $('#Fri3').html(variable);
-     });
-      </script> </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Fri4">11:15
-    <script>
-     $(function(){ 
-     var variable = null; //Fri("11:15");
-     // $('#Fri4').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Fri5">12:20
-    <script>
-     $(function(){ 
-     var variable = null; //Fri("12:20");
-     // $('#Fri5').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Fri6">1:25
-    <script>
-     $(function(){ 
-     var variable = null; //Fri("1:25");
-     // $('#Fri6').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Fri7">2:30
-    <script>
-     $(function(){ 
-     var variable = null; //Fri("2:30");
-     // $('#Fri7').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Fri8">3:35
-    <script>
-     $(function(){ 
-     var variable = null; //Fri("3:35");
-     // $('#Fri8').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Fri9">4:40
-    <script>
-     $(function(){ 
-     var variable = null; //Fri("4:40");
-     // $('#Fri9').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Fri10">5:45
-    <script>
-     $(function(){ 
-     var variable = null; //Fri("5:45");
-     // $('#Fri10').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Fri11">6:50
-    <script>
-     $(function(){ 
-     var variable = null; //Mon("6:50");
-     // $('#Fri11').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time fifty" id="Fri12">7:55
-    <script>
-     $(function(){ 
-     var variable = null; //Fri("7:55");
-     // $('#Fri12').html(variable);
-     });
-      </script> 
-    </div>
-    <div class="time fifteen"></div>
-    <div class="time hour">9:00</div>  
-</div>
-
+      <div class="time_reference" style="height:<%= height %>px;max-height:<%= height %>px;"><%= "#{num}:00#{meridian}" %></div>
+      <div class="time_reference" style="height:<%= height %>px;max-height:<%= height %>px;"><%= "#{num}:30#{meridian}" %></div>
+    <% end %>
 
 </div>
+<%
+days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+
+days.each do |day| %>
+    <div id="<%= day.downcase %>" class="day_column">
+        <div class="time header"><%= day %></div>
+    </div>
+
+
+<% end %>
 
 </div>
 
@@ -555,10 +54,13 @@
   var schedule_lookup = {};
   var cur_schedule_id = null;
   var cur_schedule = null;
+  var days = <%= raw(JSON.pretty_generate(days.as_json)) %>;
+  var short_days = $.map(days, function(day){return day[0];});
 
   function handle_status(status) {
+    console.log("handle_status");
     var message = null;
-    if ('message' in status) {
+    if (status.hasOwnProperty("message")) {
       message = status["message"];
     } else {
       message = "Unknown problem.";
@@ -568,6 +70,7 @@
   }
 
   function get_schedules(callback) {
+    console.log("get_schedules");
     $.ajax({
       type: 'POST',
       url: "/schedule/list", data: "",
@@ -588,8 +91,10 @@
   }
 
   function load_schedules() {
-    if (schedules === []) { return; }
+    console.log("load_schedules");
     var parent = $("#schedule_options").empty();
+    $(".class").remove();
+    $(".skip").remove();
     for (var i = 0; i < schedules.length; ++i) {
       var schedule = schedules[i];
       var id = schedule["id"];
@@ -601,7 +106,36 @@
   }
 
   function load() {
-    console.log("Loading schedule #" + cur_schedule_id);
+    console.log("load");
+    var min = 420;
+    var min_str = "7:00";
+    var max = 1380;
+    var max_str = "23:00";
+    $.each(days, function(idx, day) {
+      var last = min;
+      var last_str = min_str;
+
+      var letter = day[0];
+      var sections = cur_schedule["sections"].sort(function(a,b){return a["min_start"] - b["min_start"];});
+      var day_col = $("#" + day.toLowerCase());
+
+      $.each(sections, function(idx, section) {
+        if (section && section.hasOwnProperty("days") && section["days"].indexOf(letter) >= 0) {
+          var min_start = section["min_start"];
+          var start_s = section["time_start"];
+          var min_end = section["min_end"];
+          var end_s = section["time_end"];
+          var gap_size = min_start - last;
+          var sec_size = min_end - min_start;
+          $("#" + day.toLowerCase()).append("<div style=\"height: " + gap_size + "px;max-height: " + gap_size + "px;\" class=\"skip\"></div>");
+          $("#" + day.toLowerCase()).append("<div style=\"height: " + sec_size + "px;max-height: " + sec_size + "px;\" class=\"class time\">" + start_s + " - " + end_s + '<br />' + section["spire_id"] + ": " + section["name"] + "</div>");
+          last = min_end;
+          last_str = end_s;
+        }
+      });
+      var last_size = (max - last);
+      $("#" + day.toLowerCase()).append("<div style=\"height: " + last_size + "px;max-height: " + last_size + "px;\" class=\"skip\"></div>");
+    });
   }
 
   function get() {
@@ -623,13 +157,14 @@
   }
 
   function destroy(callback) {
+    console.log("destroy");
     var request = { 'id': cur_schedule_id }
     $.ajax({
       type: 'POST',
       contentType: "application/json",
       url: "/schedule/destroy", data: JSON.stringify(request),
       success: function(response) {
-        callback();
+        window.location = "<$= schedule_path %>";
       },
       dataType: "json"
     });
@@ -644,6 +179,10 @@
     $("#schedule_options").change(function() {
                             var id = $("option:selected", this).val();
                             if (id != cur_schedule_id) {
+                              /**
+                               * TODO: unload_schedule
+                               * or make the schedule disappear
+                               */
                               set_schedule(id);
                               load();
                             }

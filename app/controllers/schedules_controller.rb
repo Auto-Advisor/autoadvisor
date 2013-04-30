@@ -3,6 +3,7 @@ require 'json'
 class SchedulesController < ApplicationController
   def schedule
     @user = current_user
+    redirect_to advisor_path, :notice => "You don't have any schedules yet. This is where AutoAdvisor recommends classes for you." and return if @user.schedules.empty?
   end
 
   def all_classes
@@ -163,7 +164,7 @@ class SchedulesController < ApplicationController
     upper = opts[:upper]
     targets_so_far = 0
     lower = 4
-    return query.all.sample(4)
+    return query.all.sample(4) # was broken.
     sched = []
    
     while(targets_so_far < lower)

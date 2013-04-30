@@ -17,7 +17,7 @@ class Section < ActiveRecord::Base
     meridian = hours < 12 ? "AM" : "PM"
     hours = 12 if hours == 0
     hours -= 12 if hours > 12
-    return "%-d:%02d" % [hours, minutes]
+    return "%-d:%02d%s" % [hours, minutes, meridian]
   end
 
   def dept
@@ -66,6 +66,11 @@ class Section < ActiveRecord::Base
 
   def self.max_time
     HOURS * MINUTES
+  end
+
+  def self.major_count(constraints)
+    query = sections_for_constraints(constraints)[:query] or return {}
+    query.joins(:course, :major).select('sections.spire_id, majors.code').group('majors.code').count
   end
 
   # fields:
@@ -196,12 +201,12 @@ class Section < ActiveRecord::Base
           target_type = :number
         end
       when "specified"
-        if constraint.include? "courses"
-          constraint["courses"].each do |course_string|
-            specified_courses << Course.where("string #{eq_op} ?", course_string)
+        if constraint.include? "courses" and !constraint["courses"].empty?
+          constraint["courses"].split(/\s/).each do |course_string|
+            specified_courses << Course.where("string #{eq_op} ?", course_string.upper)
           end
         end
-        if constraint.include? "sections"
+        if constraint.include? "sections" and !constraint["sections"].empty?
           constraint["sections"].each do |spire_id|
             specifed_sections << Section.where("spire_id #{eq_op} ?", spire_id)
           end

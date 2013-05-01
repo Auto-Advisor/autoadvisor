@@ -180,6 +180,7 @@ class Section < ActiveRecord::Base
     specified_sections = Set.new
     excluded_sections = Set.new
     required_courses_strings = nil
+    required_section_ids = nil
     query = Section.joins(:course, :major) #return all sections which have a course and a major
     constraints.each do |constraint|
       invert = constraint.include? "invert" && constraint["invert"] == true
@@ -229,19 +230,22 @@ class Section < ActiveRecord::Base
         end
       when "specified"
         if constraint.include? "courses" and !constraint["courses"].empty? and !constraint["courses"].nil?
-          if invert
-            constraint["courses"].split(/\s/).each do |course_string|
-                query = query.where("courses.string #{eq_op} ?", course_string[0])
+            if invert
+                constraint["courses"].split(/\s/).each do |course_string|
+                    query = query.where("courses.string #{eq_op} ?", course_string[0])
+                end
+            else
+                required_courses_strings = constraint["courses"]
             end
-          else
-            required_courses_strings = constraint["courses"]
-          end
         end
-        if constraint.include? "sections" and !constraint["sections"].empty?
-          constraint["sections"].each do |spire_id|
-            specified_sections = Section.joins(:course, :major)
-            specified_sections = specified_sections.where("sections.spire_id #{eq_op}?", spire_id)
-          end
+        if constraint.include? "sections" and !constraint["sections"].empty? and !constraint["sections"].nil?
+            if invert
+                constraint["sections"].each do |spire_id|
+                    query = specified_sections.where("sections.spire_id #{eq_op}?", spire_id)
+                end
+            else
+                required_section_ids = constraint["sections"]
+            end
         end
       when "days_off"
         days_off = constraint["days_off"]
@@ -288,6 +292,13 @@ class Section < ActiveRecord::Base
                 specified_courses.concat(Section.joins(:course, :major).where("courses.string = ?", c).all)
             end
     end
+    #assemble a list of requested sections
+    if !required_section_ids.nil?
+        specified_sections = []
+            for c in required_section_ids
+                specified_sections.concat(Section.joins(:course, :major).where("sections.spire_id = ?", c).all)
+            end
+    end
     #this hash contains the following things:
     #:query is the set of all sections which meet the query specifications
     #:specified_courses is all the courses which the user specifically requested
@@ -296,7 +307,6 @@ class Section < ActiveRecord::Base
     #             courses
     #:credit_restriction is a flag indicating that there is a restriction on the number of
     #             courses
-    puts specified_sections.nil?
     result = {
       :query => query,
       :specified_courses => specified_courses,

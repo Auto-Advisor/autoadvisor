@@ -197,6 +197,8 @@ class Section < ActiveRecord::Base
         major_course_restriction = true
         min_maj_courses = constraint["lower"] || 0
         max_maj_courses = constraint["upper"] || 0
+        min_maj_courses = min_maj_courses.to_i
+        max_maj_courses = max_maj_courses.to_i
       when "time"
         #if the user made a time constraint, then the upper and lower are in the format ##:##:## when they need to be
         #in minutes in the day
@@ -280,7 +282,11 @@ class Section < ActiveRecord::Base
       :num_lower_courses => num_lower_courses,
       :num_upper_courses => num_upper_courses,
       :num_lower_credits => num_lower_credits,
-      :num_upper_credits => num_upper_credits
+      :num_upper_credits => num_upper_credits,
+      :major => major,
+      :major_course_restriction => major_course_restriction,
+      :min_maj_courses => min_maj_courses,
+      :max_maj_courses => max_maj_courses
     }
     result
   end

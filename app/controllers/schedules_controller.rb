@@ -176,6 +176,11 @@ class SchedulesController < ApplicationController
     num_upper_courses = opts[:num_upper_courses]
     num_lower_credits = opts[:num_lower_credits]
     num_upper_credits = opts[:num_upper_credits]
+    major = opts[:major]
+    major_course_restriction = opts[:major_course_restriction]
+    min_maj_courses = opts[:min_maj_courses]
+    max_maj_courses = opts[:max_maj_courses]
+    maj_courses_so_far = 0
     credits_so_far = 0
     courses_so_far = 0
     sched = []
@@ -201,6 +206,20 @@ class SchedulesController < ApplicationController
     while(targets_unmet)
       sect = query.all.sample
       next unless sect.ty == 'LEC' #if this thing isn't a lecture, skip through and begin the loop again
+      #ensure that we aren't violating the major course restriction by adding this class if it exists
+      abort = false
+      if major_course_restriction
+        if (maj_courses_so_far < min_maj_courses and sect.major.code != major)
+            abort = true
+        end
+        if (maj_courses_so_far >= min_maj_courses and sect.major.code == major)
+            abort = true
+        end
+        if sect.major.code == major
+            maj_courses_so_far += 1
+        end
+      end
+      next unless not abort
       #poss represents the set of all sections which have the same major code and course number as the
       #current section of interest
       poss = query.where("majors.code = ? AND courses.number = ?", sect.major.code, sect.course.number)

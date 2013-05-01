@@ -6,22 +6,18 @@ class UploadsControllerTest < ActionController::TestCase
   # end
   setup do
     @course = credits(:data)
+    @user = users(:test)
   end
 
-  test "upload_credits test" do
+  test "should upload_credits" do
   	get :upload_credits
   	assert_redirected_to(:controller=>'users', :action=>'transcript')
   end
 
-  test "add_credit" do
-  	get :add_credit
+  test "should add_credit" do
+  	get :add_credit, grade: 'A', course_string: 'cmpsci'
   	assert_redirected_to(:controller=>'users', :action=>'transcript')
   end
-
-  #test "delete_credit" do
-  #	get :delete_credit, :id=>@course 
-  #	assert_redirected_to(:controller=>'users', :action=>'transcript')
-  #end
 
   class ActiveSupport::TestCase
 	include Devise::TestHelpers

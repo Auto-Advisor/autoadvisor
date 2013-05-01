@@ -5,14 +5,13 @@ class SchedulesControllerTest < ActionController::TestCase
   #  @schedule = schedule(:test)
   #end
 
-  #test "test schedule" do
-  #  assert true
-  #end
+  test "should get schedule" do
+    get :schedule
+    assert :success
+  end
 
-  #class ActiveSupport::TestCase
-  #  include Devise::TestHelpers
-  #end
-
-  ####NO MAJOR FUNCTIONALITY TO TEST####
+  class ActiveSupport::TestCase
+    include Devise::TestHelpers
+  end
 
 end

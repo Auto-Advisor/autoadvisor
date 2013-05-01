@@ -13,7 +13,7 @@ class CoursesControllerTest < ActionController::TestCase
   test "should create course" do
     @newCourse = Course.create(:desc=>"",:name=>"java",:number=>121)
     assert_response :success
-    assert(@newCourse.valid?, "new course no in db")
+    assert(@newCourse.valid?, "new course not in db")
   end
 
   class ActiveSupport::TestCase

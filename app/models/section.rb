@@ -227,16 +227,14 @@ class Section < ActiveRecord::Base
       when "specified"
         if constraint.include? "courses" and !constraint["courses"].empty?
           constraint["courses"].split(/\s/).each do |course_string|
-            #specified_courses = Course.where("string #{eq_op} ?", course_string.upper) || specified_courses
+            specified_courses = Section.joins(:course, :major)
+            specified_courses = specified_courses.where("courses.string #{eq_op} ?", course_string[0])
           end
         end
         if constraint.include? "sections" and !constraint["sections"].empty?
           constraint["sections"].each do |spire_id|
-            puts spire_id
             specified_sections = Section.joins(:course, :major)
-            puts specified_sections.nil?
             specified_sections = specified_sections.where("sections.spire_id #{eq_op}?", spire_id)
-            puts specified_sections.nil?
           end
         end
       when "days_off"

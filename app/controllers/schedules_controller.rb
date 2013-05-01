@@ -206,7 +206,7 @@ class SchedulesController < ApplicationController
     while(targets_unmet)
       #if there are no specified courses, use one from the list of all eligable coures
       #sections = []
-      courses = []
+      #courses = []
       if not sections.empty?
         sect = sections.pop
       elsif not courses.empty?

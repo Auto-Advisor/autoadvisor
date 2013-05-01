@@ -208,7 +208,7 @@ class Section < ActiveRecord::Base
       when "units"
         lower = constraint["lower"] || 0
         upper = constraint["upper"] || 18
-        query = query.where("sections.credit_min #{gt_op} ? #{and_op} sections.credit_max #{lt_op}", lower, upper)
+        query = query.where("sections.credit_min #{gt_op} ? #{and_op} sections.credit_max #{lt_op} ?", lower, upper)
       when "target"
         lower = constraint["lower"] || lower
         upper = constraint["upper"] || upper

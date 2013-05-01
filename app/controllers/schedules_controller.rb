@@ -234,8 +234,7 @@ class SchedulesController < ApplicationController
         credits_so_far += cred_incr
         courses_so_far += 1
       end
-      puts num_lower_courses
-      targets_unmet = credits_so_far < num_lower_credits and courses_so_far < num_lower_courses
+      targets_unmet = (credits_so_far < num_lower_credits or courses_so_far < num_lower_courses)
     end  
       #
       # targets_so_far+=1

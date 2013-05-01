@@ -1,11 +1,13 @@
 function printSchedule(data) {
   var string = '';
+  var spire_id = [];
   string += '<th width="10%">Lectures</th>';
   for (var i = 0; i < data.length; i++) {
-    string += '<td align="center">';
+    string += '<td align="center" id="' + data[i].spire_id + '">';
+    spire_id.push(data[i].spire_id);
     string += data[i].class_string + '<br>';
     string += data[i].name + '<br>';
-    string += data[i]["time_start"] + ' - ' + data[i]["time_end"];
+    string += data[i].days + ' ' + data[i]["time_start"] + ' - ' + data[i]["time_end"];
     string += '</td>';
   }
 
@@ -15,9 +17,9 @@ function printSchedule(data) {
     if (data[i].discussion == undefined) {
       string += '&nbsp;';
     } else {
+      string += data[i].discussion.class_string + '<br>';
       string += data[i].discussion.name + '<br>';
-      string += data[i].discussion.day + '<br>';
-      string += data[i].discussion.beg_time + ' - ' + data[i].discussion.end_time;
+      string += data[i].discussion['time_start'] + ' - ' + data[i].discussion['time_end'];
     }
     string += '</td>';
   }
@@ -28,13 +30,13 @@ function printSchedule(data) {
     if (data[i].laboratory == undefined) {
       string += '&nbsp;';
     } else {
+      string += data[i].laboratory.class_string + '<br>';
       string += data[i].laboratory.name + '<br>';
-      string += data[i].laboratory.day + '<br>';
-      string += data[i].laboratory.beg_time + ' - ' + data[i].laboratory.end_time;
+      string += data[i].laboratory['time_start'] + ' - ' + data[i].laboratory['time_end'];
     }
     string += '</td>';
   }
-  return string;
+  return {'string': string, 'spire_id': spire_id};
 } 
 
 function getSections(data) {
@@ -50,6 +52,7 @@ function getSections(data) {
 }
 
 function print_recommendation (data) {
+  var schedule = printSchedule(data);
 	var string = '<table class="table table-bordered table-striped"><tr>';
 	   string += '<td rowspan="4" width = "20%">';
 	   string += '<a href="#save" role="button" class="btn" data-toggle="modal">Save This Schedule</a>';
@@ -57,7 +60,7 @@ function print_recommendation (data) {
 	   string += '<div class="modal-header">You are going to save the following schedule:</div>';
 
 	   string += '<table class="table table-bordered table-striped"><tr>';
-	   string += printSchedule(data);
+	   string += schedule.string;
 	   string += '</tr></table>';
 
 	   string += 'Name of This Schedule: <input type="text" name="name_of_save" id="name_of_save">';
@@ -66,7 +69,7 @@ function print_recommendation (data) {
      string += '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" id="save_btn" >Save</button>';
      string += '</div></div></td>';
 
-     string += printSchedule(data);
+     string += schedule.string;
 
      string += '</tr><tr><td>&nbsp;</td>';
 
@@ -78,10 +81,25 @@ function print_recommendation (data) {
 
   $('#recommendations').html(string);
 
+  var spire_id = schedule.spire_id;
+
+  $.each(spire_id, function (index, value) {
+    console.log(value);
+    $('td#' + value).bind('click', function (event) {
+      console.log(value + 'clicked');
+      $('#string').html(value);
+    });
+  });
+
   $.each(data, function(i, v) {
     $('a.No_' + v.id).bind('click', function (event) {
       console.log("No Class " + v.class_string);
       dontwant.push(v.class_string);
+      $.each(data, function (index, value) {
+        if (value.class_string != v.class_string) {
+          inclusion.courses.push(value.class_string);
+        }
+      });
       getRecommendation();
     });
   });

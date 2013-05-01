@@ -404,12 +404,14 @@ function getRecommendation() {
 
   var constraints_array = getConstraints();
 
-  $('#string').append('<pre>'+JSON.stringify(constraints_array)+'</pre><br />');
+  $('#string').html(JSON.stringify(constraints_array));
 
   function onSuccess (data) {
+    inclusion.courses = [];
+    inclusion.sections = [];
     console.log("Print");
     print_recommendation(data);
-    $('#string').html(JSON.stringify(data));
+    // $('#string').html(JSON.stringify(data));
 
     var exclusion_list = '';
     if (dontwant.length != 0) {

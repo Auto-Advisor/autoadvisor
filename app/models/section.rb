@@ -169,6 +169,12 @@ class Section < ActiveRecord::Base
     number_restriction = false
     credit_restriction = false
     target_type = nil
+    major_course_restriction = false
+    max_maj_courses = nil
+    min_maj_courses = nil
+    major_specified = false
+    major = nil
+    major_query = nil
     specified_courses = Set.new
     specified_sections = Set.new
     query = Section.joins(:course, :major) #return all sections which have a course and a major
@@ -183,7 +189,14 @@ class Section < ActiveRecord::Base
       or_op = invert ? " AND " : " OR "
       case constraint["type"]
       when "major"
-        query = query.where("majors.code #{eq_op} ?", constraint["major"])
+        #query = query.where("majors.code #{eq_op} ?", constraint["major"])
+        major = constraint["major"]
+        major_query = "majors.code #{eq_op} ?"
+        major_specified = true
+      when "major_course"
+        major_course_restriction = true
+        min_maj_courses = constraint["lower"] || 0
+        max_maj_courses = constraint["upper"] || 0
       when "time"
         #if the user made a time constraint, then the upper and lower are in the format ##:##:## when they need to be
         #in minutes in the day
@@ -237,6 +250,19 @@ class Section < ActiveRecord::Base
         query = query.where("sections.gened #{yes_op} LIKE ?", constraints["gened"])
       end
     end
+    
+    #only reduce the section set to major courses if there is a request for major courses
+    #and no limit on the number of major courses
+    if (not major_course_restriction and major_specified)
+        query = query.where(major_query, major)
+    end
+
+    #if we have a floor but no maximum for the number of major courses, set the maximum
+    #equal to the maximum number of courses
+    if max_maj_courses == 0
+        max_maj_courses = num_upper_courses
+    end
+
     #this hash contains the following things:
     #:query is the set of all sections which meet the query specifications
     #:specified_courses is all the courses which the user specifically requested

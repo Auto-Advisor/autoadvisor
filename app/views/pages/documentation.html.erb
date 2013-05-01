@@ -2,20 +2,28 @@
 <% content_for :h1 do %>
   <h1>Documentation</h1>
 <% end %>
+
+<div class="tabbable tabs-left">
+    <ul class="nav nav-tabs">
+   <li class="active"><a href="#users" data-toggle="tab">For users</a></li>
+  <li><a href="#admin" data-toggle="tab">For administrators</a></li>
+    </ul>
+    <div class="tab-content">
+     <div class="tab-pane active" id= "users">
+
     <div class="page-header">
-    <h1>AutoAdvisor <small>Manuals</small></h1>
+      <h1>AutoAdvisor <small>User Manual</small></h1>
     </div>
-  <blockquote>
-  	Walkthroughs, help, and information for users:
-  	<small>
-  	<%= link_to 'User Manual','https://docs.google.com/document/d/1jUuix8poZ6cw1S_zy0otE5aK1PeHHrIWfxVwcSFH-gA/edit?pli=1' %>
-  </small>
-  </blockquote>
-<p></p>
-<blockquote>
-	Installation instuctions, system requirements, and information for administrators:
-  <small>
-  	<%= link_to 'Admin Manual', 'https://docs.google.com/document/d/1S0nzsglFRUR14FiMVq1PGURrMWbzfyFbU9iTLMs1sB4/edit?pli=1' %>
-  </small>
-</blockquote>
-</p>
+    Walkthroughs, help, and information for users:<br>
+    <%= link_to 'User Manual','https://docs.google.com/document/d/1jUuix8poZ6cw1S_zy0otE5aK1PeHHrIWfxVwcSFH-gA/edit?pli=1' %>
+    </div>
+    <div class="tab-pane" id="admin">
+
+    <div class="page-header">
+      <h1>AutoAdvisor <small>Admin Manual</small></h1>
+    </div>
+    Installation instuctions, system requirements, and information for administrators:<br>
+    <%= link_to 'Admin Manual', 'https://docs.google.com/document/d/1S0nzsglFRUR14FiMVq1PGURrMWbzfyFbU9iTLMs1sB4/edit?pli=1' %>
+    </div>
+
+

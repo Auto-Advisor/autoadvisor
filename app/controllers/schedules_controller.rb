@@ -184,7 +184,7 @@ class SchedulesController < ApplicationController
     credits_so_far = 0
     courses_so_far = 0
     sched = []
-    
+    puts sections.nil?
     #if there are no sections that meet the constraints, then return any empty array
     if query.empty?
         return sched
@@ -205,7 +205,7 @@ class SchedulesController < ApplicationController
     targets_unmet = true   
     while(targets_unmet)
       #if there are no specified courses, use one from the list of all eligable coures
-      sections = []
+      #sections = []
       courses = []
       if not sections.empty?
         sect = sections.pop

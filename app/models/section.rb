@@ -232,7 +232,11 @@ class Section < ActiveRecord::Base
         end
         if constraint.include? "sections" and !constraint["sections"].empty?
           constraint["sections"].each do |spire_id|
-            #specifed_sections = Section.where("spire_id #{eq_op} ?", spire_id) || specified_sections
+            puts spire_id
+            specified_sections = Section.joins(:course, :major)
+            puts specified_sections.nil?
+            specified_sections = specified_sections.where("sections.spire_id #{eq_op}?", spire_id)
+            puts specified_sections.nil?
           end
         end
       when "days_off"
@@ -275,10 +279,11 @@ class Section < ActiveRecord::Base
     #             courses
     #:credit_restriction is a flag indicating that there is a restriction on the number of
     #             courses
+    puts specified_sections.nil?
     result = {
       :query => query,
       :specified_courses => specified_courses,
-      :specifed_sections => specified_sections,
+      :specified_sections => specified_sections,
       :number_restriction => number_restriction,
       :credit_restriction => credit_restriction,
       :num_lower_courses => num_lower_courses,

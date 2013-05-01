@@ -212,7 +212,15 @@ class SchedulesController < ApplicationController
       elsif not courses.empty?
         sect = courses.pop
       else
-        sect = query.all.sample
+        #this will be where we ensure that we aren't picking any *96,*98,*99 unless ordered to
+        invalid_section = true
+        while(invalid_section)
+            sect = query.all.sample
+            puts sect.number
+            if !(sect.number.modulo(100) == 96 or sect.number.modulo(100) == 98 or sect.number.modulo(100) == 99)
+                invalid_section = false
+            end
+        end
       end
       next unless sect.ty == 'LEC' #if this thing isn't a lecture, skip through and begin the loop again
       matching_courses = sched.select {|s| (s.major.code == sect.major.code and s.number == sect.number)}

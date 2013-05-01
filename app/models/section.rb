@@ -118,8 +118,8 @@ class Section < ActiveRecord::Base
   #   major: string (e.g. 'CMPSCI')
   # 
   #   type: time
-  #   lower: string: HH:MM(AM|PM)
-  #   upper: string: HH:MM(AM|PM)
+  #   lower: string: HH:MM:SS
+  #   upper: string: HH:MM:SS
   #
   #   type: units "only sections worth 3 credits"
   #   lower: integer >= 0
@@ -160,6 +160,7 @@ class Section < ActiveRecord::Base
 
   #takes a set of constaints and generates a hash map (contents of hash map are specified below)
   def self.sections_for_constraints(constraints)
+    puts constraints
     num_lower_courses = nil
     num_upper_courses = nil
     num_lower_credits = nil
@@ -193,6 +194,7 @@ class Section < ActiveRecord::Base
       when "target"
         lower = constraint["lower"] || 4
         upper = constraint["upper"] || 4
+        puts lower
         type = constraint["target_type"] || :number
         if type == "credits"
           num_lower_credits = lower
@@ -250,9 +252,13 @@ class Section < ActiveRecord::Base
     if target_type == :credits
       result[:lower] = num_lower_credits
       result[:upper] = num_upper_credits
-    elsif target_type == :courses
+    elsif target_type == :number
+      puts num_lower_courses
       result[:lower] = num_lower_courses
       result[:upper] = num_upper_courses
+    else
+      result[:lower] = 4
+      result[:upper] = 4
     end
     result
   end

@@ -171,13 +171,13 @@ class SchedulesController < ApplicationController
     courses = opts[:specified_courses]
     credits = opts[:specified_credits]
     target_type = opts[:target_type]
-    lower = opts[:lower]
-    upper = opts[:upper]
+    lower = opts[:lower].to_i
+    upper = opts[:upper].to_i
     targets_so_far = 0
-    lower = 4 #the lower bound on the number of courses a schedule can contain
-    return query.all.sample(4) # was broken.
+    #return query.all.sample(4) # was broken.
     sched = []
    
+    puts lower
     while(targets_so_far < lower)
       sect = query.all.sample
       next unless sect.ty == 'LEC' #if this thing isn't a lecture, skip through and begin the loop again
@@ -187,12 +187,14 @@ class SchedulesController < ApplicationController
       disc = []
       labs = []
       # sched.append(poss.sample)
+      #this loop seeks to find any discussions and labs associated with the current section and
+      #add those to their respective list
       for cur in poss
         next unless cur.ty != 'LEC'
         if cur.section_number.include?('d')
           disc.append(cur)
         end
-        if :section_number.include?('l')
+        if cur.section_number.include?('l')
           labs.append(cur)
         end
       end

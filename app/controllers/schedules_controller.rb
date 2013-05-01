@@ -171,14 +171,20 @@ class SchedulesController < ApplicationController
     courses = opts[:specified_courses]
     credits = opts[:specified_credits]
     target_type = opts[:target_type]
-    lower = opts[:lower].to_i
-    upper = opts[:upper].to_i
-    targets_so_far = 0
-    #return query.all.sample(4) # was broken.
+    number_restriction = opts[:number_restriction]
+    credit_restriction = opts[:credit_restriction]
+    num_lower_courses = opts[:num_lower_courses]
+    num_upper_courses = opts[:num_upper_courses]
+    num_lower_credits = opts[:num_lower_credits]
+    num_upper_credits = opts[:num_upper_credits]
+    credits_so_far = 0
+    courses_so_far = 0
     sched = []
-   
-    puts lower
-    while(targets_so_far < lower)
+    
+    #loop until we've built a schedule from the set of available sections which meets the minimum number
+    #of credits and courses
+    targets_unmet = true   
+    while(targets_unmet)
       sect = query.all.sample
       next unless sect.ty == 'LEC' #if this thing isn't a lecture, skip through and begin the loop again
       #poss represents the set of all sections which have the same major code and course number as the
@@ -199,17 +205,22 @@ class SchedulesController < ApplicationController
         end
       end
       
-      
-      incr = (target_type == :credits ? sect.credits : 1)
-      sched.append(sect)
+      #this is setup so that we assume each section provides its minimum number of credits
+      cred_incr = sect.credit_min
+      #only add this section if it doesn't cause the number of credits to go over the maximum
+      if (credits_so_far + cred_incr) <= num_upper_credits
+        sched.append(sect)
  
-      if (disc.length > 0) 
-        sched.append(disc.sample) 
+        if (disc.length > 0) 
+            sched.append(disc.sample) 
+        end
+        if (labs.length > 0) 
+            sched.append(labs.sample) 
+        end
+        credits_so_far += cred_incr
+        courses_so_far += 1
       end
-       if (labs.length > 0) 
-        sched.append(labs.sample) 
-      end
-      targets_so_far += incr
+      targets_unmet = credits_so_far < num_lower_credits and courses_so_far < num_lower_courses
     end  
       #
       # targets_so_far+=1

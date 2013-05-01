@@ -161,10 +161,13 @@ class Section < ActiveRecord::Base
   #takes a set of constaints and generates a hash map (contents of hash map are specified below)
   def self.sections_for_constraints(constraints)
     puts constraints
-    num_lower_courses = nil
-    num_upper_courses = nil
-    num_lower_credits = nil
-    num_upper_credits = nil
+    #set default restrictions
+    num_lower_courses = 4
+    num_upper_courses = 5
+    num_lower_credits = 12
+    num_upper_credits = 15
+    number_restriction = false
+    credit_restriction = false
     target_type = nil
     specified_courses = Set.new
     specified_sections = Set.new
@@ -194,16 +197,17 @@ class Section < ActiveRecord::Base
       when "target"
         lower = constraint["lower"] || 4
         upper = constraint["upper"] || 4
-        puts lower
         type = constraint["target_type"] || :number
         if type == "credits"
-          num_lower_credits = lower
-          num_upper_credits = upper
+          num_lower_credits = lower.to_i
+          num_upper_credits = upper.to_i
           target_type = :credits
+          credit_restriction = true
         elsif type == "number"
-          num_lower_courses = lower
-          num_upper_courses = upper
+          num_lower_courses = lower.to_i
+          num_upper_courses = upper.to_i
           target_type = :number
+          number_restriction = true
         end
       when "specified"
         if constraint.include? "courses" and !constraint["courses"].empty?
@@ -243,17 +247,26 @@ class Section < ActiveRecord::Base
     #             courses or credits
     #:upper is the upper limit on either courses or credits, as indicated by target_type
     #:lower is the upper limit on either courses or credits, as indicated by target_type
+    #:number_restriction is a flag indicating that there is a restriction on the number of
+    #             courses
+    #:credit_restriction is a flag indicating that there is a restriction on the number of
+    #             courses
     result = {
       :query => query,
       :specified_courses => specified_courses,
       :specifed_sections => specified_sections,
-      :target_type => target_type
+      :target_type => target_type,
+      :number_restriction => number_restriction,
+      :credit_restriction => credit_restriction,
+      :num_lower_courses => num_lower_courses,
+      :num_upper_courses => num_upper_courses,
+      :num_lower_credits => num_lower_credits,
+      :num_upper_credits => num_upper_credits
     }
     if target_type == :credits
       result[:lower] = num_lower_credits
       result[:upper] = num_upper_credits
     elsif target_type == :number
-      puts num_lower_courses
       result[:lower] = num_lower_courses
       result[:upper] = num_upper_courses
     else

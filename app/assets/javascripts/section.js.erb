@@ -291,11 +291,11 @@ function getConstraints() {
 
     else if (value.active === 'spe_course') {
       var courses = $('#spe_course_' + index).val().split(', ');
-      $.each(courses, function (index, value) {
+      $.each(courses, function (i, v) {
         if ($('#not_' + index).hasClass('active'))
-          exclusion.by_input.push(value);
+          exclusion.by_input.push(v);
         else
-          inclusion.courses.push(value);
+          inclusion.courses.push(v);
       });
     }
 

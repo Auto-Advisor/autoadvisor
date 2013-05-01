@@ -169,7 +169,7 @@ class SchedulesController < ApplicationController
   def generate_schedule(opts)
     query = opts[:query]
     courses = opts[:specified_courses]
-    credits = opts[:specified_credits]
+    sections = opts[:specified_sections]
     number_restriction = opts[:number_restriction]
     credit_restriction = opts[:credit_restriction]
     num_lower_courses = opts[:num_lower_courses]
@@ -204,8 +204,19 @@ class SchedulesController < ApplicationController
     #of credits and courses
     targets_unmet = true   
     while(targets_unmet)
-      sect = query.all.sample
+      #if there are no specified courses, use one from the list of all eligable coures
+      sections = []
+      courses = []
+      if not sections.empty?
+        sect = sections.pop
+      elsif not courses.empty?
+        sect = courses.pop
+      else
+        sect = query.all.sample
+      end
       next unless sect.ty == 'LEC' #if this thing isn't a lecture, skip through and begin the loop again
+      matching_courses = sched.select {|s| (s.major.code == sect.major.code and s.number == sect.number)}
+      next unless matching_courses.empty?
       #ensure that we aren't violating the major course restriction by adding this class if it exists
       abort = false
       if major_course_restriction

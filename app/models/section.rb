@@ -227,12 +227,12 @@ class Section < ActiveRecord::Base
       when "specified"
         if constraint.include? "courses" and !constraint["courses"].empty?
           constraint["courses"].split(/\s/).each do |course_string|
-            specified_courses << Course.where("string #{eq_op} ?", course_string.upper)
+            #specified_courses = Course.where("string #{eq_op} ?", course_string.upper) || specified_courses
           end
         end
         if constraint.include? "sections" and !constraint["sections"].empty?
           constraint["sections"].each do |spire_id|
-            specifed_sections << Section.where("spire_id #{eq_op} ?", spire_id)
+            #specifed_sections = Section.where("spire_id #{eq_op} ?", spire_id) || specified_sections
           end
         end
       when "days_off"

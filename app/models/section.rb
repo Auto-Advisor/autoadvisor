@@ -176,7 +176,10 @@ class Section < ActiveRecord::Base
     major = nil
     major_query = nil
     specified_courses = Set.new
+    excluded_courses = Set.new
     specified_sections = Set.new
+    excluded_sections = Set.new
+    required_courses_strings = nil
     query = Section.joins(:course, :major) #return all sections which have a course and a major
     constraints.each do |constraint|
       invert = constraint.include? "invert" && constraint["invert"] == true
@@ -189,8 +192,8 @@ class Section < ActiveRecord::Base
       or_op = invert ? " AND " : " OR "
       case constraint["type"]
       when "major"
-        #query = query.where("majors.code #{eq_op} ?", constraint["major"])
         major = constraint["major"]
+        #query = query.where("majors.code #{eq_op} ?", major)
         major_query = "majors.code #{eq_op} ?"
         major_specified = true
       when "major_course"
@@ -225,10 +228,13 @@ class Section < ActiveRecord::Base
           number_restriction = true
         end
       when "specified"
-        if constraint.include? "courses" and !constraint["courses"].empty?
-          constraint["courses"].split(/\s/).each do |course_string|
-            specified_courses = Section.joins(:course, :major)
-            specified_courses = specified_courses.where("courses.string #{eq_op} ?", course_string[0])
+        if constraint.include? "courses" and !constraint["courses"].empty? and !constraint["courses"].nil?
+          if invert
+            constraint["courses"].split(/\s/).each do |course_string|
+                query = query.where("courses.string #{eq_op} ?", course_string[0])
+            end
+          else
+            required_courses_strings = constraint["courses"]
           end
         end
         if constraint.include? "sections" and !constraint["sections"].empty?
@@ -241,6 +247,12 @@ class Section < ActiveRecord::Base
         days_off = constraint["days_off"]
 
         days_off.each_char do |c|
+          query = query.where("sections.days #{not_op} LIKE '%#{c}%'")
+        end
+      when "days"
+        days = constraint["days"]
+
+        days.each_char do |c|
           query = query.where("sections.days #{not_op} LIKE '%#{c}%'")
         end
       when "course_range"
@@ -269,6 +281,13 @@ class Section < ActiveRecord::Base
         max_maj_courses = num_upper_courses
     end
 
+    #assemble a list of requested courses
+    if !required_courses_strings.nil?
+        specified_courses = []
+            for c in required_courses_strings
+                specified_courses.concat(Section.joins(:course, :major).where("courses.string = ?", c).all)
+            end
+    end
     #this hash contains the following things:
     #:query is the set of all sections which meet the query specifications
     #:specified_courses is all the courses which the user specifically requested

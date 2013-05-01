@@ -204,9 +204,7 @@ class SchedulesController < ApplicationController
     #of credits and courses
     targets_unmet = true   
     while(targets_unmet)
-      #if there are no specified courses, use one from the list of all eligable coures
-      #sections = []
-      #courses = []
+      #if there are no specified courses, use one from the list of all eligable courses
       if not sections.empty?
         sect = sections.pop
       elsif not courses.empty?
@@ -223,6 +221,7 @@ class SchedulesController < ApplicationController
         end
       end
       next unless sect.ty == 'LEC' #if this thing isn't a lecture, skip through and begin the loop again
+      #ensure that we haven't already picked this course
       matching_courses = sched.select {|s| (s.major.code == sect.major.code and s.number == sect.number)}
       next unless matching_courses.empty?
       #ensure that we aren't violating a restriction on the number of major courses by adding this class
@@ -233,9 +232,6 @@ class SchedulesController < ApplicationController
         end
         if (maj_courses_so_far >= min_maj_courses and sect.major.code == major)
             abort = true
-        end
-        if sect.major.code == major
-            maj_courses_so_far += 1
         end
       end
       next unless not abort
@@ -266,12 +262,16 @@ class SchedulesController < ApplicationController
       poss = query.where("majors.code = ? AND courses.number = ?", sect.major.code, sect.course.number)
       disc = []
       labs = []
+      for cur in poss.all
+        puts cur.ty
+      end
       # sched.append(poss.sample)
       #this loop seeks to find any discussions and labs associated with the current section and
       #add those to their respective list
-      for cur in poss
+      for cur in poss.all
           next unless cur.ty != 'LEC'
           if cur.section_number.include?('d')
+              puts cur.section_number
               disc.append(cur)
           end
           if cur.section_number.include?('l')
@@ -286,7 +286,9 @@ class SchedulesController < ApplicationController
       end
       credits_so_far += cred_incr
       courses_so_far += 1
-      #end
+      if sect.major.code == major
+        maj_courses_so_far += 1
+      end
       targets_unmet = (credits_so_far < num_lower_credits or courses_so_far < num_lower_courses)
     end  
       #

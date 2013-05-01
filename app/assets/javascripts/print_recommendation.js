@@ -79,22 +79,29 @@ function print_recommendation (data) {
 
   string += '</tr></table>';
 
+  if (exclusion.by_click.length < 1) {
+    string += '<span class="label label-info">Info</span> Click "I don\'t want this course" to exclude the course except the remaining part the recommended schedule';
+  }
+  else {
+    string += '<span class="label label-info">Info</span> Click "Show Me My Option" again will flush out the entire schedule except the exclusion list';
+  }
+
   $('#recommendations').html(string);
 
   var spire_id = schedule.spire_id;
 
-  $.each(spire_id, function (index, value) {
-    console.log(value);
-    $('td#' + value).bind('click', function (event) {
-      console.log(value + 'clicked');
-      $('#string').html(value);
-    });
-  });
+  // $.each(spire_id, function (index, value) {
+  //   console.log(value);
+  //   $('td#' + value).bind('click', function (event) {
+  //     console.log(value + 'clicked');
+  //     $('#string').html(value);
+  //   });
+  // });
 
   $.each(data, function(i, v) {
     $('a.No_' + v.id).bind('click', function (event) {
       console.log("No Class " + v.class_string);
-      dontwant.push(v.class_string);
+      exclusion.by_click.push(v.class_string);
       $.each(data, function (index, value) {
         if (value.class_string != v.class_string) {
           inclusion.courses.push(value.class_string);

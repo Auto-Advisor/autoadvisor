@@ -70,7 +70,7 @@ function reload(schedule_hash) {
 
 var num_constraint = 0;
 var constraints = [];
-var dontwant = [];
+var exclusion = {'by_click': [], 'by_input': []};
 var inclusion = {'type': 'specified', 'courses': [], 'sections': []};
 
 /**
@@ -216,7 +216,9 @@ function getConstraints() {
         var lower = $('#course_number_' + index).val();
         var higher = $('#course_number_2_' + index).val();
         if (lower > higher) {
-          valid = false;
+          $('#constraint_row_' + index).addClass('error');
+          $('#err_' + index).html('<i class="icon-exclamation-sign">Logic Fail</i>');
+          return {'type': 'failure'};
         }
         else {
           hash['lower'] = lower;
@@ -252,7 +254,9 @@ function getConstraints() {
         var lower = $('#num_course_' + index).val();
         var higher = $('#num_course_2_' + index).val();
         if (lower > higher) {
-          valid = false;
+          $('#constraint_row_' + index).addClass('error');
+          $('#err_' + index).html('<i class="icon-exclamation-sign">Logic Fail</i>');
+          return {'type': 'failure'};
         }
         else {
           hash['lower'] = lower;
@@ -274,7 +278,9 @@ function getConstraints() {
         var lower = $('#credit_' + index).val();
         var higher = $('#credit_2_' + index).val();
         if (lower > higher) {
-          valid = false;
+          $('#constraint_row_' + index).addClass('error');
+          $('#err_' + index).html('<i class="icon-exclamation-sign">Logic Fail</i>');
+          return {'type': 'failure'};
         }
         else {
           hash['lower'] = lower;
@@ -286,7 +292,10 @@ function getConstraints() {
     else if (value.active === 'spe_course') {
       var courses = $('#spe_course_' + index).val().split(', ');
       $.each(courses, function (index, value) {
-        inclusion.courses.push(value);
+        if ($('#not_' + index).hasClass('active'))
+          exclusion.by_input.push(value);
+        else
+          inclusion.courses.push(value);
       });
     }
 
@@ -326,6 +335,11 @@ function getConstraints() {
      * TODO
      */
     else if (value.active === 'major_course') {
+      if (!hasElement(constraints, 'active', 'major')) {
+        $('#constraint_row_' + index).addClass('error');
+        $('#err_' + index).html('<i class="icon-exclamation-sign">No major</i>');
+        return {'type': 'failure'};
+      }
       hash['type'] = 'major_course';
       if (getRelation(index) === '\>\=') {
         hash['lower'] = $('#major_course_' + index).val();
@@ -337,7 +351,9 @@ function getConstraints() {
         var lower = $('#major_course_' + index).val();
         var higher = $('#major_course_2_' + index).val();
         if (lower > higher) {
-          valid = false;
+          $('#constraint_row_' + index).addClass('error');
+          $('#err_' + index).html('<i class="icon-exclamation-sign">Logic Fail</i>');
+          return {'type': 'failure'};
         }
         else {
           hash['lower'] = lower;
@@ -358,7 +374,9 @@ function getConstraints() {
         var lower = $('#unit_per_course_' + index).val();
         var higher = $('#unit_per_course_2_' + index).val();
         if (lower > higher) {
-          valid = false;
+          $('#constraint_row_' + index).addClass('error');
+          $('#err_' + index).html('<i class="icon-exclamation-sign">Logic Fail</i>');
+          return {'type': 'failure'};
         }
         else {
           hash['lower'] = lower;
@@ -373,16 +391,27 @@ function getConstraints() {
   });
 
   /**
+   * If there are any failue type, return an empty array
+   */
+  if (hasElement(array, 'type', 'failure')) {
+    $('#recommendations').html('constraint fail');
+    return constraintsss;
+  }
+
+  /**
    * Exclusion List
    */
-  var exclusion = {};
-  exclusion['type'] = 'specified';
-  exclusion['courses'] = [];
-  $.each(dontwant, function (index, value) {
-    exclusion['courses'].push(value);
+  var final_exclusion = {};
+  final_exclusion['type'] = 'specified';
+  final_exclusion['courses'] = [];
+  $.each(exclusion.by_click, function (index, value) {
+    final_exclusion['courses'].push(value);
   });
-  exclusion['invert'] = true;
-  array.push(exclusion);
+  $.each(exclusion.by_input, function (index, value) {
+    final_exclusion['courses'].push(value);
+  });
+  final_exclusion['invert'] = true;
+  array.push(final_exclusion);
   array.push(inclusion);
   return array;
 }
@@ -402,11 +431,16 @@ function getConstraints() {
 function getRecommendation() {
   $('#msg').html('Recommendation Clicked');
 
+  $.each(constraints, function (index, value) {
+    $('#constraint_row_' + index).removeClass('error');
+  })
+
   var constraints_array = getConstraints();
 
   $('#string').html(JSON.stringify(constraints_array));
 
   function onSuccess (data) {
+    exclusion.by_input = [];
     inclusion.courses = [];
     inclusion.sections = [];
     console.log("Print");
@@ -414,23 +448,23 @@ function getRecommendation() {
     // $('#string').html(JSON.stringify(data));
 
     var exclusion_list = '';
-    if (dontwant.length != 0) {
+    if (exclusion.by_click.length != 0) {
       exclusion_list += '<table class="table table-hover table-bordered">';
       exclusion_list +=   '<thead>';
       exclusion_list +=     '<tr><td colspan="2">Exclusion List</td></tr>';
       exclusion_list +=   '</thead>';
       exclusion_list += '<tbody>';
-      for (var i = 0; i < dontwant.length; i++) {
-        exclusion_list += '<tr><td>' + dontwant[i] + '</td><td><a role="button" class="btn btn-danger" id="delete_exclusion_' + i + '">Delete</a></td></tr>'
+      for (var i = 0; i < exclusion.by_click.length; i++) {
+        exclusion_list += '<tr><td>' + exclusion.by_click[i] + '</td><td><a role="button" class="btn btn-danger" id="delete_exclusion_' + i + '">Delete</a></td></tr>'
       }
       exclusion_list += '</tbody></table>';
     }
 
     $('#exclusion_list').html(exclusion_list);
 
-    $.each(dontwant, function(index, value) {
+    $.each(exclusion.by_click, function(index, value) {
       $('#delete_exclusion_' + index).bind('click', function (event) {
-        dontwant = jQuery.grep(dontwant, function(v) {
+        exclusion.by_click = jQuery.grep(exclusion.by_click, function(v) {
           return value != v;
         });
         getRecommendation();
@@ -441,7 +475,7 @@ function getRecommendation() {
       $.each(value, function(i, v) {
         $('a.No_' + v.name).bind('click', function (event) {
           console.log("No Class " + v.name);
-          dontwant.push(v.name);
+          exclusion.by_click.push(v.name);
           getRecommendation();
         });
       });
@@ -479,6 +513,9 @@ function getRecommendation() {
     url: "/schedule/generate.json", data: JSON.stringify(constraints_array),
     success: onSuccess,
     beforeSend: onSend,
+    ajaxError: function () {
+      console.log("error");
+    },
     dataType: "json"
   });
 }

@@ -158,6 +158,7 @@ class Section < ActiveRecord::Base
     query.joins(:course).where("course.string NOT IN (?)", user.credits.joins(:course).all.map { |credit| credit.course.string })
   end
 
+  #takes a set of constaints and generates a hash map (contents of hash map are specified below)
   def self.sections_for_constraints(constraints)
     num_lower_courses = nil
     num_upper_courses = nil
@@ -166,7 +167,7 @@ class Section < ActiveRecord::Base
     target_type = nil
     specified_courses = Set.new
     specified_sections = Set.new
-    query = Section.joins(:course, :major)
+    query = Section.joins(:course, :major) #return all sections which have a course and a major
     constraints.each do |constraint|
       invert = constraint.include? "invert" && constraint["invert"] == true
       eq_op = invert ? "!=" : "="
@@ -180,9 +181,11 @@ class Section < ActiveRecord::Base
       when "major"
         query = query.where("majors.code #{eq_op} ?", constraint["major"])
       when "time"
-        lower = constraint["lower"] || 0
-        upper = constraint["upper"] || 2599
-        query = query.where("sections.min_beg #{gt_op} ? #{and_op} sections.min_end #{lt_op} ?", lower, upper)
+        #if the user made a time constraint, then the upper and lower are in the format ##:##:## when they need to be
+        #in minutes in the day
+        lower = ((constraint["lower"][0..1].to_i)*60+(constraint["lower"][3..4].to_i)) || 0
+        upper = ((constraint["upper"][0..1].to_i)*60+(constraint["lower"][3..4].to_i)) || 2599
+        query = query.where("sections.min_start #{gt_op} ? #{and_op} sections.min_end #{lt_op} ?", lower, upper)
       when "units"
         lower = constraint["lower"] || 0
         upper = constraint["upper"] || 18
@@ -230,6 +233,14 @@ class Section < ActiveRecord::Base
         query = query.where("sections.gened #{yes_op} LIKE ?", constraints["gened"])
       end
     end
+    #this hash contains the following things:
+    #:query is the set of all sections which meet the query specifications
+    #:specified_courses is all the courses which the user specifically requested
+    #:specified_sections is all the sections which the user specifically requested
+    #:target_type is a flag which indicates whether the user is setting boundaries on
+    #             courses or credits
+    #:upper is the upper limit on either courses or credits, as indicated by target_type
+    #:lower is the upper limit on either courses or credits, as indicated by target_type
     result = {
       :query => query,
       :specified_courses => specified_courses,

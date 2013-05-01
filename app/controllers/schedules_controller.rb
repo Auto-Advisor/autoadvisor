@@ -149,12 +149,23 @@ class SchedulesController < ApplicationController
     end
   end
 
+  #given a set of json constraints, generates a json version of a schedule which meets
+  #those constraints
   def generate_json_schedule
     json = get_json || []
     sections = generate_schedule(Section.sections_for_constraints(json))
     render :json => sections
   end
-
+  
+  #given a set of parameters, generates a schedule which meets those parameters
+  #where the parameters include
+  #:query is the set of all sections which meet the query specifications
+  #:specified_courses is all the courses which the user specifically requested
+  #:specified_sections is all the sections which the user specifically requested
+  #:target_type is a flag which indicates whether the user is setting boundaries on
+  #             courses or credits
+  #:upper is the upper limit on either courses or credits, as indicated by target_type
+  #:lower is the upper limit on either courses or credits, as indicated by target_type
   def generate_schedule(opts)
     query = opts[:query]
     courses = opts[:specified_courses]
@@ -163,13 +174,15 @@ class SchedulesController < ApplicationController
     lower = opts[:lower]
     upper = opts[:upper]
     targets_so_far = 0
-    lower = 4
+    lower = 4 #the lower bound on the number of courses a schedule can contain
     return query.all.sample(4) # was broken.
     sched = []
    
     while(targets_so_far < lower)
       sect = query.all.sample
-      next unless sect.ty == 'LEC' 
+      next unless sect.ty == 'LEC' #if this thing isn't a lecture, skip through and begin the loop again
+      #poss represents the set of all sections which have the same major code and course number as the
+      #current section of interest
       poss = query.where("majors.code = ? AND courses.number = ?", sect.major.code, sect.course.number)
       disc = []
       labs = []

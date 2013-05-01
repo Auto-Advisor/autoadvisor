@@ -225,7 +225,7 @@ class SchedulesController < ApplicationController
       next unless sect.ty == 'LEC' #if this thing isn't a lecture, skip through and begin the loop again
       matching_courses = sched.select {|s| (s.major.code == sect.major.code and s.number == sect.number)}
       next unless matching_courses.empty?
-      #ensure that we aren't violating the major course restriction by adding this class if it exists
+      #ensure that we aren't violating a restriction on the number of major courses by adding this class
       abort = false
       if major_course_restriction
         if (maj_courses_so_far < min_maj_courses and sect.major.code != major)
@@ -239,6 +239,25 @@ class SchedulesController < ApplicationController
         end
       end
       next unless not abort
+      #only add this section if it doesn't cause the number of credits to go over the maximum
+      #this is setup so that we assume each section provides its minimum number of credits
+      cred_incr = sect.credit_min
+      if (credits_so_far + cred_incr) > num_upper_credits
+        abort = true
+      end
+      next unless not abort
+      
+      #check for time and date overlaps with already selected schedules
+      for sched_section in sched
+        if (sched_section.start_s < sect.start_s < sched_section.end_s)
+            if sched_section.days_s == sect.days_s
+                abort = true
+            end
+        end
+      end
+      next unless not abort
+      sched.append(sect)
+      #we are currently randomly adding a section/lab if those things exist
       #poss represents the set of all sections which have the same major code and course number as the
       #current section of interest
       poss = query.where("majors.code = ? AND courses.number = ?", sect.major.code, sect.course.number)
@@ -248,30 +267,23 @@ class SchedulesController < ApplicationController
       #this loop seeks to find any discussions and labs associated with the current section and
       #add those to their respective list
       for cur in poss
-        next unless cur.ty != 'LEC'
-        if cur.section_number.include?('d')
-          disc.append(cur)
-        end
-        if cur.section_number.include?('l')
-          labs.append(cur)
-        end
+          next unless cur.ty != 'LEC'
+          if cur.section_number.include?('d')
+              disc.append(cur)
+          end
+          if cur.section_number.include?('l')
+              labs.append(cur)
+          end
       end
-      
-      #this is setup so that we assume each section provides its minimum number of credits
-      cred_incr = sect.credit_min
-      #only add this section if it doesn't cause the number of credits to go over the maximum
-      if (credits_so_far + cred_incr) <= num_upper_credits
-        sched.append(sect)
- 
-        if (disc.length > 0) 
-            sched.append(disc.sample) 
-        end
-        if (labs.length > 0) 
-            sched.append(labs.sample) 
-        end
-        credits_so_far += cred_incr
-        courses_so_far += 1
+      if (disc.length > 0) 
+          sched.append(disc.sample) 
       end
+      if (labs.length > 0) 
+          sched.append(labs.sample) 
+      end
+      credits_so_far += cred_incr
+      courses_so_far += 1
+      #end
       targets_unmet = (credits_so_far < num_lower_credits or courses_so_far < num_lower_courses)
     end  
       #

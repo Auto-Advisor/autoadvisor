@@ -195,18 +195,16 @@ class Section < ActiveRecord::Base
         upper = constraint["upper"] || 18
         query = query.where("sections.credit_min #{gt_op} ? #{and_op} sections.credit_max #{lt_op}", lower, upper)
       when "target"
-        lower = constraint["lower"] || 4
-        upper = constraint["upper"] || 4
+        lower = constraint["lower"] || lower
+        upper = constraint["upper"] || upper
         type = constraint["target_type"] || :number
         if type == "credits"
           num_lower_credits = lower.to_i
           num_upper_credits = upper.to_i
-          target_type = :credits
           credit_restriction = true
         elsif type == "number"
           num_lower_courses = lower.to_i
           num_upper_courses = upper.to_i
-          target_type = :number
           number_restriction = true
         end
       when "specified"
@@ -243,10 +241,6 @@ class Section < ActiveRecord::Base
     #:query is the set of all sections which meet the query specifications
     #:specified_courses is all the courses which the user specifically requested
     #:specified_sections is all the sections which the user specifically requested
-    #:target_type is a flag which indicates whether the user is setting boundaries on
-    #             courses or credits
-    #:upper is the upper limit on either courses or credits, as indicated by target_type
-    #:lower is the upper limit on either courses or credits, as indicated by target_type
     #:number_restriction is a flag indicating that there is a restriction on the number of
     #             courses
     #:credit_restriction is a flag indicating that there is a restriction on the number of
@@ -255,7 +249,6 @@ class Section < ActiveRecord::Base
       :query => query,
       :specified_courses => specified_courses,
       :specifed_sections => specified_sections,
-      :target_type => target_type,
       :number_restriction => number_restriction,
       :credit_restriction => credit_restriction,
       :num_lower_courses => num_lower_courses,
@@ -263,16 +256,6 @@ class Section < ActiveRecord::Base
       :num_lower_credits => num_lower_credits,
       :num_upper_credits => num_upper_credits
     }
-    if target_type == :credits
-      result[:lower] = num_lower_credits
-      result[:upper] = num_upper_credits
-    elsif target_type == :number
-      result[:lower] = num_lower_courses
-      result[:upper] = num_upper_courses
-    else
-      result[:lower] = 4
-      result[:upper] = 4
-    end
     result
   end
 

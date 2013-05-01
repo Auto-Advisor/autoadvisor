@@ -162,15 +162,14 @@ class SchedulesController < ApplicationController
   #:query is the set of all sections which meet the query specifications
   #:specified_courses is all the courses which the user specifically requested
   #:specified_sections is all the sections which the user specifically requested
-  #:target_type is a flag which indicates whether the user is setting boundaries on
-  #             courses or credits
-  #:upper is the upper limit on either courses or credits, as indicated by target_type
-  #:lower is the upper limit on either courses or credits, as indicated by target_type
+  #:number_restriction is a flag indicating that there is a restriction on the number of
+  #             courses
+  #:credit_restriction is a flag indicating that there is a restriction on the number of
+  #             courses
   def generate_schedule(opts)
     query = opts[:query]
     courses = opts[:specified_courses]
     credits = opts[:specified_credits]
-    target_type = opts[:target_type]
     number_restriction = opts[:number_restriction]
     credit_restriction = opts[:credit_restriction]
     num_lower_courses = opts[:num_lower_courses]
@@ -181,6 +180,21 @@ class SchedulesController < ApplicationController
     courses_so_far = 0
     sched = []
     
+    #if there are no sections that meet the constraints, then return any empty array
+    if query.empty?
+        return sched
+    end
+
+    #if we have just a number of credits or courses restriction, then shut off the other restriction's defaults
+    if number_restriction and not credit_restriction
+        num_lower_credits = 0
+        num_upper_credits = 100
+    end
+    if credit_restriction and not number_restriction
+        num_lower_courses = 0
+        num_upper_courses = 100
+    end
+
     #loop until we've built a schedule from the set of available sections which meets the minimum number
     #of credits and courses
     targets_unmet = true   
@@ -220,6 +234,7 @@ class SchedulesController < ApplicationController
         credits_so_far += cred_incr
         courses_so_far += 1
       end
+      puts num_lower_courses
       targets_unmet = credits_so_far < num_lower_credits and courses_so_far < num_lower_courses
     end  
       #

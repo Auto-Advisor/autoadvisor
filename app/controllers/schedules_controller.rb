@@ -249,13 +249,16 @@ class SchedulesController < ApplicationController
       
       #check for time and date overlaps with already selected schedules
       for sched_section in sched
-        if (sched_section.start_s < sect.start_s < sched_section.end_s)
-            if sched_section.days_s == sect.days_s
-                abort = true
+        if (sched_section.start_s <= sect.start_s and sect.start_s <= sched_section.end_s) or (sched_section.start_s <= sect.start_s and sect.end_s <= sched_section.end_s)
+            for day in sched_section.days.chars
+                if sect.days.include? day
+                    abort = true
+                end
             end
         end
       end
       next unless not abort
+
       sched.append(sect)
       #we are currently randomly adding a section/lab if those things exist
       #poss represents the set of all sections which have the same major code and course number as the

@@ -5,12 +5,12 @@ class CreditTest < ActiveSupport::TestCase
 	#	assert true
 	#end
 
-	test "credit exists on db" do
+	test "credit should exists on db" do
 		assert_not_nil(:data)
 	end
 
-	test "credits not the same on db" do
+	test "credits should not the same on db" do
   		assert_not_equal(:data, :ai)
   	end
-
+  	
 end

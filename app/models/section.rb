@@ -181,6 +181,7 @@ class Section < ActiveRecord::Base
     excluded_sections = Set.new
     required_courses_strings = nil
     required_section_ids = nil
+    required_geneds = Set.new
     query = Section.joins(:course, :major) #return all sections which have a course and a major
     constraints.each do |constraint|
       invert = constraint.include? "invert" && constraint["invert"] == true
@@ -269,7 +270,7 @@ class Section < ActiveRecord::Base
           query = query.where("sections.ty #{eq_op} 'LAB'")
         end
       when "gened"
-        query = query.where("sections.gened #{yes_op} LIKE ?", constraints["gened"])
+        required_geneds.add(constraint["string"])
       end
     end
     

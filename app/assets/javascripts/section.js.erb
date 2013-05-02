@@ -120,16 +120,29 @@ function getDays(type, i) {
  *
  */
 function getRecommendation() {
-  $('#msg').html('Recommendation Clicked');
 
+  /**
+   * Initialize page
+   */
   $.each(constraints, function (index, value) {
     $('#constraint_row_' + index).removeClass('error');
+    $('#err_' + index).html('');
   })
 
+  $('#recommendations').html('');
+
+  /**
+   * Get an array of constraints
+   * As JSON
+   */
   var constraints_array = getConstraints();
 
   $('#string').html(JSON.stringify(constraints_array));
 
+  /**
+   * Function onSuccess
+   * Receiving data from server, retrive from 'data' parameter
+   */
   function onSuccess (data) {
     if (data.length < 1) {
       $('#recommendations').html('Fail');
@@ -199,7 +212,7 @@ function getRecommendation() {
   }
 
   function onSend() {
-    $('#recommendations').html("Please wait... I am looking for schedules which suitable for you :)");
+    $('#recommendations').html("Please wait... I am looking for schedule which is suitable for you :)");
   }
   
   $.ajax({

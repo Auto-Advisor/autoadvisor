@@ -40,6 +40,7 @@ function getConstraints() {
         if (lower > higher) {
           $('#constraint_row_' + index).addClass('error');
           $('#err_' + index).html('<i class="icon-exclamation-sign">Logic Fail</i>');
+          $('#recommendations').append('<p class="icon-remove">Course Number Range Fail <img src="http://forum9.hkgolden.com/faces/sosad.gif"/></p><br />');
           return {'type': 'failure'};
         }
         else {
@@ -80,6 +81,7 @@ function getConstraints() {
         if (lower > higher) {
           $('#constraint_row_' + index).addClass('error');
           $('#err_' + index).html('<i class="icon-exclamation-sign">Logic Fail</i>');
+          $('#recommendations').append('<p class="icon-remove">Number of Course Range Fail <img src="http://forum9.hkgolden.com/faces/sosad.gif"/></p><br />');
           return {'type': 'failure'};
         }
         else {
@@ -104,6 +106,7 @@ function getConstraints() {
         if (lower > higher) {
           $('#constraint_row_' + index).addClass('error');
           $('#err_' + index).html('<i class="icon-exclamation-sign">Logic Fail</i>');
+          $('#recommendations').append('<p class="icon-remove">Credit Range Fail <img src="http://forum9.hkgolden.com/faces/sosad.gif"/></p><br />');
           return {'type': 'failure'};
         }
         else {
@@ -130,7 +133,7 @@ function getConstraints() {
       });
     }
 
-    else if (value.active === 'days') {
+    else if (value.active === 'day') {
       hash['days'] = getDays('day', index);
 
     }
@@ -162,6 +165,7 @@ function getConstraints() {
       if (!hasElement(constraints, 'active', 'major')) {
         $('#constraint_row_' + index).addClass('error');
         $('#err_' + index).html('<i class="icon-exclamation-sign">No major</i>');
+        $('#recommendations').append('<p class="icon-remove">Major Fail <img src="http://forum9.hkgolden.com/faces/sosad.gif"/></p><br />');
         return {'type': 'failure'};
       }
       hash['type'] = 'major_course';
@@ -177,6 +181,7 @@ function getConstraints() {
         if (lower > higher) {
           $('#constraint_row_' + index).addClass('error');
           $('#err_' + index).html('<i class="icon-exclamation-sign">Logic Fail</i>');
+          $('#recommendations').append('<p class="icon-remove">Number of Major Courses Range Fail <img src="http://forum9.hkgolden.com/faces/sosad.gif"/></p><br />');
           return {'type': 'failure'};
         }
         else {
@@ -200,6 +205,7 @@ function getConstraints() {
         if (lower > higher) {
           $('#constraint_row_' + index).addClass('error');
           $('#err_' + index).html('<i class="icon-exclamation-sign">Logic Fail</i>');
+          $('#recommendations').append('<p class="icon-remove">Unit Range Fail <img src="http://forum9.hkgolden.com/faces/sosad.gif"/></p><br />');
           return {'type': 'failure'};
         }
         else {
@@ -218,7 +224,6 @@ function getConstraints() {
    * If there are any failue type, return an empty array
    */
   if (hasElement(array, 'type', 'failure')) {
-    $('#recommendations').html('constraint fail');
     return constraintsss;
   }
 

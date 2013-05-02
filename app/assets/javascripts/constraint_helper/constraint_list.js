@@ -140,7 +140,8 @@ var constraint = function (count) {
                + "<option value='greater than'>Greater Than Or Equal To</option></select>",
     "input" : "<input id='unit_per_course_" + id + "' class='input-medium' name='unit_per_course' type='number' min=1 step=1 value='3' style='width: 70px'>"
                + " <div id='second_unit_input_" + id + "' style='float: right'> and "
-               + "<input id='unit_per_course_2_" + id + "' class='input-medium' name='unit_per_course' type='number' min=1 step=1 value='3' style='width: 70px'><div id='err_" + id + "'></div>"
+               + "<input id='unit_per_course_2_" + id + "' class='input-medium' name='unit_per_course' type='number' min=1 step=1 value='3' style='width: 70px'></div>"
+               + "<div id='err_" + id + "'></div>"
   };
 
   obj.credit = {
@@ -151,7 +152,8 @@ var constraint = function (count) {
                + "<option value='greater than'>Greater Than Or Equal To</option></select>",
     "input" : "<input id='credit_" + id + "' class='input-medium' name='credit' type='number' min=1 max=18 step=1 value='12' style='width:70px'>"
                + " <div id='second_credit_input_" + id + "' style='float: right'> and "
-               + "<input id='credit_2_" + id + "' class='input-medium' name='unit_per_course' type='number' min=1 max=18 step=1 value='15' style='width: 70px'><div id='err_" + id + "'></div>"
+               + "<input id='credit_2_" + id + "' class='input-medium' name='unit_per_course' type='number' min=1 max=18 step=1 value='15' style='width: 70px'></div>"
+               + "<div id='err_" + id + "'></div>"
   };
 
   obj.num_course = {
@@ -162,7 +164,8 @@ var constraint = function (count) {
                + "<option value='greater than'>Greater Than Or Equal To</option></select>",
        "input" : "<input id='num_course_" + id + "' class='input-medium' name='num_course' type='number' min=1 step=1 value='3' style='width: 70px'>"
                + " <div id='second_num_course_input_" + id + "' style='float: right'> and "
-               + "<input id='num_course_2_" + id + "' class='input-medium' name='unit_per_course' type='number' min=1 step=1 value='3' style='width: 70px'></div><div id='err_" + id + "'></div>"
+               + "<input id='num_course_2_" + id + "' class='input-medium' name='unit_per_course' type='number' min=1 step=1 value='3' style='width: 70px'></div>"
+               + "<div id='err_" + id + "'></div>"
   };
 
   obj.spe_course = {
@@ -180,7 +183,7 @@ var constraint = function (count) {
   obj.day = {
     "relation" : "<button type='button' class='btn' id='not_" + id + "' data-toggle='button'>Not</button>"
                + " <select style='width: 100px' id='relation_" + id + "'><option value='equal'>Equal To</option></select>",
-    "input" : "<div id='dayoff_" + id + "'>"
+    "input" : "<div id='day_" + id + "'>"
             + "<div class='btn-group' data-toggle='buttons-checkbox'>"
             + "<button type='button' class='btn active' value='M'>Mo</button>"
             + "<button type='button' class='btn active' value='T'>Tu</button>"
@@ -196,9 +199,10 @@ var constraint = function (count) {
                + "<option value='within'>Within</option>"
                + "<option value='less than'>Less Than Or Equal To</option>"
                + "<option value='greater than'>Greater Than Or Equal To</option></select>",
-    "input" : "<input id='course_number_" + id + "' class='input-medium' name='course_range' type='number' min=1 step=1 value='000' style='width: 70px'>"
+    "input" : "<input id='course_number_" + id + "' class='input-medium' name='course_range' type='number' min=100 step=1 value='100' style='width: 70px'>"
                + " <div id='second_course_number_input_" + id + "' style='float: right'> and "
-               + "<input id='course_number_2_" + id + "' class='input-medium' name='unit_per_course' type='number' min=1 step=1 value='000' style='width: 70px'></div><div id='err_" + id + "'></div>"
+               + "<input id='course_number_2_" + id + "' class='input-medium' name='unit_per_course' type='number' max=900 step=1 value='300' style='width: 70px'></div>"
+               + "<div id='err_" + id + "'></div>"
   };
 
   obj.dis = {
@@ -251,7 +255,8 @@ var constraint = function (count) {
                + "<option value='greater than'>Greater Than Or Equal To</option></select>",
     "input" : "<input id='major_course_" + id + "' class='input-medium' name='major_course' type='number' min=1 step=1 value='3' style='width: 70px'>"
                + " <div id='second_major_course_input_" + id + "' style='float: right'> and "
-               + "<input id='major_course_2_" + id + "' class='input-medium' name='unit_per_course' type='number' min=1 step=1 value='3' style='width: 70px'></div><div id='err_" + id + "'></div>"
+               + "<input id='major_course_2_" + id + "' class='input-medium' name='unit_per_course' type='number' min=1 step=1 value='3' style='width: 70px'></div>"
+               + "<div id='err_" + id + "'></div>"
   };
 
   return obj;

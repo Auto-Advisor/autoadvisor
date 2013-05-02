@@ -85,23 +85,65 @@ var newConstraint = function (type, operator, value) {
   var id = num_constraint;
   var html = '<tr id="constraint_row_';
      html += id;
-     html += '"><th width="2%">';
-     html += id+1;
-     html += '.</th>';
+     html += '">';
      html += '<td width="20%"><select style="width: 200px" name="constraint" onChange="relation(this.value, ';
      html += id;
      html += ')" id="constraint_';
      html += id;
+
+     /**
+      * constraint obj: major
+      */
      html += '"><option value="major">Major</option>';
+
+     /**
+      * constraint obj: major_course
+      */
      html += '<option value="major_course">Number of Major Courses</option>';
+
+     /**
+      * constraint obj: course_number
+      */
      html += '<option value="course_number">Course Number Range</option>';
+
+     /**
+      * constraint obj: num_course
+      */
      html += '<option value="num_course">Number of Courses</option>';
+
+     /**
+      * constraint obj: c_time
+      */
      html += '<option value="c_time">Time</option>';
+
+     /**
+      * constraint obj: unit per course
+      */
      html += '<option value="unit_per_course">Unit Per Course</option>';
+
+     /**
+      * constraint obj: credit
+      */
      html += '<option value="credit">Credit</option>';
+
+     /**
+      * constraint obj: spe_course
+      */
      html += '<option value="spe_course">Specified Courses</option>';
-     html += '<option value="spe_section">Specified Sections</option>';
+
+     /**
+      * constraint obj: spe_section
+      */
+     html += '<option value="spe_section">Specified Spire ID</option>';
+
+     /**
+      * constraint obj: days
+      */
      html += '<option value="day">Class Days</option>';
+
+     /**
+      * constraint obj: gened
+      */
      html += '<option value="gened">GenEd</option>';
      html += '</select></td>';
      html += '<td width="36%"><div id="r_';

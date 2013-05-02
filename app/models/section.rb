@@ -185,12 +185,7 @@ class Section < ActiveRecord::Base
     query = Section.joins(:course, :major) #return all sections which have a course and a major
     query = query.where("courses.number != ?", 0) #perge courses with number of 0
     constraints.each do |constraint|
-      puts "constraint invert"
-      puts constraint["invert"]
-      puts "constraint include invert?"
-      puts constraint.include? "invert"
       invert = (constraint.include? "invert") && (constraint["invert"] == true)
-      puts invert
       eq_op = invert ? "!=" : "="
       lt_op = invert ? ">" : "<="
       gt_op = invert ? "<" : ">="
@@ -298,7 +293,7 @@ class Section < ActiveRecord::Base
         days_off.each_char do |c|
           query = query.where("sections.days #{not_op} LIKE '%#{c}%'")
         end
-      when "days"
+      when "day"
         days = constraint["days"]
 
         days.each_char do |c|

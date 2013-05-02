@@ -212,19 +212,21 @@ class Section < ActiveRecord::Base
       when "time"
         #if the user made a time constraint, then the upper and lower are in the format ##:##:## when they need to be
         #in minutes in the day
-        lower_time = "#{$1}:#{$2}" if constraint["lower"] =~ /(\d?\d):(\d\d)(?::\d\d)?/
-        if lower_time.nil?
-            lower = 0
-        else
+        if !constraint.include? "upper"
+            lower_time = "#{$1}:#{$2}" if constraint["lower"] =~ /(\d?\d):(\d\d)(?::\d\d)?/
             lower = ((lower_time[0..1].to_i)*60+(lower_time[3..4].to_i)) || 0
-        end
-        upper_time = "#{$1}:#{$2}" if constraint["upper"] =~ /(\d?\d):(\d\d)(?::\d\d)?/
-        if upper_time.nil?
-            upper = 2599
-        else
+            query = query.where("sections.min_start #{gt_op} ?", lower)
+        elsif !constraint.include? "lower"
+            upper_time = "#{$1}:#{$2}" if constraint["upper"] =~ /(\d?\d):(\d\d)(?::\d\d)?/
             upper = ((upper_time[0..1].to_i)*60+(upper_time[3..4].to_i)) || 2599
+            query = query.where("sections.min_end #{lt_op} ?", upper)
+        else
+            lower_time = "#{$1}:#{$2}" if constraint["lower"] =~ /(\d?\d):(\d\d)(?::\d\d)?/
+            lower = ((lower_time[0..1].to_i)*60+(lower_time[3..4].to_i)) || 0
+            upper_time = "#{$1}:#{$2}" if constraint["upper"] =~ /(\d?\d):(\d\d)(?::\d\d)?/
+            upper = ((upper_time[0..1].to_i)*60+(upper_time[3..4].to_i)) || 2599
+            query = query.where("sections.min_start #{gt_op} ? AND sections.min_end #{lt_op} ?", lower, upper)
         end
-        query = query.where("sections.min_start #{gt_op} ? AND sections.min_end #{lt_op} ?", lower, upper)
       when "units"
         lower = constraint["lower"] || 0
         upper = constraint["upper"] || 18

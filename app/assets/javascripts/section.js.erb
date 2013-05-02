@@ -145,7 +145,7 @@ function getRecommendation() {
    */
   function onSuccess (data) {
     if (data.length < 1) {
-      $('#recommendations').html('Fail');
+      $('#recommendations').html('No Schedules found to suitable for your constraints <img src="http://forum9.hkgolden.com/faces/donno.gif" />');
       return;
     }
     exclusion.by_input = [];

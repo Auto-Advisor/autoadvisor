@@ -183,11 +183,11 @@ days.each do |day| %>
                               /**
                                * Todo
                                */
-                              $('#monday').html('');
-                              $('#tuesday').html('');
-                              $('#wednesday').html('');
-                              $('#thursday').html('');
-                              $('#friday').html('');
+                              $('#monday').html('<div class="time header">Monday</div>');
+                              $('#tuesday').html('<div class="time header">Tuesday</div>');
+                              $('#wednesday').html('<div class="time header">Wednesday</div>');
+                              $('#thursday').html('<div class="time header">Thursday</div>');
+                              $('#friday').html('<div class="time header">Friday</div>');
 
                               set_schedule(id);
                               load();

@@ -215,11 +215,19 @@ class Section < ActiveRecord::Base
         if !constraint.include? "upper"
             lower_time = "#{$1}:#{$2}" if constraint["lower"] =~ /(\d?\d):(\d\d)(?::\d\d)?/
             lower = ((lower_time[0..1].to_i)*60+(lower_time[3..4].to_i)) || 0
-            query = query.where("sections.min_start #{gt_op} ?", lower)
+            if invert
+                query = query.where("sections.min_end #{gt_op} ?", lower)
+            else
+                query = query.where("sections.min_start #{gt_op} ?", lower)
+            end
         elsif !constraint.include? "lower"
             upper_time = "#{$1}:#{$2}" if constraint["upper"] =~ /(\d?\d):(\d\d)(?::\d\d)?/
             upper = ((upper_time[0..1].to_i)*60+(upper_time[3..4].to_i)) || 2599
-            query = query.where("sections.min_end #{lt_op} ?", upper)
+            if invert
+                query = query.where("sections.min_start #{lt_op} ?", upper)
+            else
+                query = query.where("sections.min_end #{lt_op} ?", upper)
+            end
         else
             lower_time = "#{$1}:#{$2}" if constraint["lower"] =~ /(\d?\d):(\d\d)(?::\d\d)?/
             lower = ((lower_time[0..1].to_i)*60+(lower_time[3..4].to_i)) || 0

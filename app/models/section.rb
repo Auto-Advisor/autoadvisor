@@ -184,7 +184,12 @@ class Section < ActiveRecord::Base
     required_geneds = Set.new
     query = Section.joins(:course, :major) #return all sections which have a course and a major
     constraints.each do |constraint|
-      invert = constraint.include? "invert" && constraint["invert"] == true
+      puts "constraint invert"
+      puts constraint["invert"]
+      puts "constraint include invert?"
+      puts constraint.include? "invert"
+      invert = (constraint.include? "invert") && (constraint["invert"] == true)
+      puts invert
       eq_op = invert ? "!=" : "="
       lt_op = invert ? ">" : "<="
       gt_op = invert ? "<" : ">="
@@ -211,11 +216,13 @@ class Section < ActiveRecord::Base
         lower = ((lower_time[0..1].to_i)*60+(lower_time[3..4].to_i)) || 0
         upper_time = "#{$1}:#{$2}" if constraint["upper"] =~ /(\d?\d):(\d\d)(?::\d\d)?/
         upper = ((upper_time[0..1].to_i)*60+(upper_time[3..4].to_i)) || 2599
-        query = query.where("sections.min_start #{gt_op} ? #{and_op} sections.min_end #{lt_op} ?", lower, upper)
+        puts gt_op
+        puts lt_op
+        query = query.where("sections.min_start #{gt_op} ? AND sections.min_end #{lt_op} ?", lower, upper)
       when "units"
         lower = constraint["lower"] || 0
         upper = constraint["upper"] || 18
-        query = query.where("sections.credit_min #{gt_op} ? #{and_op} sections.credit_max #{lt_op} ?", lower, upper)
+        query = query.where("sections.credit_min #{gt_op} ? AND sections.credit_max #{lt_op} ?", lower, upper)
       when "target"
         lower = constraint["lower"] || lower
         upper = constraint["upper"] || upper
@@ -258,10 +265,10 @@ class Section < ActiveRecord::Base
         days = constraint["days"]
 
         days.each_char do |c|
-          query = query.where("sections.days #{not_op} LIKE '%#{c}%'")
+          query = query.where("sections.days #{yes_op} LIKE '%#{c}%'")
         end
       when "course_range"
-        query = query.where("courses.number IN (?)", constraint["lower"].to_i..constraint["upper"].to_i)
+        query = query.where("courses.number #{yes_op} IN (?)", constraint["lower"].to_i..constraint["upper"].to_i)
       when "dis_lab"
         if constraint["discussion"]
           query = query.where("sections.ty #{eq_op} 'DIS'")
@@ -321,7 +328,8 @@ class Section < ActiveRecord::Base
       :major => major,
       :major_course_restriction => major_course_restriction,
       :min_maj_courses => min_maj_courses,
-      :max_maj_courses => max_maj_courses
+      :max_maj_courses => max_maj_courses,
+      :required_geneds => required_geneds
     }
     result
   end

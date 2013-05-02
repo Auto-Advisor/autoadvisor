@@ -213,7 +213,12 @@ class SchedulesController < ApplicationController
         #this will be where we ensure that we aren't picking any *96,*98,*99 unless ordered to
         invalid_section = true
         while(invalid_section)
-            sect = query.all.sample
+            if !opts[:required_geneds].empty?
+                subset = query.where("sections.gened LIKE ?", opts[:required_geneds].to_a[0])
+                sect = subset.all.sample
+            else
+                sect = query.all.sample
+            end
             puts sect.number
             if !(sect.number.modulo(100) == 96 or sect.number.modulo(100) == 98 or sect.number.modulo(100) == 99)
                 invalid_section = false
@@ -289,6 +294,10 @@ class SchedulesController < ApplicationController
       if sect.major.code == major
         maj_courses_so_far += 1
       end
+      puts sect.gened
+        if opts[:required_geneds].member?(sect.gened)
+            opts[:required_geneds].delete(sect.gened)
+        end
       targets_unmet = (credits_so_far < num_lower_credits or courses_so_far < num_lower_courses)
     end  
       #

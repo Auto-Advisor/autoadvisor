@@ -183,13 +183,9 @@ class Section < ActiveRecord::Base
     required_section_ids = nil
     required_geneds = Set.new
     query = Section.joins(:course, :major) #return all sections which have a course and a major
+    query = query.where("courses.number != ?", 0) #perge courses with number of 0
     constraints.each do |constraint|
-      puts "constraint invert"
-      puts constraint["invert"]
-      puts "constraint include invert?"
-      puts constraint.include? "invert"
       invert = (constraint.include? "invert") && (constraint["invert"] == true)
-      puts invert
       eq_op = invert ? "!=" : "="
       lt_op = invert ? ">" : "<="
       gt_op = invert ? "<" : ">="
@@ -212,13 +208,49 @@ class Section < ActiveRecord::Base
       when "time"
         #if the user made a time constraint, then the upper and lower are in the format ##:##:## when they need to be
         #in minutes in the day
-        lower_time = "#{$1}:#{$2}" if constraint["lower"] =~ /(\d?\d):(\d\d)(?::\d\d)?/
-        lower = ((lower_time[0..1].to_i)*60+(lower_time[3..4].to_i)) || 0
-        upper_time = "#{$1}:#{$2}" if constraint["upper"] =~ /(\d?\d):(\d\d)(?::\d\d)?/
-        upper = ((upper_time[0..1].to_i)*60+(upper_time[3..4].to_i)) || 2599
-        puts gt_op
-        puts lt_op
-        query = query.where("sections.min_start #{gt_op} ? AND sections.min_end #{lt_op} ?", lower, upper)
+        if !constraint.include? "upper"
+            lower_time = "#{$1}:#{$2}" if constraint["lower"] =~ /(\d?\d):(\d\d)(?::\d\d)?/
+            lower = ((lower_time[0..1].to_i)*60+(lower_time[3..4].to_i)) || 0
+            if invert
+                query = query.where("sections.min_end #{gt_op} ?", lower)
+            else
+                query = query.where("sections.min_start #{gt_op} ?", lower)
+            end
+        elsif !constraint.include? "lower"
+            upper_time = "#{$1}:#{$2}" if constraint["upper"] =~ /(\d?\d):(\d\d)(?::\d\d)?/
+            upper = ((upper_time[0..1].to_i)*60+(upper_time[3..4].to_i)) || 2599
+            if invert
+                query = query.where("sections.min_start #{lt_op} ?", upper)
+            else
+                query = query.where("sections.min_end #{lt_op} ?", upper)
+            end
+        else
+            lower_time = "#{$1}:#{$2}" if constraint["lower"] =~ /(\d?\d):(\d\d)(?::\d\d)?/
+            lower = ((lower_time[0..1].to_i)*60+(lower_time[3..4].to_i)) || 0
+            upper_time = "#{$1}:#{$2}" if constraint["upper"] =~ /(\d?\d):(\d\d)(?::\d\d)?/
+            upper = ((upper_time[0..1].to_i)*60+(upper_time[3..4].to_i)) || 2599
+            query = query.where("sections.min_start #{gt_op} ? AND sections.min_end #{lt_op} ?", lower, upper)
+        end
+      when "course_number"
+        if !constraint.include? "upper"
+            lower = constraint["lower"]
+            if invert
+                query = query.where("courses.number #{gt_op} ?", lower)
+            else
+                query = query.where("courses.number #{gt_op} ?", lower)
+            end
+        elsif !constraint.include? "lower"
+            upper = constraint["upper"]
+            if invert
+                query = query.where("courses.number #{lt_op} ?", upper)
+            else
+                query = query.where("courses.number #{lt_op} ?", upper)
+            end
+        else
+            lower = constraint["lower"]
+            upper = constraint["upper"]
+            query = query.where("courses.number #{gt_op} ? AND courses.number #{lt_op} ?", lower, upper)
+        end
       when "units"
         lower = constraint["lower"] || 0
         upper = constraint["upper"] || 18
@@ -261,7 +293,7 @@ class Section < ActiveRecord::Base
         days_off.each_char do |c|
           query = query.where("sections.days #{not_op} LIKE '%#{c}%'")
         end
-      when "days"
+      when "day"
         days = constraint["days"]
 
         days.each_char do |c|

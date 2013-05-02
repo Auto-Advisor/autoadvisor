@@ -268,7 +268,7 @@ class SchedulesController < ApplicationController
       disc = []
       labs = []
       for cur in poss.all
-        puts cur.ty
+        #puts cur.ty
       end
       # sched.append(poss.sample)
       #this loop seeks to find any discussions and labs associated with the current section and
@@ -276,7 +276,6 @@ class SchedulesController < ApplicationController
       for cur in poss.all
           next unless cur.ty != 'LEC'
           if cur.section_number.include?('d')
-              puts cur.section_number
               disc.append(cur)
           end
           if cur.section_number.include?('l')
@@ -294,7 +293,7 @@ class SchedulesController < ApplicationController
       if sect.major.code == major
         maj_courses_so_far += 1
       end
-      puts sect.gened
+      puts sect.number
         if opts[:required_geneds].member?(sect.gened)
             opts[:required_geneds].delete(sect.gened)
         end

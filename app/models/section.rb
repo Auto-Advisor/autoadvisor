@@ -183,6 +183,7 @@ class Section < ActiveRecord::Base
     required_section_ids = nil
     required_geneds = Set.new
     query = Section.joins(:course, :major) #return all sections which have a course and a major
+    query = query.where("courses.number != ?", 0) #perge courses with number of 0
     constraints.each do |constraint|
       puts "constraint invert"
       puts constraint["invert"]

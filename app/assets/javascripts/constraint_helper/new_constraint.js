@@ -141,10 +141,6 @@ var newConstraint = function (type, operator, value) {
       */
      html += '<option value="day">Class Days</option>';
 
-     /**
-      * constraint obj: gened
-      */
-     html += '<option value="gened">GenEd</option>';
      html += '</select></td>';
      html += '<td width="36%"><div id="r_';
      html += id;

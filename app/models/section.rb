@@ -235,6 +235,26 @@ class Section < ActiveRecord::Base
             upper = ((upper_time[0..1].to_i)*60+(upper_time[3..4].to_i)) || 2599
             query = query.where("sections.min_start #{gt_op} ? AND sections.min_end #{lt_op} ?", lower, upper)
         end
+      when "course_number"
+        if !constraint.include? "upper"
+            lower = constraint["lower"]
+            if invert
+                query = query.where("courses.number #{gt_op} ?", lower)
+            else
+                query = query.where("courses.number #{gt_op} ?", lower)
+            end
+        elsif !constraint.include? "lower"
+            upper = constraint["upper"]
+            if invert
+                query = query.where("courses.number #{lt_op} ?", upper)
+            else
+                query = query.where("courses.number #{lt_op} ?", upper)
+            end
+        else
+            lower = constraint["lower"]
+            upper = constraint["upper"]
+            query = query.where("courses.number #{gt_op} ? AND courses.number #{lt_op} ?", lower, upper)
+        end
       when "units"
         lower = constraint["lower"] || 0
         upper = constraint["upper"] || 18

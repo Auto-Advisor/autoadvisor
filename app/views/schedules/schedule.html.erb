@@ -179,10 +179,16 @@ days.each do |day| %>
     $("#schedule_options").change(function() {
                             var id = $("option:selected", this).val();
                             if (id != cur_schedule_id) {
+                              
                               /**
-                               * TODO: unload_schedule
-                               * or make the schedule disappear
+                               * Todo
                                */
+                              $('#monday').html('<div class="time header">Monday</div>');
+                              $('#tuesday').html('<div class="time header">Tuesday</div>');
+                              $('#wednesday').html('<div class="time header">Wednesday</div>');
+                              $('#thursday').html('<div class="time header">Thursday</div>');
+                              $('#friday').html('<div class="time header">Friday</div>');
+
                               set_schedule(id);
                               load();
                             }
